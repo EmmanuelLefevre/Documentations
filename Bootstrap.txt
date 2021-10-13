@@ -1,0 +1,14 @@
+        ---------
+        BOOTSTRAP
+        ---------
+
+Classes:
+--------
+
+"container"                Centrer les éléments <div>
+"row"                      Eléments en ligne qui possèdent des colonnes
+"col"                      Déclarer en colonne
+'fluid"                    Prendre toute la largeur de la page
+
+
+

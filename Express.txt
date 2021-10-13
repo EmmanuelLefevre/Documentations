@@ -1,0 +1,52 @@
+        ----------------------
+        ------ Express -------
+        ----------------------
+
+Vérifier la version de node.. en l'occurence la 10.15.
+nvm --version           pour vérifier la version.
+
+Installation:
+npm install express-generator -g
+sudo apt install tree   (arborescence des fichiers linux)
+
+
+Se positionner dans le répertoire ou l'on veut installer l'application puis 
+faire la commande linux ->
+express --view=hbs myExpressHbsApp
+
+Puis lancer le serveur (en se plaçant ds le répertoire de l'application) avec la commande: npm start
+ou avec nodemon:        nodemon ./bin/www
+Lancez un localhost:3000 dans un navigateur pour vérifier le fonctionnement.
+
+rs         Redémarrer le serveur!!!!!!
+
+
+Code généré:
+------------
+
+app.js                          Code source application
+bin/www                         Main point entrée (dossier lanceur /bin)
+public                          Top du serveur web (dossier public du serveur web Node)
+public/images                   Répertoire des images clientes
+public/javascripts              Répertoire des fichier JS clients
+public/stylesheets              Répertoire des feuilles de style css
+routes/index.js                 Code éxécuté en fonction du pathname (controleur sur action '/')
+routes/users.js                 Code éxécuté en fonction du pathname (controleur sur action '/users')
+views                           Répertoire vues -> HTML + Balise Moustache
+
+views/layout.hbs                Découpage de l'interface (head, body, footer, nav...)
+=> Le code HTML des vues : “index.hbs” et“error.hbs” seront affichées à la place du tag {{{body}}}.
+
+
+Debugger:
+---------
+
+node --inspect ./bin/www   
+nodemon --inspect ./bin/www         Avec nodemon  
+chrome://inspect                    Dev tools chrome debuggeur          
+
+
+App.js:
+-------
+
+var app = express();  // Initialisation express

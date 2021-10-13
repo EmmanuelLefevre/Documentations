@@ -1,0 +1,6 @@
+        ------------------
+            NAVIGATEUR
+        ------------------
+
+F12                         Console web
+CTRL + MAJ + CTRL           Inspecter

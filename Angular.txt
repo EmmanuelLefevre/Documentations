@@ -1,0 +1,43 @@
+                        -------------------
+                        ------ANGULAR------
+                        -------------------
+
+
+
+- Création nouveau projet                                   ng new mon-premier-projet
+- Lancer serveur                                            ng serve -o   ( -o option ouvrir dans un ongle de navigateur directement)
+- Lancer un autre seveur angular sur un autre port          ng serve -o --port 8001    (8000 par convention)
+
+
+------Composant------
+
+- Créer nouveau composant                                   ng g c nomComposant
+- Créer nouveau composant avec le routing                   ng g c nomComposant --routing
+
+
+------Modele------
+
+
+
+------Module------
+
+- Créer nouveau module                                      ng g m nomModule
+
+
+------Service------
+
+- Créer nouveau service                                     ng g s nomService
+
+
+------Procédure------
+
+1- Créer Service
+2- Déclarer service dans le providers de app.module.ts (racine)
+3- Créer fichier json dans un dossier asset/json
+4- Dans le fichier ts du service : - export class
+                                   - instancier variable
+                                   - constructor
+                                   - ajax
+-5 Aller dans le fichier ts du composant                    constructor(public data: nomService) {}
+
+                        

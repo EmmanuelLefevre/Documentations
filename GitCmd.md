@@ -30,6 +30,8 @@
 \
 `git commit -m "commentaire"`
 \
+`git commit -m "commentaire" -a`&nbsp;&nbsp;&nbsp;&nbsp;  <**add + commmit on one line**>
+\
 `git log --oneline`&nbsp;&nbsp;&nbsp;&nbsp;  <**Afficher la liste des commits**>
 \
 `git log --date=local`&nbsp;&nbsp;&nbsp;&nbsp;  <**Afficher la liste des commits avec option de commande plus lisible**>

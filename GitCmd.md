@@ -46,7 +46,7 @@
 # Création d'une branche:
 `git branch`&nbsp;&nbsp;&nbsp;&nbsp;  <**Indique la branche sur laquelle on se trouve**>
 \
-`git branch nameOfBranch`
+`git branch nameOfBranch`&nbsp;&nbsp;&nbsp;&nbsp;  <**Créer une branche**>
 \
 `git checkout nameOfBranch`&nbsp;&nbsp;&nbsp;&nbsp;  <**Se déplacer de branche**>
 \
@@ -58,7 +58,7 @@
 # Fusionner (merge):
 `git checkout master`&nbsp;&nbsp;&nbsp;&nbsp;  <**Se placer sur la branche master en premier lieu**>
 \
-`git merge nameOfBranch`
+`git merge nameOfBranch`&nbsp;&nbsp;&nbsp;&nbsp;  <**Fusionner la branche sur le master**>
 \
 `git branch -d nameOfBranch`&nbsp;&nbsp;&nbsp;&nbsp;  <**!!!!!!Puis SUPPRIMER la branche**>
 
@@ -67,6 +67,8 @@
 \
 `git push origin master`&nbsp;&nbsp;&nbsp;&nbsp;  <**--force => Succeptible de supprimer l'historique des commits**>
                
-# Pull:
+# Clone/Pull:
 `git clone https://github.com/user.name/nomRepo.git`
+\
+`git pull origin master`
 

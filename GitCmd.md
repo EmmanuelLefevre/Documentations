@@ -74,3 +74,5 @@
 \
 `git pull origin master`
 
+
+git fetch origin pull/ID/head:BRANCH_NAME

@@ -1,0 +1,121 @@
+# COMMANDES
+1. Afficher les distributions installées
+```
+wsl -l -v
+```
+2. Définir la distribution utilisée
+```
+wsl --set-default Ubuntu-22.04
+```
+3. Configurer le WSL2 pour toutes les distributions qui seront installées
+```
+wsl --set-default-version 2
+```
+4. Stopper la distribution
+```
+wsl --shutdown
+```
+
+## MARIADB INSTALL
+1. Afficher les services de la distribution
+```
+sudo service --status-all
+```
+2. Installer Mariadb
+```
+sudo service mariadb status
+```
+3. Démarrer Mariadb
+```
+sudo service mariadb start
+```
+4. Sécuriser l'installation
+```
+sudo mysql_secure_installation
+```
+
+### CREATE ADMIN USER
+1. Se connecter à Mariadb
+```
+sudo mariadb
+```
+2. Créer user admin
+```
+GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'nimda' WITH GRANT OPTION;
+```
+3. Remettre à jour les permissions
+```
+FLUSH PRIVILEGES;
+```
+4. Quitter Mariadb
+```
+exit
+```
+5. Checker si l'admin a bien été crée
+```
+mysqladmin -u admin -p version
+```
+
+#### CREATE USER
+1. Se connecter en admin
+```
+mysql -u admin -p
+```
+2. Afficher les databases
+```
+SHOW DATABASES;
+```
+3. Créer une bdd
+```
+CREATE DATABASE easygarden;
+```
+4. Créer un user
+```
+CREATE USER 'user'@'%' IDENTIFIED BY 'xx';
+```
+5. Afficher tous les utilisateurs
+```
+SELECT user FROM mysql.user;
+```
+6. Ajouter des droits au user sur une bdd
+```
+GRANT ALL PRIVILEGES ON easygarden.* TO 'user'@'%';
+```
+7. Remettre à jour les permissions
+```
+FLUSH PRIVILEGES;
+```
+8. Afficher liaison user/bdd + droits
+```
+SHOW GRANTS FOR 'user'@'%';
+```
+9. Se connecter en user
+```
+mysql -u user -p
+```
+
+##### NETSTAT
+1. Installer Netstat
+```
+sudo apt install net-tools
+```
+2. Afficher les connexions réseaux
+```
+sudo netstat -aln
+```
+
+##### SE CONNECTER DANS LINUX DEPUIS WINDOWS AVEC HEIDISQL
+1. Récupérer son ip
+```
+ip a | grep eth0
+```
+=> la 1ère ip des deux sans le slash et ce qui suit.
+
+2. Changer la config de Mariadb pour écouter depuis l'extérieur
+```
+cd /etc/mysql
+```
+```
+sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+```
+3. Commenter la ligne bind-adress ou remplacer 127.0.0.1 par l'ip ethernet de windows

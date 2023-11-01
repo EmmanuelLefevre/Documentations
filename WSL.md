@@ -67,7 +67,6 @@
 `sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf`
 3. Commenter la ligne bind-adress ou remplacer 127.0.0.1 par l'ip ethernet de windows
 
-
 # APACHE2 INSTALLATION
 1. Installer Apache2
 `sudo apt install apache2`
@@ -115,11 +114,7 @@
 # Easygarden Ubuntu
 172.18.244.37 easygarden.com
 ```
-12. 
-``
-13. 
-``
-14. 
-``
-15. 
-``
+
+# CONFIGURATION GENERALE DU SERVEUR APACHE
+1. Fichier de configuration principale d'Apache
+`cd etc/apache2/apache2.conf`

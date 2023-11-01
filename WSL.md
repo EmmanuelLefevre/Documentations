@@ -77,9 +77,45 @@
 `sudo service apache2 start`
 4. Afficher le hostname par défaut
 `hostname -I`
-5. 
+5. Afficher liste des utilisateurs Apache
+`sudo cat /etc/passwd`
+6. Attribuer permission sur le dossier /wwww
+`cd var`
+`sudo chown -R www-data:www-data ./www`
+7. Créer projet
+`cd www`
+`sudo mkdir easygarden`
+`cd easygarden`
+`sudo nano index.html`
+8. Activer et configurer le projet sur le serveur Apache
+`cd /etc`
+`cd apache2/sites-available`
+`sudo cp 000-default.conf easygarden.conf`
+`sudo nano easygarden.conf`
+```
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+	ServerName easygarden.com
+	ServerAlias www.easygarden.com
+
+	DocumentRoot /var/www/easygarden
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+9. Ajouter le projet dans les sites activés
+`sudo a2ensite easygarden.conf`
+10. Vérifier si la configuration est correcte
+`sudo apache2ctl configtest`
+`service apache2 reload`
+11. 
 ``
-6. 
+12. 
 ``
-7. 
+13. 
+``
+14. 
+``
+15. 
 ``

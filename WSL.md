@@ -71,12 +71,12 @@
 # APACHE2 INSTALLATION
 1. Installer Apache2
 `sudo apt install apache2`
-2. 
-``
-3. 
-``
-4. 
-``
+2. Statut du service apache2
+`sudo service apache2 status`
+3. Démarrer service apache2
+`sudo service apache2 start`
+4. Afficher le hostname par défaut
+`hostname -I`
 5. 
 ``
 6. 

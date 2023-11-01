@@ -109,8 +109,12 @@
 10. Vérifier si la configuration est correcte
 `sudo apache2ctl configtest`
 `service apache2 reload`
-11. 
-``
+11. Editer le fichier C:\Windows\System32\drivers\etc\hosts et ajouter la ligne avec l'ip de Ubuntu
+`hostname -I`
+```
+# Easygarden Ubuntu
+172.18.244.37 easygarden.com
+```
 12. 
 ``
 13. 

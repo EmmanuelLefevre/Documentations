@@ -66,3 +66,20 @@
 /
 `sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf`
 3. Commenter la ligne bind-adress ou remplacer 127.0.0.1 par l'ip ethernet de windows
+
+
+# APACHE2 INSTALLATION
+1. Installer Apache2
+`sudo apt install apache2`
+2. 
+``
+3. 
+``
+4. 
+``
+5. 
+``
+6. 
+``
+7. 
+``

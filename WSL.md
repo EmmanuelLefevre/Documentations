@@ -117,4 +117,5 @@
 
 # CONFIGURATION GENERALE DU SERVEUR APACHE
 1. Fichier de configuration principale d'Apache
+[color=#26B260]Hello[/color]
 `cd etc/apache2/apache2.conf`

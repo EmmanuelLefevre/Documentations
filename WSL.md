@@ -40,7 +40,7 @@
 4. Créer un user  
 `CREATE USER 'user'@'%' IDENTIFIED BY 'xx';`
 5. Afficher tous les utilisateurs  
-`SELECT user FROM mysql.user;`  
+`SELECT user FROM mysql.user;`
 6. Ajouter des droits au user sur une bdd  
 `GRANT ALL PRIVILEGES ON easygarden.* TO 'user'@'%';`
 7. Remettre à jour les permissions  

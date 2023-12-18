@@ -11,10 +11,12 @@
 # LANCER CONTAINER
 1. Lancer le container d'une image  
 `docker run -it node:16`
-2. Afficher les containers démarrés  
+
+# AFFICHER CONTAINER
+1. Afficher les containers démarrés  
 `docker ps`
-3. Afficher tous les containers  
-`docker ps -a`
+2. Afficher tous les containers  
+`docker ps -a`  
 
 # STOPPER CONTAINER
 1. Afficher les containers afin de récupérer le "CONTAINER ID"  
@@ -39,7 +41,6 @@
 4. Lancer l'image  
 `docker run -it node-test:1.0.0 bash`
 5. Arrêter une image
-
 
 
 `docker run -it -v "./app:/app//" node-test bash`  

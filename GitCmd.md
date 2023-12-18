@@ -68,7 +68,7 @@
 `git remote add origin https://github.com/user.name/nomRepo.git`&nbsp;&nbsp;&nbsp;&nbsp;  <**Lier local et repo**>
 \
 `git push origin master`&nbsp;&nbsp;&nbsp;&nbsp;  <**--force => Succeptible de supprimer l'historique des commits**>
-               
+
 # Clone/Pull:
 `git clone https://github.com/user.name/nomRepo.git`
 \

@@ -1,0 +1,54 @@
+
+		LINTER/TEST
+
+1/ LINTER PHP-CS-FIXER
+créer 2 dossiers tools>php-cs-fixer
+composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
+
+Lancer analyse ( à la racine ) =>
+php ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run
+
+
+2/ LINTER PHP STAN
+composer require --dev phpstan/phpstan
+composer require --dev phpstan/extension-installer
+composer require --dev phpstan/phpstan-symfony
+
+Lancer analyse ( à la racine ) =>
+php vendor/bin/phpstan analyse src
+
+
+3/ LINTER TWIG
+Checker les fichiers HTML Twig en environnement de prod
+php ./bin/console lint:twig templates --env=prod
+
+
+4/ LINTER YAML
+Checker les fichiers yaml
+php ./bin/console lint:yaml config --parse-tags
+
+
+5/ PHP UNIT
+composer require --dev phpunit/phpunit
+Lancer analyse =>
+php ./bin/phpunit
+
+
+		GITLAB
+
+/1 Créer clé SSH
+ssh-keygen -t ed25519 -C "Gitlab"
+Lancer SSH avec GitBash  =>
+ssh -T git@gitlab.com
+
+
+
+
+		GITLAB RUNNER
+
+
+
+
+
+		SYMFONY DEMO INSTALL
+composer create-project symfony/symfony-demo:1.8.0 symfony-gitlab --no-interaction

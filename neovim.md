@@ -22,9 +22,9 @@ echap
 ```
 - Sauvegarder
 ```shell
-
+:w
 ```
 - Quitter
 ```shell
-
+:q!
 ```

@@ -26,7 +26,7 @@ git init
 | :--------------: | :---------: |
 |`git remote -v`| Afficher les remotes configurés avec leurs URL|
 |`git remote rm origin`|Effacer l'ancien remote nommé "origin"|
-|`git remote add origin https://github.com/user.name/nomRepo.git`|Ajouter un nouveau remote "origin" avec l'URL spécifiée|
+|`git remote add origin https://github.com/user.name/nomRepo.git`|Lier le dépôt local au dépôt distant spécifié|
 ### Commit
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -45,31 +45,36 @@ git init
 ### Branche
 | Command + option | Description |
 | :--------------: | :---------: |
-| `git branch`                      | <**Indique la branche sur laquelle on se trouve**> |
-| `git branch 'nameOfBranch'`      | <**Créer une branche**>                          |
-| `git checkout 'nameOfBranch'`    | <**Se déplacer de branche**>                     |
-| `git checkout -b 'nameOfBranch'` | <**Créer une branche et switcher dessus**>      |
+|`git branch`|Indique la branche sur laquelle on se trouve|
+|`git branch 'nameOfBranch'`|Créer branche|
+|`git checkout 'nameOfBranch'`|Se déplacer de branche|
+|`git checkout -b 'nameOfBranch'`|Créer une branche et switcher dessus|
 ### Récupérer
 | Command + option | Description |
 | :--------------: | :---------: |
 |`git fetch --all`|Récupèrer toutes les branches/objets du dépôt distant sans les fusionner dans les branches locales (permet d'examiner les MAJ avant de fusionner)|
 ### Fusionner
-| Command + option | Description |
-| :--------------: | :---------: |
-|`git checkout 'master'`| <**Se placer sur la branche master en premier lieu**>|
-|`git merge 'nameOfBranch'`| <**Fusionner la branche sur le master**|
-|`git branch -d 'nameOfBranch'`| <**!!!!!!Puis SUPPRIMER la branche**|
+#### 1. Se placer sur la branche master
+```shell
+git checkout master
+```
 
+#### 2. Fusionner la branche sur la master
+```shell
+git merge nameOfBranch
+```
+#### 3. Puis SUPPRIMER la branche
+```shell
+git branch -d nameOfBranch
+```
 ### Push:
 | Command + option | Description |
 | :--------------: | :---------: |
-`git remote add origin https://github.com/user.name/nomRepo.git`&nbsp;&nbsp;&nbsp;&nbsp;  <**Lier local et repo**>
-\
-`git push origin master`&nbsp;&nbsp;&nbsp;&nbsp;  <**--force => Succeptible de supprimer l'historique des commits**>
-
+|`git remote add origin https://github.com/user.name/nomRepo.git`|Lier le dépôt local au dépôt distant spécifié|
+|`git push origin master`|Pousser les commits locaux de la branche 'master' sur la branche 'master' du distant|
+|`git push origin master --force`|Succeptible de supprimer l'historique des commits!!!|
 ### Clone/Pull:
 | Command + option | Description |
 | :--------------: | :---------: |
-`git clone https://github.com/user.name/nomRepo.git`
-\
-`git pull origin master`
+|`git clone https://github.com/user.name/nomRepo.git`|Cloner un dépôt distant vers son local|
+|`git pull origin master`|Récupérer les MAJ de la branche 'master' du distant => fusionner avec la branche locale actuelle.|

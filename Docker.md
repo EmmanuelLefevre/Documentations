@@ -1,30 +1,38 @@
 # DWLD IMAGE  
 1. Télécharger image NodeJs  
 ```shell
-docker pull node`  
+docker pull node
+```
 ```shell
-docker pull node:16`  
+docker pull node:16
+```
 ```shell
-docker pull node:latest`
+docker pull node:latest
+```
 2. Afficher les images disponibles  
 ```shell
-docker images`
+docker images
+```
 3. Récupérer une image sans lancer de container  
 ```shell
-docker pull node:16`
+docker pull node:16
+```
 
 # LANCER CONTAINER
 1. Lancer le container d'une image  
 ```shell
-docker run -it node:16`
+docker run -it node:16
+```
 
 # AFFICHER CONTAINER
 1. Afficher les containers démarrés  
 ```shell
-docker ps`
+docker ps
+```
 2. Afficher tous les containers  
 ```shell
-docker ps -a`  
+docker ps -a
+```
 
 # STOPPER CONTAINER
 1. Afficher les containers afin de récupérer le "CONTAINER ID"  

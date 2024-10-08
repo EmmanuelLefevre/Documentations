@@ -5,12 +5,12 @@ Git est un logiciel de gestion de versions décentralisé.
 ### Version du logiciel
 | Command + option | Description |
 | :--------------: | :---------: |
-|`git -v"`|Version de Git|
-|`git version"`|Version de Git|
+|`git -v`|Version de Git|
+|`git version`|Version de Git|
 ### Initialiser dépôt local
 | Command + option | Description |
 | :--------------: | :---------: |
-|`git init"`|Initialiser nouveau dépôt local Git dans le répertoire actuel (fichier '.git')|
+|`git init`|Initialiser nouveau dépôt local Git dans le répertoire actuel (fichier '.git')|
 ### Utilisateur
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -23,13 +23,13 @@ Git est un logiciel de gestion de versions décentralisé.
 | Command + option | Description |
 | :--------------: | :---------: |
 |`git clone https://github.com/user.name/nomRepo.git`|Cloner un dépôt distant vers son local|
-|`git pull origin master`|Récupérer les MAJ de la branche 'master' du distant => fusionner avec la branche locale actuelle.|
-### Synchronisation local avec distant
+|`git pull origin master`|Récupérer les MAJ de la branche 'master' du distant pour les fusionner avec la branche locale actuelle.|
+### Synchronisation du distant sur le local
 #### 1. Récupérer les dernières modifications du dépôt distant sans les fusionner avec la branche locale
 ```shell
 git fetch origin
 ```
-#### 2. Puis Fusionner les modifications de la 'master' distante dans la branche locale actuelle
+#### 2. Puis fusionner les modifications de la 'master' distante dans la branche locale actuelle
 ```shell
 git merge origin/master
 ```
@@ -67,6 +67,8 @@ git merge origin/master
 |`git checkout 'nameOfBranch'`|Se déplacer vers la branche spécifiée|
 |`git switch 'nameOfBranch'`|Se déplacer vers la branche spécifiée|
 |`git checkout -b 'nameOfBranch'`|Créer une branche et switcher dessus|
+|`git branch -d 'nameOfBranch'`|Supprimer une branche fusionnée|
+|`git branch -D 'nameOfBranch'`|Supprimer une branche non fusionnée|
 ### Récupérer branches distantes
 | Command + option | Description |
 | :--------------: | :---------: |

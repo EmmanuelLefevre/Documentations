@@ -5,8 +5,7 @@ Git est un logiciel de gestion de versions décentralisé.
 ### Version du logiciel
 | Command + option | Description |
 | :--------------: | :---------: |
-|`git -v`|Version de Git|
-|`git version`|Version de Git|
+|`git -v` ou `git version`|Version de Git|
 ### Initialiser dépôt local
 | Command + option | Description |
 | :--------------: | :---------: |

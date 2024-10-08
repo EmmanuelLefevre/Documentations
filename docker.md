@@ -35,11 +35,11 @@ docker ps
 docker ps -a
 ```
 ## STOPPER CONTAINER
-### 1. Afficher les containers afin de récupérer le "CONTAINER ID"
+### 1. Afficher les containers pour récupérer "CONTAINER ID"
 ```shell
 docker ps
 ```
-### 2. Stopper le container désiré
+### 2. Stopper un container spécifique
 ```shell
 docker stop "CONTAINER ID"
 ```
@@ -52,7 +52,7 @@ docker run -it -d node
 docker system prune -a
 ```
 ## IMAGE LOCALE
-### 1. Construire l'image avec un nom et la version latest
+### 1. Construire l'image avec un nom et la dernère version
 ```shell
 docker build -t node-test:latest .
 ```

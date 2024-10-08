@@ -7,31 +7,19 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | :---------: | :---------: |
 |cd /|Racine du disque|
 |cd ~ / cd $HOME|Répertoire utilisateur|
-|cd var/www/|Aller dans le répertoire /var/www|
-|cd ..|Aller dans le répertoire parent|
-|cd -|Revenir au répertoire précédent|
-|cd nomFichier|Aller dans le répertoire fichier|
-
-
-
-
-
-
-
-
-        --------
-        AFFICHER
-        --------
-
-ls -l      Afficher informations et détails
-ls -a      Afficher fichiers cachés
-ls -h      Afficher taille fichiers de façon LISIBLE
-ls -r      Tri inversé
-ls -t      Tri par date récent -> ancien
-ls -S      Trier par taille décroissante
-ls -la     Afficher tout les fichiers ainsi que les cachés
-ls -lhS    Afficher infos fichiers avec des tailles LISIBLES le tout ordonné du plus grand au plus petit
-pwd                 Renvoyer chemin absolu du répertoire courant
+|cd var/www/|Répertoire /var/www|
+|cd ..|Répertoire parent|
+|cd -|Répertoire précédent|
+### <= Affichage =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|ls -l|Informations et détails|
+|ls -a|Fichiers cachés|
+|ls -h|Poids fichiers plus lisible|
+|ls -r|Tri inversé|
+|ls -t|Tri par date récent -> ancien|
+|ls -S|Tri par taille décroissante|
+|pwd|Renvoyer chemin absolu du répertoire courant|
 
 
 

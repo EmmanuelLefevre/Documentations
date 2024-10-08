@@ -19,7 +19,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | `netstat -tuln`|Affiche les connexions réseau|
 | `curl -o 'url_fichier`|Télécharger fichier en curl à partir d'une URL|
 ### <= Redémarrage / arrêt =>
-| Command + option | Description |
+| Command          | Description |
 | :--------------: | :---------: |
 | `shutdown`     | Arrête l'instance                     | `shutdown [option]`          |
 | `reboot`       | Redémarre l'instance                  | `reboot [option]`            |

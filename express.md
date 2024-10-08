@@ -5,35 +5,73 @@ Express est un framework d'applications Web back-end pour la création d'API RES
 ### Installation
 #### 1. Initialiser un projet Node.js
 ```shell
-npm init -y
+npm init
 ```
 #### 1. Installer Express
 ```shell
 npm install express
 ```
+#### 1. Installer Nodemon en développement
+```shell
+npm install --save-dev nodemon
+```
 ### Démarrer serveur
+Se placer dans le répertoire du projet!
 #### Node.js
 ```shell
-node ./bin/www
+node app.js
 ```
 #### Nodemon
 ```shell
-nodemon ./bin/www
+nodemon app.js
 ```
 #### NPM script
 #### 1. Fichier package.json
 ```json
-scripts": {
-    "start": "node -r dotenv/config api/server.js",
-    "dev": "npm-run-all --parallel sass-watch nodemon-watch"
-},
+{
+    "name": "newProject",
+    "version": "1.0.0",
+    "main": "app.js",
+    "scripts": {
+        "start": "node ./bin/www", // Prod
+        "dev": "npm-run-all --parallel nodemon-watch" // Dev
+    },
+}
 ```
 #### 2. Terminal
+Prod
+```shell
+npm start
+```
+Dev
 ```shell
 npm run dev
 ```
+### Création serveur
+```js
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+});
+```
 ### Debug
+#### Redémarrer le serveur avec le débogueur intégré de Node.js
+```shell
 node --inspect ./bin/www
-nodemon --inspect ./bin/www         Avec nodemon
-chrome://inspect                    Dev tools chrome debuggeur
+```
+#### Si utilisation de Nodemon
+```shell
+nodemon --inspect ./bin/www
+```
+#### Accéder à l'outil de débogage dans Chrome, ouvrir l'URL suivante =>
+```shell
+chrome://inspect
+```
 

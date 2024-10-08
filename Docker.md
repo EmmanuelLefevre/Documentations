@@ -21,7 +21,7 @@ docker images
 docker pull node:16
 ```
 # LANCER CONTAINER
-1. Lancer le container d'une image
+- Lancer le container d'une image
 ```shell
 docker run -it node:16
 ```
@@ -79,11 +79,12 @@ docker run -it -v "./pwa:/pwa" node-test bash
 ```shell
 docker run -it -v "./app:/app" ubuntu bash
 ```
-# VERSION LINUX DU CONTAINER
+# COMMANDES UTILES
+- Version Linux du container
 ```shell
 uname -a
 ```
-# DOCKER COMPOSE
+- Docker compose
 ```shell
 docker-compose up
 ```

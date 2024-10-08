@@ -11,7 +11,8 @@ Plugin pour éditeur de texte (assistance de contenu)
 |#id|<div id="id"></div>|
 |.class|<div id="class"></div>|
 |nav#navbar|<nav id="navbar"></nav>|
-|||
+|div.class1.class2.class3|<div class="class1 class2 class3">|
+|img[src="image.png"]||
 ## CSS
 | Raccourci | Résultat |
 | :---------: | :---------: |
@@ -25,9 +26,7 @@ Plugin pour éditeur de texte (assistance de contenu)
 
 
 
-nav#navbar                          <nav id="navbar"></nav>
-article.post                        <article class="post"</article>
-div.class1.class2.class3            <div class="class1 class2 class3">
+
 img[src="image.png"]                <img src="image.png" alt="">
 span[data-hint]                     <span data-hint=""></span>
 section>h3+h4*3                     Créer une balise section contenant un titre h3 et 3 titres h4

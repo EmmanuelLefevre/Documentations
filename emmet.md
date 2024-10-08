@@ -19,7 +19,7 @@ Plugin pour éditeur de texte (assistance de contenu)
 |m10|margin:10px;|
 |p10|padding:10px;|
 |v|visibility:hidden;|
-|-bdrs|kits border-radius|
+|-bdrs|border-radius|
 
 
 

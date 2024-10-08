@@ -20,75 +20,157 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`ls -t`|Tri par date récent -> ancien|
 |`ls -S`|Tri par taille décroissante|
 |`pwd`|Renvoyer chemin absolu du répertoire courant|
-### <= Recherche =>
-grep permet de rechercher une chaîne de caractères ou un motif dans un fichier
+### <= Création répertoire =>
 | Command + option | Objectif |
 | :---------: | :---------: |
-|`grep 'text' foo.txt`|Occurences 'text' dans foo.txt|
-|`grep -v 'text' foo.txt`|Afficher les lignes de foo.txt ne contenant pas l'occurence 'text'|
-|`grep -c 'text' foo.txt`|Compter nombre de lignes dans foo.txt contenant l'occurence 'text''|
-|`grep -n 'text' foo.txt`|Afficher les lignes de foo.txt contenant 'text', préfixées par leur numéro de ligne.|
-|`grep -x 'exact' foo.txt`|Afficher uniquement les lignes de foo.txt qui correspondent exactement à la chaîne 'exact'.|
-|`grep -l 'text' *.txt`|Afficher les noms des fichiers .txt dans le répertoire courant contenant l'occurrence 'text'.|
-|`grep -r "texte" /folderPath`|Rechercher de manière récursive l'occurence "texte" dans folderPath|
-|`grep -nri 'foobar' /project`|Recherche récursive, insensible à la casse, des occurrences de 'foobar' dans le répertoire /project.|
-|`grep -nri '\(foo\|bar\|baz\)' /project`|Recherche récursive, insensible à la casse, des occurrences de 'foo', 'bar' ou 'baz' dans le répertoire /project.|
+|`mkdir 'foo'`|Créer répertoire 'foo'|
+|`mkdir -v 'foo' '/tmp/bar'`|Créer répertoires 'foo' et '/tmp/bar'|
+|`mkdir -p 'foo/bar/baz'`|Créer l’arborescence 'foo/bar/baz'|
+|`mkdir -m 755 'new_folder'`|Créer répertoire 'new_folder' avec permissions 755|
+|`mkdir -v`|Retourner des informations lors de la création d'un répertoire|
+### <= Création fichier =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|`touch 'file.txt'`|Créer fichier vide nommé 'file.txt' (ou MAJ d'horodatage s'il existe déjà)|
+|`touch 'file1.txt' 'file2.txt'`|Créer 'file1.txt' et 'file2.txt'|
+|`touch -c 'file.txt'`|Ne pas créer de fichier si 'file.txt' n'existe pas, juste MAJ d'horodatage s'il existe|
+|`touch -a 'file.txt'`|MAJ d'horodatage d'accès du fichier 'file.txt'|
+|`touch -m 'file.txt'`|MAJ d'horodatage de modification du fichier 'file.txt'|
 ### <= Copier =>
 | Command + option | Objectif |
 | :---------: | :---------: |
+|`cp foo/bar.txt info/`|Copier 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
+|`cp -r foo/ info/`|Copier répertoire 'foo' + son contenu dans le répertoire 'info' (si 'info' existe le contenu sera placé dans 'info/foo/')|
+### <= Déplacer / Renommer =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|`mv 'project_v1/' 'project_v2/'`|Renommer répertoire 'project_v1' en 'project_v2'|
+|`mv foo_bar.txt foo_stop.txt`|Renommer foo_bar.txt' en 'foo_stop.txt' dans le même répertoire|
+|`mv foo/bar.txt info/`|Déplacer 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
+|`mv temp.txt '/backup/'`|Déplacer 'temp.txt' vers le répertoire 'backup'|
+|`mv '*.txt' '/documents/'`|Déplacer tous les '.txt' du répertoire courant vers le répertoire 'documents'|
+### <= Effacer =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|`rm '*.txt'`|Supprimer tous les fichiers ayant pour extension 'txt'|
+|`rm 'foo.txt' 'bar.txt'`|Supprimer les fichiers 'foo.txt' et 'bar.txt'|
+|`rm -rf 'baz/'`|Supprimer le répertoire 'baz' et tout son contenu|
+|`rm -i 'file.txt'`|Supprimer 'file.txt' après confirmation de l'utilisateur|
+|`rm -v '*.log'`|Supprimer les fichiers ayant pour extension '.log' + afficher les noms des fichiers supprimés|
+### <= Afficher contenu fichier =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|`cat 'file.txt'`|Afficher contenu 'file.txt' dans le terminal|
+|`cat 'file1.txt' 'file2.txt'`|Afficher contenu de 'file1.txt' et 'file2.txt' en séquence|
+|`cat > 'newfile.txt'`|Créer 'newfile.txt' et y entrer du texte, terminé par Ctrl+D|
+|`cat -n 'file.txt'`|Afficher contenu de 'file.txt' avec les numéros de ligne|
+|`cat >> 'existingfile.txt'`|Ajouter du texte à la fin de 'existingfile.txt', terminé par Ctrl+D|
+### <= Trouver =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|`find 'myfile*' -print`|Rechercher fichier commençant par 'myfile'|
+|`find -name '*myfile*.txt' -print`|Rechercher fichier contenant 'myfile' + extension '.txt'|
+|`find '/usr' -type d -print`|Afficher tous les répertoires de '/usr'|
+|`find '$HOME' \( -name '*.txt' -o -name '*.pdf' \)`|Afficher tous les fichiers '.txt' ou '.pdf' dans répertoire $HOME|
+|`find '$HOME' -name '*.txt' -atime +7 -exec rm {} \;`|Supprimer tous les fichiers '.txt' qui n'ont pas été consultés depuis plus de 7 jours dans répertoire $HOME|
+|`find '$HOME' -name '*.txt' -size +4k -exec ls -l {} \;`|Afficher taille tous les fichiers de plus de 4 kilo dans répertoire $HOME|
+|`find -name 'file.txt'`|Recherche fichier nommé 'file.txt'|
+|`find -iname 'file.txt'`|Recherche fichier nommé 'file.txt', insensible à la casse|
+|`find -type d`|Rechercher tous les répertoires (d) dans le répertoire courant|
+|`find -type f`|Rechercher tous les fichiers (f) dans le répertoire courant|
+|`find -atime +7`|Rechercher fichiers qui n'ont pas été accédés depuis plus de 7 jours|
+|`find -mtime -5`|Rechercher fichiers modifiés dans les 5 derniers jours|
+|`find -user 'username'`|Rechercher fichiers appartenant à l'utilisateur spécifié 'username'|
+|`find -group 'groupname'`|Rechercher fichiers appartenant au groupe spécifié 'groupname'|
+|`find -size +1M`|Rechercher fichiers dont la taille est supérieure à 1 mégaoctet|
+|`find -exec rm {} \;`|Supprimer les fichiers trouvés par la commande `find`|
+|`find -a`|Opérateur ET (exemple : `find -name '*.txt' -a -size +1k` pour trouver fichiers .txt de plus de 1 Ko)|
+|`find -o`|Opérateur OU (exemple : `find -name '*.jpg' -o -name '*.png'` pour trouver fichiers .jpg ou .png)|
+|`find ! -name 'file.txt'` ou `find -not -name 'file.txt'`|Rechercher tous les fichiers sauf 'file.txt'|
+### <= Rechercher chaînes de caractères ou motif =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|`grep 'text' foo.txt`|Occurences 'text' dans 'foo.txt'|
+|`grep -v 'text' foo.txt`|Afficher les lignes de 'foo.txt' ne contenant pas l'occurence "text"|
+|`grep -c 'text' foo.txt`|Compter nombre de lignes dans 'foo.txt' contenant l'occurence "text"'|
+|`grep -n 'text' foo.txt`|Afficher les lignes de 'foo.txt' contenant "text", préfixées par leur numéro de ligne|
+|`grep -x 'exact' foo.txt`|Afficher uniquement les lignes de 'foo.txt' qui correspondent exactement à la chaîne "exact"|
+|`grep -l 'text' *.txt`|Afficher les noms des fichiers '.txt' dans le répertoire courant contenant l'occurrence "text"|
+|`grep -r "text" /folderPath`|Rechercher de manière récursive l'occurence "text" dans folderPath|
+|`grep -nri 'text' /project`|Recherche récursive, insensible à la casse, des occurrences de "text" dans le répertoire /project.|
+|`grep -nri '\(foo\|bar\|baz\)' /project`|Recherche récursive, insensible à la casse, des occurrences de "foo", "bar" ou "baz" dans le répertoire /project|
+### <= Install packages =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|`apt-get update`|MAJ liste des fichiers disponibles dans les dépôts APT|
+|`apt-get upgrade`|Installer les MAJ en dernière version disponible|
+|`apt-get install samba`|Installer le paquet 'Samba'|
+|`apt-get install foo=2.2-1`|Installer le paquet 'foo' dans sa version '2.2-1'|
+|`apt-get remove samba`|Désinstaller le paquet 'Samba' tout en laissant les fichiers de configuration|
+|`apt-get purge samba`|Supprimer complètement le paquet 'Samba' et ses fichiers de configuration|
+|`apt-cache policy php5`|Récupérer des informations sur l'état du paquet 'php5'|
+|`dpkg -l \| grep php`|Lister tous les paquets 'php' installés sur la machine|
+|`apt-get dist-upgrade`|Mettre à jour les paquets, en gérant les dépendances et les changements de paquets|
+|`apt-get autoremove`|Supprimer les paquets installés automatiquement qui ne sont plus nécessaires|
+|`apt-cache search <package>`|Rechercher un paquet disponible dans les dépôts APT|
+|`apt-get clean`|Supprimer les fichiers de paquets (.deb) téléchargés pour libérer de l'espace|
+|`apt-get show <package>`|Afficher des informations détaillées sur un paquet spécifique|
+|`dpkg -i <package.deb>`|Installer un paquet à partir d'un fichier .deb local|
+|`dpkg --remove <package>`|Désinstaller un paquet sans supprimer les fichiers de configuration|
+|`dpkg -S <file>`|Trouver quel paquet a installé un fichier donné sur le système|
+|`apt-get reinstall <package>`|Réinstaller un paquet sans le supprimer au préalable|
+### <= Changer droit d'un fichier =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|`chmod u+w fichier`|Ajouter droits d'écriture au propriétaire (user, write)|
+|`chmod g+r fichier`|Ajouter droits de lecture au groupe du fichier (group, read)|
+|`chmod o-x fichier`|Supprimer droits d'exécution aux autres utilisateurs (other, execution)|
+|`chmod a+rw dossier`|Ajouter droits de lecture et d'écriture à tous (all)|
+|`chmod -R a+rx files`|Ajouter droits de lecture et d'exécution à tout ce que contient le répertoire 'files'|
+|`chmod 764 dossier`|Tous droits pour le propriétaire (7xx), lecture et écriture pour le groupe (6xx), et lecture uniquement pour autres (4xx)|
+|`chmod -R 755 dossier`|Donner au propriétaire tous droits (7xx), alors que seuls les droits de lecture et d'accès seront donnés aux autres (55), avec l'option -R pour appliquer ces droits à tous les fichiers et dossiers contenus dans 'dossier'|
+|`chmod 600 fichier`|Tous droits pour le propriétaire (lecture et écriture), aucun droit pour le groupe et les autres|
+|`chmod 644 fichier`|Droits lecture écriture pour le propriétaire, droits de lecture pour le groupe et les autres|
+|`chmod +x script.sh`|Ajouter droit d'exécution au fichier script.sh|
+|`chmod -R g+w dossier`|Ajouter droits d'écriture au groupe pour le répertoire 'dossier' et tous ses contenus|
+|`chmod u-s fichier`|Supprimer le bit setuid du fichier (ne pas exécuter le fichier avec les privilèges du propriétaire)|
+
+                                    Correspondances de représentation des droits
+                                    --------------------------------------------
+
+| Droit                                               | Valeur alphanumérique | Valeur octale |
+|-----------------------------------------------------|-----------------------|----------------|
+| aucun droit                                         | ---                   | 0              |
+| exécution seulement                                 | --x                   | 1              |
+| écriture seulement                                   | -w-                   | 2              |
+| écriture et exécution                               | -wx                   | 3              |
+| lecture seulement                                    | r--                   | 4              |
+| lecture et exécution                                | r-x                   | 5              |
+| lecture et écriture                                  | rw-                   | 6              |
+| tous les droits (lecture, écriture et exécution)    | rwx                   | 7              |
 
 
-        ------
-        COPIER
-        ------
-
-cp foo/bar.txt info/            Copier le fichier bar.txt dans le répertoire info
-cp -r foo/ info/                Copier des répertoires entiers (note : si info existe, la cible sera info/foo/)
-
-
-
-        -------------------
-        DEPLACER / RENOMMER
-        -------------------
-
-mv foo/bar.txt info/                    Déplacer le fichier bar.txt dans le répertoire info
-mv foo_bar.txt foo_stop.txt             Renommer le fichier foo_bar.txt en foo_stop.txt
-
-
-
-        -------
-        EFFACER
-        -------
-
-rm *.txt                    Supprimer tous les fichiers ayant pour extension txt
-rm foo.txt bar.txt          Supprimer les fichiers foo.txt et bar.txt
-rm -rf baz/                 Supprimer le répertoire baz et tout son contenu
+### <= Changer propriétaire fichier =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+### <= SSH =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+### <= SCP =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+### <= Espace disque =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+### <= Processus =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+### <= Archives =>
+| Command + option | Objectif |
+| :---------: | :---------: |
 
 
 
-        ----------------
-        CREER REPERTOIRE
-        ----------------
-
-mkdir foo                       Créer le répertoire foo
-mkdir -v                        Retourner des informations lors de la création d'un répertoire    
-mkdir -p                        Cette option permet de créer une arborescence complète
-mkdir -v foo /tmp/bar           Créer les répertoires foo et /tmp/bar
-mkdir -p foo/bar/baz            Créer l’arborescence foo/bar/baz
-
-
-
-        ------------------
-        PACKAGES / INSTALL
-        ------------------
-
-apt-get update                              Mettre à jour la liste des fichiers disponibles dans les dépôts APT
-apt-get install samba                       Installer du paquet Samba
-apt-get install foo=2.2-1                   Installer du paquet foo dans sa version 2.2-1
-apt-get remove samba                        Désinstallation du paquet Samba tout en laissant les fichiers de configuration
-apt-get purge samba                         Suppression complète du paquet Samba et de ses fichiers de configuration
-apt-cache policy php5                       Récupération d'informations sur l'état du paquet php5
-dpkg -l | grep php                          Lister tous les paquets php installés sur la machine
 
 
       
@@ -100,32 +182,7 @@ chown bob:admin foo.txt             Attribuer l’utilisateur bob et le groupe a
 
 
 
-        ---------------------------------------------
-        CHANGER LES DROITS D'UN FICHIER OU REPERTOIRE
-        ---------------------------------------------
 
-chmod u+w fichier               Ajouter les droits d'écriture au propriétaire (user, write)
-chmod g+r fichier               Ajouter les droits de lecture au groupe du fichier (group, read)
-chmod o-x fichier               Supprimer les droits d'exécution aux autres utilisateurs (other, execution)
-chmod a+rw dossier              Ajouter les droits de lecture / écriture à tous (all)
-chmod -R a+rx files             Ajouter les droits de lecture et d'exécution à tout ce que contient le repertoire dossier
-chmod 764 dossier               Tous les droits pour le propriétaire (7xx), lecture et ecriture pour le groupe (x6x) et lecture uniquement pour les autres (xx4)
-chmod -R 755 dossier            Donner au propriétaire tous les droits (7xx), alors que seuls les droits de lecture et d'accès seront donnés aux autres (x55),
-                                Grace à l'option -R ces droits seront appliqués à tous les fichiers et dossiers contenus dans ce répertoire
-
-
-                                    Correspondances de représentation des droits
-                                    --------------------------------------------
-
-                Droit	                              Valeur alphanumérique	             Valeur octale
-            aucun droit	                                        ---	                            0
-            exécution seulement	                                --x	                            1
-            écriture seulement	                                -w-	                            2
-            ecriture et exécution	                            -wx	                            3
-            lecture seulement	                                r--	                            4
-            lecture et exécution	                            r-x	                            5
-            lecture et écriture	                                rw-	                            6
-    tous les droits (lecture, écriture et exécution)	        rwx	                            7
 
 
 
@@ -160,37 +217,6 @@ scp john@remotehost.example.com:/backups/*.sql backups/     Récupérer les fich
 scp -P 17654 john@remotehost:/files/ files/                 Récupérer les fichiers via un autre port (17654) que le port par défaut (22)
 
 scp -r mails/ john@remotehost:                              Transfère l'intégralité du répertoire mails
-
-
-
-        -------
-        TROUVER
-        -------
-
-find permet de chercher des fichiers et éventuellement d'exécuter des commandes dessus.
-
-Quelques options :
--name:              Recherche d'un fichier par son nom
--iname:             Même chose que -name mais insensible à la casse
--type:              Recherche de fichier d'un certain type
--atime:             Recherche par date de dernier accès
--mtime:             Recherche par date de dernière modification
--user:              Recherche de fichiers appartenant à l'utilisateur donné
--group:             Recherche de fichiers appartenant au groupe donné
--size:              Recherche par rapport à une taille de fichier.
--exec:              Exécute la commande donnée aux fichiers trouvés.
--a:                 Opérateur ET
--o:                 Opérateur OU
-! ou -not:          Opérateur NOT
-
-
-find myfile* -print                                         Rechercher un fichier commençant par "myfile"
-find -name *myfile*.txt -print                              Rechercher un fichier contenant "myfile" et ayant pour extention ".txt"
-find /usr -type d -print                                    Afficher tous les répertoires de /usr
-find $HOME \( -name '*.txt' -o -name '*.pdf' \)             Afficher tous les fichiers .txt ou .pdf dans le répertoire home de l'utilisateur
-find $HOME -name *.txt -atime +7 -exec rm {} \;             Supprimer tous les fichiers .txt qui n'ont pas été consultés depuis plus de 7 jours 
-                                                            dans le répertoire home de l'utilisateur
-find $HOME -name '*.txt' -size +4k -exec ls -l {} \;        Afficher la taille de tous les fichiers de plus de 4 kilos
 
 
 

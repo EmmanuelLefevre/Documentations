@@ -134,10 +134,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`chmod +x script.sh`|Ajouter droit d'exécution au fichier script.sh|
 |`chmod -R g+w dossier`|Ajouter droits d'écriture au groupe pour le répertoire 'dossier' et tous ses contenus|
 |`chmod u-s fichier`|Supprimer le bit setuid du fichier (ne pas exécuter le fichier avec les privilèges du propriétaire)|
-
-                                    Correspondances de représentation des droits
-                                    --------------------------------------------
-
+#### Correspondances de représentation des droits
 | Droit                                               | Valeur alphanumérique | Valeur octale |
 |-----------------------------------------------------|-----------------------|----------------|
 | aucun droit                                         | ---                   | 0              |

@@ -3,17 +3,31 @@
 Système d'exploitation open source de type Unix fondé sur le noyau Linux créé en 1991 par Linus Torvalds
 ## COMMANDS
 ### <= Vérification de version =>
-| Command + option | Objectif |
-| :--------------: | :------: |
-| Commande                 | Description                                   | Syntaxe                                |
-|--------------------------|-----------------------------------------------|----------------------------------------|
-| `cat /etc/os-release`    | Affiche les informations sur la distribution  | `cat /etc/os-release`                 |
-| `uname -a`               | Affiche des informations sur le noyau         | `uname -a`                             |
-| `lsb_release -a`         | Affiche les informations sur la version LSB   | `lsb_release -a`                       |
-| `dpkg --version`         | Affiche la version de dpkg                    | `dpkg --version`                       |
+| Command + option | Description |
+| :--------------: | :---------: |
+|`cat /etc/os-release`| Affiche les informations sur la distribution| `cat /etc/os-release`|
+|`uname -a`| Affiche des informations sur le noyau| `uname -a`|
+|`lsb_release -a`| Affiche les informations sur la version LSB| `lsb_release -a`|
+|`dpkg --version`| Affiche la version de dpkg| `dpkg --version`|
+### <= Réseau =>
+| Command + option | Description |
+| :--------------: | :---------: |
+| `ifconfig 'eth0'`| Affiche la configuration réseau ethernet|
+| `ifconfig 'wlan0'`| Affiche la configuration réseau wifi|
+| `ping 'adresse_IP_ou_nom_de_domaine'`|Vérifie la connectivité réseau|
+| `traceroute 'adresse_IP_ou_nom_de_domaine'`|Affiche le chemin des paquets réseau|
+| `netstat -tuln`|Affiche les connexions réseau|
+| `curl -o 'url_fichier`|Télécharger fichier en curl à partir d'une URL|
+### <= Redémarrage / arrêt =>
+| Command + option | Description |
+| :--------------: | :---------: |
+| `shutdown`     | Arrête l'instance                     | `shutdown [option]`          |
+| `reboot`       | Redémarre l'instance                  | `reboot [option]`            |
+| `poweroff`     | Éteint l'instance                     | `poweroff [option]`          |
+| `halt`         | Arrête le système immédiatement       | `halt [option]`              |
 ### <= Navigation fichiers =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |` /`|Racine du disque|
 |`cd ~ / cd $HOME`|Répertoire utilisateur|
 |`cd var/www/`|Répertoire /var/www|
@@ -21,8 +35,8 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`cd ../../..`|Naviguer plusieurs niveaux en amont|
 |`cd -`|Répertoire précédent|
 ### <= Affichage =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`ls -l`|Informations et détails|
 |`ls -a`|Fichiers cachés|
 |`ls -h`|Poids fichiers plus lisible|
@@ -31,8 +45,8 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`ls -S`|Tri par taille décroissante|
 |`pwd`|Renvoyer chemin absolu du répertoire courant|
 ### <= Création répertoire =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`mkdir 'foo'`|Créer répertoire 'foo'|
 |`mkdir -v 'foo' '/tmp/bar'`|Créer répertoires 'foo' et '/tmp/bar'|
 |`mkdir -p 'foo/bar/baz'`|Créer l’arborescence 'foo/bar/baz'|
@@ -47,37 +61,37 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`touch -a 'file.txt'`|MAJ d'horodatage d'accès du fichier 'file.txt'|
 |`touch -m 'file.txt'`|MAJ d'horodatage de modification du fichier 'file.txt'|
 ### <= Copier =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`cp foo/bar.txt info/`|Copier 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
 |`cp -r foo/ info/`|Copier répertoire 'foo' + son contenu dans le répertoire 'info' (si 'info' existe le contenu sera placé dans 'info/foo/')|
 ### <= Déplacer / Renommer =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`mv 'project_v1/' 'project_v2/'`|Renommer répertoire 'project_v1' en 'project_v2'|
 |`mv foo_bar.txt foo_stop.txt`|Renommer foo_bar.txt' en 'foo_stop.txt' dans le même répertoire|
 |`mv foo/bar.txt info/`|Déplacer 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
 |`mv temp.txt '/backup/'`|Déplacer 'temp.txt' vers le répertoire 'backup'|
 |`mv '*.txt' '/documents/'`|Déplacer tous les '.txt' du répertoire courant vers le répertoire 'documents'|
 ### <= Effacer =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`rm '*.txt'`|Supprimer tous les fichiers ayant pour extension 'txt'|
 |`rm 'foo.txt' 'bar.txt'`|Supprimer les fichiers 'foo.txt' et 'bar.txt'|
 |`rm -rf 'baz/'`|Supprimer le répertoire 'baz' et tout son contenu|
 |`rm -i 'file.txt'`|Supprimer 'file.txt' après confirmation de l'utilisateur|
 |`rm -v '*.log'`|Supprimer les fichiers ayant pour extension '.log' + afficher les noms des fichiers supprimés|
 ### <= Afficher contenu fichier =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`cat 'file.txt'`|Afficher contenu 'file.txt' dans le terminal|
 |`cat 'file1.txt' 'file2.txt'`|Afficher contenu de 'file1.txt' et 'file2.txt' en séquence|
 |`cat > 'newfile.txt'`|Créer 'newfile.txt' et y entrer du texte, terminé par Ctrl+D|
 |`cat -n 'file.txt'`|Afficher contenu de 'file.txt' avec les numéros de ligne|
 |`cat >> 'existingfile.txt'`|Ajouter du texte à la fin de 'existingfile.txt', terminé par Ctrl+D|
 ### <= Trouver =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`find 'myfile*' -print`|Rechercher fichier commençant par 'myfile'|
 |`find -name '*myfile*.txt' -print`|Rechercher fichier contenant 'myfile' + extension '.txt'|
 |`find '/usr' -type d -print`|Afficher tous les répertoires de '/usr'|
@@ -98,8 +112,8 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`find -o`|Opérateur OU (exemple : `find -name '*.jpg' -o -name '*.png'` pour trouver fichiers .jpg ou .png)|
 |`find ! -name 'file.txt'` ou `find -not -name 'file.txt'`|Rechercher tous les fichiers sauf 'file.txt'|
 ### <= Rechercher chaînes de caractères ou motif =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`grep 'text' foo.txt`|Occurences 'text' dans 'foo.txt'|
 |`grep -v 'text' foo.txt`|Afficher les lignes de 'foo.txt' ne contenant pas l'occurence "text"|
 |`grep -c 'text' foo.txt`|Compter nombre de lignes dans 'foo.txt' contenant l'occurence "text"'|
@@ -110,8 +124,8 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`grep -nri 'text' /project`|Recherche récursive, insensible à la casse, des occurrences de "text" dans le répertoire /project.|
 |`grep -nri '\(foo\|bar\|baz\)' /project`|Recherche récursive, insensible à la casse, des occurrences de "foo", "bar" ou "baz" dans le répertoire /project|
 ### <= Install packages =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`apt-get update`|MAJ liste des fichiers disponibles dans les dépôts APT|
 |`apt-get upgrade`|Installer les MAJ en dernière version disponible|
 |`apt-get install samba`|Installer le paquet 'Samba'|
@@ -130,8 +144,8 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`dpkg -S <file>`|Trouver quel paquet a installé un fichier donné sur le système|
 |`apt-get reinstall <package>`|Réinstaller un paquet sans le supprimer au préalable|
 ### <= Changer droit d'un fichier =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`chmod u+w fichier`|Ajouter droits d'écriture au propriétaire (user, write)|
 |`chmod g+r fichier`|Ajouter droits de lecture au groupe du fichier (group, read)|
 |`chmod o-x fichier`|Supprimer droits d'exécution aux autres utilisateurs (other, execution)|
@@ -159,8 +173,8 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | Setgid                                              | rwx                   | 2xx           | Exécution avec les privilèges du groupe          |
 | Sticky bit                                          | rwx+t                 | 1xx           | Fichiers dans un répertoire pouvant être supprimés uniquement par leur propriétaire|
 ### <= Changer propriétaire fichier =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`chown bob:admin foo.txt`|Attribuer l’utilisateur 'bob' + groupe 'admin' à 'foo.txt'|
 |`chown alice file.txt`|Changer propriétaire 'file.txt' en 'alice'|
 |`chown :users file.txt`|Changer groupe 'file.txt' en 'users' sans modifier le propriétaire|
@@ -168,8 +182,8 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`chown --from=currentuser:newgroup file.txt`|Changer le propriétaire de 'file.txt' uniquement si l'utilisateur actuel est 'current|
 ### <= SSH =>
 #### Connection SSH à une machine distante!
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`ssh john@remotehost.example.com`|Connexion machine distante login 'john'|
 |`ssh-keygen -t dsa`|Génération clé DSA (à faire sur la machine locale)|
 |`ssh-copy-id -i ~/.ssh/id_dsa.pub john@remotehost.example.com`|Copie clé publique sur la machine distante pour utilisateur 'john'|
@@ -178,11 +192,10 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`ssh -v john@remotehost.example.com`|Activer le mode verbeux pour afficher des informations de débogage lors de la connexion|
 |`ssh user@remotehost.example.com 'command'`|Exécuter une commande spécifique sur la machine distante sans ouvrir une session interactive|
 |`ssh -D 8080 john@remotehost.example.com`|Configurer un tunnel SOCKS pour la redirection de trafic via la machine distante|
-
 ### <= SCP =>
 #### Copier des fichiers entre le serveur et le client SSH de manière sécurisée!
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`scp foo.txt john@remotehost.example.com:`|Transférer 'foo.txt' situé dans répertoire courant vers répertoire 'home' du compte 'john' de la machine 'remotehost.example.com'|
 |`scp john@remotehost.example.com:foo.txt ./`|Récupèrer 'foo.txt' situé dans répertoire 'home' du compte 'john' pour le copier dans le répertoire courant|
 |`scp john@remotehost.example.com:/backups/*.sql backups/`|Récupérer les fichiers '.sql' situés dans le répertoire '/backups' pour les copier dans le sous-répertoire 'backups' du répertoire courant|
@@ -194,8 +207,8 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`scp -P 2222 john@remotehost:/path/to/file.txt ./`|Transférer un fichier depuis une machine distante en utilisant un port spécifique (ici 2222)|
 |`scp -r john@remotehost:/path/to/directory ./`|Récupérer l'intégralité d'un répertoire depuis la machine distante vers le répertoire courant|
 ### <= Espace disque =>
-| Command + option | Objectif |
-| :--------------: | :------: |
+| Command + option | Description |
+| :--------------: | :---------: |
 |`du -sh dossier1 dossier2`|Connaitre espace disque utilisé par les répertoires 'dossier1' et 'dossier2'|
 |`du -hc --max-depth=1`|Afficher espace disque utilisé des fichiers et répertoires contenus dans le répertoire courant|
 |`df -h`|Afficher espace disque disponible sur toutes les partitions (disk free)|
@@ -204,11 +217,14 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`df -i`|Afficher l'utilisation des inodes sur toutes les partitions|
 |`df -h /mount_point`|Afficher l'espace disque disponible pour un point de montage spécifique|
 |`du -s /path/to/directory`|Afficher l'espace disque utilisé par le répertoire spécifié sans afficher les sous-répertoires|
-### <= Processus =>
-| Command + option | Objectif |
-| :--------------: | :------: |
-|`top`|Classement en temps réel des processus en cours triés par utilisation du CPU ou de la mémoire|
+### <= ProcessuMémoires =>
+| Command + option | Description |
+| :--------------: | :---------: |
 |`free`|Afficher la mémoire libre et utilisée sur le système|
+### <= Processus =>
+| Command + option | Description |
+| :--------------: | :---------: |
+|`top`|Classement en temps réel des processus en cours triés par utilisation du CPU ou de la mémoire|
 |`ps aux`|Afficher tous les processus exécutés par tous les utilisateurs|
 |`ps faux`|Afficher tous les processus exécutés sous forme d'arbre pour visualiser les relations entre eux|
 |`kill pid`|Arrêter un processus spécifié par son identifiant (PID)|
@@ -219,11 +235,9 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`vmstat`|Afficher des statistiques sur la mémoire virtuelle et l'utilisation du système|
 |`lsof`|Lister tous les fichiers ouverts par les processus, utile pour diagnostiquer les problèmes de fichiers|
 ### <= Archives =>
-| Command + option | Objectif |
-| :--------------: | :------: |
-| Commande | Description |
-|----------|-------------|
-|-------- TAR -----------|
+#### TAR
+| Command + option | Description |
+| :--------------: | :---------: |
 |`tar -cvf 'archive.tar' 'mon_dossier/'`|Créer une archive|
 |`tar -tvf 'archive.tar'`| Tester / lister le contenu d'une archive|
 |`tar -xvf 'archive.tar'`| Extraire les fichiers d'une archive|
@@ -241,21 +255,31 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`tar --exclude='*.log' -cvf archive.tar projet/`|Créer archive tout en excluant les fichiers avec l'extension '.log'|
 |`tar -cvf - fichier1 \| gzip > fichier1.tar.gz`|Créer archive tar compressée au format gzip en une seule commande|
 |`tar -xvf archive.tar -C /destination/`|Extraire les fichiers de 'archive.tar' dans le répertoire spécifié '/destination/'|
-### <= Réseau =>
-| Command + option | Objectif |
-| :--------------: | :------: |
-| Commande                    | Description                                   | Syntaxe                                |
-|-----------------------------|-----------------------------------------------|----------------------------------------|
-| `ifconfig`                  | Affiche la configuration réseau               | `ifconfig [interface]`                 |
-| `ping`                      | Vérifie la connectivité réseau                | `ping [adresse]`                       |
-| `traceroute`               | Affiche le chemin des paquets réseau          | `traceroute [adresse]`                 |
-| `netstat`                   | Affiche les connexions réseau                 | `netstat -tuln`                        |
-### <= Redémarrage / arrêt =>
-| Command + option | Objectif |
-| :--------------: | :------: |
-| Commande       | Description                           | Syntaxe                       |
-|----------------|---------------------------------------|-------------------------------|
-| `shutdown`     | Arrête l'instance                     | `shutdown [option]`          |
-| `reboot`       | Redémarre l'instance                  | `reboot [option]`            |
-| `poweroff`     | Éteint l'instance                     | `poweroff [option]`          |
-| `halt`         | Arrête le système immédiatement       | `halt [option]`              |
+#### GZIP
+| Command + option | Description |
+| :--------------: | :---------: |
+|`gzip 'fichier.txt'`|Compresser un fichier en utilisant gzip|
+|`gzip -d 'fichier.txt.gz'`|Décompresser un fichier compressé avec gzip|
+|`gzip -k 'fichier.txt'`|Compresser un fichier tout en conservant l'original|
+|`gzip -l 'fichier.txt.gz'`|Lister les informations sur le fichier compressé|
+|`gzip -r 'dossier/'`|Compresser tous les fichiers d'un répertoire|
+|`gzip -v 'fichier.txt'`|Afficher les détails de la compression|
+|`gzip -1 'fichier.txt'`|Compresser un fichier avec la compression la plus rapide|
+|`gzip -9 'fichier.txt'`|Compresser un fichier avec la meilleure compression|
+|`gzip -c 'fichier.txt' > 'fichier.txt.gz'`|Compresser et rediriger la sortie vers un nouveau fichier|
+|`gunzip 'fichier.txt.gz'`|Commande alternative pour décompresser un fichier gzip|
+### UTILISATEURS
+| Command + option | Description |
+| :--------------: | :---------: |
+|`sudo adduser 'nom_utilisateur'`|Ajouter un nouvel utilisateur|
+|`sudo passwd 'nom_utilisateur'`|Changer le mot de passe d'un utilisateur|
+### LOGS
+| Command + option | Description |
+| :--------------: | :---------: |
+|`tail -f '/var/log/syslog'`|Afficher les logs en temps réel|
+|`grep 'terme_de_recherche' '/var/log/syslog'`|Rechercher dans les logs|
+### ENVIRONNEMENT
+| Command + option | Description |
+| :--------------: | :---------: |
+|`export 'NOM_VARIABLE=valeur'`|Définir une variable d'environnement|
+|`printenv`|Afficher les variables d'environnement|

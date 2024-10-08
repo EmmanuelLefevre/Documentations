@@ -2,14 +2,14 @@
 ## INTRODUCTION
 Système d'exploitation open source de type Unix fondé sur le noyau Linux créé en 1991 par Linus Torvalds
 ## COMMANDS
-### <= Vérification de version =>
+### Vérification de version
 | Command + option | Description |
 | :--------------: | :---------: |
 |`cat /etc/os-release`| Affiche les informations sur la distribution| `cat /etc/os-release`|
 |`uname -a`| Affiche des informations sur le noyau| `uname -a`|
 |`lsb_release -a`| Affiche les informations sur la version LSB| `lsb_release -a`|
 |`dpkg --version`| Affiche la version de dpkg| `dpkg --version`|
-### <= Réseau =>
+### Réseau
 | Command + option | Description |
 | :--------------: | :---------: |
 | `ifconfig 'eth0'`| Affiche la configuration réseau ethernet|
@@ -18,14 +18,14 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | `traceroute 'adresse_IP_ou_nom_de_domaine'`|Affiche le chemin des paquets réseau|
 | `netstat -tuln`|Affiche les connexions réseau|
 | `curl -o 'url_fichier`|Télécharger fichier en curl à partir d'une URL|
-### <= Redémarrage / arrêt =>
+### Redémarrage / arrêt
 | Command          | Description |
 | :--------------: | :---------: |
 | `shutdown`     | Arrête l'instance                     | `shutdown [option]`          |
 | `reboot`       | Redémarre l'instance                  | `reboot [option]`            |
 | `poweroff`     | Éteint l'instance                     | `poweroff [option]`          |
 | `halt`         | Arrête le système immédiatement       | `halt [option]`              |
-### <= Navigation fichiers =>
+### Navigation fichiers
 | Command + option | Description |
 | :--------------: | :---------: |
 |` /`|Racine du disque|
@@ -34,7 +34,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`cd ..`|Répertoire parent|
 |`cd ../../..`|Naviguer plusieurs niveaux en amont|
 |`cd -`|Répertoire précédent|
-### <= Affichage =>
+### Affichage
 | Command + option | Description |
 | :--------------: | :---------: |
 |`ls -l`|Informations et détails|
@@ -44,7 +44,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`ls -t`|Tri par date récent -> ancien|
 |`ls -S`|Tri par taille décroissante|
 |`pwd`|Renvoyer chemin absolu du répertoire courant|
-### <= Création répertoire =>
+### Création répertoire
 | Command + option | Description |
 | :--------------: | :---------: |
 |`mkdir 'foo'`|Créer répertoire 'foo'|
@@ -52,7 +52,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`mkdir -p 'foo/bar/baz'`|Créer l’arborescence 'foo/bar/baz'|
 |`mkdir -m 755 'new_folder'`|Créer répertoire 'new_folder' avec permissions 755|
 |`mkdir -v`|Retourner des informations lors de la création d'un répertoire|
-### <= Création fichier =>
+### Création fichier
 | Command + option | Objectif |
 | :--------------: | :---------: |
 |`touch 'file.txt'`|Créer fichier vide nommé 'file.txt' (ou MAJ d'horodatage s'il existe déjà)|
@@ -60,12 +60,12 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`touch -c 'file.txt'`|Ne pas créer de fichier si 'file.txt' n'existe pas, juste MAJ d'horodatage s'il existe|
 |`touch -a 'file.txt'`|MAJ d'horodatage d'accès du fichier 'file.txt'|
 |`touch -m 'file.txt'`|MAJ d'horodatage de modification du fichier 'file.txt'|
-### <= Copier =>
+### Copier
 | Command + option | Description |
 | :--------------: | :---------: |
 |`cp foo/bar.txt info/`|Copier 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
 |`cp -r foo/ info/`|Copier répertoire 'foo' + son contenu dans le répertoire 'info' (si 'info' existe le contenu sera placé dans 'info/foo/')|
-### <= Déplacer / Renommer =>
+### Déplacer / Renommer
 | Command + option | Description |
 | :--------------: | :---------: |
 |`mv 'project_v1/' 'project_v2/'`|Renommer répertoire 'project_v1' en 'project_v2'|
@@ -73,7 +73,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`mv foo/bar.txt info/`|Déplacer 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
 |`mv temp.txt '/backup/'`|Déplacer 'temp.txt' vers le répertoire 'backup'|
 |`mv '*.txt' '/documents/'`|Déplacer tous les '.txt' du répertoire courant vers le répertoire 'documents'|
-### <= Effacer =>
+### Effacer
 | Command + option | Description |
 | :--------------: | :---------: |
 |`rm '*.txt'`|Supprimer tous les fichiers ayant pour extension 'txt'|
@@ -81,7 +81,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`rm -rf 'baz/'`|Supprimer le répertoire 'baz' et tout son contenu|
 |`rm -i 'file.txt'`|Supprimer 'file.txt' après confirmation de l'utilisateur|
 |`rm -v '*.log'`|Supprimer les fichiers ayant pour extension '.log' + afficher les noms des fichiers supprimés|
-### <= Afficher contenu fichier =>
+### Afficher contenu fichier
 | Command + option | Description |
 | :--------------: | :---------: |
 |`cat 'file.txt'`|Afficher contenu 'file.txt' dans le terminal|
@@ -89,7 +89,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`cat > 'newfile.txt'`|Créer 'newfile.txt' et y entrer du texte, terminé par Ctrl+D|
 |`cat -n 'file.txt'`|Afficher contenu de 'file.txt' avec les numéros de ligne|
 |`cat >> 'existingfile.txt'`|Ajouter du texte à la fin de 'existingfile.txt', terminé par Ctrl+D|
-### <= Trouver =>
+### Trouver
 | Command + option | Description |
 | :--------------: | :---------: |
 |`find 'myfile*' -print`|Rechercher fichier commençant par 'myfile'|
@@ -111,7 +111,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`find -a`|Opérateur ET (exemple : `find -name '*.txt' -a -size +1k` pour trouver fichiers .txt de plus de 1 Ko)|
 |`find -o`|Opérateur OU (exemple : `find -name '*.jpg' -o -name '*.png'` pour trouver fichiers .jpg ou .png)|
 |`find ! -name 'file.txt'` ou `find -not -name 'file.txt'`|Rechercher tous les fichiers sauf 'file.txt'|
-### <= Rechercher chaînes de caractères ou motif =>
+### Rechercher chaînes de caractères ou motif
 | Command + option | Description |
 | :--------------: | :---------: |
 |`grep 'text' foo.txt`|Occurences 'text' dans 'foo.txt'|
@@ -123,7 +123,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`grep -r "text" /folderPath`|Rechercher de manière récursive l'occurence "text" dans folderPath|
 |`grep -nri 'text' /project`|Recherche récursive, insensible à la casse, des occurrences de "text" dans répertoire 'project'|
 |`grep -nri '\(foo\|bar\|baz\)' /project`|Recherche (récursive/insensible à la casse) occurrences de "foo""bar""baz" dans répertoire 'project'|
-### <= Install packages =>
+### Install packages
 | Command + option | Description |
 | :--------------: | :---------: |
 |`apt-get update`|MAJ liste des fichiers disponibles dans les dépôts APT|
@@ -143,7 +143,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`dpkg --remove <package>`|Désinstaller un paquet sans supprimer les fichiers de configuration|
 |`dpkg -S <file>`|Trouver quel paquet a installé un fichier donné sur le système|
 |`apt-get reinstall <package>`|Réinstaller un paquet sans le supprimer au préalable|
-### <= Changer droit d'un fichier =>
+### Changer droit d'un fichier
 | Command + option | Description |
 | :--------------: | :---------: |
 |`chmod u+w foo.txt`|Ajouter droits d'écriture au propriétaire (user, write)|
@@ -172,7 +172,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | Setuid                                              | rws                   | 4xx           | Exécution avec les privilèges du propriétaire    |
 | Setgid                                              | rwx                   | 2xx           | Exécution avec les privilèges du groupe          |
 | Sticky bit                                          | rwx+t                 | 1xx           | Fichiers dans un répertoire pouvant être supprimés uniquement par leur propriétaire|
-### <= Changer propriétaire fichier =>
+### Changer propriétaire fichier
 | Command + option | Description |
 | :--------------: | :---------: |
 |`chown bob:admin foo.txt`|Attribuer l’utilisateur 'bob' + groupe 'admin' à 'foo.txt'|
@@ -180,7 +180,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`chown :users file.txt`|Changer groupe 'file.txt' en 'users' sans modifier le propriétaire|
 |`chown -R bob:admin /path/to/directory`|Attribuer 'bob' + groupe 'admin' à tous les fichiers et dossiers dans '/path/to/directory' de manière récursive|
 |`chown --from=currentuser:newgroup file.txt`|Changer le propriétaire de 'file.txt' uniquement si l'utilisateur actuel est 'current'|
-### <= SSH =>
+### SSH
 #### Connection SSH à une machine distante!
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -192,7 +192,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`ssh -v john@remotehost.example.com`|Activer le mode verbeux pour afficher des informations de débogage lors de la connexion|
 |`ssh user@remotehost.example.com 'command'`|Exécuter une commande spécifique sur la machine distante sans ouvrir une session interactive|
 |`ssh -D 8080 john@remotehost.example.com`|Configurer un tunnel SOCKS pour la redirection de trafic via la machine distante|
-### <= SCP =>
+### SCP
 #### Copier des fichiers entre le serveur et le client SSH de manière sécurisée!
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -206,7 +206,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`scp -i ~/.ssh/my_key foo.txt john@remotehost.example.com:`|Utiliser une clé privée spécifique pour l'authentification lors du transfert de 'foo.txt'|
 |`scp -P 2222 john@remotehost:/path/to/file.txt ./`|Transférer un fichier depuis une machine distante en utilisant un port spécifique (ici 2222)|
 |`scp -r john@remotehost:/path/to/directory ./`|Récupérer l'intégralité d'un répertoire depuis la machine distante vers le répertoire courant|
-### <= Espace disque =>
+### Espace disque
 | Command + option | Description |
 | :--------------: | :---------: |
 |`du -sh dossier1 dossier2`|Connaitre espace disque utilisé par les répertoires 'dossier1' et 'dossier2'|
@@ -217,11 +217,11 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`df -i`|Afficher l'utilisation des inodes sur toutes les partitions|
 |`df -h /mount_point`|Afficher l'espace disque disponible pour un point de montage spécifique|
 |`du -s /path/to/directory`|Afficher l'espace disque utilisé par le répertoire spécifié sans afficher les sous-répertoires|
-### <= ProcessuMémoires =>
+### ProcessuMémoires
 | Command + option | Description |
 | :--------------: | :---------: |
 |`free`|Afficher la mémoire libre et utilisée sur le système|
-### <= Processus =>
+### Processus
 | Command + option | Description |
 | :--------------: | :---------: |
 |`top`|Classement en temps réel des processus en cours triés par utilisation du CPU ou de la mémoire|
@@ -234,7 +234,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`killall name`|Tuer tous les processus par leur nom (similaire à `pkill`)|
 |`vmstat`|Afficher des statistiques sur la mémoire virtuelle et l'utilisation du système|
 |`lsof`|Lister tous les fichiers ouverts par les processus, utile pour diagnostiquer les problèmes de fichiers|
-### <= Archives =>
+### Archives
 #### TAR
 | Command + option | Description |
 | :--------------: | :---------: |

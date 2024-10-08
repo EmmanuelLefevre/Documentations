@@ -1,4 +1,7 @@
-# DWLD IMAGE  
+# DOCKER
+## INTRODUCTION
+Plateforme permettant de lancer des applications dans des conteneurs logiciels
+## DOWNLOAD IMAGE  
 1. Télécharger image NodeJs  
 ```shell
 docker pull node

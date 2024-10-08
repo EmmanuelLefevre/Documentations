@@ -33,8 +33,8 @@ nodemon app.js
     "version": "1.0.0",
     "main": "app.js",
     "scripts": {
-        "start": "node ./bin/www", // Prod
-        "dev": "npm-run-all --parallel nodemon-watch" // Dev
+        "start": "node ./bin/www",
+        "dev": "npm-run-all --parallel nodemon-watch"
     },
 }
 ```
@@ -48,6 +48,7 @@ Dev
 npm run dev
 ```
 ### Création serveur
+Fichier app.js
 ```js
 const express = require('express');
 const app = express();

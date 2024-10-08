@@ -112,7 +112,6 @@ ip a | grep eth0
 ```shell
 cd /etc/mysql
 ```
-puis
 ```shell
 sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
 ```
@@ -146,7 +145,7 @@ cd var
 ```shell
 sudo chown -R www-data:www-data ./www
 ```
-7. Créer projet
+7. Créer un projet
 ```shell
 cd www
 ```
@@ -161,10 +160,7 @@ sudo nano index.html
 ```
 8. Activer et configurer le projet sur le serveur Apache
 ```shell
-cd /etc
-```
-```shell
-cd apache2/sites-available
+cd /etc/apache2/sites-available
 ```
 ```shell
 sudo cp 000-default.conf easygarden.conf
@@ -172,7 +168,7 @@ sudo cp 000-default.conf easygarden.conf
 ```shell
 sudo nano easygarden.conf
 ```
-```
+```conf
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 	ServerName easygarden.com

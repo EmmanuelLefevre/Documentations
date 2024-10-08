@@ -1,6 +1,6 @@
 # SYMFONY
 ## INTRODUCTION
-Symfony est un un framework MVC libre écrit en PHP.
+Symfony est un un framework MVC libre écrit en PHP. L'agence web française SensioLabs et son créateur Fabien Potencier est à l'origine du framework Symfony.
 ## COMMANDES UTILES
 
 

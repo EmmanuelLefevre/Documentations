@@ -3,7 +3,7 @@
 Plugin pour éditeur de texte (assistance de contenu)
 ## HTML
 | Raccourci | Résultat |
-| :---------: | :---------: |
+| :-------: | :------: |
 |html:5|Template HTML 5|
 |!|Template HTML 5|
 |ul>li*2>span.class{li}|`<ul><li><span class="class">li</span></li><li><span class="class">li</span></li></ul>`|
@@ -20,7 +20,7 @@ Plugin pour éditeur de texte (assistance de contenu)
 |(p>lorem40)*2|2x `<p>` avec 40 mots de Lorem chacun|
 ## CSS
 | Raccourci | Résultat |
-| :---------: | :---------: |
+| :-------: | :------: |
 |dn|display:none;|
 |m10|margin:10px;|
 |p10|padding:10px;|

@@ -1,55 +1,39 @@
 # EXPRESS
-## INROODUCTION
+## INTRODUCTION
+Express est un framework d'applications Web back-end pour la création d'API REST avec Node.js (publié en tant que logiciel libre et open source sous la licence MIT).
 ## COMMANDES UTILES
-
-
-Vérifier la version de node.. en l'occurence la 10.15.
-nvm --version           pour vérifier la version.
-
-Installation:
-npm install express-generator -g
-sudo apt install tree   (arborescence des fichiers linux)
-
-
-Se positionner dans le répertoire ou l'on veut installer l'application puis
-faire la commande linux ->
-express --view=hbs myExpressHbsApp
-
-Puis lancer le serveur (en se plaçant ds le répertoire de l'application) avec la commande: npm start
-ou avec nodemon:        nodemon ./bin/www
-Lancez un localhost:3000 dans un navigateur pour vérifier le fonctionnement.
-
-rs         Redémarrer le serveur!!!!!!
-
-
-Debugger:
----------
-
+### Installation
+#### 1. Initialiser un projet Node.js
+```shell
+npm init -y
+```
+#### 1. Installer Express
+```shell
+npm install express
+```
+### Démarrer serveur
+#### Node.js
+```shell
+node ./bin/www
+```
+#### Nodemon
+```shell
+nodemon ./bin/www
+```
+#### NPM script
+#### 1. Fichier package.json
+```json
+scripts": {
+    "start": "node -r dotenv/config api/server.js",
+    "dev": "npm-run-all --parallel sass-watch nodemon-watch"
+},
+```
+#### 2. Terminal
+```shell
+npm run dev
+```
+### Debug
 node --inspect ./bin/www
 nodemon --inspect ./bin/www         Avec nodemon
 chrome://inspect                    Dev tools chrome debuggeur
 
-
-App.js:
--------
-
-var app = express();  // Initialisation express
-
-
-
-
-Code généré:
-------------
-
-app.js                          Code source application
-bin/www                         Main point entrée (dossier lanceur /bin)
-public                          Top du serveur web (dossier public du serveur web Node)
-public/images                   Répertoire des images clientes
-public/javascripts              Répertoire des fichier JS clients
-public/stylesheets              Répertoire des feuilles de style css
-routes/index.js                 Code éxécuté en fonction du pathname (controleur sur action '/')
-routes/users.js                 Code éxécuté en fonction du pathname (controleur sur action '/users')
-views                           Répertoire vues -> HTML + Balise Moustache
-
-views/layout.hbs                Découpage de l'interface (head, body, footer, nav...)
-=> Le code HTML des vues : “index.hbs” et“error.hbs” seront affichées à la place du tag {{{body}}}.

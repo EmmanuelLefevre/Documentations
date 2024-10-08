@@ -57,21 +57,13 @@ docker build -t node-test:1.0.0 .
 docker run -it node-test:1.0.0 bash
 ```
 ### 5. Arrêter une image
-```shell
-docker run -it -v "./app:/app//" node-test bash
-```
-```shell
-docker run -it -v "./pwa:/pwa" node-test bash
-```
-```shell
-docker run -it -v "./app:/app" ubuntu bash
-```
-## COMMANDES UTILES
-- Version Linux du container
-```shell
-uname -a
-```
-- Docker compose
-```shell
-docker-compose up
-```
+| Command + option | Description |
+| :--------------: | :---------: |
+|`docker run -it -v "./app:/app//" node-test bash`|Lancer l'image en montant un volume|
+|`docker run -it -v "./pwa:/pwa" node-test bash`|Lancer l'image avec un autre volume|
+|`docker run -it -v "./app:/app" ubuntu bash`|Lancer l'image Ubuntu avec un volume|
+## DIVERS
+| Command + option | Description |
+| :--------------: | :---------: |
+|`uname -a`|Version Linux du container|
+|`docker-compose up`|	Lancer les services définis dans docker-compose|

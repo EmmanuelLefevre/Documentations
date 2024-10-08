@@ -21,6 +21,24 @@ git init
 |`git config --list`| Afficher toutes les configurations Git actuelles|
 |`git config user.name`| Afficher le nom d'utilisateur configuré pour Git|
 |`git config user.email`| Afficher l'adresse e-mail configurée pour Git|
+### Clone/Pull:
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git clone https://github.com/user.name/nomRepo.git`|Cloner un dépôt distant vers son local|
+|`git pull origin master`|Récupérer les MAJ de la branche 'master' du distant => fusionner avec la branche locale actuelle.|
+### Synchronisation local avec distant
+#### 1. Récupérer les dernières modifications du dépôt distant sans les fusionner avec la branche locale
+```shell
+git fetch origin
+```
+#### 2. Puis Fusionner les modifications de la 'master' distante dans la branche locale actuelle
+```shell
+git git merge origin/master
+```
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git fetch origin`| Afficher le nom d'utilisateur configuré pour Git|
+|`git merge origin/master`| Afficher l'adresse e-mail configurée pour Git|
 ### Reconfigurer dépôt distant
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -33,11 +51,16 @@ git init
 |`git add .`|Ajouter tous les fichiers modifiés au staging|
 |`git commit -m "commentaire"`|Créer un commit avec un message de commentaire|
 |`git commit -m "commentaire" -a`|Ajouter et créer un commit en une seule ligne|
-|`git log --oneline`|Afficher la liste des commits de manière concise|
-|`git log --date=local`|Afficher la liste des commits avec des dates locales|
 |`git checkout commitIdentifiant`|Se replacer sur un commit spécifique|
 |`git reset --hard`|Annuler les fichiers ajoutés avec `git add .`|
 |`git commit --amend -m "newMessage"`|Modifier le message du dernier commit|
+|`git checkout -b nameOfBranch <commitID>`|Récupérer une branche supprimée en pointant vers un commit spécifique|
+### Historique
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git log --oneline`|Afficher liste des commits de manière concise|
+|`git log --date=local`|Afficher liste des commits avec des dates locales|
+|`git log --graph --oneline --decorate`|Afficher liste des commits sous forme graphique avec des références|
 ### Statut
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -45,20 +68,20 @@ git init
 ### Branche
 | Command + option | Description |
 | :--------------: | :---------: |
-|`git branch`|Indique la branche sur laquelle on se trouve|
+|`git branch`|Indiquer la branche sur laquelle on se trouve|
 |`git branch 'nameOfBranch'`|Créer branche|
-|`git checkout 'nameOfBranch'`|Se déplacer de branche|
+|`git checkout 'nameOfBranch'`|Se déplacer vers la branche spécifiée|
+|`git switch 'nameOfBranch'`|Se déplacer vers la branche spécifiée|
 |`git checkout -b 'nameOfBranch'`|Créer une branche et switcher dessus|
-### Récupérer
+### Récupérer branches distantes
 | Command + option | Description |
 | :--------------: | :---------: |
-|`git fetch --all`|Récupèrer toutes les branches/objets du dépôt distant sans les fusionner dans les branches locales (permet d'examiner les MAJ avant de fusionner)|
+|`git fetch --all`|Récupérer toutes les branches/objets du dépôt distant sans les fusionner dans les branches locales (permet d'examiner les MAJ avant de fusionner)|
 ### Fusionner
 #### 1. Se placer sur la branche master
 ```shell
 git checkout master
 ```
-
 #### 2. Fusionner la branche sur la master
 ```shell
 git merge nameOfBranch
@@ -67,14 +90,34 @@ git merge nameOfBranch
 ```shell
 git branch -d nameOfBranch
 ```
-### Push:
+### Push
 | Command + option | Description |
 | :--------------: | :---------: |
 |`git remote add origin https://github.com/user.name/nomRepo.git`|Lier le dépôt local au dépôt distant spécifié|
 |`git push origin master`|Pousser les commits locaux de la branche 'master' sur la branche 'master' du distant|
 |`git push origin master --force`|Succeptible de supprimer l'historique des commits!!!|
-### Clone/Pull:
+### Rebase
 | Command + option | Description |
 | :--------------: | :---------: |
-|`git clone https://github.com/user.name/nomRepo.git`|Cloner un dépôt distant vers son local|
-|`git pull origin master`|Récupérer les MAJ de la branche 'master' du distant => fusionner avec la branche locale actuelle.|
+|`git rebase nameOfBranch`|Déplacer ou combiner une série de commits vers une nouvelle base|
+### Stash
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git stash`|Mettre de côté les modifications en cours|
+### Différence
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git diff`|Montrer modifications entre branche locale et dernier commit|
+|`git diff foo.txt`|Montrer modificationsentre branche locale et dernier commit pour 'foo.txt'|
+### Suivi (.gitignore)
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git add -f foo.txt`|Forcer l’ajout de 'foo.txt' (si dans .gitignore)|
+### Conflits
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git mergetool`|Utiliser outil de fusion pour résoudre les conflits après une tentative de fusion (permet d'afficher les différences entre les versions conflictuelles)|
+### Tag
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git tag -a v1.0 -m "Version 1.0"`|Crée tag annoté pour marquer une version dans l'historique des commits (facilite le suivi des versions)|

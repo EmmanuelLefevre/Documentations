@@ -21,7 +21,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |ls -S|Tri par taille décroissante|
 |pwd|Renvoyer chemin absolu du répertoire courant|
 ### <= Recherche =>
-- grep permet de rechercher une chaîne de caractères ou un motif dans un fichier
+grep permet de rechercher une chaîne de caractères ou un motif dans un fichier
 | Command + option | Objectif |
 | :---------: | :---------: |
 |grep 'text' foo.txt|Occurences 'text' dans foo.txt|

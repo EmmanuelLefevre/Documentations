@@ -1,6 +1,0 @@
-        --------------
-            VCCode
-        --------------
-
-CTRL + f                Rechercher les occurences
-CTRL + h                Remplacer les occurences

@@ -1,6 +1,6 @@
 # CONFIGURATION SERVEUR SUR WSL
 ## INTRODUCTION
-Cette documentation a pour objectif de guider l'utilisateur dans la configuration d'un environnement de serveur web sur Windows Subsystem for Linux (WSL) avec les technologies MariaDB et Apache2. Elle couvre les étapes essentielles, depuis l'installation de WSL jusqu'à la mise en place d'un serveur fonctionnel avec une base de données et un projet web.
+Cette documentation a pour objectif de guider l'utilisateur dans la configuration d'un environnement de serveur web sur Windows Subsystem for Linux (WSL) avec les technologies MariaDB et Apache2. Elle couvre les étapes essentielles, de la mise en place du serveur fonctionnel avec sa base de données et son projet web.
 ## COMMANDES WSL
 ### 1. Afficher les distributions installées
 ```shell
@@ -18,7 +18,7 @@ wsl --set-default-version 2
 ```shell
 wsl --shutdown
 ```
-## INSTALLATION DEMARIADB
+## INSTALLATION DE MARIADB
 ### 1. Afficher les services de la distribution
 ```shell
 sudo service --status-all

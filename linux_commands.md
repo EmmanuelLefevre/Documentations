@@ -1,22 +1,21 @@
-        ------
-        DIVERS
-        ------
+# Linux
+## INTRODUCTION
+Système d'exploitation open source de type Unix fondé sur le noyau Linux créé en 1991 par Linus Torvalds
+## COMMANDS
+### <= Navigation fichiers =>
+| Command + option | Objectif |
+| :---------: | :---------: |
+|cd /|Racine du disque|
+|cd ~ / cd $HOME|Répertoire utilisateur|
+|cd var/www/|Aller dans le répertoire /var/www|
+|cd ..|Aller dans le répertoire parent|
+|cd -|Revenir au répertoire précédent|
+|cd nomFichier|Aller dans le répertoire fichier|
 
-(touche) insert              Coller du texte dans la console
 
 
 
-        ----------
-        NAVIGATION
-        ----------
 
-cd /                Racine du disque
-cd                  Répertoire utilisateur
-cd fichier          Aller dans le répertoire fichier
-cd var/www/         Aller dans le répertoire /var/www
-cd ..               Remonter d'un répertoire parent
-cd -                Revenir au répertoire précédent
-pwd                 Renvoyer chemin absolu du répertoire courant
 
 
 
@@ -32,6 +31,7 @@ ls -t      Tri par date récent -> ancien
 ls -S      Trier par taille décroissante
 ls -la     Afficher tout les fichiers ainsi que les cachés
 ls -lhS    Afficher infos fichiers avec des tailles LISIBLES le tout ordonné du plus grand au plus petit
+pwd                 Renvoyer chemin absolu du répertoire courant
 
 
 
@@ -267,3 +267,5 @@ tar -tf mon_fichier.tar                                 Liste tous les fichiers 
 
 
 
+
+(touche) insert              Coller du texte dans la console

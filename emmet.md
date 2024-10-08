@@ -2,9 +2,8 @@
 ## INTRODUCTION
 Plugin pour éditeur de texte (assistance de contenu)
 ## HTML
-```shell
 |html:5|Template HTML|
-```
+
 ```shell
 
 ```

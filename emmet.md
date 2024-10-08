@@ -17,7 +17,7 @@ Plugin pour éditeur de texte (assistance de contenu)
 |section>h3+h4*3|`<section><h3></h3><h4></h4><h4></h4><h4></h4></section>`|
 |lorem50|Lorem text 50 mots|
 |lorem*5|Lorem sur 5 lignes|
-|(p>lorem40)*2|2x `<p>` avec 40 mots de lorem|
+|(p>lorem40)*2|2x `<p>` avec 40 mots de lorem chacun|
 ## CSS
 | Raccourci | Résultat |
 | :---------: | :---------: |

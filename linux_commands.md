@@ -179,7 +179,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`chown alice file.txt`|Changer propriétaire 'file.txt' en 'alice'|
 |`chown :users file.txt`|Changer groupe 'file.txt' en 'users' sans modifier le propriétaire|
 |`chown -R bob:admin /path/to/directory`|Attribuer 'bob' + groupe 'admin' à tous les fichiers et dossiers dans '/path/to/directory' de manière récursive|
-|`chown --from=currentuser:newgroup file.txt`|Changer le propriétaire de 'file.txt' uniquement si l'utilisateur actuel est 'current|
+|`chown --from=currentuser:newgroup file.txt`|Changer le propriétaire de 'file.txt' uniquement si l'utilisateur actuel est 'current'|
 ### <= SSH =>
 #### Connection SSH à une machine distante!
 | Command + option | Description |

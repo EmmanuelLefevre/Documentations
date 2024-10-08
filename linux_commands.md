@@ -20,27 +20,22 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |ls -t|Tri par date récent -> ancien|
 |ls -S|Tri par taille décroissante|
 |pwd|Renvoyer chemin absolu du répertoire courant|
-
-
-
-        ----------
-        RECHERCHER
-        ----------
-
-grep permet de rechercher une chaîne de caractères ou un motif dans un fichier.
-
-Quelques options :
--v:             Affiche les lignes ne contenant pas la chaîne.
--c:             Compte le nombre de lignes contenant la chaîne.
--n:             Retourne les lignes préfixées par leur numéro.
--x:             Ligne correspondant exactement à la chaîne.
--l:             Affiche le nom des fichiers qui contiennent la chaîne.
-
-
-grep 'text' foo.txt                             Recherche l'occurence 'text' dans le fichier foo.txt
-grep -nri 'foobar' /project                     Recherche toutes les occurences de 'foobar' dans le repertoire /project
-grep -nri '\(foo\|bar\|baz\)' /project          Recherche toutes les occurences à 'foo', 'bar' et 'baz' dans le repertoire /project
-
+### <= Recherche =>
+- grep permet de rechercher une chaîne de caractères ou un motif dans un fichier
+| Command + option | Objectif |
+| :---------: | :---------: |
+|grep 'text' foo.txt|Occurences 'text' dans foo.txt|
+|grep -v 'text' foo.txt|Afficher les lignes de foo.txt ne contenant pas l'occurence 'text'|
+|grep -c 'text' foo.txt|Compter nombre de lignes dans foo.txt contenant l'occurence 'text''|
+|grep -n 'text' foo.txt|Afficher les lignes de foo.txt contenant 'text', préfixées par leur numéro de ligne.|
+|grep -x 'exact' foo.txt|Afficher uniquement les lignes de foo.txt qui correspondent exactement à la chaîne 'exact'.|
+|grep -l 'text' *.txt|Afficher les noms des fichiers .txt dans le répertoire courant contenant l'occurrence 'text'.|
+|grep -r "texte" /folderPath|Rechercher de manière récursive l'occurence "texte" dans folderPath|
+|grep -nri 'foobar' /project|Recherche récursive, insensible à la casse, des occurrences de 'foobar' dans le répertoire /project.|
+|grep -nri '\(foo\|bar\|baz\)' /project|Recherche récursive, insensible à la casse, des occurrences de 'foo', 'bar' ou 'baz' dans le répertoire /project.|
+### <= Copier =>
+| Command + option | Objectif |
+| :---------: | :---------: |
 
 
         ------

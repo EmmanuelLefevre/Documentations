@@ -15,6 +15,21 @@ npm install express
 ```shell
 npm install --save-dev nodemon
 ```
+### Création serveur
+Fichier app.js
+```js
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+});
+```
 ### Démarrer serveur
 Se placer dans le répertoire du projet!
 #### Node.js
@@ -47,21 +62,6 @@ Dev
 ```shell
 npm run dev
 ```
-### Création serveur
-Fichier app.js
-```js
-const express = require('express');
-const app = express();
-const port = 3000;
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
-```
 ### Debug
 #### Redémarrer le serveur avec le débogueur intégré de Node.js
 ```shell
@@ -75,4 +75,3 @@ nodemon --inspect ./bin/www
 ```shell
 chrome://inspect
 ```
-

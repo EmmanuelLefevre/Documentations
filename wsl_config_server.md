@@ -168,7 +168,7 @@ sudo cp 000-default.conf easygarden.conf
 ```shell
 sudo nano easygarden.conf
 ```
-```conf
+```
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 	ServerName easygarden.com
@@ -180,18 +180,28 @@ sudo nano easygarden.conf
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
-9. Ajouter le projet dans les sites activés
-`sudo a2ensite easygarden.conf`
+9. Ajouter le projet dans les sites activés (activation)
+```shell
+sudo a2ensite easygarden.conf
+```
 10. Vérifier si la configuration est correcte
-`sudo apache2ctl configtest`
-`service apache2 reload`
-11. Editer le fichier C:\Windows\System32\drivers\etc\hosts et ajouter la ligne avec l'ip de Ubuntu
-`hostname -I`
+```shell
+sudo apache2ctl configtest
+```
+```shell
+service apache2 reload
+```
+11. Editer le fichier C:\Windows\System32\drivers\etc\hosts
+```shell
+hostname -I
+```
+12. Ajouter la ligne avec l'ip de Ubuntu
 ```
 # Easygarden Ubuntu
 172.18.244.37 easygarden.com
 ```
-
 ## CONFIGURATION GENERALE DU SERVEUR APACHE
 1. Fichier de configuration principale d'Apache
-`cd etc/apache2/apache2.conf`
+```shell
+cd etc/apache2/apache2.conf
+```

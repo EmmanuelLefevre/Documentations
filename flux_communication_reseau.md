@@ -13,4 +13,4 @@
 | server listen port =>               | Le serveur écoute sur le port spécifié (ex: 80 pour HTTP, 443 pour HTTPS) |
 | content =>                          | Le contenu du serveur est traité et envoyé au client |
 | web server response =>              | Le serveur web envoie la réponse HTTP au client |
-| client browser =>                   | Le navigateur reçoit et affiche la réponse |
+| client browser                      | Le navigateur reçoit et affiche la réponse |

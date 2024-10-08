@@ -12,7 +12,12 @@ Plugin pour éditeur de texte (assistance de contenu)
 |.class|`<div id="class"></div>`|
 |nav#navbar|`<nav id="navbar"></nav>`|
 |div.class1.class2.class3|`<div class="class1 class2 class3"`>|
-|img[src="image.png"]||
+|img[src="image.png"]|`<img src="image.png" alt="">`|
+|span[data-hint]|Tooltip mouseover `<span data-hint="Ceci est une astuce"></span>`|
+|section>h3+h4*3|`<section><h3></h3><h4></h4><h4></h4><h4></h4></section>`|
+|lorem50|Lorem text 50 mots|
+|lorem*5|Lorem sur 5 lignes|
+|(p>lorem40)*2|2x `<p>` avec 40 mots de lorem|
 ## CSS
 | Raccourci | Résultat |
 | :---------: | :---------: |
@@ -21,15 +26,3 @@ Plugin pour éditeur de texte (assistance de contenu)
 |p10|padding:10px;|
 |v|visibility:hidden;|
 |-bdrs|border-radius|
-
-
-
-
-
-
-img[src="image.png"]                <img src="image.png" alt="">
-span[data-hint]                     <span data-hint=""></span>
-section>h3+h4*3                     Créer une balise section contenant un titre h3 et 3 titres h4
-lorem50                             Lorem text avec 50 mots
-lorem*5                             Lorem sur 5 lignes
-(p>lorem40)*2                       2x <p> avec 40 mots de lorem

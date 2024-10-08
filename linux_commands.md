@@ -146,10 +146,29 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | lecture et écriture                                  | rw-                   | 6              |
 | tous les droits (lecture, écriture et exécution)    | rwx                   | 7              |
 
+#### Correspondances de représentation des droits
+| Droit                                               | Valeur alphanumérique | Valeur octale | Description                                      |
+|-----------------------------------------------------|-----------------------|----------------|--------------------------------------------------|
+| Aucun droit                                         | ---                   | 0              ||
+| Exécution seulement                                 | --x                   | 1              ||
+| Ecriture seulement                                   | -w-                   | 2              ||
+| Ecriture et exécution                               | -wx                   | 3              ||
+| Lecture seulement                                    | r--                   | 4              ||
+| Lecture et exécution                                | r-x                   | 5              ||
+| Lecture et écriture                                  | rw-                   | 6              ||
+| Tous les droits (lecture, écriture et exécution)    | rwx                   | 7              ||
+| Setuid                                              | rws                   | 4xx            | Exécution avec les privilèges du propriétaire    |
+| Setgid                                              | rwx                   | 2xx            | Exécution avec les privilèges du groupe          |
+| Sticky bit                                          | rwx+t                 | 1xx            | Fichiers dans un répertoire peuvent être supprimés uniquement par leur propriétaire |
 
 ### <= Changer propriétaire fichier =>
 | Command + option | Objectif |
 | :---------: | :---------: |
+|`chown bob:admin foo.txt`|Attribuer l’utilisateur 'bob' + groupe 'admin' à 'foo.txt'|
+|`chown alice file.txt`|Changer propriétaire du fichier 'file.txt' en 'alice'|
+|`chown :users file.txt`|Changer groupe du fichier 'file.txt' en 'users' sans modifier le propriétaire|
+|`chown -R bob:admin /path/to/directory`|Attribuer 'bob' + groupe 'admin' à tous les fichiers et dossiers dans '/path/to/directory' de manière récursive|
+|`chown --from=currentuser:newgroup file.txt`|Changer le propriétaire de 'file.txt' uniquement si l'utilisateur actuel est 'current|
 ### <= SSH =>
 | Command + option | Objectif |
 | :---------: | :---------: |
@@ -165,21 +184,6 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 ### <= Archives =>
 | Command + option | Objectif |
 | :---------: | :---------: |
-
-
-
-
-
-      
-        ---------------------------------
-        CHANGER PROPRIETAIRE D'UN FICHIER
-        ---------------------------------
-
-chown bob:admin foo.txt             Attribuer l’utilisateur bob et le groupe admin au fichier foo.txt
-
-
-
-
 
 
 

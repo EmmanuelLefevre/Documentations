@@ -1,40 +1,28 @@
 # DOCKER
 ## INTRODUCTION
-Plateforme permettant de lancer des applications dans des conteneurs logiciels
-## TELECHARGER IMAGE
-### 1. Télécharger image NodeJs
-```shell
-docker pull node
-```
-```shell
-docker pull node:16
-```
-```shell
-docker pull node:latest
-```
-### 2. Afficher les images disponibles
+Plateforme permettant de lancer des applications dans des conteneurs logiciels.
+## IMAGE
+### Afficher les images disponibles
+Lancer le container d'une image
 ```shell
 docker images
 ```
-### 3. Récupérer une image sans lancer de container
-```shell
-docker pull node:16
-```
-## LANCER CONTAINER
-- Lancer le container d'une image
+### Télécharger image NodeJs sans lancer de container
+| Command          | Description |
+| :--------------: | :---------: |
+|`docker pull node`|Télécharger image Node.js par défaut|
+|`docker pull node:16`|Télécharger version 16 de Node.js|
+|`docker pull node:latest`|Télécharger dernière version de Node.js|
+## Lancer container d'une image
 ```shell
 docker run -it node:16
 ```
-## AFFICHER CONTAINER
-### 1. Afficher les containers démarrés
-```shell
-docker ps
-```
-### 2. Afficher tous les containers
-```shell
-docker ps -a
-```
-## STOPPER CONTAINER
+## Afficher containers
+| Command + option | Description |
+| :--------------: | :---------: |
+|`docker ps`|Afficher les containers démarrés|
+|`docker ps -a`|Afficher tous les containers|
+## Stopper container
 ### 1. Afficher les containers pour récupérer "CONTAINER ID"
 ```shell
 docker ps

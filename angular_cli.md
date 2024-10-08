@@ -2,11 +2,11 @@
 ## INTRODUCTION
 Best front-end framework!
 ## CLI SHORTCUTS
-### <= Nouveau projet =>
+### Nouveau projet
 ```shell
 ng new projetName
 ```
-### <= Serveur =>
+### Serveur
 - Lancer serveur
 ```shell
 ng serve -o
@@ -15,7 +15,7 @@ ng serve -o
 ```shell
 ng serve -o --port 4001
 ```
-### <= Composant =>
+### Composant
 - Créer nouveau composant
 ```shell
 ng g c nomComposant
@@ -24,13 +24,13 @@ ng g c nomComposant
 ```shell
 ng g c nomComposant --routing
 ```
-### <= Module =>
+### Module
 - Créer nouveau module
 
 ```shell
 ng g m nomModule
 ```
-### <= Service =>
+### Service
 ```shell
 ng g s nomService
 ```

@@ -121,8 +121,8 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`grep -x 'exact' foo.txt`|Afficher uniquement les lignes de 'foo.txt' qui correspondent exactement à la chaîne "exact"|
 |`grep -l 'text' *.txt`|Afficher les noms des fichiers '.txt' dans le répertoire courant contenant l'occurrence "text"|
 |`grep -r "text" /folderPath`|Rechercher de manière récursive l'occurence "text" dans folderPath|
-|`grep -nri 'text' /project`|Recherche récursive, insensible à la casse, des occurrences de "text" dans le répertoire /project.|
-|`grep -nri '\(foo\|bar\|baz\)' /project`|Recherche récursive, insensible à la casse, des occurrences de "foo", "bar" ou "baz" dans le répertoire /project|
+|`grep -nri 'text' /project`|Recherche récursive, insensible à la casse, des occurrences de "text" dans répertoire 'project'|
+|`grep -nri '\(foo\|bar\|baz\)' /project`|Recherche (récursive/insensible à la casse) occurrences de "foo""bar""baz" dans répertoire 'project'|
 ### <= Install packages =>
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -146,18 +146,18 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 ### <= Changer droit d'un fichier =>
 | Command + option | Description |
 | :--------------: | :---------: |
-|`chmod u+w fichier`|Ajouter droits d'écriture au propriétaire (user, write)|
-|`chmod g+r fichier`|Ajouter droits de lecture au groupe du fichier (group, read)|
-|`chmod o-x fichier`|Supprimer droits d'exécution aux autres utilisateurs (other, execution)|
-|`chmod a+rw dossier`|Ajouter droits de lecture et d'écriture à tous (all)|
-|`chmod -R a+rx files`|Ajouter droits de lecture et d'exécution à tout ce que contient le répertoire 'files'|
-|`chmod 764 dossier`|Tous droits pour le propriétaire (7xx), lecture et écriture pour le groupe (6xx), et lecture uniquement pour autres (4xx)|
-|`chmod -R 755 dossier`|Propriétaire tous droits (7xx) + droits lecture/accès aux autres (55), -R sur fichiers + dossiers contenus dans 'dossier'|
-|`chmod 600 fichier`|Tous droits pour le propriétaire (lecture et écriture), aucun droit pour le groupe et les autres|
-|`chmod 644 fichier`|Droits lecture écriture pour le propriétaire, droits de lecture pour le groupe et les autres|
+|`chmod u+w foo.txt`|Ajouter droits d'écriture au propriétaire (user, write)|
+|`chmod g+r foo.txt`|Ajouter droits de lecture au groupe du fichier (group, read)|
+|`chmod o-x foo.txt`|Supprimer droits d'exécution aux autres utilisateurs|
+|`chmod a+rw projet`|Ajouter droits de lecture et d'écriture à tous|
+|`chmod -R a+rx projet`|Ajouter droits de lecture/éxécution à tout le répertoire 'projet'|
+|`chmod 764 dossier`|Propriétaire (7xx), lecture/écriture pour groupe (6xx), lecture uniquement pour autres (4xx)|
+|`chmod -R 755 dossier`|Propriétaire tous droits (7xx) + droits lecture/accès aux autres (55) + récursif|
+|`chmod 600 fichier`|Tous droits propriétaire (lecture/écriture), aucun droit pour le groupe et les autres|
+|`chmod 644 fichier`|Droits lecture/écriture pour propriétaire, droits de lecture pour le groupe et les autres|
 |`chmod +x script.sh`|Ajouter droit d'exécution à 'script.sh'|
-|`chmod -R g+w dossier`|Ajouter droits d'écriture au groupe pour le répertoire 'dossier' et tous ses contenus|
-|`chmod u-s fichier`|Supprimer le bit setuid du fichier (ne pas exécuter le fichier avec les privilèges du propriétaire)|
+|`chmod -R g+w projet`|Ajouter droits d'écriture au groupe pour répertoire 'projet' et tous ses contenus|
+|`chmod u-s fichier`|Supprimer le bit setuid du fichier (ne pas exécuter fichier avec privilèges du propriétaire)|
 #### Correspondances de représentation des droits
 | Droit                                               | Valeur alphanumérique | Valeur octale | Description                                      |
 | :-------------------------------------------------: | :-------------------: | :-----------: | :----------------------------------------------: |

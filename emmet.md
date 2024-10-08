@@ -7,7 +7,7 @@ Plugin pour éditeur de texte (assistance de contenu)
 |html:5|Template HTML|
 |!|Template HTML|
 |ul>li*2>span.class{li}|<ul><li><span class="class">li class="class"</span></li><li><span class="class">li class="class"</span></li></ul>|
-|header+article|<header></header><article></article>|
+|header+article|`<header></header><article></article>`|
 |#id|<div id="id"></div>|
 |.class|<div id="class"></div>|
 |nav#navbar|<nav id="navbar"></nav>|

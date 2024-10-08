@@ -69,7 +69,6 @@ docker build -t node-test:1.0.0 .
 docker run -it node-test:1.0.0 bash
 ```
 ### 5. Arrêter une image
-
 ```shell
 docker run -it -v "./app:/app//" node-test bash
 ```

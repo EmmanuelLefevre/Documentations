@@ -2,25 +2,23 @@
 ## INTRODUCTION
 Git est un logiciel de gestion de versions décentralisé.
 ## COMMANDES UTILES
-### Version
-```shell
-git -v
-```
-```shell
-git version
-```
+### Version du logiciel
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git -v"`|Version de Git|
+|`git version"`|Version de Git|
 ### Initialiser dépôt local
-```shell
-git init
-```
+| Command + option | Description |
+| :--------------: | :---------: |
+|`git init"`|Initialiser nouveau dépôt local Git dans le répertoire actuel (fichier '.git')|
 ### Utilisateur
 | Command + option | Description |
 | :--------------: | :---------: |
-|`git config --global user.name "user"`|Configurer le nom d'utilisateur global pour Git|
-|`git config --global user.email "user@email.com"`|Configurer l'adresse e-mail globale pour Git|
-|`git config --list`| Afficher toutes les configurations Git actuelles|
-|`git config user.name`| Afficher le nom d'utilisateur configuré pour Git|
-|`git config user.email`| Afficher l'adresse e-mail configurée pour Git|
+|`git config --global user.name "user"`|Configurer le nom d'utilisateur global|
+|`git config --global user.email "user@email.com"`|Configurer l'adresse e-mail globale|
+|`git config --list`| Afficher toutes les configurations actuelles|
+|`git config user.name`| Afficher le nom d'utilisateur configuré|
+|`git config user.email`| Afficher l'adresse e-mail configurée|
 ### Clone/Pull:
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -33,12 +31,8 @@ git fetch origin
 ```
 #### 2. Puis Fusionner les modifications de la 'master' distante dans la branche locale actuelle
 ```shell
-git git merge origin/master
+git merge origin/master
 ```
-| Command + option | Description |
-| :--------------: | :---------: |
-|`git fetch origin`| Afficher le nom d'utilisateur configuré pour Git|
-|`git merge origin/master`| Afficher l'adresse e-mail configurée pour Git|
 ### Reconfigurer dépôt distant
 | Command + option | Description |
 | :--------------: | :---------: |

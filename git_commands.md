@@ -16,7 +16,7 @@ git init
 ### Utilisateur:
 | Command + option | Description |
 | :--------------: | :---------: |
-|```shell git config --global user.name "user"```|Configurer le nom d'utilisateur global pour Git|
+|<button onclick="copyToClipboard('shell git config --global user.name \"user\"')">Copier</button> `shell git config --global user.name "user"`|Configurer le nom d'utilisateur global pour Git|
 |`git config --global user.email "user@email.com"`|Configurer l'adresse e-mail globale pour Git|
 |`git config --list`| Afficher toutes les configurations Git actuelles|
 |`git config user.name`| Afficher le nom d'utilisateur configuré pour Git|
@@ -71,3 +71,14 @@ git init
 `git clone https://github.com/user.name/nomRepo.git`
 \
 `git pull origin master`
+
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        alert('Commande copiée : ' + text);
+    }, function(err) {
+        console.error('Erreur lors de la copie : ', err);
+    });
+}
+</script>

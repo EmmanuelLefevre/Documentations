@@ -1,6 +1,7 @@
-                            -----------------------------
-                            ------COMMANDES WINDOWS------
-                            -----------------------------
+# POWERSHELL
+## Introduction
+Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad) est une suite logicielle développée par Microsoft qui intègre une interface en ligne de commande, un langage de script nommé PowerShell ainsi qu'un kit de développement.
+## COMMANDES UTILES
 
 
 

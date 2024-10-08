@@ -2,17 +2,27 @@
 ## INTRODUCTION
 Système d'exploitation open source de type Unix fondé sur le noyau Linux créé en 1991 par Linus Torvalds
 ## COMMANDS
+### <= Vérification de version =>
+| Command + option | Objectif |
+| :--------------: | :------: |
+| Commande                 | Description                                   | Syntaxe                                |
+|--------------------------|-----------------------------------------------|----------------------------------------|
+| `cat /etc/os-release`    | Affiche les informations sur la distribution  | `cat /etc/os-release`                 |
+| `uname -a`               | Affiche des informations sur le noyau         | `uname -a`                             |
+| `lsb_release -a`         | Affiche les informations sur la version LSB   | `lsb_release -a`                       |
+| `dpkg --version`         | Affiche la version de dpkg                    | `dpkg --version`                       |
 ### <= Navigation fichiers =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |` /`|Racine du disque|
 |`cd ~ / cd $HOME`|Répertoire utilisateur|
 |`cd var/www/`|Répertoire /var/www|
 |`cd ..`|Répertoire parent|
+|`cd ../../..`|Naviguer plusieurs niveaux en amont|
 |`cd -`|Répertoire précédent|
 ### <= Affichage =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`ls -l`|Informations et détails|
 |`ls -a`|Fichiers cachés|
 |`ls -h`|Poids fichiers plus lisible|
@@ -22,7 +32,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`pwd`|Renvoyer chemin absolu du répertoire courant|
 ### <= Création répertoire =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`mkdir 'foo'`|Créer répertoire 'foo'|
 |`mkdir -v 'foo' '/tmp/bar'`|Créer répertoires 'foo' et '/tmp/bar'|
 |`mkdir -p 'foo/bar/baz'`|Créer l’arborescence 'foo/bar/baz'|
@@ -30,7 +40,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`mkdir -v`|Retourner des informations lors de la création d'un répertoire|
 ### <= Création fichier =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :---------: |
 |`touch 'file.txt'`|Créer fichier vide nommé 'file.txt' (ou MAJ d'horodatage s'il existe déjà)|
 |`touch 'file1.txt' 'file2.txt'`|Créer 'file1.txt' et 'file2.txt'|
 |`touch -c 'file.txt'`|Ne pas créer de fichier si 'file.txt' n'existe pas, juste MAJ d'horodatage s'il existe|
@@ -38,12 +48,12 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`touch -m 'file.txt'`|MAJ d'horodatage de modification du fichier 'file.txt'|
 ### <= Copier =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`cp foo/bar.txt info/`|Copier 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
 |`cp -r foo/ info/`|Copier répertoire 'foo' + son contenu dans le répertoire 'info' (si 'info' existe le contenu sera placé dans 'info/foo/')|
 ### <= Déplacer / Renommer =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`mv 'project_v1/' 'project_v2/'`|Renommer répertoire 'project_v1' en 'project_v2'|
 |`mv foo_bar.txt foo_stop.txt`|Renommer foo_bar.txt' en 'foo_stop.txt' dans le même répertoire|
 |`mv foo/bar.txt info/`|Déplacer 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
@@ -51,7 +61,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`mv '*.txt' '/documents/'`|Déplacer tous les '.txt' du répertoire courant vers le répertoire 'documents'|
 ### <= Effacer =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`rm '*.txt'`|Supprimer tous les fichiers ayant pour extension 'txt'|
 |`rm 'foo.txt' 'bar.txt'`|Supprimer les fichiers 'foo.txt' et 'bar.txt'|
 |`rm -rf 'baz/'`|Supprimer le répertoire 'baz' et tout son contenu|
@@ -59,7 +69,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`rm -v '*.log'`|Supprimer les fichiers ayant pour extension '.log' + afficher les noms des fichiers supprimés|
 ### <= Afficher contenu fichier =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`cat 'file.txt'`|Afficher contenu 'file.txt' dans le terminal|
 |`cat 'file1.txt' 'file2.txt'`|Afficher contenu de 'file1.txt' et 'file2.txt' en séquence|
 |`cat > 'newfile.txt'`|Créer 'newfile.txt' et y entrer du texte, terminé par Ctrl+D|
@@ -67,7 +77,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`cat >> 'existingfile.txt'`|Ajouter du texte à la fin de 'existingfile.txt', terminé par Ctrl+D|
 ### <= Trouver =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`find 'myfile*' -print`|Rechercher fichier commençant par 'myfile'|
 |`find -name '*myfile*.txt' -print`|Rechercher fichier contenant 'myfile' + extension '.txt'|
 |`find '/usr' -type d -print`|Afficher tous les répertoires de '/usr'|
@@ -89,7 +99,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`find ! -name 'file.txt'` ou `find -not -name 'file.txt'`|Rechercher tous les fichiers sauf 'file.txt'|
 ### <= Rechercher chaînes de caractères ou motif =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`grep 'text' foo.txt`|Occurences 'text' dans 'foo.txt'|
 |`grep -v 'text' foo.txt`|Afficher les lignes de 'foo.txt' ne contenant pas l'occurence "text"|
 |`grep -c 'text' foo.txt`|Compter nombre de lignes dans 'foo.txt' contenant l'occurence "text"'|
@@ -101,7 +111,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`grep -nri '\(foo\|bar\|baz\)' /project`|Recherche récursive, insensible à la casse, des occurrences de "foo", "bar" ou "baz" dans le répertoire /project|
 ### <= Install packages =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`apt-get update`|MAJ liste des fichiers disponibles dans les dépôts APT|
 |`apt-get upgrade`|Installer les MAJ en dernière version disponible|
 |`apt-get install samba`|Installer le paquet 'Samba'|
@@ -121,7 +131,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`apt-get reinstall <package>`|Réinstaller un paquet sans le supprimer au préalable|
 ### <= Changer droit d'un fichier =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`chmod u+w fichier`|Ajouter droits d'écriture au propriétaire (user, write)|
 |`chmod g+r fichier`|Ajouter droits de lecture au groupe du fichier (group, read)|
 |`chmod o-x fichier`|Supprimer droits d'exécution aux autres utilisateurs (other, execution)|
@@ -131,151 +141,121 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`chmod -R 755 dossier`|Donner au propriétaire tous droits (7xx), alors que seuls les droits de lecture et d'accès seront donnés aux autres (55), avec l'option -R pour appliquer ces droits à tous les fichiers et dossiers contenus dans 'dossier'|
 |`chmod 600 fichier`|Tous droits pour le propriétaire (lecture et écriture), aucun droit pour le groupe et les autres|
 |`chmod 644 fichier`|Droits lecture écriture pour le propriétaire, droits de lecture pour le groupe et les autres|
-|`chmod +x script.sh`|Ajouter droit d'exécution au fichier script.sh|
+|`chmod +x script.sh`|Ajouter droit d'exécution à 'script.sh'|
 |`chmod -R g+w dossier`|Ajouter droits d'écriture au groupe pour le répertoire 'dossier' et tous ses contenus|
 |`chmod u-s fichier`|Supprimer le bit setuid du fichier (ne pas exécuter le fichier avec les privilèges du propriétaire)|
 #### Correspondances de représentation des droits
-| Droit                                               | Valeur alphanumérique | Valeur octale |
-|-----------------------------------------------------|-----------------------|----------------|
-| aucun droit                                         | ---                   | 0              |
-| exécution seulement                                 | --x                   | 1              |
-| écriture seulement                                   | -w-                   | 2              |
-| écriture et exécution                               | -wx                   | 3              |
-| lecture seulement                                    | r--                   | 4              |
-| lecture et exécution                                | r-x                   | 5              |
-| lecture et écriture                                  | rw-                   | 6              |
-| tous les droits (lecture, écriture et exécution)    | rwx                   | 7              |
-
-#### Correspondances de représentation des droits
 | Droit                                               | Valeur alphanumérique | Valeur octale | Description                                      |
-|-----------------------------------------------------|-----------------------|----------------|--------------------------------------------------|
-| Aucun droit                                         | ---                   | 0              ||
-| Exécution seulement                                 | --x                   | 1              ||
-| Ecriture seulement                                   | -w-                   | 2              ||
-| Ecriture et exécution                               | -wx                   | 3              ||
-| Lecture seulement                                    | r--                   | 4              ||
-| Lecture et exécution                                | r-x                   | 5              ||
-| Lecture et écriture                                  | rw-                   | 6              ||
-| Tous les droits (lecture, écriture et exécution)    | rwx                   | 7              ||
-| Setuid                                              | rws                   | 4xx            | Exécution avec les privilèges du propriétaire    |
-| Setgid                                              | rwx                   | 2xx            | Exécution avec les privilèges du groupe          |
-| Sticky bit                                          | rwx+t                 | 1xx            | Fichiers dans un répertoire peuvent être supprimés uniquement par leur propriétaire |
-
+| :-------------------------------------------------: | :-------------------: | :-----------: | :----------------------------------------------: |
+| Aucun droit                                         | ---                   | 0             |                                                  |
+| Exécution seulement                                 | --x                   | 1             |                                                  |
+| Ecriture seulement                                  | -w-                   | 2             |                                                  |
+| Ecriture et exécution                               | -wx                   | 3             |                                                  |
+| Lecture seulement                                   | r--                   | 4             |                                                  |
+| Lecture et exécution                                | r-x                   | 5             |                                                  |
+| Lecture et écriture                                 | rw-                   | 6             |                                                  |
+| Tous les droits (lecture, écriture et exécution)    | rwx                   | 7             |                                                  |
+| Setuid                                              | rws                   | 4xx           | Exécution avec les privilèges du propriétaire    |
+| Setgid                                              | rwx                   | 2xx           | Exécution avec les privilèges du groupe          |
+| Sticky bit                                          | rwx+t                 | 1xx           | Fichiers dans un répertoire pouvant être supprimés uniquement par leur propriétaire|
 ### <= Changer propriétaire fichier =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
 |`chown bob:admin foo.txt`|Attribuer l’utilisateur 'bob' + groupe 'admin' à 'foo.txt'|
-|`chown alice file.txt`|Changer propriétaire du fichier 'file.txt' en 'alice'|
-|`chown :users file.txt`|Changer groupe du fichier 'file.txt' en 'users' sans modifier le propriétaire|
+|`chown alice file.txt`|Changer propriétaire 'file.txt' en 'alice'|
+|`chown :users file.txt`|Changer groupe 'file.txt' en 'users' sans modifier le propriétaire|
 |`chown -R bob:admin /path/to/directory`|Attribuer 'bob' + groupe 'admin' à tous les fichiers et dossiers dans '/path/to/directory' de manière récursive|
 |`chown --from=currentuser:newgroup file.txt`|Changer le propriétaire de 'file.txt' uniquement si l'utilisateur actuel est 'current|
 ### <= SSH =>
+#### Connection SSH à une machine distante!
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
+|`ssh john@remotehost.example.com`|Connexion machine distante login 'john'|
+|`ssh-keygen -t dsa`|Génération clé DSA (à faire sur la machine locale)|
+|`ssh-copy-id -i ~/.ssh/id_dsa.pub john@remotehost.example.com`|Copie clé publique sur la machine distante pour utilisateur 'john'|
+|`ssh -p 2222 john@remotehost.example.com`|Connexion à la machine distante sur le port 2222|
+|`ssh -i ~/.ssh/my_key john@remotehost.example.com`|Utiliser une clé privée spécifique pour la connexion à la machine distante|
+|`ssh -v john@remotehost.example.com`|Activer le mode verbeux pour afficher des informations de débogage lors de la connexion|
+|`ssh user@remotehost.example.com 'command'`|Exécuter une commande spécifique sur la machine distante sans ouvrir une session interactive|
+|`ssh -D 8080 john@remotehost.example.com`|Configurer un tunnel SOCKS pour la redirection de trafic via la machine distante|
+
 ### <= SCP =>
+#### Copier des fichiers entre le serveur et le client SSH de manière sécurisée!
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
+|`scp foo.txt john@remotehost.example.com:`|Transférer 'foo.txt' situé dans répertoire courant vers répertoire 'home' du compte 'john' de la machine 'remotehost.example.com'|
+|`scp john@remotehost.example.com:foo.txt ./`|Récupèrer 'foo.txt' situé dans répertoire 'home' du compte 'john' pour le copier dans le répertoire courant|
+|`scp john@remotehost.example.com:/backups/*.sql backups/`|Récupérer les fichiers '.sql' situés dans le répertoire '/backups' pour les copier dans le sous-répertoire 'backups' du répertoire courant|
+|`scp -P 17654 john@remotehost:/files/ files/`|Récupérer les fichiers via un autre port (17654) que le port par défaut (22)|
+|`scp -r mails/ john@remotehost:`|Transférer l'intégralité du répertoire 'mails' vers le répertoire 'home' du compte 'john' sur la machine distante|
+|`scp -v foo.txt john@remotehost.example.com:`|Transférer 'foo.txt' avec un affichage verbeux pour le débogage|
+|`scp -C foo.txt john@remotehost.example.com:`|Transférer 'foo.txt' avec compression pour réduire la taille des données transférées|
+|`scp -i ~/.ssh/my_key foo.txt john@remotehost.example.com:`|Utiliser une clé privée spécifique pour l'authentification lors du transfert de 'foo.txt'|
+|`scp -P 2222 john@remotehost:/path/to/file.txt ./`|Transférer un fichier depuis une machine distante en utilisant un port spécifique (ici 2222)|
+|`scp -r john@remotehost:/path/to/directory ./`|Récupérer l'intégralité d'un répertoire depuis la machine distante vers le répertoire courant|
 ### <= Espace disque =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
+|`du -sh dossier1 dossier2`|Connaitre espace disque utilisé par les répertoires 'dossier1' et 'dossier2'|
+|`du -hc --max-depth=1`|Afficher espace disque utilisé des fichiers et répertoires contenus dans le répertoire courant|
+|`df -h`|Afficher espace disque disponible sur toutes les partitions (disk free)|
+|`du -ah`|Afficher espace disque utilisé par tous les fichiers et répertoires + fichiers cachés|
+|`du -sh *`|Afficher espace disque utilisé par chaque élément du répertoire courant|
+|`df -i`|Afficher l'utilisation des inodes sur toutes les partitions|
+|`df -h /mount_point`|Afficher l'espace disque disponible pour un point de montage spécifique|
+|`du -s /path/to/directory`|Afficher l'espace disque utilisé par le répertoire spécifié sans afficher les sous-répertoires|
 ### <= Processus =>
 | Command + option | Objectif |
-| :---------: | :---------: |
+| :--------------: | :------: |
+|`top`|Classement en temps réel des processus en cours triés par utilisation du CPU ou de la mémoire|
+|`free`|Afficher la mémoire libre et utilisée sur le système|
+|`ps aux`|Afficher tous les processus exécutés par tous les utilisateurs|
+|`ps faux`|Afficher tous les processus exécutés sous forme d'arbre pour visualiser les relations entre eux|
+|`kill pid`|Arrêter un processus spécifié par son identifiant (PID)|
+|`kill -9 pid`|Tuer violemment le processus spécifié (déconseillé, à utiliser en dernier recours)|
+|`htop`|Interface améliorée de `top` avec une interface utilisateur plus conviviale pour la gestion des processus|
+|`pkill name`|Tuer tous les processus correspondant au nom spécifié|
+|`killall name`|Tuer tous les processus par leur nom (similaire à `pkill`)|
+|`vmstat`|Afficher des statistiques sur la mémoire virtuelle et l'utilisation du système|
+|`lsof`|Lister tous les fichiers ouverts par les processus, utile pour diagnostiquer les problèmes de fichiers|
 ### <= Archives =>
 | Command + option | Objectif |
-| :---------: | :---------: |
-
-
-
-         ---------
-            SSH
-         ---------
-
-Se connecter de façon sécurisée à une machine distante!
-
-ssh john@remotehost.example.com                                         Connexion à la machine distante avec le login john
-ssh -l john remotehost.example.com                                      Equivaut à la commande précédente
-ssh-keygen -t dsa                                                       Génération d'une clé DSA (à faire sur la machine locale)
-ssh-copy-id -i ~/.ssh/id_dsa.pub john@remotehost.example.com            Copie de la clé publique sur la machine distante
-
-
-
-         ---------
-            SCP
-         ---------
-
-Permet de copier des fichiers entre le serveur et le client ssh de manière sécurisée!
-
-scp foo.txt john@remotehost.example.com:                    Transfère le fichier foo.txt situé dans le répertoire courant vers le home du compte 
-                                                            john de la machine remotehost.example.com
-
-scp john@remotehost.example.com:foo.txt ./                  Récupère le fichier foo.txt situé dans le home du répertoire du compte john pour le 
-                                                            copier dans le répertoire courant
-
-scp john@remotehost.example.com:/backups/*.sql backups/     Récupérer les fichiers .sql situés dans le répertoire backups pour le copier dans le 
-                                                            sous-répertoire backups
-
-scp -P 17654 john@remotehost:/files/ files/                 Récupérer les fichiers via un autre port (17654) que le port par défaut (22)
-
-scp -r mails/ john@remotehost:                              Transfère l'intégralité du répertoire mails
-
-
-
-        -------------
-        ESPACE DISQUE
-        -------------
-
-du -sh dossier1 dossier2               Connaitre l'espace disque utilisé des deux répertoires (disk usage)
-du -hc --max-depth=1                   Afficher l'espace disque utilisé des fichiers et répertoires contenu dans un répertoire
-df -h                                  Afficher l'espace disque disponible (disk free)
-
-
-        ---------
-        PROCESSUS
-        ---------
-
-top                 Classement en live des processus en cours triés par utilisation Proc, Mem ou Temps CPU
-free                Afficher la mémoire libre
-ps aux              Afficher tous les processus exécutés
-ps faux             Afficher tous les processus exécutés affiché sous forme
-kill pid            Arrêter un processus
-kill ­9 pid          Tuer violemment le processus (déconseillé)
-
-
-
-        --------
-        ARCHIVES
-        --------
-
-Quelques options :
--c:           Créer
--t:           Tester / lister
--x:           Extraire
--v:           Description des fichiers désarchivés
--j:           Format de compression bzip2
--z:           Format de compression gzip
-
-
-tar -cvf archive.tar fichier1                           Création d’une archive nommée archive.tar contenant le fichier fichier1
-tar -cvf archive.tar fichier1 fichier2                  Création d’une archive contenant deux fichiers fichier1 et fichier2
-tar -cvf archive.tar repertoire/                        Création d’une archive a partir d’un répertoire
-tar -czvf archive.tar.gz repertoire/                    Création d’une archive au format tar.gz
-tar -cjvf archive.tar.bz2 repertoire/                   Création d’une archive au format tar.bz2
-tar -xzvf archive.tar.gz                                Extraction de l’archive tar.gz
-tar -xjvf archive.tar.bz2                               Extraction de l’archive tar.bz2
-tar -tf mon_fichier.tar                                 Liste tous les fichiers contenus dans une archive
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(touche) insert              Coller du texte dans la console
+| :--------------: | :------: |
+| Commande | Description |
+|----------|-------------|
+|-------- TAR -----------|
+|`tar -cvf 'archive.tar' 'mon_dossier/'`|Créer une archive|
+|`tar -tvf 'archive.tar'`| Tester / lister le contenu d'une archive|
+|`tar -xvf 'archive.tar'`| Extraire les fichiers d'une archive|
+|`tar -cvf 'archive.tar' 'mon_dossier/'`|Afficher des informations détaillées sur les fichiers archivés ou extraits|
+|`tar -cvjf 'archive.tar.bz2' 'mon_dossier/'`|Utiliser le format de compression bzip2|
+|`tar -czvf 'archive.tar.gz' 'mon_dossier/'`|Utiliser le format de compression gzip|
+|`tar -cvf archive.tar foo.txt`|Créer archive nommée 'archive.tar' contenant 'foo.txt'|
+|`tar -cvf archive.tar foo.txt foo2.txt`|Créer archive contenant les fichiers 'foo.txt' et 'foo2.txt'|
+|`tar -cvf archive.tar projet/`|Créer archive à partir du répertoire 'projet/'|
+|`tar -czvf archive.tar.gz projet/`|Créer archive au format tar.gz à partir du répertoire 'projet/'|
+|`tar -cjvf archive.tar.bz2 projet/`|Créer archive au format tar.bz2 à partir du répertoire 'projet/'|
+|`tar -xzvf archive.tar.gz`|Extraire archive 'archive.tar.gz'|
+|`tar -xjvf archive.tar.bz2`|Extraire archive 'archive.tar.bz2'|
+|`tar -tf mon_fichier.tar`|Lister les fichiers contenus dans l'archive 'mon_fichier.tar'|
+|`tar --exclude='*.log' -cvf archive.tar projet/`|Créer archive tout en excluant les fichiers avec l'extension '.log'|
+|`tar -cvf - fichier1 \| gzip > fichier1.tar.gz`|Créer archive tar compressée au format gzip en une seule commande|
+|`tar -xvf archive.tar -C /destination/`|Extraire les fichiers de 'archive.tar' dans le répertoire spécifié '/destination/'|
+### <= Réseau =>
+| Command + option | Objectif |
+| :--------------: | :------: |
+| Commande                    | Description                                   | Syntaxe                                |
+|-----------------------------|-----------------------------------------------|----------------------------------------|
+| `ifconfig`                  | Affiche la configuration réseau               | `ifconfig [interface]`                 |
+| `ping`                      | Vérifie la connectivité réseau                | `ping [adresse]`                       |
+| `traceroute`               | Affiche le chemin des paquets réseau          | `traceroute [adresse]`                 |
+| `netstat`                   | Affiche les connexions réseau                 | `netstat -tuln`                        |
+### <= Redémarrage / arrêt =>
+| Command + option | Objectif |
+| :--------------: | :------: |
+| Commande       | Description                           | Syntaxe                       |
+|----------------|---------------------------------------|-------------------------------|
+| `shutdown`     | Arrête l'instance                     | `shutdown [option]`          |
+| `reboot`       | Redémarre l'instance                  | `reboot [option]`            |
+| `poweroff`     | Éteint l'instance                     | `poweroff [option]`          |
+| `halt`         | Arrête le système immédiatement       | `halt [option]`              |

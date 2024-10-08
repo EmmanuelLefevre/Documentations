@@ -7,11 +7,11 @@ Express est un framework d'applications Web back-end pour la création d'API RES
 ```shell
 npm init
 ```
-#### 1. Installer Express
+#### 2. Installer Express
 ```shell
 npm install express
 ```
-#### 1. Installer Nodemon en développement
+#### 3. Installer Nodemon en développement
 ```shell
 npm install --save-dev nodemon
 ```

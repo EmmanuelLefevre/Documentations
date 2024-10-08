@@ -11,7 +11,7 @@ i
 ```shell
 echap
 ```
-### <= PROMPT =>
+### <= Prompt =>
 - Saisie prompt
 ```shell
 :

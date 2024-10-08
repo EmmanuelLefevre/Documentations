@@ -24,7 +24,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 grep permet de rechercher une chaîne de caractères ou un motif dans un fichier
 | Command + option | Objectif |
 | :---------: | :---------: |
-|grep 'text' foo.txt|Occurences 'text' dans foo.txt|
+|`grep 'text' foo.txt`|Occurences 'text' dans foo.txt|
 |grep -v 'text' foo.txt|Afficher les lignes de foo.txt ne contenant pas l'occurence 'text'|
 |grep -c 'text' foo.txt|Compter nombre de lignes dans foo.txt contenant l'occurence 'text''|
 |grep -n 'text' foo.txt|Afficher les lignes de foo.txt contenant 'text', préfixées par leur numéro de ligne.|

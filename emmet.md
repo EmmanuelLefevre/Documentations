@@ -5,51 +5,26 @@ Plugin pour éditeur de texte (assistance de contenu)
 | Raccourci | Résultat |
 | :---------: | :---------: |
 |html:5|Template HTML|
-
-```shell
-
-```
-```shell
-
-```
-```shell
-
-```
-```shell
-
-```
-```shell
-
-```
-```shell
-
-```
+|!|Template HTML|
+|ul>li*2>span.hello|<ul><li><span class="hello"></span></li><li><span class="hello"></span></li></ul>|
+|header+article|<header></header><article></article>|
+|#id|<div id="id"></div>|
+|.class|<div id="class"></div>|
+|nav#navbar|<nav id="navbar"></nav>|
+|||
 ## CSS
-```shell
-
-```
-```shell
-
-```
-```shell
-
-```
-```shell
-
-```
-```shell
-
-```
+| Raccourci | Résultat |
+| :---------: | :---------: |
+|dn|display:none;|
+|m10|margin:10px;|
+|p10|padding:10px;|
+|v|visibility:hidden;|
+|-bdrs|kits border-radius|
 
 
-HTML:
------
 
-html:5                              Structure de base html (template)
-ul>li*3>span.hello$                 Liste à puces x3  et span "class$"
-header+article+footer               Créer une balise header puis une article puis une footer
-#thisID                             <div id="thisID"></div>
-.thisClass                          <div id="thisClass"></div>
+
+
 nav#navbar                          <nav id="navbar"></nav>
 article.post                        <article class="post"</article>
 div.class1.class2.class3            <div class="class1 class2 class3">
@@ -59,18 +34,3 @@ section>h3+h4*3                     Créer une balise section contenant un titre
 lorem50                             Lorem text avec 50 mots
 lorem*5                             Lorem sur 5 lignes
 (p>lorem40)*2                       2x <p> avec 40 mots de lorem
-
-
-
-CSS:
-----
-
-dn              display:none;
-m10             margin:10px;
-p10             padding:10px;
-v               visibility:hidden;
--bdrs           kits border-radius
-
-```shell
-
-```

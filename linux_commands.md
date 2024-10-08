@@ -5,34 +5,34 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 ### <= Navigation fichiers =>
 | Command + option | Objectif |
 | :---------: | :---------: |
-|cd /|Racine du disque|
-|cd ~ / cd $HOME|Répertoire utilisateur|
-|cd var/www/|Répertoire /var/www|
-|cd ..|Répertoire parent|
-|cd -|Répertoire précédent|
+|` /`|Racine du disque|
+|`cd ~ / cd $HOME`|Répertoire utilisateur|
+|`cd var/www/`|Répertoire /var/www|
+|`cd ..`|Répertoire parent|
+|`cd -`|Répertoire précédent|
 ### <= Affichage =>
 | Command + option | Objectif |
 | :---------: | :---------: |
-|ls -l|Informations et détails|
-|ls -a|Fichiers cachés|
-|ls -h|Poids fichiers plus lisible|
-|ls -r|Tri inversé|
-|ls -t|Tri par date récent -> ancien|
-|ls -S|Tri par taille décroissante|
-|pwd|Renvoyer chemin absolu du répertoire courant|
+|`ls -l`|Informations et détails|
+|`ls -a`|Fichiers cachés|
+|`ls -h`|Poids fichiers plus lisible|
+|`ls -r`|Tri inversé|
+|`ls -t`|Tri par date récent -> ancien|
+|`ls -S`|Tri par taille décroissante|
+|`pwd`|Renvoyer chemin absolu du répertoire courant|
 ### <= Recherche =>
 grep permet de rechercher une chaîne de caractères ou un motif dans un fichier
 | Command + option | Objectif |
 | :---------: | :---------: |
 |`grep 'text' foo.txt`|Occurences 'text' dans foo.txt|
-|grep -v 'text' foo.txt|Afficher les lignes de foo.txt ne contenant pas l'occurence 'text'|
-|grep -c 'text' foo.txt|Compter nombre de lignes dans foo.txt contenant l'occurence 'text''|
-|grep -n 'text' foo.txt|Afficher les lignes de foo.txt contenant 'text', préfixées par leur numéro de ligne.|
-|grep -x 'exact' foo.txt|Afficher uniquement les lignes de foo.txt qui correspondent exactement à la chaîne 'exact'.|
-|grep -l 'text' *.txt|Afficher les noms des fichiers .txt dans le répertoire courant contenant l'occurrence 'text'.|
-|grep -r "texte" /folderPath|Rechercher de manière récursive l'occurence "texte" dans folderPath|
-|grep -nri 'foobar' /project|Recherche récursive, insensible à la casse, des occurrences de 'foobar' dans le répertoire /project.|
-|grep -nri '\(foo\|bar\|baz\)' /project|Recherche récursive, insensible à la casse, des occurrences de 'foo', 'bar' ou 'baz' dans le répertoire /project.|
+|`grep -v 'text' foo.txt`|Afficher les lignes de foo.txt ne contenant pas l'occurence 'text'|
+|`grep -c 'text' foo.txt`|Compter nombre de lignes dans foo.txt contenant l'occurence 'text''|
+|`grep -n 'text' foo.txt`|Afficher les lignes de foo.txt contenant 'text', préfixées par leur numéro de ligne.|
+|`grep -x 'exact' foo.txt`|Afficher uniquement les lignes de foo.txt qui correspondent exactement à la chaîne 'exact'.|
+|`grep -l 'text' *.txt`|Afficher les noms des fichiers .txt dans le répertoire courant contenant l'occurrence 'text'.|
+|`grep -r "texte" /folderPath`|Rechercher de manière récursive l'occurence "texte" dans folderPath|
+|`grep -nri 'foobar' /project`|Recherche récursive, insensible à la casse, des occurrences de 'foobar' dans le répertoire /project.|
+|`grep -nri '\(foo\|bar\|baz\)' /project`|Recherche récursive, insensible à la casse, des occurrences de 'foo', 'bar' ou 'baz' dans le répertoire /project.|
 ### <= Copier =>
 | Command + option | Objectif |
 | :---------: | :---------: |

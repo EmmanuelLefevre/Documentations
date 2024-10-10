@@ -91,7 +91,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`cat >> 'existingfile.txt'`|Ajouter du texte à la fin de 'existingfile.txt', terminé par Ctrl+D|
 ### Trouver
 | Command + option | Description |
-| :--------------: | :---------: |
+| -------------- | --------- |
 |`find 'myfile*' -print`|Rechercher fichier commençant par 'myfile'|
 |`find -name '*myfile*.txt' -print`|Rechercher fichier contenant 'myfile' + extension '.txt'|
 |`find '/usr' -type d -print`|Afficher tous les répertoires de '/usr'|

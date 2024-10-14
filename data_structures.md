@@ -231,7 +231,7 @@ Les dictionnaires sont une structure de données puissante et polyvalente qui pe
 
 ## 4. LISTES CHAINEES (LINKED LISTS)
 ### Introduction
-Les listes chaînées sont une autre structure de données fondamentale qui permet de stocker une collection d'éléments de manière ordonnée. Contrairement aux tableaux, les listes chaînées utilisent des nœuds, où chaque nœud contient une valeur et une référence (ou pointeur) vers le nœud suivant. Cette structure permet une flexibilité accrue en termes d'insertion et de suppression d'éléments.
+Les listes chaînées sont une autre structure de données fondamentale qui permet de stocker une collection d'éléments de manière ordonnée. Contrairement aux tableaux, les listes chaînées utilisent des noeuds, où chaque noeud contient une valeur et une référence (ou pointeur) vers le noeud suivant. Cette structure permet une flexibilité accrue en termes d'insertion et de suppression d'éléments.
 ### Caractéristiques
 - **Taille dynamique**: Contrairement aux tableaux, la taille d'une liste chaînée peut varier dynamiquement. On peut ajouter ou supprimer des noeuds sans avoir besoin de redimensionner une structure existante.
 - **Non contiguë**: Les noeuds de la liste ne sont pas nécessairement stockés de manière contiguë en mémoire. Chaque noeud peut être situé à différents endroits.
@@ -252,7 +252,7 @@ Les listes chaînées sont une autre structure de données fondamentale qui perm
 - **Flexibilité**: Les listes chaînées peuvent contenir des éléments de types différents (selon l'implémentation).
 ### Inconvénients
 - **Accès lent**: L'accès aux éléments est séquentiel, ce qui peut être moins efficace que les tableaux pour les opérations de lecture.
-- **Utilisation de mémoire**: Chaque nœud nécessite de la mémoire pour stocker le pointeur, ce qui peut entraîner une surcharge par rapport aux tableaux.
+- **Utilisation de mémoire**: Chaque noeud nécessite de la mémoire pour stocker le pointeur, ce qui peut entraîner une surcharge par rapport aux tableaux.
 - **Complexité**: La gestion des pointeurs peut rendre l'implémentation et le débogage plus complexes.
 ### Cas d'usage
 Les listes chaînées peuvent être utilisées dans de nombreux contextes, tels que :
@@ -485,7 +485,7 @@ fileBilletterie.defiler(); // Client Client 1 servi.
 console.log("Client en attente : ", fileBilletterie.consulter()); // Client en attente :  Client 2
 ```
 ## 7. ARBRE (TREES)
-Les arbres sont une structure de données hiérarchique qui permet de représenter des relations entre des éléments de manière organisée. Chaque arbre est composé de nœuds, où chaque nœud peut avoir plusieurs enfants, mais un seul parent. La structure des arbres est largement utilisée dans divers domaines, tels que les bases de données, les systèmes de fichiers et les algorithmes de recherche.
+Les arbres sont une structure de données hiérarchique qui permet de représenter des relations entre des éléments de manière organisée. Chaque arbre est composé de noeuds, où chaque noeud peut avoir plusieurs enfants, mais un seul parent. La structure des arbres est largement utilisée dans divers domaines, tels que les bases de données, les systèmes de fichiers et les algorithmes de recherche.
 ### Caractéristiques
 - **Hiérarchie**: Les arbres représentent des relations parent-enfant, ce qui permet une organisation hiérarchique des données.
 - **Noeud racine**: Le noeud supérieur de l'arbre.
@@ -499,17 +499,17 @@ Les arbres sont une structure de données hiérarchique qui permet de représent
 - **Arbre équilibré**: Un arbre où les hauteurs des sous-arbres gauche et droit d'un noeud diffèrent d'au plus un.
 - **Arbre n-aire**: Chaque noeud peut avoir jusqu'à n enfants.
 ### Opérations courantes
-- **Insertion**: Ajouter un nœud à l'arbre.
-- **Suppression**: Retirer un nœud de l'arbre.
-- **Recherche**: Trouver un nœud contenant une valeur spécifique.
-- **Parcours**: Visiter les nœuds de l'arbre dans un ordre spécifique (préordre, infixe, postordre).
+- **Insertion**: Ajouter un noeud à l'arbre.
+- **Suppression**: Retirer un noeud de l'arbre.
+- **Recherche**: Trouver un noeud contenant une valeur spécifique.
+- **Parcours**: Visiter les noeuds de l'arbre dans un ordre spécifique (préordre, infixe, postordre).
 ### Avantages
 - **Représentation hiérarchique**: Les arbres sont idéaux pour représenter des structures hiérarchiques, comme les systèmes de fichiers.
 - **Recherche efficace**: Les arbres, en particulier les arbres binaires de recherche, permettent des recherches rapides.
 - **Flexibilité**: Les arbres peuvent être utilisés pour stocker des données de manière dynamique.
 ### Inconvénients
 - **Complexité**: La gestion des arbres peut être plus complexe que celle des tableaux ou des listes chaînées.
-- **Surcharge mémoire**: Les arbres peuvent consommer plus de mémoire en raison des pointeurs supplémentaires pour chaque nœud.
+- **Surcharge mémoire**: Les arbres peuvent consommer plus de mémoire en raison des pointeurs supplémentaires pour chaque noeud.
 ### Cas d'usage
 Les arbres sont utilisés dans de nombreux contextes, tels que :
 - **Systèmes de fichiers**: Les systèmes de fichiers utilisent des arbres pour organiser les fichiers et les répertoires.
@@ -518,7 +518,7 @@ Les arbres sont utilisés dans de nombreux contextes, tels que :
 ### Exemple
 **Gestion d'un arbre binaire de recherche**
 Imaginons un système qui gère un arbre binaire de recherche pour stocker des nombres. Les arbres sont particulièrement adaptés pour ce cas d'utilisation pour plusieurs raisons :
-- **Organisation**: Les arbres binaires de recherche organisent les données de manière à ce que chaque nœud respecte la propriété de recherche, facilitant ainsi les opérations de recherche, d'insertion et de suppression.
+- **Organisation**: Les arbres binaires de recherche organisent les données de manière à ce que chaque noeud respecte la propriété de recherche, facilitant ainsi les opérations de recherche, d'insertion et de suppression.
 - **Efficacité**: Les opérations de recherche dans un arbre binaire de recherche équilibré sont généralement plus rapides que dans des structures de données linéaires comme les tableaux.
 ```javascript
 class Node {
@@ -538,23 +538,23 @@ class ArbreBinaireRecherche {
         this.racine = this._insererRec(this.racine, val);
     }
 
-    _insererRec(nœud, val) {
-        if (nœud === null) {
+    _insererRec(noeud, val) {
+        if (noeud === null) {
             return new Node(val);
         }
-        if (val < nœud.val) {
-            nœud.gauche = this._insererRec(nœud.gauche, val);
+        if (val < noeud.val) {
+            noeud.gauche = this._insererRec(noeud.gauche, val);
         } else {
-            nœud.droit = this._insererRec(nœud.droit, val);
+            noeud.droit = this._insererRec(noeud.droit, val);
         }
-        return nœud;
+        return noeud;
     }
 
-    parcourirInfixe(nœud) {
-        if (nœud !== null) {
-            this.parcourirInfixe(nœud.gauche);
-            console.log(nœud.val);
-            this.parcourirInfixe(nœud.droit);
+    parcourirInfixe(noeud) {
+        if (noeud !== null) {
+            this.parcourirInfixe(noeud.gauche);
+            console.log(noeud.val);
+            this.parcourirInfixe(noeud.droit);
         }
     }
 }
@@ -575,25 +575,25 @@ Les arbres sont une structure de données puissante qui permet de représenter d
 
 ## 8. GRAPHS (GRAPHIQUES)
 ### Introduction
-Les graphes sont une structure de données fondamentale qui représente des ensembles d'objets connectés entre eux. Un graphe est composé de nœuds (ou sommets) et d'arêtes (ou liens) qui relient ces nœuds. Les graphes sont utilisés pour modéliser des relations complexes dans divers domaines, tels que les réseaux sociaux, les systèmes de transport, et les algorithmes de recherche.
+Les graphes sont une structure de données fondamentale qui représente des ensembles d'objets connectés entre eux. Un graphe est composé de noeuds (ou sommets) et d'arêtes (ou liens) qui relient ces noeuds. Les graphes sont utilisés pour modéliser des relations complexes dans divers domaines, tels que les réseaux sociaux, les systèmes de transport, et les algorithmes de recherche.
 ### Caractéristiques
 - **Non ordonné ou orienté**: Un graphe peut être orienté (les arêtes ont une direction) ou non orienté (les arêtes n'ont pas de direction).
 - **Pondéré ou non pondéré**: Les arêtes d'un graphe peuvent avoir des poids ou des coûts associés, représentant des distances, des temps ou d'autres mesures.
-- **Cyclicité**: Un graphe peut contenir des cycles (chemins qui commencent et se terminent au même nœud) ou être acyclique.
+- **Cyclicité**: Un graphe peut contenir des cycles (chemins qui commencent et se terminent au même noeud) ou être acyclique.
 ### Types
-- **Graphe orienté**: Les arêtes ont une direction, indiquant un lien unidirectionnel entre les nœuds.
-- **Graphe non orienté**: Les arêtes n'ont pas de direction, indiquant un lien bidirectionnel entre les nœuds.
+- **Graphe orienté**: Les arêtes ont une direction, indiquant un lien unidirectionnel entre les noeuds.
+- **Graphe non orienté**: Les arêtes n'ont pas de direction, indiquant un lien bidirectionnel entre les noeuds.
 - **Graphe pondéré**: Les arêtes ont des poids associés, ce qui permet de modéliser des coûts ou des distances.
 - **Graphe non pondéré**: Les arêtes n'ont pas de poids associés.
 ### Représentation
 Les graphes peuvent être représentés de plusieurs manières :
-- **Liste d'adjacence**: Un tableau où chaque élément est une liste des nœuds adjacents.
-- **Matrice d'adjacence**: Une matrice carrée où chaque cellule indique la présence ou l'absence d'une arête entre deux nœuds.
+- **Liste d'adjacence**: Un tableau où chaque élément est une liste des noeuds adjacents.
+- **Matrice d'adjacence**: Une matrice carrée où chaque cellule indique la présence ou l'absence d'une arête entre deux noeuds.
 ### Opérations courantes
-- **Ajout d'un nœud**: Ajouter un nouveau nœud au graphe.
-- **Ajout d'une arête**: Créer un lien entre deux nœuds.
-- **Suppression d'un nœud**: Retirer un nœud et toutes les arêtes qui y sont associées.
-- **Parcours**: Visiter les nœuds du graphe (parcours en profondeur ou en largeur).
+- **Ajout d'un noeud**: Ajouter un nouveau noeud au graphe.
+- **Ajout d'une arête**: Créer un lien entre deux noeuds.
+- **Suppression d'un noeud**: Retirer un noeud et toutes les arêtes qui y sont associées.
+- **Parcours**: Visiter les noeuds du graphe (parcours en profondeur ou en largeur).
 ### Avantages
 - **Flexibilité**: Les graphes peuvent modéliser des relations complexes et des structures variées.
 - **Efficacité**: Les algorithmes sur les graphes peuvent résoudre des problèmes complexes, comme la recherche de chemins les plus courts.
@@ -608,7 +608,7 @@ Les graphes sont utilisés dans de nombreux contextes, tels que :
 ### Exemple
 #### Gestion d'un réseau social
 Imaginons un système de gestion d'un réseau social où les utilisateurs sont connectés entre eux. Les graphes sont particulièrement adaptés pour ce cas d'utilisation pour plusieurs raisons.
-- **Modélisation des relations**: Chaque utilisateur peut être représenté par un nœud, et chaque connexion entre utilisateurs par une arête.
+- **Modélisation des relations**: Chaque utilisateur peut être représenté par un noeud, et chaque connexion entre utilisateurs par une arête.
 - **Recherche de connexions**: Les graphes permettent de rechercher des connexions entre utilisateurs facilement.
 ```javascript
 class Graphe {

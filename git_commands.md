@@ -61,6 +61,7 @@ git merge origin/master
 ### Branche
 | Command + option | Description |
 | :--------------: | :---------: |
+|`git branch -a`|Afficher toutes les branches|
 |`git branch`|Indiquer la branche sur laquelle on se trouve|
 |`git branch 'nameOfBranch'`|Créer branche|
 |`git checkout 'nameOfBranch'`|Se déplacer vers la branche spécifiée|

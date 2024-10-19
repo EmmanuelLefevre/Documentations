@@ -100,11 +100,11 @@ git branch -d nameOfBranch
 | Command + option | Description |
 | :--------------: | :---------: |
 |`git stash`|Mettre de côté les modifications en cours|
-### Différence
+### Diff
 | Command + option | Description |
 | :--------------: | :---------: |
-|`git diff`|Montrer modifications entre branche locale et dernier commit|
-|`git diff foo.txt`|Montrer modificationsentre branche locale et dernier commit pour 'foo.txt'|
+|`git diff`|Modifications entre branche locale et dernier commit|
+|`git diff foo.txt`|Modificationsentre branche locale et dernier commit pour 'foo.txt'|
 ### Suivi (.gitignore)
 | Command + option | Description |
 | :--------------: | :---------: |

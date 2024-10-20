@@ -5,10 +5,10 @@ Neovim est un éditeur de texte (logiciel permettant la manipulation de fichiers
 ### Modes
 | Command          | Description          |
 | :--------------: | :------------------: |
-|`i`| Mode édition|
-|`:`|Mode saisie|
+|`i`|Mode édition|
+|`:`|Mode prompt|
 |`Esc`|Quitter mode édition|
-|`Esc + SHIFT + ZQ`|Quitter éditeur en mode insertion|
+|`Esc + SHIFT + ZQ`|Quitter le mode prompt|
 ### Sauvegarder / Quitter
 | Command          | Description          |
 | :--------------: | :------------------: |

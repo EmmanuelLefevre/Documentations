@@ -1,6 +1,7 @@
 # TERMINALS CONFIG
 ## INTRODUCTION
-🔥❤️ Tutorial to setup step by step awesome terminals and text editor! ❤️🔥
+🔥❤️ Tutorial to setup step by step awesome terminals and text editor! ❤️🔥  
+It was joinly tested on Windows 10 and 11.
 ## IMPORTANT INFORMATIONS
 🧨 If not explicitly mentioned, always place yourself in your user directory and launch your PowerShell as an admin! 🧨
 ## FIRST STEP

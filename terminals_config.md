@@ -5,12 +5,13 @@
 🧨 If not explicitly mentioned, always place yourself in your user directory and launch your PowerShell as an admin! 🧨
 ## FIRST STEP
 ### Microsoft Store
-Open Microsoft Store and install PowerShell
+For beginning open Microsoft Store and install PowerShell.
 ### PowerShell
 Customize PowerShell appearance:
 - Click the bottom chevron and go "parameters"
 - Edit the setings.json file
-- Add a color theme with your taste to personalize the prompt  
+- Add a color theme with your taste to personalize the prompt
+
 [Windows Terminal Color Theme Site](https://windowsterminalthemes.dev/)
 ## PACKAGE MANAGERS
 ### Chocolatey

@@ -5,17 +5,16 @@
 🧨 If not explicitly mentioned, always place yourself in your user directory and launch your PowerShell as an admin! 🧨
 ## FIRST STEP
 ### Microsoft Store
-Install PowerShell
+Open Microsoft Store and install PowerShell
 ### PowerShell
 Customize PowerShell appearance:
 - Click the bottom chevron and go "parameters"
 - Edit the setings.json file
 - Add a color theme with your taste to personalize the prompt  
-[Windows Terminal Color Theme](https://windowsterminalthemes.dev/)
+[Windows Terminal Color Theme Site](https://windowsterminalthemes.dev/)
 ## PACKAGE MANAGERS
 ### Chocolatey
 #### Install Chocolatey
-[Chocolatey Download](https://chocolatey.org/install)
 ```shell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
@@ -29,9 +28,8 @@ choco upgrade chocolatey
 ```
 ### Winget
 #### Install Winget with Chocolatey
-[Winget Download](https://community.chocolatey.org/packages/winget-cli/1.6.2771#install)
 ```shell
-choco choco install microsoft-winget
+choco install microsoft-winget
 ```
 Check installation
 ```shell
@@ -43,7 +41,7 @@ choco upgrade microsoft-winget
 ```
 ## UTILITIES
 ### NVM
-NVM is used to have several versions of nodejs on the same computer and to easily change them.
+NVM is used to have several versions of nodejs on the same computer and to easily change between them.
 #### Install NVM
 ```shell
 choco install nvm
@@ -56,7 +54,7 @@ Update it
 ```shell
 choco upgrade nvm
 ```
-[NVM CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/nvm_cheatsheets.md)
+[NVM Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/nvm_cheatsheets.md)
 ### NodeJs (add NPM by default)
 Install NodeJs
 #### With Chocolatey
@@ -95,14 +93,13 @@ Update it
 ```shell
 choco upgrade git
 ```
-[Git CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/git_cheatsheets.md)
+[Git Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/git_cheatsheets.md)
 ### SSH
 Setup a SSH connexion:  
-[Git CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/ssh_connection.md)
+[Personal Tutorial To Create A SSH Connexion With GPG Keys](https://github.com/EmmanuelLefevre/Documentations/blob/master/ssh_connection.md)
 ## FONTS
 ### Nerd Font
-I love Fira Code Nerd Font but that’s just personal, take the one you like. The only thing is to install a nerd one, otherwise you won't have the dedicated icons.  
-Install your nerd font with chocolatey...
+I love Fira Code Nerd Font but that’s just personal, take the one you like. The only thing is to install a nerd one, otherwise you won't have the dedicated icons.
 ```shell
 choco install nerd-fonts-firacode
 ```
@@ -110,17 +107,17 @@ or Hack Nerd Font
 ```shell
 choco install nerd-fonts-hack
 ```
-Alternatively you can download them here without using chocolatey, you should install it manually (just click on it, windows will do the rest 😜):  
-[Nerd Fonts Download](https://www.nerdfonts.com/font-downloads)  
+Alternatively you can download them here without using chocolatey, you should install it manually. Just click on it, windows will do the rest 😜  
+[Nerd Fonts Download Site](https://www.nerdfonts.com/font-downloads)  
 Now you can use the nerd font that you downloaded in PowerShell or VsCode, just setup in each one.
 ## NEOVIM
 Neovim is a powerfull text editor. It is directly inspired by Vim (a very common editor on Unix-type operating systems), of which it is a derivative (fork).  
+[Neovim Wiki](https://github.com/neovim/neovim/blob/master/INSTALL.md)
 ### Install Neovim
-[Neovim Wiki](https://github.com/neovim/neovim/blob/master/INSTALL.md)  
 ```shell
 winget install --id=Neovim.Neovim -e
 ```
-Check installation (if the text editor opens everything is good 😍)
+Check installation (if the text editor opens that mean everything is good 😍)
 ```shell
 nvim
 ```
@@ -132,24 +129,24 @@ Create a file named init.vim:
 ```shell
 New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\init.vim" -ItemType File
 ```
-Copy and paste the "raw" content of this init.vim file into yours  
+Copy and paste the "raw" content of this init.vim file into yours...  
 [Gist BeckBrace](https://gist.github.com/BekBrace/73d1d179967a33853c5e079f68fdc93a)
 ### Themes
-Get a theme to your liking  
-[Neovim Themes](https://dotfyle.com/neovim/colorscheme/trending)  
-[Neovim Themes 2](https://vimcolorschemes.com/i/trending)  
-Create a "themes" folder inside vim settings
+Get a theme to your liking!  
+[Neovim Themes Site](https://dotfyle.com/neovim/colorscheme/trending)  
+[Neovim Themes Site 2](https://vimcolorschemes.com/i/trending)  
+Create a "themes" folder inside vim settings:
 ```shell
 New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\themes" -ItemType Directory
 ```
-Now you can copy your theme inside the "themes" folder.
+Now you can copy the name of your theme inside the "themes" folder.
 Apply your theme inside the init.vim file:  
 ![Apply Neovim Theme](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/apply_neovim_theme.png)  
 ⚠️ Configuration isn't entirely done, don't worry if Neovim does not launch correctly! ⚠️
 ### Plug
-**You now need to install PLUG**  
+**You now need to install PLUG!!!**  
+[Plug Documentation](https://github.com/junegunn/vim-plug)
 #### Install Plug
-[Plug Installation](https://github.com/junegunn/vim-plug)  
 Run the Plug install command below in this path:  
 ```shell
 cd "$env:USERPROFILE\AppData\Local\nvim"
@@ -162,12 +159,13 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
 Don't worry about the PowerShell alert! Select "stick anyway"...  
 💎 Relaunch your init.vim, if you have nicely followed all steps Neovim should launch correctly! 💎
 ***
-We should install the Neovim modules thanks to Plug!  
-In the lower part of Neovim you can see the prompt 🕶️ Enter "PlugInstall" in it and validate.  
+We should now install the Neovim modules thanks to Plug!  
+In the lower part of Neovim you can see the prompt 🕶️  
+Enter "PlugInstall" in it and validate.  
 ![Neovim Install Modules](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/plug_install.png)  
 Wait for the installation to complete, go make yourself a coffee ☕☕☕
 ### Yarn
-#### Install Yarn for Neovim
+Install Yarn for Neovim
 ```shell
 cd "$env:USERPROFILE\AppData\Local\nvim\nvim-data\plugged\coc.nvim"
 ```
@@ -193,11 +191,10 @@ nvim init.vim
 ```
 ![Yarn Install](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/yarn_install.png)
 You have autocompletion for HTML, CSS, Javascript, Typescript in Neovim... GGWP 🤙  
-Bonus =>  
-[Neovim CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/neovim_cheatsheets.md)
+[Neovim Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/neovim_cheatsheets.md)
 ## OH-MY-POSH
-Install Oh-My-Posh:  
 [Oh-My-Posh Documentation](https://ohmyposh.dev/docs/)
+Install Oh-My-Posh
 ### With Chocolatey
 ```shell
 choco install oh-my-posh
@@ -242,7 +239,7 @@ Import-Module Terminal-Icons
 [PowerShell Personal Profile](https://github.com/EmmanuelLefevre/Settings/blob/main/Powershell/Microsoft.PowerShell_profile.ps1)
 ### Themes
 Apply a prompt theme to your terminal due to Oh-My-Posh:  
-[Oh-My-Posh Themes](https://ohmyposh.dev/docs/themes)  
+[Oh-My-Posh Themes Site](https://ohmyposh.dev/docs/themes)  
 For the agnoster theme for example
 ```shell
 // Replace the other import by this one
@@ -253,7 +250,7 @@ For custom ones
 // Replace the other import by your custom theme
 oh-my-posh init pwsh --config "$env:USERPROFILE/Documents/PowerShell/powershell_profile_custom.json" | Invoke-Expression
 ```
-[Oh-My-Posh My Personal Theme For Powershell](https://github.com/EmmanuelLefevre/Settings/blob/main/Powershell/powershell_profile_darka.json)
+[Oh-My-Posh Personal Theme For Powershell](https://github.com/EmmanuelLefevre/Settings/blob/main/Powershell/powershell_profile_darka.json)
 ## GIT BASH
 If they do not exist create these two files in the user directory.
 ```shell
@@ -263,13 +260,13 @@ New-Item -Path "$env:USERPROFILE\.bashrc" -ItemType File
 New-Item -Path "$env:USERPROFILE\.bash_profile" -ItemType File
 ```
 ### Basic theme
-.bashrc file
+File ".bashrc"
 ```shell
 # INTERACTIVE LOGIN SHELL
 ## Profil loaded in Powershell
 eval "$(oh-my-posh init bash --config "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/jblab_2021.omp.json")"
 ```
-.bash_profile file
+File ".bash_profile"
 ```shell
 # NON INTERACTIVE LOGIN SHELL
 ## Profil loaded in VSCode
@@ -284,25 +281,24 @@ source ~/.bash_profile
 ```
 As you can see the themes are different between Git Bash and PowerShell!
 ### Custom theme
-.bashrc file
+File ".bashrc"
 ```shell
 # INTERACTIVE LOGIN SHELL
 ## Profil loaded in Powershell
 eval "$(oh-my-posh init bash --config "$HOME\Documents\GitBash\gitbash_profile_custom.json")"
 ```
-.bash_profile file
+File ".bash_profile"
 ```shell
 # NON INTERACTIVE LOGIN SHELL
 ## Profil loaded in VSCode
 eval "$(oh-my-posh init bash --config "$HOME\Documents\GitBash\gitbash_profile_custom.json")"
 ```
-Apply the themes again for effective changes.
+Apply the themes again for effective changes.  
 👨‍💻 Take a look to see what is possible with a custom theme 👨‍💻  
-[Oh-My-Posh My Personal Theme For Git Bash](https://github.com/EmmanuelLefevre/Settings/blob/main/GitBash/gitbash_profile_darka.json)
+[Oh-My-Posh Personal Theme For Git Bash](https://github.com/EmmanuelLefevre/Settings/blob/main/GitBash/gitbash_profile_darka.json)
 ## Z JUMPER
 The Z plugin adds z directory jumping to PowerShell, you could quickly open directories that you frequent on the command line or jump to a one without entering the exact folder name.  
 [Z Jumper Documentation](https://github.com/JannesMeyer/z.ps)  
-Install Z Jumper:
 ```shell
 Install-Module -Name z -Force
 ```
@@ -334,5 +330,6 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 Upcoming section!
 ***
 🔎🔎🔎 You could find a few of my personal settings here 🔎🔎🔎  
-[Personal Settings](https://github.com/EmmanuelLefevre/Settings)  
+[Emmanuel Lefevre Personal Settings](https://github.com/EmmanuelLefevre/Settings)  
+***
 🔥🔥🔥 You're now a fucking swag developer!!! 🔥🔥🔥

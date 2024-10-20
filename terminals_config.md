@@ -109,19 +109,22 @@ or Hack Nerd Font
 ```shell
 choco install nerd-fonts-hack
 ```
-Alternatively you can download them here without using chocolatey, you should install it manually. Just click on it, windows will do the rest 😜
+Alternatively you can download them here without using chocolatey, you should install it manually.  
+Just click on it, windows will do the rest 😜
 
 [Nerd Fonts Download Site](https://www.nerdfonts.com/font-downloads)
 
 Now you can use the nerd font that you downloaded in PowerShell or VsCode, just setup in each one.
 ## NEOVIM
-Neovim is a powerfull text editor. It is directly inspired by Vim (a very common editor on Unix-type operating systems), of which it is a derivative (fork).  
+Neovim is a powerfull text editor. It is directly inspired by Vim (a very common editor on Unix-type operating systems), of which it is a derivative (fork).
+
 [Neovim Wiki](https://github.com/neovim/neovim/blob/master/INSTALL.md)
-### Install Neovim
+
+Installation:
 ```shell
 winget install --id=Neovim.Neovim -e
 ```
-Check installation (if the text editor opens that mean everything is good 😍)
+Check installation (if the text editor opens that mean everything is good 😍):
 ```shell
 nvim
 ```
@@ -133,22 +136,28 @@ Create a file named init.vim:
 ```shell
 New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\init.vim" -ItemType File
 ```
-Copy and paste the "raw" content of this init.vim file into yours...  
+Copy and paste this "raw" file content of this init.vim file into yours...
+
 [Gist BeckBrace](https://gist.github.com/BekBrace/73d1d179967a33853c5e079f68fdc93a)
 ### Themes
-Get a theme to your liking!  
+Get a theme to your liking!
+
 [Neovim Themes Site](https://dotfyle.com/neovim/colorscheme/trending)  
-[Neovim Themes Site 2](https://vimcolorschemes.com/i/trending)  
+[Neovim Themes Site 2](https://vimcolorschemes.com/i/trending)
+
 Create a "themes" folder inside vim settings:
 ```shell
 New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\themes" -ItemType Directory
 ```
 Now you can copy the name of your theme inside the "themes" folder.
-Apply your theme inside the init.vim file:  
-![Apply Neovim Theme](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/apply_neovim_theme.png)  
+Apply your theme inside the init.vim file:
+
+![Apply Neovim Theme](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/apply_neovim_theme.png)
+
 ⚠️ Configuration isn't entirely done, don't worry if Neovim does not launch correctly! ⚠️
 ### Plug
-**You now need to install PLUG!!!**  
+**You now need to install PLUG!!!**
+
 [Plug Documentation](https://github.com/junegunn/vim-plug)
 #### Install Plug
 Run the Plug install command below in this path:  
@@ -160,16 +169,19 @@ The Plug install command:
 iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni $HOME/vimfiles/autoload/plug.vim -Force
 ```
-Don't worry about the PowerShell alert! Select "stick anyway"...  
+Don't worry about the PowerShell alert! Select "stick anyway"...
+
 💎 Relaunch your init.vim, if you have nicely followed all steps Neovim should launch correctly! 💎
 ***
 We should now install the Neovim modules thanks to Plug!  
 In the lower part of Neovim you can see the prompt 🕶️  
-Enter "PlugInstall" in it and validate.  
-![Neovim Install Modules](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/plug_install.png)  
+Enter "PlugInstall" in it and validate.
+
+![Neovim Install Modules](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/plug_install.png)
+
 Wait for the installation to complete, go make yourself a coffee ☕☕☕
 ### Yarn
-Install Yarn for Neovim
+Install Yarn for Neovim:
 ```shell
 cd "$env:USERPROFILE\AppData\Local\nvim\nvim-data\plugged\coc.nvim"
 ```
@@ -193,17 +205,21 @@ cd "$env:USERPROFILE\AppData\Local\nvim"
 ```shell
 nvim init.vim
 ```
+
 ![Yarn Install](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/yarn_install.png)
-You have autocompletion for HTML, CSS, Javascript, Typescript in Neovim... GGWP 🤙  
+
+You have autocompletion for HTML, CSS, Javascript, Typescript in Neovim... GGWP 🤙
+
 [Neovim Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/neovim_cheatsheets.md)
 ## OH-MY-POSH
 [Oh-My-Posh Documentation](https://ohmyposh.dev/docs/)
-Install Oh-My-Posh
-### With Chocolatey
+
+Installation:
+##### With Chocolatey
 ```shell
 choco install oh-my-posh
 ```
-### With Winget
+##### With Winget
 ```shell
 winget install JanDeDobbeleer.OhMyPosh -s winget
 ```
@@ -211,7 +227,7 @@ Check installation:
 ```shell
 oh-my-posh --version
 ```
-### Make a user profile
+##### Make a user profile
 Check if the Microsoft.PowerShell_profile.ps1 file was nicely created when installing PowerShell.
 ```shell
 echo $PROFILE
@@ -229,7 +245,7 @@ Edit Microsoft.PowerShell_profile.ps1 with your favorite text editor and paste t
 ```shell
 oh-my-posh init pwsh --config "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json" | Invoke-Expression
 ```
-### Import terminal icons
+##### Import terminal icons
 Add this in your Microsoft.PowerShell_profile.ps1:
 ```shell
 #---------#
@@ -238,13 +254,16 @@ Add this in your Microsoft.PowerShell_profile.ps1:
 ########## Terminal Icons ##########
 Import-Module Terminal-Icons
 ```
-**Reload your terminal**  
+**Reload your terminal**
+
 👨‍💻 Take a look to see what is possible with this configuration file 👨‍💻  
 [PowerShell Personal Profile](https://github.com/EmmanuelLefevre/Settings/blob/main/Powershell/Microsoft.PowerShell_profile.ps1)
-### Themes
-Apply a prompt theme to your terminal due to Oh-My-Posh:  
-[Oh-My-Posh Themes Site](https://ohmyposh.dev/docs/themes)  
-For the agnoster theme for example
+##### Themes
+Apply a prompt theme to your terminal due to Oh-My-Posh:
+
+[Oh-My-Posh Themes Site](https://ohmyposh.dev/docs/themes)
+
+Agnoster theme for example
 ```shell
 // Replace the other import by this one
 oh-my-posh init pwsh --config "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/agnoster.omp.json" | Invoke-Expression
@@ -297,17 +316,20 @@ File ".bash_profile"
 ## Profil loaded in VSCode
 eval "$(oh-my-posh init bash --config "$HOME\Documents\GitBash\gitbash_profile_custom.json")"
 ```
-Apply the themes again for effective changes.  
+Apply the themes again for effective changes.
+
 👨‍💻 Take a look to see what is possible with a custom theme 👨‍💻  
 [Oh-My-Posh Personal Theme For Git Bash](https://github.com/EmmanuelLefevre/Settings/blob/main/GitBash/gitbash_profile_darka.json)
 ## Z JUMPER
-The Z plugin adds z directory jumping to PowerShell, you could quickly open directories that you frequent on the command line or jump to a one without entering the exact folder name.  
-[Z Jumper Documentation](https://github.com/JannesMeyer/z.ps)  
+The Z plugin adds z directory jumping to PowerShell, you could quickly open directories that you frequent on the command line or jump to a one without entering the exact folder name.
+
+[Z Jumper Documentation](https://github.com/JannesMeyer/z.ps)
 ```shell
 Install-Module -Name z -Force
 ```
 ## PSREADLINE
-PSRReadline is a powerfull PowerShell module that gives command history, autocomplete, shortcuts and syntax highlighting.  
+PSRReadline is a powerfull PowerShell module that gives command history, autocomplete, shortcuts and syntax highlighting.
+
 [PSReadLine Documentation](https://learn.microsoft.com/fr-fr/powershell/module/psreadline/?view=powershell-7.4)
 ### Install PSReadLine:
 ```shell

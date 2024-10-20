@@ -15,88 +15,89 @@ Customize PowerShell appearance:
 [Windows Terminal Color Theme Site](https://windowsterminalthemes.dev/)
 ## PACKAGE MANAGERS
 ### Chocolatey
-#### Install Chocolatey
+Installation:
 ```shell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
-Check installation
+Check installation:
 ```shell
 choco -v
 ```
-Update it
+Update it:
 ```shell
 choco upgrade chocolatey
 ```
 ### Winget
-#### Install Winget with Chocolatey
+Installation:
 ```shell
 choco install microsoft-winget
 ```
-Check installation
+Check installation:
 ```shell
 winget --version
 ```
-Update it
+Update it:
 ```shell
 choco upgrade microsoft-winget
 ```
 ## UTILITIES
 ### NVM
 NVM is used to have several versions of nodejs on the same computer and to easily change between them.
-#### Install NVM
+Installation:
 ```shell
 choco install nvm
 ```
-Check installation
+Check installation:
 ```shell
 nvm --version
 ```
-Update it
+Update it:
 ```shell
 choco upgrade nvm
 ```
 [NVM Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/nvm_cheatsheets.md)
 ### NodeJs (add NPM by default)
-Install NodeJs
-#### With Chocolatey
+Installation:
+##### With Chocolatey
 ```shell
 choco install nodejs
 ```
-#### With NVM
+##### With NVM
 ```shell
 nvm install node
 ```
-#### With Winget
+##### With Winget
 ```shell
 winget install -e --id OpenJs.NodeJs
 ```
 ***
-Check installation
+Check installation:
 ```shell
 node -v
 ```
 ### Git
-Install Git
-#### With Chocolatey
+Installation:
+##### With Chocolatey
 ```shell
 choco install git
 ```
-#### With Winget
+##### With Winget
 ```shell
 winget install --id Git.Git -e --source winget
 ```
 ***
-Check installation
+Check installation:
 ```shell
 git --version
 ```
-Update it
+Update it:
 ```shell
 choco upgrade git
 ```
 [Git Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/git_cheatsheets.md)
 ### SSH
-Setup a SSH connexion:  
+Setup a SSH connexion:
+
 [Personal Tutorial To Create A SSH Connexion With GPG Keys](https://github.com/EmmanuelLefevre/Documentations/blob/master/ssh_connection.md)
 ## FONTS
 ### Nerd Font
@@ -108,8 +109,10 @@ or Hack Nerd Font
 ```shell
 choco install nerd-fonts-hack
 ```
-Alternatively you can download them here without using chocolatey, you should install it manually. Just click on it, windows will do the rest 😜  
-[Nerd Fonts Download Site](https://www.nerdfonts.com/font-downloads)  
+Alternatively you can download them here without using chocolatey, you should install it manually. Just click on it, windows will do the rest 😜
+
+[Nerd Fonts Download Site](https://www.nerdfonts.com/font-downloads)
+
 Now you can use the nerd font that you downloaded in PowerShell or VsCode, just setup in each one.
 ## NEOVIM
 Neovim is a powerfull text editor. It is directly inspired by Vim (a very common editor on Unix-type operating systems), of which it is a derivative (fork).  

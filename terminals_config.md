@@ -258,6 +258,9 @@ Import-Module Terminal-Icons
 
 👨‍💻 Take a look to see what is possible with this configuration file 👨‍💻  
 [PowerShell Personal Profile](https://github.com/EmmanuelLefevre/Settings/blob/main/Powershell/Microsoft.PowerShell_profile.ps1)
+
+![PowerShell Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/powershell.png)
+
 ##### Themes
 Apply a prompt theme to your terminal due to Oh-My-Posh:
 
@@ -320,6 +323,9 @@ Apply the themes again for effective changes.
 
 👨‍💻 Take a look to see what is possible with a custom theme 👨‍💻  
 [Oh-My-Posh Personal Theme For Git Bash](https://github.com/EmmanuelLefevre/Settings/blob/main/GitBash/gitbash_profile_darka.json)
+
+![GitBash Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/gitbash.png)
+
 ## Z JUMPER
 The Z plugin adds z directory jumping to PowerShell, you could quickly open directories that you frequent on the command line or jump to a one without entering the exact folder name.
 

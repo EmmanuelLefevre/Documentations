@@ -140,7 +140,7 @@ New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\init.vim" -ItemType File
 ```
 Copy and paste this "raw" file content of this init.vim file into yours...
 
-[Gist BeckBrace](https://gist.github.com/BekBrace/73d1d179967a33853c5e079f68fdc93a)
+[Gist Beck Brace](https://gist.github.com/BekBrace/73d1d179967a33853c5e079f68fdc93a)
 ### Themes
 Get a theme to your liking!
 

@@ -13,7 +13,7 @@ Tutoriel pour créer des raccourcis sur le bureau Windows afin d'accéder plus r
 ```shell
 rundll32.exe sysdm.cpl,EditEnvironmentVariables
 ```
-Right click > Propriétés > Avancé > Cocher "Exécuter en tant qu'administrateur"
+Right click sur le raccourci > Propriétés > Avancé > Cocher "Exécuter en tant qu'administrateur"
 ## 🚀 Services de démarrage 🚀
 ```shell
 services.msc
@@ -24,7 +24,7 @@ Permet de gérer les informations d'identification pour les connexions à des si
 control /name Microsoft.CredentialManager
 ```
 ### 🎨 Personnalisation des icônes 🎨
-Right click > Propriétés > Changer d'icône
+Right click sur le raccourci > Propriétés > Changer d'icône
 
 Paths des icônes système:
 ```shell

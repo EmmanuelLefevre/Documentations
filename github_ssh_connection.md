@@ -24,17 +24,15 @@ eval "$(ssh-agent -s)"
 ssh-add C:/Users/darka/.ssh/github_id_ed
 ```
 ### 5. => github.com Ajouter la clé (Profile>Settings>SSH and GPG keys)
-### 6. Open connection
+### 6. Tester la connection
 ```shell
 ssh -T git@github.com
 ```
-### 7. Close connection
+### 7. Configurer le repository en SSH
+Récupérer le lien SSH dans le repository distant.  
+git@github.com:EmmanuelLefevre/Documentations.git
 ```shell
-kill <PID>
-```
-ou
-```shell
-exit
+git remote set-url origin git@github.com:EmmanuelLefevre/Documentations.git
 ```
 ## COMMANDES UTILES
 - Lister les clés ajoutées

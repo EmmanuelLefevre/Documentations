@@ -264,6 +264,8 @@ Import-Module Terminal-Icons
 
 ![PowerShell Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/powershell.png)
 
+![PowerShell Functions Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/powershell2.png)
+
 ##### Themes
 Apply a prompt theme to your terminal due to Oh-My-Posh:
 

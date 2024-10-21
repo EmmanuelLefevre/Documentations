@@ -32,9 +32,17 @@ ssh -T git@github.com
 Récupérer le lien SSH dans le repository distant. Ici =>
 
 git@github.com:EmmanuelLefevre/Documentations.git
+
+Se placer dans le path du repository!
 ```shell
 git remote set-url origin git@github.com:EmmanuelLefevre/Documentations.git
 ```
+Vérifier la configuration:
+```shell
+git remote -v
+```
+Le retour de la commande doit affiché ce format =>  
+origin git@github.com:<UserName>/<RepoName>;git
 ## COMMANDES UTILES
 - Lister les clés ajoutées
 ```shell

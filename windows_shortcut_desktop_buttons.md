@@ -2,32 +2,32 @@
 ## INTRODUCTION
 Tutoriel pour créer des raccourcis sur le bureau Windows afin d'accéder plus rapidement à certaines fonctionnalités qui ne peuvent pas être ajoutées au menu démarrer.
 ## Basic
-Reproduire cette manipulation pour chaque raccourci!
+⚠️ Reproduire cette manipulation pour chaque raccourci ⚠️
 
 1. Right click sur le bureau > "Nouveau" > "Raccourci"
 2. Dans la fenêtre qui s'ouvre, entrez la commande correspondante
 3. Bouton "Suivant"
-4. Donnez un nom au raccourci
+4. Donner un nom au raccourci
 5. Bouton "Terminer"
-## Environment variables
+## 🌍 Variables d'environnement 🌍
 ```shell
 rundll32.exe sysdm.cpl,EditEnvironmentVariables
 ```
-Right click > Propriétés > Avancé
+Right click > Propriétés > Avancé  
 Cocher "Exécuter en tant qu'administrateur"
-## Gestionnaire d'informations d'identification
-```shell
-control /name Microsoft.CredentialManager
-```
-## Services
+## 🚀 Services de démarrage 🚀
 ```shell
 services.msc
 ```
-## Credential manager
+## 🔒 Gestionnaire d'informations d'identification 🔒
+```shell
+control /name Microsoft.CredentialManager
+```
+## 🔑 Credential manager 🔑
 ```shell
 rundll32.exe keymgr.dll,KRShowKeyMgr
 ```
-### Personnalisation des icônes
+### 🎨 Personnalisation des icônes 🎨
 Right click > Propriétés > Changer d'icône
 
 Paths des icônes système:

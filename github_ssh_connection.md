@@ -42,7 +42,7 @@ Vérifier la configuration:
 git remote -v
 ```
 Le retour de la commande doit affiché ce format =>  
-`origin git@github.com:"<UserName>"/"<RepoName>".git`
+`origin git@github.com:<UserName>/<RepoName>.git`
 ## COMMANDES UTILES
 - Lister les clés ajoutées
 ```shell

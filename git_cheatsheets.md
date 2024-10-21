@@ -35,7 +35,7 @@ git merge origin/master
 ### Reconfigurer dépôt distant
 | Command + option | Description |
 | :--------------: | :---------: |
-|`git remote -v`| Afficher les remotes configurés avec leurs URL|
+|`git remote -v`| Afficher remotes URL (SSH ou HTTPS)|
 |`git remote rm origin`|Effacer l'ancien remote nommé "origin"|
 |`git remote add origin https://github.com/user.name/nomRepo.git`|Lier le dépôt local au dépôt distant spécifié|
 ### Commit

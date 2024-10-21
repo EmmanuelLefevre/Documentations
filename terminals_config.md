@@ -371,3 +371,9 @@ Upcoming section!
 [Emmanuel Lefevre Personal Settings](https://github.com/EmmanuelLefevre/Settings)  
 ***
 🔥🔥🔥 You're now a fucking swag developer!!! 🔥🔥🔥
+
+Credits:
+
+[Beck Brace Youtube](https://www.youtube.com/watch?v=fviSilPKIhs)
+
+[Christian Lempa Youtube](https://www.youtube.com/watch?v=AK2JE2YsKto&t=242s)

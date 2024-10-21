@@ -29,7 +29,7 @@ ssh-add C:/Users/darka/.ssh/github_id_ed
 ssh -T git@github.com
 ```
 ### 7. Configurer le repository en SSH
-Récupérer le lien SSH dans le repository distant.
+Récupérer le lien SSH dans le repository distant. Ici =>
 
 git@github.com:EmmanuelLefevre/Documentations.git
 ```shell

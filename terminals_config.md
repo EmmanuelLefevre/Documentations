@@ -258,7 +258,8 @@ Import-Module Terminal-Icons
 ```
 **Reload your terminal**
 
-👨‍💻 Take a look to see what is possible with this configuration file 👨‍💻  
+👨‍💻 Take a look to see what is possible with this configuration file 👨‍💻
+
 [PowerShell Personal Profile](https://github.com/EmmanuelLefevre/Settings/blob/main/Powershell/Microsoft.PowerShell_profile.ps1)
 
 ![PowerShell Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/powershell.png)
@@ -323,7 +324,8 @@ eval "$(oh-my-posh init bash --config "$HOME\Documents\GitBash\gitbash_profile_c
 ```
 Apply the themes again for effective changes.
 
-👨‍💻 Take a look to see what is possible with a custom theme 👨‍💻  
+👨‍💻 Take a look to see what is possible with a custom theme 👨‍💻
+
 [Oh-My-Posh Personal Theme For Git Bash](https://github.com/EmmanuelLefevre/Settings/blob/main/GitBash/gitbash_profile_darka.json)
 
 ![GitBash Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/gitbash.png)

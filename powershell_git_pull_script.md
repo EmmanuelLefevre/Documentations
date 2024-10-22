@@ -33,7 +33,7 @@ git_pull
 Read-Host -Prompt "Press Enter to close..."
 ```
 8. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
-9. Create the function "git_pull" inside.
+9. Copy/Paste "git_pull" function and his utility function inside.
 ```powershell
 ########## Update your local repositories ##########
 function git_pull {
@@ -52,9 +52,8 @@ function git_pull {
       Set-Location -Path $repoPath
 
       # Show the name of the repository being updated
-      Write-Host -NoNewline "$repoName " -ForegroundColor Magenta
-      Write-Host "repository is on update process... 🚀" -NoNewline
-      Write-Host ""
+      Write-Host -NoNewline "$repoName" -ForegroundColor Magenta
+      Write-Host " is on update process 🚀"
 
       try {
         # Check for remote repository existence using GitHub API
@@ -65,7 +64,11 @@ function git_pull {
         $currentBranch = git rev-parse --abbrev-ref HEAD
         # If branch isn't "master" or "main"
         if ($currentBranch -ne "main" -and $currentBranch -ne "master") {
-          Write-Host "⚠️ $repoName is on $currentBranch not 'main' or 'master'! Cancelling update ⚠️" -ForegroundColor DarkRed
+          Write-Host -NoNewline "⚠️ "
+          Write-Host -NoNewline "$repoName" -ForegroundColor Magenta
+          Write-Host -NoNewline " is on " -ForegroundColor Red
+          Write-Host -NoNewline "$currentBranch" -ForegroundColor Magenta
+          Write-Host " not 'main' or 'master'! Cancelling update ⚠️" -ForegroundColor Red
           Write-Host "--------------------------------------------------------------------"
 
           # Next repository
@@ -108,18 +111,29 @@ function git_pull {
           Write-Host "--------------------------------------------------------------------"
         }
         else {
-          Write-Host "⚠️ Error updating $repoName !!! ⚠️" -ForegroundColor Red
+          Write-Host -NoNewline "⚠️ "
+          Write-Host -NoNewline "Error updating " -ForegroundColor Red
+          Write-Host -NoNewline "$repoName" -ForegroundColor Magenta
+          Write-Host " !!! ⚠️" -ForegroundColor Red
           Write-Host "--------------------------------------------------------------------"
         }
       }
       catch {
         # Check if the error is related to the remote repository not existing
         if ($_.Exception.Response.StatusCode -eq 404) {
-          Write-Host "⚠️ Remote repository `"$repoName`" doesn't exist !!! ⚠️" -ForegroundColor Red
+          Write-Host -NoNewline "⚠️ "
+          Write-Host -NoNewline "Remote repository " -ForegroundColor Red
+          Write-Host -NoNewline "`"$repoName`"" -ForegroundColor Magenta
+          Write-Host " doesn't exist !!! ⚠️" -ForegroundColor Red
+        }
+        # elseif ($responseBody.message -match "API rate limit exceeded") {
+        elseif ($_.Exception.Response.StatusCode -eq 403) {
+          Write-Host "󰊤 GitHub API rate limit exceeded! Try again later or authenticate to increase your rate limit. 󰊤" -ForegroundColor Red
         }
         else {
-          Write-Host "⚠️ An error occurred while updating {$repoName}: ${_} ⚠️" -ForegroundColor Red
-          Write-Host "--------------------------------------------------------------------"
+          Write-Host -NoNewline "⚠️ An error occurred while updating "
+          Write-Host -NoNewline "{$repoName}" -ForegroundColor Magenta
+          Write-Host ": ${_} ⚠️" -ForegroundColor Red
         }
       }
 
@@ -130,7 +144,9 @@ function git_pull {
       Set-Location -Path $HOME
     }
     else {
-      Write-Host "⚠️ Local repository `"$repoName`" doesn't exist !!! ⚠️" -ForegroundColor Red
+      Write-Host -NoNewline "⚠️ Local repository " -ForegroundColor Red
+      Write-Host -NoNewline "`"$repoName`"" -ForegroundColor Magenta
+      Write-Host " doesn't exist !!! ⚠️" -ForegroundColor Red
       Write-Host "--------------------------------------------------------------------"
     }
   }

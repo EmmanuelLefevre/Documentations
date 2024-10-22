@@ -27,9 +27,9 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_script.ps1" -ItemType File
 ```
 9. Copy/Paste this inside the new file
-```shell
+```powershell
 # Load PowerShell Profile
-. "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+. "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 
 # Call function
 git_pull

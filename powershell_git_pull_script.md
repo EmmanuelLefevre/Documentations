@@ -107,14 +107,14 @@ function git_pull {
 
         # Check if the command was successful
         if ($LASTEXITCODE -eq 0) {
-          Write-Host "✅ Successfully updated ✅" -ForegroundColor Green
+          Write-Host "Successfully updated ✅" -ForegroundColor Green
           Write-Host "--------------------------------------------------------------------"
         }
         else {
           Write-Host -NoNewline "⚠️ "
           Write-Host -NoNewline "Error updating " -ForegroundColor Red
           Write-Host -NoNewline "$repoName" -ForegroundColor Magenta
-          Write-Host " !!! ⚠️" -ForegroundColor Red
+          Write-Host " ⚠️" -ForegroundColor Red
           Write-Host "--------------------------------------------------------------------"
         }
       }
@@ -123,8 +123,8 @@ function git_pull {
         if ($_.Exception.Response.StatusCode -eq 404) {
           Write-Host -NoNewline "⚠️ "
           Write-Host -NoNewline "Remote repository " -ForegroundColor Red
-          Write-Host -NoNewline "`"$repoName`"" -ForegroundColor Magenta
-          Write-Host " doesn't exist !!! ⚠️" -ForegroundColor Red
+          Write-Host -NoNewline "$repoName" -ForegroundColor Magenta
+          Write-Host " doesn't exists ⚠️" -ForegroundColor Red
         }
         # elseif ($responseBody.message -match "API rate limit exceeded") {
         elseif ($_.Exception.Response.StatusCode -eq 403) {
@@ -132,7 +132,7 @@ function git_pull {
         }
         else {
           Write-Host -NoNewline "⚠️ An error occurred while updating "
-          Write-Host -NoNewline "{$repoName}" -ForegroundColor Magenta
+          Write-Host -NoNewline "$repoName" -ForegroundColor Magenta
           Write-Host ": ${_} ⚠️" -ForegroundColor Red
         }
       }
@@ -145,8 +145,8 @@ function git_pull {
     }
     else {
       Write-Host -NoNewline "⚠️ Local repository " -ForegroundColor Red
-      Write-Host -NoNewline "`"$repoName`"" -ForegroundColor Magenta
-      Write-Host " doesn't exist !!! ⚠️" -ForegroundColor Red
+      Write-Host -NoNewline "$repoName" -ForegroundColor Magenta
+      Write-Host " doesn't exists ⚠️" -ForegroundColor Red
       Write-Host "--------------------------------------------------------------------"
     }
   }

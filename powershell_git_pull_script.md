@@ -23,7 +23,7 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 7. ❤️ Additionally give the shortcut a nice icon ❤️
 
 8. Create the file "run_powershell_git_pull_script.ps1" in this path:
-```shell
+```powershell
 New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_script.ps1" -ItemType File
 ```
 9. Copy/Paste this inside the new file

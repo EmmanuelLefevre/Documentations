@@ -18,7 +18,7 @@ Customize PowerShell appearance:
 ## PACKAGE MANAGERS
 ### Chocolatey
 Installation:
-```shell
+```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
 Check installation:
@@ -131,11 +131,11 @@ Check installation (if the text editor opens that mean everything is good 😍):
 nvim
 ```
 Create a setting folder call "nvim":
-```shell
+```powershell
 mkdir "$env:USERPROFILE\AppData\Local\nvim"
 ```
 Create a file named init.vim:
-```shell
+```powershell
 New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\init.vim" -ItemType File
 ```
 Copy and paste this "raw" file content of this init.vim file into yours...
@@ -148,7 +148,7 @@ Get a theme to your liking!
 [Neovim Themes Site 2](https://vimcolorschemes.com/i/trending)
 
 Create a "themes" folder inside vim settings:
-```shell
+```powershell
 New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\themes" -ItemType Directory
 ```
 Now you can copy the name of your theme inside the "themes" folder.
@@ -163,11 +163,11 @@ Apply your theme inside the init.vim file:
 [Plug Documentation](https://github.com/junegunn/vim-plug)
 #### Install Plug
 Run the Plug install command below in this path:  
-```shell
+```powershell
 cd "$env:USERPROFILE\AppData\Local\nvim"
 ```
 The Plug install command:  
-```shell
+```powershell
 iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni $HOME/vimfiles/autoload/plug.vim -Force
 ```
@@ -184,7 +184,7 @@ Enter "PlugInstall" in it and validate.
 Wait for the installation to complete, go make yourself a coffee ☕☕☕
 ### Yarn
 Install Yarn for Neovim:
-```shell
+```powershell
 cd "$env:USERPROFILE\AppData\Local\nvim\nvim-data\plugged\coc.nvim"
 ```
 ```shell
@@ -201,7 +201,7 @@ yarn install
 ```shell
 yarn build
 ```
-```shell
+```powershell
 cd "$env:USERPROFILE\AppData\Local\nvim"
 ```
 ```shell
@@ -236,15 +236,15 @@ echo $PROFILE
 ```
 ***
 If not:
-```shell
+```powershell
 mkdir "$env:USERPROFILE\Documents\PowerShell"
 ```
-```shell
+```powershell
 New-Item -Path "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -ItemType File
 ```
 ***
 Edit Microsoft.PowerShell_profile.ps1 with your favorite text editor and paste this inside.  
-```shell
+```powershell
 oh-my-posh init pwsh --config "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json" | Invoke-Expression
 ```
 ##### Import terminal icons
@@ -272,22 +272,22 @@ Apply a prompt theme to your terminal due to Oh-My-Posh:
 [Oh-My-Posh Themes Site](https://ohmyposh.dev/docs/themes)
 
 Agnoster theme for example
-```shell
+```powershell
 // Replace the other import by this one
 oh-my-posh init pwsh --config "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/agnoster.omp.json" | Invoke-Expression
 ```
 For custom ones
-```shell
+```powershell
 // Replace the other import by your custom theme
 oh-my-posh init pwsh --config "$env:USERPROFILE/Documents/PowerShell/powershell_profile_custom.json" | Invoke-Expression
 ```
 [Oh-My-Posh Personal Theme For Powershell](https://github.com/EmmanuelLefevre/Settings/blob/main/Powershell/powershell_profile_darka.json)
 ## GIT BASH
 If they do not exist create these two files in the user directory.
-```shell
+```powershell
 New-Item -Path "$env:USERPROFILE\.bashrc" -ItemType File
 ```
-```shell
+```powershell
 New-Item -Path "$env:USERPROFILE\.bash_profile" -ItemType File
 ```
 ### Basic theme

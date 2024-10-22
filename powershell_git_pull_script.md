@@ -10,7 +10,7 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 2. Right click on desktop > "New" > "Shortcut"
 
 3. In the window that opens, enter this line =>  
-💡💡💡 Consider replacing the installation path of your PowerShell, it may be different! Same for your file "run_powershell_git_pull_script.ps1" ...
+💡 Consider replacing the installation path of your PowerShell, it may be different! Same for your file "run_powershell_git_pull_script.ps1" ...
 ```shell
 "C:\Program Files\WindowsApps\Microsoft.PowerShell_7.4.5.0_x64__8wekyb3d8bbwe\pwsh.exe" -NoExit -ExecutionPolicy Bypass -File "C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1"
 ```
@@ -22,11 +22,11 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 
 7. ❤️ Additionally give the shortcut a nice icon ❤️
 
-7. Create the file "run_powershell_git_pull_script.ps1" in this path:
+8. Create the file "run_powershell_git_pull_script.ps1" in this path:
 ```shell
 New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_script.ps1" -ItemType File
 ```
-Copy/Paste this inside the new file
+9. Copy/Paste this inside the new file
 ```shell
 # Load PowerShell Profile
 . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
@@ -37,9 +37,9 @@ git_pull
 # Keep window open
 Read-Host -Prompt "Press Enter to close..."
 ```
-8. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
+10. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
 
-9. Copy/Paste "git_pull" function and his utility function inside.
+11. Copy/Paste "git_pull" function and his utility function inside.
 ```powershell
 ########## Update your local repositories ##########
 function git_pull {

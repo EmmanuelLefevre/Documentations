@@ -114,14 +114,12 @@ function git_pull {
         # Check if the command was successful
         if ($LASTEXITCODE -eq 0) {
           Write-Host "Successfully updated ✅" -ForegroundColor Green
-          Write-Host "--------------------------------------------------------------------"
         }
         else {
           Write-Host -NoNewline "⚠️ "
           Write-Host -NoNewline "Error updating " -ForegroundColor Red
           Write-Host -NoNewline "$repoName" -ForegroundColor Magenta
           Write-Host " ⚠️" -ForegroundColor Red
-          Write-Host "--------------------------------------------------------------------"
         }
       }
       catch {

@@ -2,6 +2,7 @@
 ## INTRODUCTION
 This tutorial shows the step-by-step procedure to create a powershell script (executable using a shortcut button on the user's desktop) allowing you to update your local repositories with a single click. Indeed, when you have several computers, it can be laborious to synchronize your local repositories each one after the other if you have made a modification in one of them.  
 👌 Many controls have been added 👌
+⚠️ This procedure is intended to automate pulls for repositories with only one branch, such as a repository for documentation or configurations.
 ## PROCEDURE
 1. Get the fully path where PowerShell was installed:
 ```shell
@@ -9,7 +10,8 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 ```
 2. Right click on desktop > "New" > "Shortcut"
 
-3. In the window that opens, enter this line =>  
+3. In the window that opens, enter this line =>
+
 💡 Consider replacing the installation path of your PowerShell, it may be different! Same for your file "run_powershell_git_pull_script.ps1" ...
 ```shell
 "C:\Program Files\WindowsApps\Microsoft.PowerShell_7.4.5.0_x64__8wekyb3d8bbwe\pwsh.exe" -NoExit -ExecutionPolicy Bypass -File "C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1"
@@ -181,7 +183,8 @@ function Get-RepositoriesInfo {
   }
 }
 ```
-12. 😍 Bonus 😍  
+12. 😍 Bonus 😍
+
 Request the github api with a personnal token to increase the rate limit...
 
 On github.com:  
@@ -189,7 +192,7 @@ Settings > Developer settings > Personal access tokens > Tokens (classic) > Gene
 
 - Input "Note": Your token name...
 - Expiration option: "No expiration"
-- Tick the checkbox: "repo"
+- Tick checkbox: "repo"
 - Click on "Generate token"
 
 ⚠️ Be careful to copy your token because it will no longer be visible afterwards!
@@ -199,7 +202,7 @@ You must now modify the utility function, replace it by:
 ########## Get local repositories information ##########
 function Get-RepositoriesInfo {
   # GitHub username
-  $GitHubUsername = "EmmanuelLefevre"
+  $GitHubUsername = "<YOUR GITHUB NAME>"
 
   # GitHub token
   $gitHubToken = "<YOUR PERSONAL TOKEN>"

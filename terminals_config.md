@@ -365,14 +365,14 @@ Set-PSReadLineKeyHandler -Key Tab -Function Complete
 Set-PSReadLineOption -PredictionViewStyle ListView
 ```
 ## WSL
-Upcoming section!
+Upcoming section soon!
 ***
 🔎🔎🔎 You could find a few of my personal settings here 🔎🔎🔎  
 [Emmanuel Lefevre Personal Settings](https://github.com/EmmanuelLefevre/Settings)  
 ***
-🔥🔥🔥 You're now a fucking swag developer!!! 🔥🔥🔥
+🔥🔥🔥 You're now a fucking terminal user!!! 🔥🔥🔥
 
-⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
 
 Credits:
 

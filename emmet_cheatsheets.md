@@ -26,3 +26,5 @@ Plugin pour éditeur de texte (assistance de contenu)
 |p10|padding:10px;|
 |v|visibility:hidden;|
 |-bdrs|border-radius|
+
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗

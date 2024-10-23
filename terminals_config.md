@@ -372,6 +372,8 @@ Upcoming section!
 ***
 🔥🔥🔥 You're now a fucking swag developer!!! 🔥🔥🔥
 
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗
+
 Credits:
 
 [Beck Brace Youtube](https://www.youtube.com/watch?v=fviSilPKIhs)

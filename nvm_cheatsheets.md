@@ -12,3 +12,5 @@ NVM (Node Version Manager) est un gestionnaire de versions pour NodeJs qui perme
 |`nvm uninstall <version>`|Désinstaller une version spécifique|
 |`nvm ls-remote`|Lister les versions disponibles au téléchargement|
 |`nvm alias default <version>`|Installer une version par défaut|
+
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗

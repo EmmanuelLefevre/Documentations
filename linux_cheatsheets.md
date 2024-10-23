@@ -283,3 +283,5 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | :--------------: | :---------: |
 |`export 'NOM_VARIABLE=valeur'`|Définir une variable d'environnement|
 |`printenv`|Afficher les variables d'environnement|
+
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗

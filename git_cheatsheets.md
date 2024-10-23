@@ -117,3 +117,5 @@ git branch -d nameOfBranch
 | Command + option | Description |
 | :--------------: | :---------: |
 |`git tag -a v1.0 -m "Version 1.0"`|Crée tag annoté pour marquer une version dans l'historique des commits (facilite le suivi des versions)|
+
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗

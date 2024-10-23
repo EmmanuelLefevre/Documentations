@@ -159,7 +159,7 @@ function git_pull {
 ########## Get local repositories information ##########
 function Get-RepositoriesInfo {
   # GitHub username
-  $GitHubUsername = "EmmanuelLefevre"
+  $gitHubUsername = "EmmanuelLefevre"
 
   # Array to define the order of repositories
   $reposOrder = @("Documentations", "EmmanuelLefevre", "IAmEmmanuelLefevre", "Schemas", "Settings", "Soutenances")
@@ -175,7 +175,7 @@ function Get-RepositoriesInfo {
   }
 
   return @{
-    Username = $GitHubUsername
+    Username = $gitHubUsername
     Order = $reposOrder
     Paths = $repos
   }

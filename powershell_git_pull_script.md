@@ -181,3 +181,14 @@ function Get-RepositoriesInfo {
   }
 }
 ```
+12. 😍 Bonus 😍
+Request the github api with a personnal token to increase the rate limit...
+
+On github.com: Settings > Developer settings > Personal access tokens > Tokens (classic) > Generate new token > Generate new token (classic)
+
+- Input "Note": Your token name...
+- Expiration: "No expiration"
+- Check the checkbox: "repo"
+
+Click on "Generate token"
+

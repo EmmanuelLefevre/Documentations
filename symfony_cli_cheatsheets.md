@@ -402,4 +402,4 @@ composer create-project symfony/symfony-demo:1.8.0 symfony-gitlab --no-interacti
 composer create-project symfony/symfony-demo:1.8.0 symfony-local2 --no-interaction
 ```
 
-⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

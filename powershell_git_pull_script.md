@@ -1,7 +1,7 @@
 # POWERSHELL GIT PULL SCRIPT
 ## INTRODUCTION
 This tutorial shows the step-by-step procedure to create a powershell script (executable using a shortcut button on the user's desktop) allowing you to update your local repositories with a single click. Indeed, when you have several computers, it can be laborious to synchronize your local repositories each one after the other if you have made a modification in one of them.  
-⚠️ Many controls have been added ⚠️
+👌 Many controls have been added 👌
 ## PROCEDURE
 1. Get the fully path where PowerShell was installed:
 ```shell
@@ -181,14 +181,55 @@ function Get-RepositoriesInfo {
   }
 }
 ```
-12. 😍 Bonus 😍
+12. 😍 Bonus 😍  
 Request the github api with a personnal token to increase the rate limit...
 
-On github.com: Settings > Developer settings > Personal access tokens > Tokens (classic) > Generate new token > Generate new token (classic)
+On github.com:  
+Settings > Developer settings > Personal access tokens > Tokens (classic) > Generate new token > Generate new token (classic)
 
 - Input "Note": Your token name...
-- Expiration: "No expiration"
-- Check the checkbox: "repo"
+- Expiration option: "No expiration"
+- Tick the checkbox: "repo"
+- Click on "Generate token"
 
-Click on "Generate token"
+⚠️ Be careful to copy your token because it will no longer be visible afterwards!
 
+You must now modify the utility function, replace it by:
+```powershell
+########## Get local repositories information ##########
+function Get-RepositoriesInfo {
+  # GitHub username
+  $GitHubUsername = "EmmanuelLefevre"
+
+  # GitHub token
+  $gitHubToken = "<YOUR PERSONAL TOKEN>"
+
+  # Array to define the order of repositories
+  $reposOrder = @("Documentations", "EmmanuelLefevre", "IAmEmmanuelLefevre", "Schemas", "Settings", "Soutenances")
+
+  # Dictionary containing local repositories path
+  $repos = @{
+    "Documentations"        = "$env:USERPROFILE\Documents\Documentations"
+    "EmmanuelLefevre"       = "$env:USERPROFILE\Desktop\Projets\EmmanuelLefevre"
+    "IAmEmmanuelLefevre"    = "$env:USERPROFILE\Desktop\Projets\IAmEmmanuelLefevre"
+    "Schemas"               = "$env:USERPROFILE\Desktop\Schemas"
+    "Settings"              = "$env:USERPROFILE\Desktop\Settings"
+    "Soutenances"           = "$env:USERPROFILE\Desktop\Soutenances"
+  }
+
+  return @{
+    Username = $GitHubUsername
+    Token = $gitHubToken
+    Order = $reposOrder
+    Paths = $repos
+  }
+}
+```
+At last add the below line after `$username = $reposInfo.Username`
+```powershell
+$token = $reposInfo.Token
+```
+And change the line `$response = Invoke-RestMethod -Uri $repoUrl -Method Get -ErrorAction Stop` by this one =>
+```powershell
+$response = Invoke-RestMethod -Uri $repoUrl -Method Get -Headers @{ Authorization = "Bearer $token" } -ErrorAction Stop
+```

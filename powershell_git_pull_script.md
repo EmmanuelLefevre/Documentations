@@ -1,7 +1,7 @@
 # POWERSHELL GIT PULL SCRIPT
 ## INTRODUCTION
 This tutorial shows the step-by-step procedure to create a powershell script (executable using a shortcut button on the user's desktop) allowing you to update your local repositories with a single click. Indeed, when you have several computers, it can be laborious to synchronize your local repositories each one after the other if you have made a modification in one of them.  
-👌 Many controls have been added 👌
+👌 Many controls have been added 👌  
 ⚠️ This procedure is intended to automate pulls for repositories with only one branch, such as a repository for documentation or configurations.
 ## PROCEDURE
 1. Get the fully path where PowerShell was installed:

@@ -784,4 +784,4 @@ utilisateursPlusDe30.forEach(utilisateur => {
 ### Conclusion
 Les énumérables sont une structure de données puissante qui facilite le travail avec des collections d'objets ou de valeurs. Leur capacité à simplifier l'itération, le filtrage et la transformation des données en fait un choix essentiel dans de nombreux contextes. Comprendre les énumérables et leur utilisation est crucial pour tout développeur souhaitant optimiser le traitement des données dans ses programmes.
 
-⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

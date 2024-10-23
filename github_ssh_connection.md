@@ -60,3 +60,5 @@ ssh-add -d C:/Users/darka/.ssh/github_id_ed
 ```shell
 eval $(ssh-agent -s)
 ```
+
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗

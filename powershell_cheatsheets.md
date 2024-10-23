@@ -66,4 +66,4 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`shutdown -s -c "text"`|Arrêter avec un message (127 caractères maxi)|
 |`shutdown -r`|Redémarrer l'ordinateur|
 
-⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on my repository (click on the "Star" button at the top right of the repository page). Thanks 🤗
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

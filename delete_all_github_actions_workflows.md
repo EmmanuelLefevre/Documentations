@@ -39,7 +39,11 @@ sudo apt-get install jq
 ```shell
 sudo apt-get upgrade
 ```
-#### 3. Exécuter le script
+#### 4. Exécuter le script
+Dans le WSL =>
+```shell
+cd /mnt/c/Users/darka/Desktop/Scripts
+```
 ```shell
 ./delete_workflows.sh
 

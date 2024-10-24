@@ -202,7 +202,7 @@ You must now modify the utility function, replace it by:
 ########## Get local repositories information ##########
 function Get-RepositoriesInfo {
   # GitHub username
-  $GitHubUsername = "<YOUR GITHUB NAME>"
+  $GitHubUsername = "<YOUR GITHUB USERNAME>"
 
   # GitHub token
   $gitHubToken = "<YOUR PERSONAL TOKEN>"

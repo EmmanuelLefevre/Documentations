@@ -1,6 +1,15 @@
 # ANGULAR
 ## INTRODUCTION
 Best front-end framework!
+## CLI
+Global:
+```shell
+npm install -g @angular/cli@16.1.1
+```
+Projet:
+```shell
+npm install @angular/cli@16.1.1 --save-dev
+```
 ## CLI SHORTCUTS
 ### Nouveau projet
 ```shell

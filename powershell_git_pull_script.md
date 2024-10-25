@@ -161,7 +161,7 @@ function git_pull {
 ########## Get local repositories information ##########
 function Get-RepositoriesInfo {
   # GitHub username
-  $gitHubUsername = "EmmanuelLefevre"
+  $gitHubUsername = "<YOUR GITHUB USERNAME>"
 
   # Array to define the order of repositories
   $reposOrder = @("Documentations", "EmmanuelLefevre", "IAmEmmanuelLefevre", "Schemas", "Settings", "Soutenances")

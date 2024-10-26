@@ -51,7 +51,7 @@ git_pull
 
 # Switch prompt mode
 Write-Host ""
-Read-Host -Prompt "Press Enter to switch prompt mode..."
+Read-Host -Prompt "Press Enter to switch prompt mode... "
 
 # Change prompt directory to Home
 Set-Location -Path $env:USERPROFILE

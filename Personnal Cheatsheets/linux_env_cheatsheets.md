@@ -9,6 +9,7 @@
 | `$EDITOR` | Éditeur de texte par défaut |
 | `$LANG` | Langue par défaut |
 | `$HOSTNAME` | Nom d'hôte de l'ordinateur |
+
 ## DÉFINITION DES VARIABLES D'ENVIRONNEMENT
 | Commande | Description |
 | :---: | :---: |
@@ -19,6 +20,7 @@
 | `env` | Afficher toutes les variables d'environnement |
 | `printenv` | Afficher toutes les variables d'environnement |
 | `echo $VAR` | Afficher la valeur d'une variable d'environnement |
+
 ## EXPANSION DES PARAMÈTRES
 | Commande | Description |
 | :---: | :---: |

@@ -32,7 +32,7 @@ Symfony est un ensemble de composants PHP ainsi qu'un framework MVC libre écrit
 | `php bin/console debug:validator` | Validator |
 | `php bin/console debug:event-dispatcher` | Listener priority |
 
-## SGDB
+## SGBD
 | Command | Description |
 | :--------------: | :---------: |
 | `php bin/console doctrine:database:drop --force`| Drop bdd |

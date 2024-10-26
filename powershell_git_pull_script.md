@@ -22,7 +22,7 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 
 - Windows 10
 ```shell
-wt.exe -p "PowerShell" -d . -- pwsh.exe -NoExit -ExecutionPolicy Bypass -File "C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1"
+wt.exe -p "PowerShell" -d . -- pwsh.exe -ExecutionPolicy Bypass -File "C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1"
 ```
 4. "Next" button
 
@@ -51,12 +51,9 @@ New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_sc
 # Call function
 git_pull
 
-# Switch prompt mode
+# Close terminal
 Write-Host ""
-Read-Host -Prompt "Press Enter to switch prompt mode... "
-
-# Change prompt directory to Home
-Set-Location -Path $env:USERPROFILE
+Read-Host -Prompt "Press Enter to close... "
 ```
 10. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
 

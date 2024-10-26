@@ -16,7 +16,7 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 
 - Windows 11
 ```shell
-"C:\Program Files\WindowsApps\Microsoft.PowerShell_7.4.5.0_x64__8wekyb3d8bbwe\pwsh.exe" -NoExit -ExecutionPolicy Bypass -File "C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1"
+"C:\Program Files\WindowsApps\Microsoft.PowerShell_7.4.5.0_x64__8wekyb3d8bbwe\pwsh.exe" -ExecutionPolicy Bypass -File "C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1"
 ```
 ⚠️ Also pay attention to the version of powershell installed if you use Windows 11 ...
 

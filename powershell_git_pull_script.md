@@ -51,14 +51,12 @@ New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_sc
 # Call function
 git_pull
 
-# Keep window open
-Read-Host -Prompt "Press Enter to finish..."
+# Switch prompt mode
+Write-Host ""
+Read-Host -Prompt "Press Enter to switch prompt mode..."
 
 # Change directory to Home
 Set-Location -Path $env:USERPROFILE
-
-# Close the terminal
-exit
 ```
 10. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
 

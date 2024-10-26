@@ -1,6 +1,8 @@
 # WSL
+
 ## INTRODUCTION
 Windows Subsystem for Linux (WSL) est une couche de compatibilité permettant d'exécuter des exécutables binaires Linux (au format ELF) de manière native sur Windows.
+
 ## SAUVEGARDE/RESTAURATION WSL
 | Commande | Description |
 | :---: | :---: |
@@ -10,11 +12,13 @@ Windows Subsystem for Linux (WSL) est une couche de compatibilité permettant d'
 | `wsl --shutdown` | Terminer toutes les distributions en cours d'exécution et le processus WSL |
 | `wsl --export (distribution) (filename.tar)` | Sauvegarder une distribution WSL |
 | `wsl --import (distribution) (install location) (file location and filename)` | Restaurer une distribution WSL à partir de la sauvegarde |
+
 ## LIENS SYMBOLIQUES
 | Commande | Description |
 | :---: | :---: |
 | `sudo ln -s /mnt/c/Users/<user>/.ssh ~/.ssh` | Lier le dossier .ssh |
 | `sudo ln -s /mnt/c/Users/<user>/.kube ~/.kube` | Lier le dossier .kube |
+
 ## RÉSEAU
 | Commande | Description |
 | :---: | :---: |

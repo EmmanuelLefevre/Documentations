@@ -365,7 +365,96 @@ Set-PSReadLineKeyHandler -Key Tab -Function Complete
 Set-PSReadLineOption -PredictionViewStyle ListView
 ```
 ## WSL
-Upcoming section soon!
+### Open your Microsoft Store
+Download "Ubuntu 22.04.1 LTS" (you are free to download another distribution) and click "Open"  
+
+⚠️ Be careful not to have any other terminals open, if this is the case close them!  
+
+Enter an username, must be different than you windows user!!!  
+Enter a password and confirm it... If you're new on Linux, you won't see passwords in the prompt, it's a security standart common to Linux distributions...  
+
+### Update/upgrade your WSL
+```shell
+sudo apt-get update
+```
+```shell
+sudo apt-get upgrade
+```
+### Homebrew install (optional)
+Homebrew is a popular package manager, originally designed for macOS, that makes it easy to install and manage software, libraries, and other tools directly from the terminal.  
+
+[Homebrew Documentation](https://brew.sh/)
+
+```shell
+clear
+```
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+⚠️ Don't forget the "Next steps" part... (these steps may be different depending on your version of windows and the version of Homebrew). Follow the recommendation regarding the installation of GCC.  
+
+![Homebrew Next Steps](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/homebrew_install.png)
+
+Upgrade Homebrew:
+```shell
+brew update
+```
+```shell
+brew upgrade
+```
+A litlle long 💤💤💤
+### Oh-My-Posh install
+[Oh-My-Posh Linux Installation](https://ohmyposh.dev/docs/installation/linux)
+- Homebrew installation
+```shell
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+```
+- Manual installation:  
+💡 You need first to install unzip (this command only work on Ubuntu/Debian)!
+```shell
+sudo apt update && sudo apt install unzip -y
+```
+Check installation:
+```shell
+unzip -v
+```
+```shell
+curl -s https://ohmyposh.dev/install.sh | bash -s
+```
+Check installation (relaunch your WSL):
+```shell
+oh-my-posh --version
+```
+### Add a nerd font
+```shell
+oh-my-posh font install
+```
+Select the font you want with your keyboard down arrow and press "Enter"
+### Add a prompt theme
+Create a folder in the home directory
+```shell
+mkdir -p ~/poshtheme && cd $_
+```
+```shell
+curl -L -o quick-term.omp.json https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/quick-term.omp.json
+```
+Edit your .bashrc file and add this at end:
+```shell
+########## THEME ##########
+# Add posh theme path
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(oh-my-posh init bash --config '/home/<YOUR USERNAME>/poshtheme/quick-term.omp.json')"
+```
+🔃 For the changes to take effect, reload the configuration file 🔃
+```shell
+source ~/.bashrc
+```
+Samely as PowerShell or GitBash you coul create your own theme.  
+
+[Oh-My-Posh Personal Theme For WSL](https://github.com/EmmanuelLefevre/Settings/blob/main/WSL/wsl_profile_darka.json)
+
+![WSL Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/wsl.png)
+
 ***
 🔎🔎🔎 You could find a few of my personal settings here 🔎🔎🔎  
 [Emmanuel Lefevre Personal Settings](https://github.com/EmmanuelLefevre/Settings)  

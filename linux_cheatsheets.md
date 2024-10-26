@@ -1,6 +1,6 @@
 # LINUX
 ## INTRODUCTION
-Système d'exploitation open source de type Unix fondé sur le noyau Linux créé en 1991 par Linus Torvalds
+Système d'exploitation open source de type Unix fondé sur le noyau Linux créé en 1991 par Linus Torvalds.
 ## COMMANDS
 ### Vérification de version
 | Command + option | Description |

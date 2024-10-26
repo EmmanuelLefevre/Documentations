@@ -166,4 +166,70 @@ php bin/console make:fixtures
 symfony serve:start -d
 ```
 
+## FIXTURES
+### Faker
+```shell
+composer require fzaninotto/faker --dev
+```
+```shell
+php bin/console doctrine:fixtures:load
+```
+### ORM fixture
+```shell
+composer require orm-fixtures --dev
+```
+```shell
+php bin/console make:fixtures
+```
+
+## LINTER
+### PHP-CS-Fixer
+```shell
+mkdir -p tools/php-cs-fixer
+```
+```shell
+composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
+```
+Lancer analyse
+```shell
+php ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run
+```
+### PHPStan
+```shell
+composer require --dev phpstan/phpstan
+```
+```shell
+composer require --dev phpstan/extension-installer
+```
+```shell
+composer require --dev phpstan/phpstan-symfony
+```
+Lancer analyse
+```shell
+php vendor/bin/phpstan analyse src
+```
+### Linter Twig
+```shell
+php ./bin/console lint:twig templates --env=dev
+```
+### Linter YAML
+```shell
+php ./bin/console lint:yaml config --parse-tags
+```
+
+## TESTS
+### PHPUnit
+Installer PHPUnit
+```shell
+composer require --dev phpunit/phpunit
+```
+Lancer l'analyse
+```shell
+php ./bin/phpunit
+```
+Lancer les tests unitaires
+```shell
+php ./bin/phpunit
+```
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

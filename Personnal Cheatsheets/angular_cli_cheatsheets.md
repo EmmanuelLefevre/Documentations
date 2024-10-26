@@ -1,6 +1,8 @@
 # ANGULAR
+
 ## INTRODUCTION
 Angular est un framework de développement d'applications web.
+
 ## CLI installation
 Global:
 ```shell

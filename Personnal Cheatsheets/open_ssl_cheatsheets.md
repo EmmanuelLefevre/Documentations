@@ -1,6 +1,8 @@
 # OPEN SSL
+
 ## INTRODUCTION
 OpenSSL est un ensemble d'outils de chiffrement comprenant deux bibliothèques, libcrypto et libssl, fournissant respectivement une implémentation des algorithmes cryptographiques et du protocole de communication SSL/TLS, ainsi qu'une interface en ligne de commande.
+
 ## CERTIFICATE MANAGEMENT
 | Commande | Description |
 | :---: | :---: |
@@ -9,6 +11,7 @@ OpenSSL est un ensemble d'outils de chiffrement comprenant deux bibliothèques, 
 | `openssl x509 -in <cert> -text -noout` | Afficher les détails d'un certificat |
 | `openssl x509 -in <cert> -pubkey -noout` | Extraire la clé publique d'un certificat |
 | `openssl x509 -in <cert> -fingerprint -noout` | Afficher l'empreinte d'un certificat |
+
 ## KEY MANAGEMENT
 | Commande | Description |
 | :---: | :---: |
@@ -16,12 +19,14 @@ OpenSSL est un ensemble d'outils de chiffrement comprenant deux bibliothèques, 
 | `openssl rsa -in <key> -pubout -out <pub_key>` | Extraire la clé publique d'une clé privée |
 | `openssl rsa -in <key> -out <new_key>` | Convertir une clé privée dans un format différent |
 | `openssl rand -hex 16` | Générer une chaîne hexadécimale aléatoire |
+
 ## CERTIFICATE SIGNING
 | Commande | Description |
 | :---: | :---: |
 | `openssl ca -in <csr> -out <cert>` | Signer une demande de certificat |
 | `openssl ca -config <config> -in <csr> -out <cert>` | Signer une demande de certificat avec une configuration personnalisée |
 | `openssl verify -CAfile <ca> <cert>` | Vérifier un certificat contre un fichier CA |
+
 ## CERTIFICATE CONVERSION
 | Commande | Description |
 | :---: | :---: |
@@ -29,6 +34,7 @@ OpenSSL est un ensemble d'outils de chiffrement comprenant deux bibliothèques, 
 | `openssl pkcs12 -in <file> -out <cert> -nodes` | Extraire un certificat et une clé d'un fichier PKCS#12 |
 | `openssl x509 -in <cert> -outform DER -out <file>` | Convertir un certificat au format DER |
 | `openssl x509 -in <cert> -outform PEM -out <file>` | Convertir un certificat au format PEM |
+
 ## ENCRYPTION/DECRYPTION
 | Commande | Description |
 | :---: | :---: |
@@ -36,6 +42,7 @@ OpenSSL est un ensemble d'outils de chiffrement comprenant deux bibliothèques, 
 | `openssl enc -d -aes-256-cbc -in <file> -out <decrypted_file>` | Déchiffrer un fichier chiffré avec AES-256-CBC |
 | `openssl dgst -sha256 FILE` | Calculer le hachage SHA-256 d'un fichier |
 | `openssl dgst -md5 FILE` | Calculer le hachage MD5 d'un fichier |
+
 ## MISCELLANEOUS
 | Commande | Description |
 | :---: | :---: |

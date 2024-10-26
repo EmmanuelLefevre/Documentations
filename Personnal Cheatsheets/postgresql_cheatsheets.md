@@ -1,4 +1,5 @@
 # POSTGRESQL
+
 ## INTRODUCTION
 PostgreSQL est un système de gestion de bases de données relationnelles (SGBDR) open source connu pour sa robustesse, sa conformité aux normes SQL et ses fonctionnalités avancées.
 
@@ -33,6 +34,5 @@ PostgreSQL est un système de gestion de bases de données relationnelles (SGBDR
 | :---: | :---: |
 | `pg_dump <database> > backup.sql` | Sauvegarder une base de données dans un fichier |
 | `psql <database> < backup.sql` | Restaurer une base de données à partir d'un fichier |
-
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

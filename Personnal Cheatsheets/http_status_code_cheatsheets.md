@@ -1,4 +1,5 @@
 # HTTP STATUS CODE
+
 ## CATÉGORIES
 | Code | Description |
 | :---: | :---: |
@@ -7,6 +8,7 @@
 |**3XX**|Redirections|
 |**4XX**|Erreurs client|
 |**5XX**|Erreurs serveur|
+
 ## LISTE COMPLÈTE
 | Code | Nom | Description |
 | :---: | :---: | :---: |

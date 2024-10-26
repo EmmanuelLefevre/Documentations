@@ -1,30 +1,29 @@
 # SQLITE
 ## INTRODUCTION
-SQLite is a library written in C language which provides a relational database engine accessible through the SQL language.
+SQLite est une bibliothèque écrite en langage C qui fournit un moteur de base de données relationnelle accessible via le langage SQL.
+
 ## CONNECTION
 | Command | Description |
 | :---: | :---: |
-| `sqlite3 <db>` | Connect to a SQLite database |
+| `sqlite3 <db>` | Se connecter à une base de données SQLite |
+
 ## CLI
 | Command | Description |
 | :---: | :---: |
-| `.databases` | List all databases |
-| `.tables` | List all tables in the current database |
-| `.schema <table>` | Show the schema of a table |
-| `.indexes <table>` | List all indexes in a table |
-| `.show` | Show the current settings |
-| `.help` | Show help information |
-| `.shell <command` | Run a shell command |
-| `.exit` | Quit SQLite |
+| `.databases` | Lister toutes les bases de données |
+| `.tables` | Lister toutes les tables dans la base de données actuelle |
+| `.schema <table>` | Afficher le schéma d'une table |
+| `.indexes <table>` | Lister tous les index dans une table |
+| `.show` | Afficher les paramètres actuels |
+| `.help` | Afficher les informations d'aide |
+| `.shell <command>` | Exécuter une commande shell |
+| `.exit` | Quitter SQLite |
+
 ## BACKUP/RESTORE
 | Command | Description |
 | :---: | :---: |
-| `.backup <file>` | Backup the current database to a file |
-| `.restore <file>` | Restore a database from a file |
-| `.dump` | Dump the database as SQL statements |
+| `.backup <file>` | Sauvegarder la base de données actuelle dans un fichier |
+| `.restore <file>` | Restaurer une base de données à partir d'un fichier |
+| `.dump` | Dumper la base de données sous forme d'instructions SQL |
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
-
-Credits:
-
-[Christian Lempa GitHub](https://github.com/ChristianLempa)

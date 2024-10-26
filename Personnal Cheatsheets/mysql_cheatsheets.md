@@ -1,20 +1,16 @@
-# MySQL
+# MYSQL
 ## INTRODUCTION
-MySQL is a relational database management system (RDBMS). It is distributed under a dual GPL and proprietary license. It is one of the most used database management software in the world4, both by the general public (mainly web applications) and by professionals.
+MySQL est un système de gestion de bases de données relationnelles (RDBMS). Il est distribué sous une double licence GPL et propriétaire. C'est l'un des logiciels de gestion de bases de données les plus utilisés au monde, tant par le grand public (principalement pour les applications web) que par des professionnels.
 ## CONNECTION
-| Command | Description |
+| Commande | Description |
 | :---: | :---: |
-| `mysql -u root -p` | Connect to MySQL as root user |
-| `mysql -u <user> -p` | Connect to MySQL as a specific user |
-| `mysql -u root -p -h <host>` | Connect to MySQL on a specific host |
+| `mysql -u root -p` | Se connecter à MySQL en tant qu'utilisateur root |
+| `mysql -u <user> -p` | Se connecter à MySQL en tant qu'utilisateur spécifique |
+| `mysql -u root -p -h <host>` | Se connecter à MySQL sur un hôte spécifique |
 ## BACKUP/RESTORE
-| Command | Description |
+| Commande | Description |
 | :---: | :---: |
-| `mysqldump -u root -p <database> > backup.sql` | Backup a database to a file |
-| `mysql -u root -p <database> < backup.sql` | Restore a database from a file |
+| `mysqldump -u root -p <database> > backup.sql` | Sauvegarder une base de données dans un fichier |
+| `mysql -u root -p <database> < backup.sql` | Restaurer une base de données à partir d'un fichier |
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
-
-Credits:
-
-[Christian Lempa GitHub](https://github.com/ChristianLempa)

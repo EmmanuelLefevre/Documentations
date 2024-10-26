@@ -271,8 +271,11 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 ### UTILISATEURS
 | Command + option | Description |
 | :--------------: | :---------: |
-|`sudo adduser 'nom_utilisateur'`|Ajouter un nouvel utilisateur|
-|`sudo passwd 'nom_utilisateur'`|Changer le mot de passe d'un utilisateur|
+|`sudo adduser <user>`|Ajouter un nouvel utilisateur|
+|`sudo userdel <user>`|Supprimer utilisateur|
+|`sudo passwd <user>`|Changer le mot de passe d'un utilisateur|
+|`sudo usermod -aG <group> <user>`|Ajouter utilisateur au groupe|
+|`sudo deluser <user> <group>`|Supprimer utilisateur du groupe|
 ### LOGS
 | Command + option | Description |
 | :--------------: | :---------: |

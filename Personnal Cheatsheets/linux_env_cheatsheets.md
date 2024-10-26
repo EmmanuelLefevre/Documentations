@@ -27,3 +27,5 @@
 | `${VAR:=value}` | Valeur de `VAR` si définie, sinon `value` et définit `VAR` à `value` |
 | `${VAR:?message}` | Valeur de `VAR` si définie, sinon imprime `message` et quitte |
 | `${VAR:+value}` | Valeur de `value` si `VAR` est définie, sinon rien |
+
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

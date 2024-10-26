@@ -40,12 +40,12 @@ Symfony est un ensemble de composants PHP ainsi qu'un framework MVC libre écrit
 ## SECRETS
 | Command | Description |
 | :--------------: | :---------: |
-| `php bin/console secrets:generate-keys` | New secret |
-| `php bin/console secrets:list` | List of secrets |
-| `php bin/console secrets:remove` | Delete secrets |
-| `php bin/console secrets:set` | Set secret in vault |
-| `php bin/console secrets:decrypt-to-local` | Decrypt all secrets and stores them in the local vault |
-| `php bin/console secrets:encrypt-from-local` | Encrypt all local secrets to the vault |
+| `php bin/console secrets:generate-keys` | Générer une nouvelle clé secrète |
+| `php bin/console secrets:list` | Lister les secrets |
+| `php bin/console secrets:remove` | Supprimer les secrets |
+| `php bin/console secrets:set` | Définir un secret dans le cofre |
+| `php bin/console secrets:decrypt-to-local` | Déchiffrer tous les secrets et les stocker dans le coffre local |
+| `php bin/console secrets:encrypt-from-local` | Chiffrer tous les secrets locaux dans le coffre  |
 
 ## CACHE
 | Command | Description |
@@ -56,7 +56,7 @@ Symfony est un ensemble de composants PHP ainsi qu'un framework MVC libre écrit
 ## LEXIK JWT
 | Command | Description |
 | :--------------: | :---------: |
-| `php bin/console lexik:jwt:check-config`| Checks JWT configuration |
+| `php bin/console lexik:jwt:check-config`| Vérifier JWT configuration |
 | `php bin/console lexik:jwt:generate-keypair`| Générer clés privé/publique |
 | `php bin/console lexik:jwt:generate-token`| Générer un token JWT |
 

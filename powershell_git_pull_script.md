@@ -31,7 +31,9 @@ wt.exe -p "PowerShell" -d . -- pwsh.exe -NoExit -ExecutionPolicy Bypass -File "C
 6. "Finish" button
 
 7. ❤️ Additionally give the shortcut a nice icon ❤️
-💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this =>
+
+💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this.
+
 Right click on shortcut > Properties > Change icon
 Icon path:
 ```shell

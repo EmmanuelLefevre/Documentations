@@ -1,27 +1,31 @@
 # SYMFONY
+
 ## INTRODUCTION
 Symfony est un framework MVC libre écrit en PHP. Développé par l'agence web française SensioLabs et son créateur Fabien Potencier, il est conçu pour faciliter la création d'applications web robustes et modulaires.
+
 ## INSTALLATION
 ### 1. Installer composer
+
 [Composer](https://getcomposer.org/download)
+
 ### 2. Vérifier version de composer
 ```shell
 composer -v
 ```
-### 2. Vérifier version PHP
+### 3. Vérifier version PHP
 ```shell
 php --version
 ```
 - NOTE: 7.2 mini
-### 3. Créer projet Symfony
+### 4. Créer projet Symfony
 ```shell
 composer create-project symfony/website-skeleton nomProjet
 ```
-### 4. Créer serveur personnalisé pour lancer Symfony (dev)
+### 5. Créer serveur personnalisé pour lancer Symfony (dev)
 ```shell
 composer require server --dev
 ```
-### 5. Lancer l'application (localhost:8000)
+### 6. Lancer l'application (localhost:8000)
 ```shell
 php bin/console server:run
 ```
@@ -29,7 +33,7 @@ php bin/console server:run
 php -S 127.0.0.1:8000 -t ./public
 ```
 - NOTE: La seconde commande ne nécessite pas l'installation du serveur personnalisé!
-### 6. Configurer le SGDB
+### 7. Configurer le SGDB
 Editer le fichier .env.local
 ```env
 ###> doctrine/doctrine-bundle ###
@@ -39,12 +43,12 @@ DATABASE_URL=mysql://root:root@127.0.0.1:3306/dbName
 # DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
 ###< doctrine/doctrine-bundle ###
 ```
-### 7. Créer le SGDB
+### 8. Créer le SGDB
 Editer le fichier .env.local
 ```bash
 php bin/console doctrine:database:create
 ```
-### 8. CORS
+### 9. CORS
 #### Installer le bundle Nelmio
 ```shell
 composer require nelmio/cors-bundle
@@ -58,7 +62,7 @@ CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'
 # CORS_ALLOW_ORIGIN='^http:\/\/localhost:4200$'
 ###< nelmio/cors-bundle ###
 ```
-### 9. JWT
+### 10. JWT
 #### Installer le bundle LexikJWTAuthenticationBundle
 ```shell
 composer require lexik/jwt-authentication-bundle
@@ -136,11 +140,11 @@ Il suffit d'envoyer le token dans l'en-tête Authorization de chaque requête, a
 ```shell
 curl -X GET -H "Authorization: Bearer <token>" http://localhost/api/secure-route
 ```
-### 10. Créer une entité
+### 11. Créer une entité
 ```shell
 php bin/console make:entity
 ```
-### 11. Générer le fichier de migration
+### 12. Générer le fichier de migration
 #### Synchroniser la base de données avec les changements apportés à l'entité
 ```shell
 php bin/console make:migration
@@ -153,11 +157,11 @@ php bin/console doctrine:migrations:migrate --no-interaction
 ```shell
 php bin/console doctrine:schema:validate
 ```
-### 12. Générer la fixture si existante
+### 13. Générer la fixture si existante
 ```shell
 php bin/console make:fixtures
 ```
-### 13. Lancer le serveur
+### 14. Lancer le serveur
 ```shell
 symfony serve:start -d
 ```
@@ -166,60 +170,22 @@ symfony serve:start -d
 ```shell
 php bin/console doctrine:database:drop --force
 ```
-## COMMAND LINE INTERFACE
-### Toutes les commandes
-```shell
-php bin/console list
-```
-### Help
-```shell
-php bin/console help
-```
-### Entity
-```shell
-php bin/console make:entity
-```
-### Controller
-```shell
-php bin/console make:controller
-```
-### Form
-```shell
-php bin/console make:form
-```
-### Registration form
-```shell
-php bin/console make:registration-form
-```
-### Entity
-```shell
-php bin/console make:entity
-```
-### User
-```shell
-php bin/console make:user
-```
-### CRUD
-```shell
-php bin/console make:crud
-```
-### Password
-#### Reset password
-```shell
-php bin/console make:reset-password
-```
-#### Hash password
-```shell
-php bin/console security:hash-password
-```
-### Subscriber
-```shell
-php bin/console make:subscriber
-```
-### Validator
-```shell
-php bin/console make:validator
-```
+## CLI
+| Command | Description |
+| :--------------: | :---------: |
+| `php bin/console list`| Toutes les commandes |
+| `php bin/console help` | Help |
+| `php bin/console make:entity` | Entity |
+| `php bin/console make:controller` | Controller |
+| `php bin/console make:form` | Form |
+| `php bin/console make:registration-form` | Registration form |
+| `php bin/console make:user` | User |
+| `php bin/console make:crud` | CRUD |
+| `php bin/console make:reset-password` | Reset password |
+| `php bin/console security:hash-password` | Hash password |
+| `php bin/console make:subscriber` | Subscriber |
+| `php bin/console make:validator` | Validator |
+
 ## FIXTURES
 ### Faker
 ```shell
@@ -284,67 +250,28 @@ Lancer les tests unitaires
 php ./bin/phpunit
 ```
 ## DEBUG
-### Autowiring
-```shell
-php bin/console debug:autowiring
-```
-### Firewall
-```shell
-php bin/console debug:firewall
-```
-### Configuration
-```shell
-php bin/console debug:config
-```
-### Profiler
-```shell
-php bin/console debug:config profiler
-```
-### Debug router
-```shell
-php bin/console debug:router
-```
-### Container
-```shell
-php bin/console debug:container
-```
-### Twig
-```shell
-php bin/console debug:twig
-```
-### Validator
-```shell
-php bin/console debug:validator
-```
-### Listener priority
-```shell
-php bin/console debug:event-dispatcher
-```
+| Command | Description |
+| :--------------: | :---------: |
+| `php bin/console debug:autowiring` | Autowiring |
+| `php bin/console debug:firewall` | Firewall |
+| `php bin/console debug:config` | Configuration |
+| `php bin/console debug:config profiler` | Profiler |
+| `php bin/console debug:router` | Debug router |
+| `php bin/console debug:container` | Container |
+| `php bin/console debug:twig` | Twig |
+| `php bin/console debug:validator` | Validator |
+| `php bin/console debug:event-dispatcher` | Listener priority |
+
 ## SECRETS
-### New secret
-```shell
-php bin/console secrets:generate-keys
-```
-### List of secrets
-```shell
-php bin/console secrets:list
-```
-### Delete secrets
-```shell
-php bin/console secrets:remove
-```
-### Set secret in vault
-```shell
-php bin/console secrets:set
-```
-### Decrypt all secrets and stores them in the local vault
-```shell
-php bin/console secrets:decrypt-to-local
-```
-### Encrypt all local secrets to the vault
-```shell
-php bin/console secrets:encrypt-from-local
-```
+| Command | Description |
+| :--------------: | :---------: |
+| `php bin/console secrets:generate-keys` | New secret |
+| `php bin/console secrets:list` | List of secrets |
+| `php bin/console secrets:remove` | Delete secrets |
+| `php bin/console secrets:set` | Set secret in vault |
+| `php bin/console secrets:decrypt-to-local` | Decrypt all secrets and stores them in the local vault |
+| `php bin/console secrets:encrypt-from-local` | Encrypt all local secrets to the vault |
+
 ## GESTION DES ASSETS
 ### 1. Installer Webpack Encore
 ```shell
@@ -359,6 +286,7 @@ npm run dev
 ```shell
 npm run build
 ```
+
 ## CACHE
 ### Clear cache
 ```shell
@@ -368,6 +296,7 @@ php bin/console cache:clear
 ```shell
 php bin/console cache:pool:clear
 ```
+
 ## LEXIK JWT
 ### Checks JWT configuration
 ```shell
@@ -381,6 +310,7 @@ php bin/console lexik:jwt:generate-keypair
 ```shell
 php bin/console lexik:jwt:generate-token
 ```
+
 ## DIVERS
 ### FOS User Bundle
 ```shell
@@ -394,6 +324,7 @@ npx kill-port 8000
 ```shell
 php bin/console config:dump-reference
 ```
+
 ## DEMO INSTALLATION
 ```shell
 composer create-project symfony/symfony-demo:1.8.0 symfony-gitlab --no-interaction

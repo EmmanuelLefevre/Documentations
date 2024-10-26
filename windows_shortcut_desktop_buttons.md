@@ -23,7 +23,7 @@ Permet de gérer les informations d'identification pour les connexions à des si
 ```shell
 control /name Microsoft.CredentialManager
 ```
-### 🎨 Personnalisation des icônes 🎨
+## 🎨 Personnalisation des icônes 🎨
 Right click sur le raccourci > Propriétés > Changer d'icône
 
 Paths des icônes système:

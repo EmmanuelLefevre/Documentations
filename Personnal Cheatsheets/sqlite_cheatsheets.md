@@ -1,4 +1,5 @@
 # SQLITE
+
 ## INTRODUCTION
 SQLite est une bibliothèque écrite en langage C qui fournit un moteur de base de données relationnelle accessible via le langage SQL.
 

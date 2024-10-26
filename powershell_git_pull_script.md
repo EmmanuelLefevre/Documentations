@@ -53,7 +53,7 @@ git_pull
 Write-Host ""
 Read-Host -Prompt "Press Enter to switch prompt mode..."
 
-# Change directory to Home
+# Change prompt directory to Home
 Set-Location -Path $env:USERPROFILE
 ```
 10. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.

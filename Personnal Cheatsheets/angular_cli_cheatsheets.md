@@ -1,7 +1,7 @@
 # ANGULAR
 ## INTRODUCTION
-Best front-end framework!
-## CLI
+Angular est un framework de développement d'applications web.
+## CLI installation
 Global:
 ```shell
 npm install -g @angular/cli@16.1.1
@@ -10,84 +10,47 @@ Projet:
 ```shell
 npm install @angular/cli@16.1.1 --save-dev
 ```
-## CLI SHORTCUTS
+## CLI
 ### Nouveau projet
 ```shell
 ng new projectName
 ```
+
 ### Serveur
 - Lancer serveur
 ```shell
 ng serve -o
 ```
+
 - Lancer serveur sur un autre port que le 4000 par défaut
 ```shell
 ng serve -o --port 4001
 ```
-### Component
-- Créer nouveau composant
-```shell
-ng generate c nomComposant
-```
-- Créer nouveau composant avec le routing
-```shell
-ng generate c nomComposant --routing
-```
-### Module
-- Créer nouveau module
 
-```shell
-ng generate m nomModule
-```
-### Service
-```shell
-ng generate s nomService
-```
-### Guard
-```shell
-ng generate guard nomGuard
-```
-### Interceptor
-```shell
-ng generate interceptor nomInterceptor
-```
-### Class
-```shell
-ng generate class nomClass
-```
-### Interface
-```shell
-ng generate interface nomInterface
-```
-### Library
-```shell
-ng generate library nomLibrary
-```
-### Module
-```shell
-ng generate module nomModule
-```
-### Pipe
-```shell
-ng generate pipe nomPipe
-```
-### Resolver
-```shell
-ng generate resolver nomResolver
-```
-### Service-worker
-```shell
-ng generate service-worker nomService-worker
-```
-### Directive
-```shell
-ng generate directive nomDirective
-```
-### App Shell
-```shell
-ng generate app-shell nomAppShell
-```
-## COMPODOC
+### Raccourcis
+| Command | Description |
+| :---: | :---: |
+| `ng new projectName` | Créer un nouveau projet Angular |
+| `ng serve -o` | Lancer le serveur et ouvrir dans le navigateur |
+| `ng serve -o --port 4001` | Lancer le serveur sur le port 4001 |
+| `ng generate c nomComposant` | Créer un nouveau composant |
+| `ng generate c nomComposant --routing` | Créer un nouveau composant avec le routing |
+| `ng generate m nomModule` | Créer un nouveau module |
+| `ng generate s nomService` | Créer un nouveau service |
+| `ng generate guard nomGuard` | Créer un nouveau guard |
+| `ng generate interceptor nomInterceptor` | Créer un nouvel interceptor |
+| `ng generate class nomClass` | Créer une nouvelle classe |
+| `ng generate interface nomInterface` | Créer une nouvelle interface |
+| `ng generate library nomLibrary` | Créer une nouvelle bibliothèque |
+| `ng generate module nomModule` | Créer un nouveau module |
+| `ng generate pipe nomPipe` | Créer un nouveau pipe |
+| `ng generate resolver nomResolver` | Créer un nouveau resolver |
+| `ng generate service-worker nomService-worker` | Créer un nouveau service-worker |
+| `ng generate directive nomDirective` | Créer une nouvelle directive |
+| `ng generate app-shell nomAppShell` | Créer un nouvel App Shell |
+| `compodoc` | Générer la documentation du projet Angular |
+
+## COMPODOC URL
 [Compodoc](http://localhost:8080)
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

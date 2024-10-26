@@ -1,4 +1,5 @@
 # CHOCOLATEY
+
 ## INTRODUCTION
 Chocolatey est un gestionnaire de packages et un installateur de ligne de commande au niveau de la machine pour les logiciels sous Microsoft Windows. Il utilise l'infrastructure de packaging NuGet et Windows PowerShell pour simplifier le processus de téléchargement et d'installation de logiciels.
 

@@ -11,6 +11,7 @@ Cron est un programme qui permet aux utilisateurs de systèmes Unix d'exécuter 
 | `DAY` | 1-31 | Déclencher tous les JOURS du mois |
 | `MONTH` | 1-12 | Déclencher tous les MOIS |
 | `DAY OF WEEK` | 0-6 | LUN-DIM Déclencher un jour spécifique de la semaine |
+
 ## CARACTÈRES SPÉCIAUX
 | Caractère Spécial | Description |
 | :---: | :---: |
@@ -18,6 +19,7 @@ Cron est un programme qui permet aux utilisateurs de systèmes Unix d'exécuter 
 | `,` | Séparateur de liste |
 | `–` | Spécifier une plage |
 | `/` | Définir un incrément |
+
 ## EXEMPLES
 | Expression Cron | Description |
 | :---: | :---: |

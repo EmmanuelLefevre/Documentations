@@ -1,16 +1,20 @@
 # POWERSHELL
+
 ## Introduction
 Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad) est une suite logicielle développée par Microsoft qui intègre une interface en ligne de commande, un langage de script nommé PowerShell ainsi qu'un kit de développement.
+
 ## COMMANDES UTILES
 ### Lancer l'invite de commande
 | Command          | Description          |
 | :--------------: | :------------------: |
 |`WIN + R`| Ouvrir la boîte de dialogue Exécuter|
 |`cmd /k <commande>`|Lancer cmd avec une commande spécifique|
+
 ### Informations système
 | Command          | Description          |
 | :--------------: | :------------------: |
 |`systeminfo`|Afficher des informations sur le système|
+
 ### Gestion des processus
 | Command          | Description          |
 | :--------------: | :------------------: |
@@ -19,6 +23,7 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`Stop-Process -Name <processus>`|Arrêter un processus|
 |`Start-Process <processus>`|Démarrer un nouveau processus|
 |`Wait-Process -Name <processus>`|Attendre qu'un processus se termine|
+
 ## Gestion des utilisateurs
 | Commande | Description |
 | :---: | :---: |
@@ -28,6 +33,7 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`Set-LocalUser <utilisateur> -Password <motdepasse>`|Définir le mot de passe d'un utilisateur local|
 |`Add-LocalGroupMember -Group Administrators -Member <utilisateur>`|Ajouter un utilisateur au groupe Administrateurs|
 |`Remove-LocalGroupMember -Group Administrators -Member <utilisateur>`|Supprimer un utilisateur du groupe Administrateurs|
+
 ## Gestion des fichiers et dossiers
 | Commande | Description |
 | :---: | :---: |
@@ -42,6 +48,7 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`Copy-Item SOURCE DEST`|Copier un fichier|
 |`Copy-Item SOURCE DEST -Recurse`|Copier un répertoire|
 |`Move-Item SOURCE DEST`|Déplacer un fichier ou un répertoire|
+
 ### Afficher les adresses IP
 | Command          | Description          |
 | :--------------: | :------------------: |
@@ -49,11 +56,13 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`ipconfig /all`|Afficher toutes les adresses IP (IPv4)|
 |`ipconfig /release`|Libérer l'adresse IP actuelle (DHCP)|
 |`ipconfig /renew`|Renouveler l'adresse IP actuelle (DHCP)|
+
 ## Gestion du réseau
 | Commande | Description |
 | :---: | :---: |
 |`Get-NetIPAddress`|Lister les adresses IP|
 |`Get-NetAdapter`|Lister les adaptateurs réseau|
+
 ### Diagnostique réseau
 | Command          | Description          |
 | :--------------: | :------------------: |
@@ -64,16 +73,19 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`telnet <adresse> <port>`|Se connecter à un hôte distant sur un port spécifique|
 |`telnet smtp.example.com 25`|Tester serveur SMTP sur l'adresse smtp.example.com sur le port 25|
 |`telnet localhost 465`|Tester serveur SMTP localhost sur le port 465|
+
 ### Gestion du cache DNS
 | Command          | Description          |
 | :--------------: | :------------------: |
 |`ipconfig /displaydns > logdns.txt`|Afficher le cache DNS dans un fichier logdns.txt|
 |`ipconfig /flushdns`|Effacer le cache DNS|
+
 ### Processus
 | Command          | Description          |
 | :--------------: | :------------------: |
 |`tasklist`|Afficher tous les processus en cours|
 |`taskkill /IM <nom_du_processus>`|Terminer un processus spécifique|
+
 ### Gestion des services
 | Command          | Description          |
 | :--------------: | :------------------: |
@@ -88,18 +100,21 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`net start <nom_du_service>`|Démarrer un service Windows|
 |`net stop <nom_du_service>`|Arrêter un service Windows|
 |`net start`|Afficher les connexions réseau et les ports d'écoute|
+
 ## MAJ Windows
 | Commande | Description |
 | :---: | :---: |
 |`Install-Module -Name PSWindowsUpdate`|Installer le module PSWindowsUpdate|
 |`Get-Command -Module PSWindowsUpdate`|Lister toutes les commandes dans le module PSWindowsUpdate|
 |`Get-WUInstall`|Installer les mises à jour Windows|
+
 ## Fonctionnalités Windows
 | Commande | Description |
 | :---: | :---: |
 |`Get-WindowsFeature`|Lister les fonctionnalités Windows|
 |`Install-WindowsFeature <fonctionnalité>`|Installer une fonctionnalité Windows|
 |`Uninstall-WindowsFeature <fonctionnalité>`|Désinstaller une fonctionnalité Windows|
+
 ## Connexion à un ordinateur distant
 | Commande | Description |
 | :---: | :---: |
@@ -107,6 +122,7 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`Exit-PSSession`|Fermer la session distante en cours|
 |`Invoke-Command -ComputerName <nom> -ScriptBlock { <commande> }`|Exécuter une commande sur un ordinateur distant|
 |`Invoke-Command -ComputerName <nom> -FilePath <script>`|Exécuter un script sur un ordinateur distant|
+
 ### Gestion de l'arrêt de l'ordinateur
 | Command          | Description          |
 | :--------------: | :------------------: |

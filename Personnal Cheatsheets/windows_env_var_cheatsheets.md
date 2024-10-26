@@ -1,4 +1,5 @@
 # VARIABLES D'ENVIRONNEMENT WINDOWS
+
 | Variable | Description |
 | :---: | :---: |
 | `%ALLUSERSPROFILE%` | C:\ProgramData |

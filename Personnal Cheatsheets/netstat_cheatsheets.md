@@ -1,4 +1,5 @@
 # NETSTAT FOR LINUX
+
 | Commande | Description |
 | :---: | :---: |
 | `netstat -pan \| grep LISTEN` | Afficher les processus avec leurs PID qui écoutent les connexions |

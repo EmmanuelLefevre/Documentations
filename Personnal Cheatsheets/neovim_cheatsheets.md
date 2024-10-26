@@ -1,6 +1,8 @@
 # NEOVIM (fonctionne pour VIM)
+
 ## INTRODUCTION
 Neovim est un éditeur de texte (logiciel permettant la manipulation de fichiers texte).  Il est directement inspiré de Vim (un éditeur très répandu sur les systèmes d’exploitation de type Unix), dont il est un dérivé (fork).
+
 ## COMMANDES UTILES
 ### Modes
 | Command          | Description          |
@@ -9,12 +11,14 @@ Neovim est un éditeur de texte (logiciel permettant la manipulation de fichiers
 |`:`|Mode prompt|
 |`Esc`|Quitter mode édition|
 |`Esc + SHIFT + ZQ`|Quitter le mode prompt|
+
 ### Sauvegarder / Quitter
 | Command          | Description          |
 | :--------------: | :------------------: |
 |`:wq`| Sauvegarder + quitter|
 |`:w`| Sauvegarder|
 |`:q`| Quitter|
+
 ### Commandes d'édition
 | Command          | Description          |
 | :--------------: | :------------------: |
@@ -38,6 +42,7 @@ Neovim est un éditeur de texte (logiciel permettant la manipulation de fichiers
 |`R`|Active le mode écrasement|
 |`s`|Remplace un caractère|
 |`S`|Remplace une ligne entière|
+
 ### Navigation dans le texte
 | Command          | Description          |
 | :--------------: | :------------------: |
@@ -50,6 +55,7 @@ Neovim est un éditeur de texte (logiciel permettant la manipulation de fichiers
 |`{`|Début du paragraphe précédent|
 |`]`|Début de la section suivante|
 |`[`|Début de la section précédente|
+
 ### Navigation dans les lignes
 | Command          | Description          |
 | :--------------: | :------------------: |
@@ -61,6 +67,7 @@ Neovim est un éditeur de texte (logiciel permettant la manipulation de fichiers
 |`L`|Dernière ligne de l’écran|
 |`]`|Début de la section suivante|
 |`[`|Début de la section précédente|
+
 ### Déplacement du curseur
 Si flèches du clavier ne fonctionnent pas!
 | Command          | Description          |
@@ -69,6 +76,7 @@ Si flèches du clavier ne fonctionnent pas!
 |`j`| Un caractère vers le bas|
 |`k`| Un caractère vers le haut|
 |`l` ou `ESPACE`| Un caractère vers la droite|
+
 ### Réglages
 -------------
 | Command          | Description          |

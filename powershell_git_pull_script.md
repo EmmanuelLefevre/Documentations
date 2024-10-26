@@ -16,13 +16,20 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 
 - Windows 11
 ```shell
-"C:\Program Files\WindowsApps\Microsoft.PowerShell_7.4.6.0_x64__8wekyb3d8bbwe\pwsh.exe" -NoExit -ExecutionPolicy Bypass -File "C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1"
+"C:\Program Files\WindowsApps\Microsoft.PowerShell_7.4.5.0_x64__8wekyb3d8bbwe\pwsh.exe" -NoExit -ExecutionPolicy Bypass -File "C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1"
 ```
 ⚠️ Also pay attention to the version of powershell installed if you use Windows 11 ...
 
 - Windows 10
 ```shell
 wt.exe -p "PowerShell" -d . -- pwsh.exe -NoExit -ExecutionPolicy Bypass -File "C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1"
+```
+🎨 Customizing the icon 🎨  
+By default the created shortcut will not have the black PowerShell 7 icon but an other one, you can assign the correct one like this =>
+Right click on shortcut > Properties > Change icon
+Icon path:
+```shell
+C:\Program Files\WindowsApps\Microsoft.PowerShell_7.4.6.0_x64__8wekyb3d8bbwe\pwsh.exe
 ```
 4. "Next" button
 

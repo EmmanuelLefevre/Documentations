@@ -1,92 +1,95 @@
 # DOCKER
+
 ## INTRODUCTION
-Docker is a platform for launching certain applications in software containers.
-## RUNNING CONTAINERS
-| COMMAND | DESCRIPTION |
+Docker est une plateforme pour lancer des applications dans des conteneurs logiciels.
+
+## COMMANDES
+| Command | Description |
 | :---: | :---: |
-| `docker run <image>` | Start a new container from an image |
-| `docker run -it <image>` | Start a new container in interactive mode |
-| `docker run --rm <image>` | Start a new container and remove it when it exits |
-| `docker create <image>` | Create a new container |
-| `docker start <container>` | Start a container |
-| `docker stop <container>` | Graceful stop a container |
-| `docker kill <container>` | Kill (SIGKILL) a container |
-| `docker restart <container>` | Graceful stop and restart a container |
-| `docker pause <container>` | Suspend a container |
-| `docker unpause <container>` | Resume a container |
-| `docker rm <container>` | Destroy a container |
-## CONTAINER BULL MANAGEMENT
-| COMMAND | DESCRIPTION |
+| `docker run <image>` | Démarrer un nouveau conteneur à partir d'une image |
+| `docker run -it <image>` | Démarrer un nouveau conteneur en mode interactif |
+| `docker run --rm <image>` | Démarrer un nouveau conteneur et le supprimer à sa sortie |
+| `docker create <image>` | Créer un nouveau conteneur |
+| `docker start <container>` | Démarrer un conteneur |
+| `docker stop <container>` | Arrêter un conteneur de manière gracieuse |
+| `docker kill <container>` | Tuer (SIGKILL) un conteneur |
+| `docker restart <container>` | Arrêter et redémarrer un conteneur de manière gracieuse |
+| `docker pause <container>` | Suspendre un conteneur |
+| `docker unpause <container>` | Reprendre un conteneur |
+| `docker rm <container>` | Détruire un conteneur |
+
+## GESTION DES CONTENEURS
+| Command | Description |
 | :---: | :---: |
-| `docker stop $(docker ps -q)` | To stop all the running containers |
-| `docker stop $(docker ps -a -q)` | To stop all the stopped and running containers |
-| `docker kill $(docker ps -q)` | To kill all the running containers |
-| `docker kill $(docker ps -a -q)` | To kill all the stopped and running containers |
-| `docker restart $(docker ps  -q)` | To restart all  running containers |
-| `docker restart $(docker ps -a -q)` | To restart all the stopped and running containers |
-| `docker rm $(docker ps  -q)` | To destroy all running containers |
-| `docker rm $(docker ps -a -q)` | To destroy all the stopped and running containers |
-| `docker pause $(docker ps  -q)` | To pause all  running containers |
-| `docker pause $(docker ps -a -q)` | To pause all the stopped and running containers |
-| `docker start $(docker ps  -q)` | To start all  running containers |
-| `docker start $(docker ps -a -q)` | To start all the stopped and running containers |
-| `docker rm -vf $(docker ps -a -q)` | To delete all containers including its volumes use |
-| `docker rmi -f $(docker images -a -q)` | To delete all the images |
-| `docker system prune` | To delete all dangling and unused images, containers, cache and volumes |
-| `docker system prune -a` | To delete all used and unused images |
-| `docker system prune --volumes` | To delete all docker volumes |
-## INSPECT CONTAINER
-| COMMAND | DESCRIPTION |
+| `docker stop $(docker ps -q)` | Arrêter tous les conteneurs en cours d'exécution |
+| `docker stop $(docker ps -a -q)` | Arrêter tous les conteneurs, arrêtés et en cours d'exécution |
+| `docker kill $(docker ps -q)` | Tuer tous les conteneurs en cours d'exécution |
+| `docker kill $(docker ps -a -q)` | Tuer tous les conteneurs, arrêtés et en cours d'exécution |
+| `docker restart $(docker ps  -q)` | Redémarrer tous les conteneurs en cours d'exécution |
+| `docker restart $(docker ps -a -q)` | Redémarrer tous les conteneurs arrêtés |
+| `docker rm $(docker ps  -q)` | Détruire tous les conteneurs en cours d'exécution |
+| `docker rm $(docker ps -a -q)` | Détruire tous les conteneurs arrêtés |
+| `docker pause $(docker ps  -q)` | Suspendre tous les conteneurs en cours d'exécution |
+| `docker pause $(docker ps -a -q)` | Suspendre tous les conteneurs arrêtés |
+| `docker start $(docker ps  -q)` | Démarrer tous les conteneurs en cours d'exécution |
+| `docker start $(docker ps -a -q)` | Démarrer tous les conteneurs arrêtés |
+| `docker rm -vf $(docker ps -a -q)` | Supprimer tous les conteneurs, y compris leurs volumes |
+| `docker rmi -f $(docker images -a -q)` | Supprimer toutes les images |
+| `docker system prune` | Supprimer toutes les images, conteneurs, caches et volumes inutilisés |
+| `docker system prune -a` | Supprimer toutes les images utilisées et non utilisées |
+| `docker system prune --volumes` | Supprimer tous les volumes Docker |
+
+## INSPECTION DES CONTENEURS
+| Command | Description |
 | :---: | :---: |
-| `docker ps` | List running containers |
-| `docker ps --all` | List all containers, including stopped |
-| `docker logs <container>` | Show a container output |
-| `docker logs -f <container>` | Follow a container output |
-| `docker logs -f <container> 2>&1 \| grep string-to-search` | Follow container logs and search for specific string occurrence |
-| `docker top <container>` | List the processes running in a container |
-| `docker diff` | Show the differences with the image (modified files) |
-| `docker inspect` | Show information of a container (json formatted) |
-## EXECUTIONG COMMANDS
-| COMMAND | DESCRIPTION |
+| `docker ps` | Lister les conteneurs en cours d'exécution |
+| `docker ps --all` | Lister tous les conteneurs, y compris ceux arrêtés |
+| `docker logs <container>` | Afficher la sortie d'un conteneur |
+| `docker logs -f <container>` | Suivre la sortie d'un conteneur |
+| `docker logs -f <container> 2>&1 | grep string-to-search` | Suivre les logs du conteneur et chercher une chaîne spécifique |
+| `docker top <container>` | Lister les processus en cours dans un conteneur |
+| `docker diff <container>` | Afficher les différences avec l'image (fichiers modifiés) |
+| `docker inspect <container>` | Afficher les informations d'un conteneur (format JSON) |
+
+## EXÉCUTION DE COMMANDES
+| Command | Description |
 | :---: | :---: |
-| `docker attach <container>` | Attach to a container |
-| `docker cp <container>:<container-path> <host-path>` | Copy files from the container |
-| `docker cp <host-path> <container>:<container-path>` | Copy files into the container |
-| `docker export <container>` | Export the content of the container (tar archive) |
-| `docker exec <container>` | Run a command inside a container |
-| `docker exec -it <container> /bin/bash` | Open an interactive shell inside a container (there is no bash in some images, use /bin/sh) |
-| `docker wait <container>` | Wait until the container terminates and return the exit code |
+| `docker attach <container>` | S'attacher à un conteneur |
+| `docker cp <container>:<container-path> <host-path>` | Copier des fichiers du conteneur |
+| `docker cp <host-path> <container>:<container-path>` | Copier des fichiers dans le conteneur |
+| `docker export <container>` | Exporter le contenu du conteneur (archive tar) |
+| `docker exec <container>` | Exécuter une commande à l'intérieur d'un conteneur |
+| `docker exec -it <container> /bin/bash` | Ouvrir un shell interactif à l'intérieur d'un conteneur (utiliser /bin/sh si bash n'est pas présent) |
+| `docker wait <container>` | Attendre la terminaison du conteneur et retourner le code de sortie |
+
 ## IMAGES
-| COMMAND | DESCRIPTION |
+| Command | Description |
 | :---: | :---: |
-| `docker image ls` | List all local images |
-| `docker history <image>` | Show the image history |
-| `docker inspect <image>` | Show information (json formatted) |
-| `docker tag <image> <tag>` | Tag an image |
-| `docker commit <container> <image>` | Create an image (from a container) |
-| `docker import <url>` | Create an image (from a tarball) |
-| `docker rmi <image>` | Delete images |
-| `docker pull <user>/<repository>:<tag>` | Pull an image from a registry |
-| `docker push <user>/<repository>:<tag>` | Push and image to a registry |
-| `docker search <test>` | Search an image on the official registry |
-| `docker login` | Login to a registry |
-| `docker logout` | Logout from a registry |
-| `docker save <user>/<repository>:<tag>` | Export an image/repo as a tarball |
-| `docker load` | Load images from a tarball |
+| `docker image ls` | Lister toutes les images locales |
+| `docker history <image>` | Afficher l'historique de l'image |
+| `docker inspect <image>` | Afficher les informations (format JSON) |
+| `docker tag <image> <tag>` | Taguer une image |
+| `docker commit <container> <image>` | Créer une image à partir d'un conteneur |
+| `docker import <url>` | Créer une image à partir d'une archive tar |
+| `docker rmi <image>` | Supprimer des images |
+| `docker pull <user>/<repository>:<tag>` | Tirer une image d'un registre |
+| `docker push <user>/<repository>:<tag>` | Pousser une image vers un registre |
+| `docker search <test>` | Rechercher une image sur le registre officiel |
+| `docker login` | Se connecter à un registre |
+| `docker logout` | Se déconnecter d'un registre |
+| `docker save <user>/<repository>:<tag>` | Exporter une image/répertoire en tant qu'archive tar |
+| `docker load` | Charger des images à partir d'une archive tar |
+
 ## VOLUMES
-| COMMAND | DESCRIPTION |
+| Command | Description |
 | :---: | :---: |
-| `docker volume ls` | List all vol1umes |
-| `docker volume create <volume>` | Create a volume |
-| `docker volume inspect <volume>` | Show information (json formatted) |
-| `docker volume rm <volume>` | Destroy a volume |
-| `docker volume ls --filter="dangling=true"` | List all dangling volumes (not referenced by any container) |
-| `docker volume prune` | Delete all volumes (not referenced by any container) |
-| `docker run --rm --volumes-from <container> -v $(pwd):/backup busybox tar cvfz /backup/backup.tar.gz <container-path>` | Backup a container |
-| `docker run --rm --volumes-from <container> -v $(pwd):/backup busybox sh -c "cd <container-path> && tar xvfz /backup/backup.tar.gz --strip 1"` | Restore a container from backup |
+| `docker volume ls` | Lister tous les volumes |
+| `docker volume create <volume>` | Créer un volume |
+| `docker volume inspect <volume>` | Afficher les informations (format JSON) |
+| `docker volume rm <volume>` | Détruire un volume |
+| `docker volume ls --filter="dangling=true"` | Lister tous les volumes non référencés (dangling) |
+| `docker volume prune` | Supprimer tous les volumes non référencés |
+| `docker run --rm --volumes-from <container> -v $(pwd):/backup busybox tar cvfz /backup/backup.tar.gz <container-path>` | Sauvegarder un conteneur |
+| `docker run --rm --volumes-from <container> -v $(pwd):/backup busybox sh -c "cd <container-path> && tar xvfz /backup/backup.tar.gz --strip 1"` | Restaurer un conteneur à partir d'une sauvegarde |
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
-
-Credits:
-
-[Christian Lempa GitHub](https://github.com/ChristianLempa)

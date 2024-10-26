@@ -1,6 +1,8 @@
 # LINUX
+
 ## INTRODUCTION
 Système d'exploitation open source de type Unix fondé sur le noyau Linux créé en 1991 par Linus Torvalds.
+
 ## COMMANDS
 ### Vérification de version
 | Command + option | Description |
@@ -9,6 +11,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`uname -a`| Affiche des informations sur le noyau| `uname -a`|
 |`lsb_release -a`| Affiche les informations sur la version LSB| `lsb_release -a`|
 |`dpkg --version`| Affiche la version de dpkg| `dpkg --version`|
+
 ### Réseau
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -18,6 +21,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | `traceroute 'adresse_IP_ou_nom_de_domaine'`|Affiche le chemin des paquets réseau|
 | `netstat -tuln`|Affiche les connexions réseau|
 | `curl -o 'url_fichier`|Télécharger fichier en curl à partir d'une URL|
+
 ### Redémarrage / arrêt
 | Command          | Description |
 | :--------------: | :---------: |
@@ -25,6 +29,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | `reboot`       | Redémarre l'instance                  | `reboot [option]`            |
 | `poweroff`     | Éteint l'instance                     | `poweroff [option]`          |
 | `halt`         | Arrête le système immédiatement       | `halt [option]`              |
+
 ### Navigation fichiers
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -34,6 +39,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`cd ..`|Répertoire parent|
 |`cd ../../..`|Naviguer plusieurs niveaux en amont|
 |`cd -`|Répertoire précédent|
+
 ### Affichage
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -44,6 +50,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`ls -t`|Tri par date récent -> ancien|
 |`ls -S`|Tri par taille décroissante|
 |`pwd`|Renvoyer chemin absolu du répertoire courant|
+
 ### Création répertoire
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -52,6 +59,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`mkdir -p 'foo/bar/baz'`|Créer l’arborescence 'foo/bar/baz'|
 |`mkdir -m 755 'new_folder'`|Créer répertoire 'new_folder' avec permissions 755|
 |`mkdir -v`|Retourner des informations lors de la création d'un répertoire|
+
 ### Création fichier
 | Command + option | Objectif |
 | :--------------: | :---------: |
@@ -60,11 +68,13 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`touch -c 'file.txt'`|Ne pas créer de fichier si 'file.txt' n'existe pas, juste MAJ d'horodatage s'il existe|
 |`touch -a 'file.txt'`|MAJ d'horodatage d'accès du fichier 'file.txt'|
 |`touch -m 'file.txt'`|MAJ d'horodatage de modification du fichier 'file.txt'|
+
 ### Copier
 | Command + option | Description |
 | :--------------: | :---------: |
 |`cp foo/bar.txt info/`|Copier 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
 |`cp -r foo/ info/`|Copier répertoire 'foo' + son contenu dans le répertoire 'info' (si 'info' existe le contenu sera placé dans 'info/foo/')|
+
 ### Déplacer / Renommer
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -73,6 +83,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`mv foo/bar.txt info/`|Déplacer 'bar.txt' situé dans le répertoire 'foo' vers le répertoire 'info'|
 |`mv temp.txt '/backup/'`|Déplacer 'temp.txt' vers le répertoire 'backup'|
 |`mv '*.txt' '/documents/'`|Déplacer tous les '.txt' du répertoire courant vers le répertoire 'documents'|
+
 ### Effacer
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -81,6 +92,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`rm -rf 'baz/'`|Supprimer le répertoire 'baz' et tout son contenu|
 |`rm -i 'file.txt'`|Supprimer 'file.txt' après confirmation de l'utilisateur|
 |`rm -v '*.log'`|Supprimer les fichiers ayant pour extension '.log' + afficher les noms des fichiers supprimés|
+
 ### Afficher contenu fichier
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -89,6 +101,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`cat > 'newfile.txt'`|Créer 'newfile.txt' et y entrer du texte, terminé par Ctrl+D|
 |`cat -n 'file.txt'`|Afficher contenu de 'file.txt' avec les numéros de ligne|
 |`cat >> 'existingfile.txt'`|Ajouter du texte à la fin de 'existingfile.txt', terminé par Ctrl+D|
+
 ### Trouver
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -111,6 +124,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`find -a`|Opérateur ET (exemple : `find -name '*.txt' -a -size +1k` pour trouver fichiers .txt de plus de 1 Ko)|
 |`find -o`|Opérateur OU (exemple : `find -name '*.jpg' -o -name '*.png'` pour trouver fichiers .jpg ou .png)|
 |`find ! -name 'file.txt'` ou `find -not -name 'file.txt'`|Rechercher tous les fichiers sauf 'file.txt'|
+
 ### Rechercher chaînes de caractères ou motif
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -123,6 +137,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`grep -r "text" /folderPath`|Rechercher de manière récursive l'occurence "text" dans folderPath|
 |`grep -nri 'text' /project`|Recherche récursive, insensible à la casse, des occurrences de "text" dans répertoire 'project'|
 |`grep -nri '\(foo\|bar\|baz\)' /project`|Recherche (récursive/insensible à la casse) occurrences de "foo""bar""baz" dans répertoire 'project'|
+
 ### Install packages
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -143,6 +158,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`dpkg --remove <package>`|Désinstaller un paquet sans supprimer les fichiers de configuration|
 |`dpkg -S <file>`|Trouver quel paquet a installé un fichier donné sur le système|
 |`apt-get reinstall <package>`|Réinstaller un paquet sans le supprimer au préalable|
+
 ### Changer droit d'un fichier
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -158,6 +174,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`chmod +x script.sh`|Ajouter droit d'exécution à 'script.sh'|
 |`chmod -R g+w projet`|Ajouter droits d'écriture au groupe pour répertoire 'projet' et tous ses contenus|
 |`chmod u-s fichier`|Supprimer le bit setuid du fichier (ne pas exécuter fichier avec privilèges du propriétaire)|
+
 #### Correspondances de représentation des droits
 | Droit                                               | Valeur alphanumérique | Valeur octale | Description                                      |
 | :-------------------------------------------------: | :-------------------: | :-----------: | :----------------------------------------------: |
@@ -172,6 +189,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 | Setuid                                              | rws                   | 4xx           | Exécution avec les privilèges du propriétaire    |
 | Setgid                                              | rwx                   | 2xx           | Exécution avec les privilèges du groupe          |
 | Sticky bit                                          | rwx+t                 | 1xx           | Fichiers dans un répertoire pouvant être supprimés uniquement par leur propriétaire|
+
 ### Changer propriétaire fichier
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -180,8 +198,10 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`chown :users file.txt`|Changer groupe 'file.txt' en 'users' sans modifier le propriétaire|
 |`chown -R bob:admin /path/to/directory`|Attribuer 'bob' + groupe 'admin' à tous les fichiers et dossiers dans '/path/to/directory' de manière récursive|
 |`chown --from=currentuser:newgroup file.txt`|Changer le propriétaire de 'file.txt' uniquement si l'utilisateur actuel est 'current'|
+
 ### SSH
-#### Connection SSH à une machine distante!
+Connection SSH à une machine distante!
+
 | Command + option | Description |
 | :--------------: | :---------: |
 |`ssh john@remotehost.example.com`|Connexion machine distante login 'john'|
@@ -192,6 +212,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`ssh -v john@remotehost.example.com`|Activer le mode verbeux pour afficher des informations de débogage lors de la connexion|
 |`ssh user@remotehost.example.com 'command'`|Exécuter une commande spécifique sur la machine distante sans ouvrir une session interactive|
 |`ssh -D 8080 john@remotehost.example.com`|Configurer un tunnel SOCKS pour la redirection de trafic via la machine distante|
+
 ### SCP
 #### Copier des fichiers entre le serveur et le client SSH de manière sécurisée!
 | Command + option | Description |
@@ -206,6 +227,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`scp -i ~/.ssh/my_key foo.txt john@remotehost.example.com:`|Utiliser une clé privée spécifique pour l'authentification lors du transfert de 'foo.txt'|
 |`scp -P 2222 john@remotehost:/path/to/file.txt ./`|Transférer un fichier depuis une machine distante en utilisant un port spécifique (ici 2222)|
 |`scp -r john@remotehost:/path/to/directory ./`|Récupérer l'intégralité d'un répertoire depuis la machine distante vers le répertoire courant|
+
 ### Espace disque
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -217,10 +239,12 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`df -i`|Afficher l'utilisation des inodes sur toutes les partitions|
 |`df -h /mount_point`|Afficher l'espace disque disponible pour un point de montage spécifique|
 |`du -s /path/to/directory`|Afficher l'espace disque utilisé par le répertoire spécifié sans afficher les sous-répertoires|
+
 ### ProcessuMémoires
 | Command + option | Description |
 | :--------------: | :---------: |
 |`free`|Afficher la mémoire libre et utilisée sur le système|
+
 ### Processus
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -234,6 +258,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`killall name`|Tuer tous les processus par leur nom (similaire à `pkill`)|
 |`vmstat`|Afficher des statistiques sur la mémoire virtuelle et l'utilisation du système|
 |`lsof`|Lister tous les fichiers ouverts par les processus, utile pour diagnostiquer les problèmes de fichiers|
+
 ### Archives
 #### TAR
 | Command + option | Description |
@@ -255,6 +280,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`tar --exclude='*.log' -cvf archive.tar projet/`|Créer archive tout en excluant les fichiers avec l'extension '.log'|
 |`tar -cvf - fichier1 \| gzip > fichier1.tar.gz`|Créer archive tar compressée au format gzip en une seule commande|
 |`tar -xvf archive.tar -C /destination/`|Extraire les fichiers de 'archive.tar' dans le répertoire spécifié '/destination/'|
+
 #### GZIP
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -268,6 +294,7 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`gzip -9 'fichier.txt'`|Compresser un fichier avec la meilleure compression|
 |`gzip -c 'fichier.txt' > 'fichier.txt.gz'`|Compresser et rediriger la sortie vers un nouveau fichier|
 |`gunzip 'fichier.txt.gz'`|Commande alternative pour décompresser un fichier gzip|
+
 ### UTILISATEURS
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -276,11 +303,13 @@ Système d'exploitation open source de type Unix fondé sur le noyau Linux cré�
 |`sudo passwd <user>`|Changer le mot de passe d'un utilisateur|
 |`sudo usermod -aG <group> <user>`|Ajouter utilisateur au groupe|
 |`sudo deluser <user> <group>`|Supprimer utilisateur du groupe|
+
 ### LOGS
 | Command + option | Description |
 | :--------------: | :---------: |
 |`tail -f '/var/log/syslog'`|Afficher les logs en temps réel|
 |`grep 'terme_de_recherche' '/var/log/syslog'`|Rechercher dans les logs|
+
 ### ENVIRONNEMENT
 | Command + option | Description |
 | :--------------: | :---------: |

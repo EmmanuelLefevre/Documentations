@@ -7,14 +7,41 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 | :--------------: | :------------------: |
 |`WIN + R`| Ouvrir la boîte de dialogue Exécuter|
 |`cmd /k <commande>`|Lancer cmd avec une commande spécifique|
-### Nouveau terminal admin depuis le Powershell
-| Command          | Description          |
-| :--------------: | :------------------: |
-|`Start-Process powershell -Verb runAs`|Nouveau terminal en mode admin|
 ### Informations système
 | Command          | Description          |
 | :--------------: | :------------------: |
 |`systeminfo`|Afficher des informations sur le système|
+### Gestion des processus
+| Command          | Description          |
+| :--------------: | :------------------: |
+|`Start-Process powershell -Verb runAs`|Nouveau terminal en mode admin|
+|`Get-Process`|Lister les processus en cours d'exécution|
+|`Stop-Process -Name <processus>`|Arrêter un processus|
+|`Start-Process <processus>`|Démarrer un nouveau processus|
+|`Wait-Process -Name <processus>`|Attendre qu'un processus se termine|
+## Gestion des utilisateurs
+| Commande | Description |
+| :---: | :---: |
+|`Get-LocalUser`|Lister les utilisateurs locaux|
+|`New-LocalUser <utilisateur>`|Créer un nouvel utilisateur local|
+|`Remove-LocalUser <utilisateur>`|Supprimer un utilisateur local|
+|`Set-LocalUser <utilisateur> -Password <motdepasse>`|Définir le mot de passe d'un utilisateur local|
+|`Add-LocalGroupMember -Group Administrators -Member <utilisateur>`|Ajouter un utilisateur au groupe Administrateurs|
+|`Remove-LocalGroupMember -Group Administrators -Member <utilisateur>`|Supprimer un utilisateur du groupe Administrateurs|
+## Gestion des fichiers et dossiers
+| Commande | Description |
+| :---: | :---: |
+|`Get-ChildItem`|Lister les fichiers et répertoires|
+|`Get-Content <fichier>`|Obtenir le contenu d'un fichier|
+|`Set-Content <fichier> <contenu>`|Définir le contenu d'un fichier|
+|`New-Item <fichier>`|Créer un nouveau fichier|
+|`New-Item <répertoire> -ItemType Directory`|Créer un nouveau répertoire|
+|`Remove-Item <fichier>`|Supprimer un fichier|
+|`Remove-Item <répertoire> -Recurse`|Supprimer un répertoire|
+|`Rename-Item <fichier> <nouveau_fichier>`|Renommer un fichier ou un répertoire|
+|`Copy-Item SOURCE DEST`|Copier un fichier|
+|`Copy-Item SOURCE DEST -Recurse`|Copier un répertoire|
+|`Move-Item SOURCE DEST`|Déplacer un fichier ou un répertoire|
 ### Afficher les adresses IP
 | Command          | Description          |
 | :--------------: | :------------------: |
@@ -22,6 +49,11 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`ipconfig /all`|Afficher toutes les adresses IP (IPv4)|
 |`ipconfig /release`|Libérer l'adresse IP actuelle (DHCP)|
 |`ipconfig /renew`|Renouveler l'adresse IP actuelle (DHCP)|
+## Gestion du réseau
+| Commande | Description |
+| :---: | :---: |
+|`Get-NetIPAddress`|Lister les adresses IP|
+|`Get-NetAdapter`|Lister les adaptateurs réseau|
 ### Diagnostique réseau
 | Command          | Description          |
 | :--------------: | :------------------: |
@@ -42,21 +74,39 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 | :--------------: | :------------------: |
 |`tasklist`|Afficher tous les processus en cours|
 |`taskkill /IM <nom_du_processus>`|Terminer un processus spécifique|
-### Gestion des services windows
+### Gestion des services
 | Command          | Description          |
 | :--------------: | :------------------: |
+|`Get-Service`|Lister les services|
+|`Start-Service <service>`|Démarrer un service|
+|`Stop-Service <service>`|Arrêter un service|
+|`Restart-Service <service>`|Redémarrer un service|
+|`Set-Service <service> -StartupType Automatic`|Configurer un service pour qu'il démarre automatiquement|
+|`Set-Service <service> -StartupType Manual`|Configurer un service pour qu'il démarre manuellement|
+|`Set-Service <service> -StartupType Disabled`|Désactiver un service|
 |`services.msc`|Ouvrir la fenêtre des services Windows|
 |`net start <nom_du_service>`|Démarrer un service Windows|
 |`net stop <nom_du_service>`|Arrêter un service Windows|
 |`net start`|Afficher les connexions réseau et les ports d'écoute|
-### Gestion des fichiers et dossiers
-| Command          | Description          |
-| :--------------: | :------------------: |
-|`mkdir <nom_dossier>`|Créer un nouveau dossier|
-|`rmdir <nom_dossier>`|Supprimer un dossier|
-|`del <nom_fichier>`|Supprimer un fichier|
-|`copy <source> <destination>`|Copier un fichier|
-|`move <source> <destination>`|Déplacer un fichier|
+## MAJ Windows
+| Commande | Description |
+| :---: | :---: |
+|`Install-Module -Name PSWindowsUpdate`|Installer le module PSWindowsUpdate|
+|`Get-Command -Module PSWindowsUpdate`|Lister toutes les commandes dans le module PSWindowsUpdate|
+|`Get-WUInstall`|Installer les mises à jour Windows|
+## Fonctionnalités Windows
+| Commande | Description |
+| :---: | :---: |
+|`Get-WindowsFeature`|Lister les fonctionnalités Windows|
+|`Install-WindowsFeature <fonctionnalité>`|Installer une fonctionnalité Windows|
+|`Uninstall-WindowsFeature <fonctionnalité>`|Désinstaller une fonctionnalité Windows|
+## Connexion à un ordinateur distant
+| Commande | Description |
+| :---: | :---: |
+|`Enter-PSSession -ComputerName <nom> -Credential <utilisateur>`|Ouvrir une nouvelle session distante|
+|`Exit-PSSession`|Fermer la session distante en cours|
+|`Invoke-Command -ComputerName <nom> -ScriptBlock { <commande> }`|Exécuter une commande sur un ordinateur distant|
+|`Invoke-Command -ComputerName <nom> -FilePath <script>`|Exécuter un script sur un ordinateur distant|
 ### Gestion de l'arrêt de l'ordinateur
 | Command          | Description          |
 | :--------------: | :------------------: |

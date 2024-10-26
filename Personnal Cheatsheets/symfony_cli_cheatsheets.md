@@ -73,8 +73,6 @@ Symfony est un ensemble de composants PHP ainsi qu'un framework MVC libre écrit
 | `npm run dev`| Compiler les assets en dev |
 | `npm run build`| Compiler les assets en prod |
 
-
-
 ## MISCELLANEOUS
 | Command | Description |
 | :--------------: | :---------: |

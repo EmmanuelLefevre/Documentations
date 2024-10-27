@@ -1,7 +1,9 @@
 # POWERSHELL GIT PULL SCRIPT
 ## INTRODUCTION
 This tutorial shows the step-by-step procedure to create a powershell script (executable using a shortcut button on the user's desktop) allowing you to update your local repositories with a single click. Indeed, when you have several computers, it can be laborious to synchronize your local repositories each one after the other if you have made a modification in one of them.  
+
 ⚠️ This procedure is intended to automate pulls for repositories with only one branch, such as a repository for documentation or configurations.  
+
 👌 Many controls have been added 👌
 ## PROCEDURE
 1. Get the fully path where PowerShell was installed:
@@ -199,6 +201,7 @@ function Get-RepositoriesInfo {
   }
 }
 ```
+
 ⚠️ I you don't use a personal token to request the Github API don't forget to switch the visibility of your remote repository to public, if not this script will not be able to update your local repository. To set up an identification token on the Github API, go to the next "Bonus"" section...
 
 ![Script Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/git_pull_script.png)

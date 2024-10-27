@@ -409,7 +409,10 @@ A litlle long 💤💤💤
 ```shell
 brew install jandedobbeleer/oh-my-posh/oh-my-posh
 ```
-- Manual installation:  
+Jump directly to checking the Oh-My-Posh installation
+
+- Manual installation
+
 💡 You need first to install unzip (this command only work on Ubuntu/Debian)!
 ```shell
 sudo apt update && sudo apt install unzip -y
@@ -418,6 +421,7 @@ Check installation:
 ```shell
 unzip -v
 ```
+You could now install Oh-My-Posh
 ```shell
 curl -s https://ohmyposh.dev/install.sh | bash -s
 ```
@@ -445,7 +449,7 @@ Edit your .bashrc file and add this at end:
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(oh-my-posh init bash --config '/home/<YOUR USERNAME>/poshtheme/quick-term.omp.json')"
 ```
-🔃 For the changes to take effect, reload the configuration file 🔃
+🔃 For apply changes, reload the configuration file 🔃
 ```shell
 source ~/.bashrc
 ```
@@ -455,8 +459,14 @@ Samely as PowerShell or GitBash you coul create your own theme.
 
 ![WSL Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/wsl.png)
 
+### Disable the daily message in WSL
+```shell
+touch ~/.hushlogin
+```
+
 ***
 🔎🔎🔎 You could find a few of my personal settings here 🔎🔎🔎  
+
 [Emmanuel Lefevre Personal Settings](https://github.com/EmmanuelLefevre/Settings)  
 ***
 🔥🔥🔥 You're now a fucking terminal user!!! 🔥🔥🔥

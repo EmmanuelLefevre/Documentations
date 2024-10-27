@@ -409,7 +409,7 @@ A litlle long 💤💤💤
 ```shell
 brew install jandedobbeleer/oh-my-posh/oh-my-posh
 ```
-Jump directly to checking the Oh-My-Posh installation
+Jump directly to checking your Oh-My-Posh installation.
 
 - Manual installation
 
@@ -453,7 +453,7 @@ eval "$(oh-my-posh init bash --config '/home/<YOUR USERNAME>/poshtheme/quick-ter
 ```shell
 source ~/.bashrc
 ```
-Samely as PowerShell or GitBash you coul create your own theme.  
+Samely as PowerShell or GitBash you could create your own theme.  
 
 [Oh-My-Posh Personal Theme For WSL](https://github.com/EmmanuelLefevre/Settings/blob/main/WSL/wsl_profile_darka.json)
 

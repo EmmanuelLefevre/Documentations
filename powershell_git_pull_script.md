@@ -201,6 +201,8 @@ function Get-RepositoriesInfo {
 ```
 ⚠️ I you don't use a personal token to request the Github API don't forget to switch the visibility of your remote repository to public, if not this script will not be able to update your local repository. To set up an identification token on the Github API, go to the next "Bonus"" section...
 
+![Script Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/git_pull_script.png)
+
 ## 😍 Bonus 😍
 
 Request the github api with a personnal token to increase the rate limit and be able to update a private repository...

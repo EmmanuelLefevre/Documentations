@@ -447,7 +447,9 @@ Edit your .bashrc file and add this at end:
 ########## THEME ##########
 # Add posh theme path
 export PATH="$HOME/.local/bin:$PATH"
-eval "$(oh-my-posh init bash --config '/home/<YOUR USERNAME>/poshtheme/quick-term.omp.json')"
+eval "$(oh-my-posh init bash --config '/home/<YOUR WSL USERNAME>/poshtheme/quick-term.omp.json')"
+# Open WSL terminal in your user Windows folder
+cd /mnt/c/Users/<YOUR WINDOWS USERNAME>
 ```
 🔃 For apply changes, reload the configuration file 🔃
 ```shell

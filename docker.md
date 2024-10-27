@@ -40,7 +40,7 @@ docker run -it -d node
 docker system prune -a
 ```
 ## IMAGE LOCALE
-### 1. Construire l'image avec un nom et la dernère version
+### 1. Construire l'image avec un nom et la dernière version
 ```shell
 docker build -t node-test:latest .
 ```

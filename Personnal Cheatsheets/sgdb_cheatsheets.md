@@ -11,13 +11,13 @@
 | MariaDB | Relationnel | MariaDB est un fork de MySQL qui offre des fonctionnalités améliorées et est conçu pour être compatible avec les applications MySQL existantes. |
 | IBM Db2 | Relationnel | Db2 est un SGBDR développé par IBM, utilisé dans les environnements d'entreprise pour le traitement de grandes quantités de données. |
 | Teradata | Relationnel | Teradata est un SGBDR spécialisé dans l'analyse des données, souvent utilisé pour des applications de big data et de data warehousing. |
+| Firebird | Relationnel | Firebird est un SGBDR open source qui supporte les transactions ACID et est connu pour sa légèreté et sa flexibilité. |
+| Ingres | Relationnel | Ingres est un SGBDR open source qui offre des fonctionnalités avancées et est utilisé pour des applications critiques. |
+| SAP HANA | Relationnel | SAP HANA est une plateforme de données en mémoire qui permet des analyses en temps réel et est utilisée dans des applications d'entreprise. |
 | Amazon RDS | Hybride | Amazon RDS permet de déployer des SGBDR relationnels dans le cloud, supportant MySQL, PostgreSQL, MariaDB, Oracle et SQL Server. |
 | CockroachDB | Hybride | CockroachDB, bien que classée comme NewSQL, offre des capacités relationnelles avec une architecture distribuée, supportant des transactions ACID. |
 | Google Cloud SQL | Hybride | Google Cloud SQL est un service de base de données relationnelle entièrement géré, supportant MySQL, PostgreSQL et SQL Server. |
 | Azure SQL Database | Hybride | Azure SQL Database est un service cloud relationnel géré par Microsoft, offrant des fonctionnalités de scalabilité et de sécurité. |
-| Firebird | Relationnel | Firebird est un SGBDR open source qui supporte les transactions ACID et est connu pour sa légèreté et sa flexibilité. |
-| Ingres | Relationnel | Ingres est un SGBDR open source qui offre des fonctionnalités avancées et est utilisé pour des applications critiques. |
-| SAP HANA | Relationnel | SAP HANA est une plateforme de données en mémoire qui permet des analyses en temps réel et est utilisée dans des applications d'entreprise. |
 | NuoDB | Hybride | NuoDB est une base de données relationnelle distribuée qui combine les caractéristiques des SGBDR traditionnels avec une architecture distribuée. |
 | TimescaleDB | Hybride | TimescaleDB est une extension de PostgreSQL optimisée pour le traitement de séries temporelles, utilisée pour des applications de monitoring et d'analyse de données temporelles. |
 

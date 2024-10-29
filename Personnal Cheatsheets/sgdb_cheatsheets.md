@@ -44,3 +44,32 @@
 | RavenDB | Document | RavenDB est une base de données orientée document qui offre des fonctionnalités de réplication et de sharding. |
 | Couchbase (support de graphes) | Hybride | Couchbase offre des capacités de graphe en plus de son modèle orienté document, permettant une gestion flexible des relations entre les données. |
 | Amazon Neptune (configuration lecture seule) | Graphe | En mode lecture seule, Amazon Neptune assure une haute disponibilité et peut être utilisé pour interroger des données de manière fiable, même en cas de partitionnement. |
+
+## SQL ou NoSQL
+## Utiliser du SQL
+- **Données structurés :** Données organisées dans des tables avec des schémas bien définis, facilitant la gestion des relations entre les différentes entités.
+- **Transactions critiques :** Applications qui nécessitent des transactions sécurisées et conformes aux normes ACID (systèmes bancaires ou de gestion de la chaîne d'approvisionnement).
+- **Intégrité des données :** Contraintes de validation, garantissant l'intégrité et la cohérence des données tout au long de leur cycle de vie.
+- **Analytique et reporting :** Exécuter des requêtes analytiques complexes ou des rapports basés sur des jointures. Offrir des outils robustes pour la génération de rapports.
+
+### Ne pas utiliser du SQL
+SQL peut ne pas être le choix optimal pour les situations suivantes :
+- **Documents complexes :** JSON, PDF, images codées en base64, et autres formats complexes.
+- **Données hétérogènes :** Données qui changent fréquemment en structure ou en format.
+- **Données non structurées :** Informations sans format fixe ou organisation définie (journaux de serveurs, données issues de capteurs).
+- **Volumes massifs de données (plus de 3M d'entrées) :** Données massives nécessitant un stockage et une gestion distribuée.
+- **Flux de données en temps réel :** Appareils générant des données en continu et en grande volumétrie.
+
+## Utiliser du NoSQL
+- **Scalabilité horizontale :** Se développer facilement en ajoutant des serveurs supplémentaires (idéal pour des applications à grande échelle).
+- **Flexibilité des données :** Stocker des données non structurées ou semi-structurées comme du JSON + documents complexes et hétérogènes.
+- **Haute disponibilité :** Assurer une disponibilité continue même en cas de panne d'un ou plusieurs noeuds.
+- **Performance en lecture/écriture :** Nécessité d'écritures ou de lectures rapides sur de grands volumes de données.
+- **Clés/valeurs** : Données accessibles via des paires clé-valeur.
+
+### Ne pas utiliser du NoSQL
+NoSQL peut également ne pas convenir dans les scénarios suivants :
+- **Transactions complexes :** Applications nécessitant des transactions ACID.
+- **Relations de données strictes :** Modèle de données fortement structuré avec de nombreuses relations entre les entités.
+- **Reporting et analytics avancés :** Des requêtes analytiques complexes et des rapports basés sur des jointures multiples.
+- **Standardisation et conformité :** Environnements où des normes strictes de conformité et de sécurité des données doivent être respectées.

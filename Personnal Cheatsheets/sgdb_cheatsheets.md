@@ -46,7 +46,7 @@
 | Amazon Neptune (configuration lecture seule) | Graphe | En mode lecture seule, Amazon Neptune assure une haute disponibilité et peut être utilisé pour interroger des données de manière fiable, même en cas de partitionnement. |
 
 ## SQL ou NoSQL
-## Utiliser du SQL
+### Utiliser du SQL
 - **Données structurés :** Données organisées dans des tables avec des schémas bien définis, facilitant la gestion des relations entre les différentes entités.
 - **Transactions critiques :** Applications qui nécessitent des transactions sécurisées et conformes aux normes ACID (systèmes bancaires ou de gestion de la chaîne d'approvisionnement).
 - **Intégrité des données :** Contraintes de validation, garantissant l'intégrité et la cohérence des données tout au long de leur cycle de vie.
@@ -59,7 +59,7 @@
 - **Volumes massifs de données (plus de 3M d'entrées) :** Données massives nécessitant un stockage et une gestion distribuée.
 - **Flux de données en temps réel :** Appareils générant des données en continu et en grande volumétrie.
 
-## Utiliser du NoSQL
+### Utiliser du NoSQL
 - **Scalabilité horizontale :** Se développer facilement en ajoutant des serveurs supplémentaires (idéal pour des applications à grande échelle).
 - **Flexibilité des données :** Stocker des données non structurées ou semi-structurées comme du JSON + documents complexes et hétérogènes.
 - **Haute disponibilité :** Assurer une disponibilité continue même en cas de panne d'un ou plusieurs noeuds.

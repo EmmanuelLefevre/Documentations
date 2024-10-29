@@ -53,7 +53,6 @@
 - **Analytique et reporting :** Exécuter des requêtes analytiques complexes ou des rapports basés sur des jointures. Offrir des outils robustes pour la génération de rapports.
 
 ### Ne pas utiliser du SQL
-SQL peut ne pas être le choix optimal pour les situations suivantes :
 - **Documents complexes :** JSON, PDF, images codées en base64, et autres formats complexes.
 - **Données hétérogènes :** Données qui changent fréquemment en structure ou en format.
 - **Données non structurées :** Informations sans format fixe ou organisation définie (journaux de serveurs, données issues de capteurs).
@@ -68,7 +67,6 @@ SQL peut ne pas être le choix optimal pour les situations suivantes :
 - **Clés/valeurs** : Données accessibles via des paires clé-valeur.
 
 ### Ne pas utiliser du NoSQL
-NoSQL peut également ne pas convenir dans les scénarios suivants :
 - **Transactions complexes :** Applications nécessitant des transactions ACID.
 - **Relations de données strictes :** Modèle de données fortement structuré avec de nombreuses relations entre les entités.
 - **Reporting et analytics avancés :** Des requêtes analytiques complexes et des rapports basés sur des jointures multiples.

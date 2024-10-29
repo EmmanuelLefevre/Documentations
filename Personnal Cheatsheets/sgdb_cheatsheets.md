@@ -51,6 +51,7 @@
 - **Transactions critiques :** Applications qui nécessitent des transactions sécurisées et conformes aux normes ACID (systèmes bancaires ou de gestion de la chaîne d'approvisionnement).
 - **Intégrité des données :** Contraintes de validation, garantissant l'intégrité et la cohérence des données tout au long de leur cycle de vie.
 - **Analytique et reporting :** Exécuter des requêtes analytiques complexes ou des rapports basés sur des jointures. Offrir des outils robustes pour la génération de rapports.
+- **Scalabilité verticale :** Augmenter la puissance d'une seule machine. Les bases de données relationnelles ont historiquement été conçues pour se développer verticalement.
 
 ### Ne pas utiliser du SQL
 - **Documents complexes :** JSON, PDF, images codées en base64, et autres formats complexes.

@@ -72,3 +72,5 @@
 - **Relations de données strictes :** Modèle de données fortement structuré avec de nombreuses relations entre les entités.
 - **Reporting et analytics avancés :** Des requêtes analytiques complexes et des rapports basés sur des jointures multiples.
 - **Standardisation et conformité :** Environnements où des normes strictes de conformité et de sécurité des données doivent être respectées.
+
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

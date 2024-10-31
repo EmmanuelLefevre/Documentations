@@ -39,6 +39,8 @@ shell:startup
 ```
 4. Paste you shortcut file inside.  
 
+5. ⚠️ Add an exception in your anti-virus for the "mouse_shortcuts.ahk" file, because it's not uncommon for an antivirus to detect AutoHotkey scripts as potentially suspicious.
+
 Well it's done, the script will be launch at startup 🤙
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

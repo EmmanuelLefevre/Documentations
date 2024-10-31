@@ -23,10 +23,6 @@ XButton1::Send ^c
 
 ; Assign CTRL+V to button B5
 XButton2::Send ^v
-
-; Assign CTRL+L to button B6
-; Selecting the entire line in VS Code
-XButton3::Send ^l
 ```
 7. Double click on the file to launch the script.  
 

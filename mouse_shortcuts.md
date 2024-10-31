@@ -10,7 +10,7 @@ Assign mouse shortcuts without builder software!
 
 2. Install it with the exe file...  
 
-3. Launch it => AutoHotkey Dash program  
+3. Launch it => **AutoHotkey Dash** program  
 
 4. "New script" button  
 
@@ -29,16 +29,15 @@ XButton2::Send ^v
 ## 😍 BONUS 😍
 Automate script at startup.  
 
-Right click on your "mouse_shortcuts.ahk" file > Create shortcut  
+1. Right click on your "mouse_shortcuts.ahk" file > Create shortcut  
 
-Right click on the shortcut > Cut  
+2. Right click on the shortcut > Cut  
 
-Windows + R  
-
+3. Windows + R
 ```shell
 shell:startup
 ```
-Paste you shortcut file inside.  
+4. Paste you shortcut file inside.  
 
 Well it's done, the script will be launch at startup 🤙
 

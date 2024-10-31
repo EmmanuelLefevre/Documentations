@@ -23,6 +23,16 @@ Permet de gérer les informations d'identification pour les connexions à des si
 ```shell
 control /name Microsoft.CredentialManager
 ```
+## ❌ Shutdown pc ❌
+Eteindre l'ordinateur sans passer par le menu démarrer.
+```shell
+shutdown /s /f /t 0
+```
+## ♻️ Relaunch pc ♻️
+Redémarrer l'ordinateur sans passer par le menu démarrer.
+```shell
+shutdown /r /f /t 0
+```
 ## 🎨 Personnalisation des icônes 🎨
 Right click sur le raccourci > Propriétés > Changer d'icône
 

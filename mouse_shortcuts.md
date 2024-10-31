@@ -10,13 +10,13 @@ Assign mouse shortcuts without builder software!
 
 2. Install it with the exe file...  
 
-3. Launch it => **AutoHotkey Dash** program  
+3. Launch program => **AutoHotkey Dash**  
 
-4. "New script" button  
+4. "New script" button.  
 
 5. Give a name to your script file, like "mouse_shorcuts". AutoHotkey will create the file for you, this one will have ".ahk" file extension.  
 
-6. Copy paste this inside:
+6. Copy/paste this inside:
 ```shell
 ; Assign CTRL+C to button B4
 XButton1::Send ^c

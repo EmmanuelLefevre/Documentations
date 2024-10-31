@@ -2,12 +2,11 @@
 
 ## INTRODUCTION
 Assign mouse shortcuts without builder software!  
+
 ⚠️ Your mouse must have several buttons apart from the classic ones...
 
 ## PROCEDURE
-1. Download AutoHotkey:  
-
-[AutoHotkey](https://www.autohotkey.com/)
+1. Download AutoHotkey => [AutoHotkey](https://www.autohotkey.com/)
 
 2. Install it with the exe file...  
 
@@ -19,18 +18,18 @@ Assign mouse shortcuts without builder software!
 
 6. Copy paste this inside:
 ```shell
-; Assigner CTRL+C au bouton B4
+; Assign CTRL+C to button B4
 XButton1::Send ^c
 
-; Assigner CTRL+V au bouton B5
+; Assign CTRL+V to button B5
 XButton2::Send ^v
 ```
 7. Double click on the file to launch the script.  
 
-8. 😍 Bonus 😍  
+## 😍 BONUS 😍
 Automate script at startup.  
 
-Right click on your file > Create shortcut  
+Right click on your "mouse_shortcuts.ahk" file > Create shortcut  
 
 Right click on the shortcut > Cut  
 

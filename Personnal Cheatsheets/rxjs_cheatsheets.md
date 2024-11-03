@@ -14,11 +14,12 @@ RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour 
 | concatMap |  |
 | filter | Sélectionner uniquement les valeurs d'un Observable qui satisfont une condition spécifique. |
 | catchError |  |
+| debounceTime |  |
 
 ## CAS D'USAGE
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
-| pipe | Gestion des appels HTTP avec la manipulation des réponses. |
+| pipe | - Gestion des appels HTTP avec la manipulation des réponses. <br> - Gérer les événements de saisie d'un formulaire en temps réel pour valider et transformer les données saisies par l'utilisateur avant de les soumettre. |
 | map |  |
 | mergeMap |  |
 | switchMap |  |
@@ -26,3 +27,4 @@ RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour 
 | concatMap |  |
 | filter | - Filtrer les clics sur des boutons spécifiques dans une interface utilisateur pour n'exécuter des actions que sur ceux marqués comme importants. <br> - Filtrer les données reçues d'un flux d'API pour n'afficher que les éléments qui répondent à un certain critère, comme les produits en stock dans un e-commerce. |
 | catchError |  |
+| debounceTime |  |

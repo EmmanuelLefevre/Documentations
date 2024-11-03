@@ -15,6 +15,9 @@ RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour 
 | filter | Sélectionner uniquement les valeurs d'un Observable qui satisfont une condition spécifique. |
 | catchError | Gérer les erreurs émises par un Observable. |
 | debounceTime | Ignorer les valeurs émises par un Observable pendant une durée spécifiée. |
+| tap | Exécuter des actions externes pour les valeurs émises par un Observable sans altérer ces valeurs. |
+| combineLatest | Combiner plusieurs Observables pour émettre les dernières valeurs de chacun d'eux. |
+| forkJoin | Attendre que tous les Observables terminent pour émettre les derniers résultats. |
 
 ## CAS D'USAGE
 | Opérateurs | Cas d'usage |
@@ -28,3 +31,6 @@ RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour 
 | filter | - Filtrer les clics sur des boutons spécifiques dans une interface utilisateur pour n'exécuter des actions que sur ceux marqués comme importants. <br> - Filtrer les données reçues d'un flux d'API pour n'afficher que les éléments qui répondent à un certain critère, comme les produits en stock dans un e-commerce. <br>  |
 | catchError | - Gérer les erreurs lors d'appels API en affichant un message d'erreur à l'utilisateur. <br> - Renvoyer une valeur par défaut lorsque la requête échoue, pour éviter de casser le flux de l'application. |
 | debounceTime | - Attendre que l'utilisateur ait terminé de saisir dans le champ de recherche afin de limiter le nombre d'appels API. <br> - Utiliser debounceTime pour gérer les entrées d'un formulaire afin de ne valider les données qu'une fois que l'utilisateur a cessé de saisir, évitant ainsi des validations répétées. |
+| tap | - Log les valeurs d'un Observable pour le débogage. <br> - Exécuter une fonction de notification à chaque émission. |
+| combineLatest | - Combiner les valeurs de plusieurs champs de formulaire pour une validation dynamique. <br> - Émettre les dernières données d'une source de données combinée. |
+| forkJoin | - Attendre que plusieurs appels API se terminent pour traiter leurs résultats ensemble. <br> - Dans une application de reporting, rassembler des informations provenant de plusieurs endpoints d'API avant de générer un rapport final. |

@@ -17,7 +17,7 @@ RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour 
 
 ## CAS D'USAGE
 | Opérateurs | Cas d'usage |
-| :---: | :---: |
+| :---: | :--- |
 | pipe | Gestion des appels HTTP avec la manipulation des réponses. |
 | map |  |
 | mergeMap |  |

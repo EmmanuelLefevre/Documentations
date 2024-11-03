@@ -10,7 +10,7 @@ RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour 
 | map | Transformer les valeurs émises par un Observable en un nouvel Observable (en appliquant une fonction). |
 | mergeMap | Transformer les valeurs d'un Observable en un autre Observable et fusionner les résultats. |
 | switchMap | Annuler les anciennes requêtes et ne garder que la dernière lorsque de nouvelles valeurs sont émises. |
-| exhaustMap | Ignorer les nouvelles valeurs tant que l'Observable interne est actif (ignorer les émissions tant que le traitement n'est pas terminé). |
+| exhaustMap | Ignorer les nouvelles valeurs tant que l'Observable interne est actif et donc le traitement actuel non terminé. |
 | concatMap | Transformer et concaténer les valeurs émises par un Observable de manière séquentielle. |
 | filter | Sélectionner uniquement les valeurs d'un Observable qui satisfont une condition spécifique. |
 | catchError | Gérer les erreurs émises par un Observable. |

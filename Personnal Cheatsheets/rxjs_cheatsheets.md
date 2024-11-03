@@ -24,5 +24,5 @@ RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour 
 | switchMap |  |
 | exhaustMap |  |
 | concatMap |  |
-| filter |  - Filtrer les clics sur des boutons spécifiques dans une interface utilisateur pour n'exécuter des actions que sur ceux marqués comme importants. <br> - Filtrer les données reçues d'un flux d'API pour n'afficher que les éléments qui répondent à un certain critère, comme les produits en stock dans un e-commerce. |
+| filter | - Filtrer les clics sur des boutons spécifiques dans une interface utilisateur pour n'exécuter des actions que sur ceux marqués comme importants. <br> - Filtrer les données reçues d'un flux d'API pour n'afficher que les éléments qui répondent à un certain critère, comme les produits en stock dans un e-commerce. |
 | catchError |  |

@@ -9,9 +9,12 @@ Docker est une plateforme pour lancer des applications dans des conteneurs logic
 | `docker run <image>` | Démarrer un nouveau conteneur à partir d'une image |
 | `docker run -it <image>` | Démarrer un nouveau conteneur en mode interactif |
 | `docker run --rm <image>` | Démarrer un nouveau conteneur et le supprimer à sa sortie |
+| `docker run -it node:16` | Démarrer un nouveau conteneur Node V16 |
+| `docker run -it node-test:latest bash` | Démarrer un conteneur et ouvrir un terminal interactif dans celui-ci |
+| `docker run -it -d <image>` | Faire tourner en arrière plan une image |
 | `docker create <image>` | Créer un nouveau conteneur |
 | `docker start <container>` | Démarrer un conteneur |
-| `docker stop <container>` | Arrêter un conteneur de manière gracieuse |
+| `docker stop <container id>` | Arrêter un conteneur spécifique |
 | `docker kill <container>` | Tuer (SIGKILL) un conteneur |
 | `docker restart <container>` | Arrêter et redémarrer un conteneur de manière gracieuse |
 | `docker pause <container>` | Suspendre un conteneur |
@@ -72,6 +75,9 @@ Docker est une plateforme pour lancer des applications dans des conteneurs logic
 | `docker commit <container> <image>` | Créer une image à partir d'un conteneur |
 | `docker import <url>` | Créer une image à partir d'une archive tar |
 | `docker rmi <image>` | Supprimer des images |
+| `docker pull node` | Télécharger image Node.js par défaut |
+| `docker pull node:16` | Télécharger version 16 de Node.js |
+| `docker pull node:latest` | Télécharger dernière version de Node.js |
 | `docker pull <user>/<repository>:<tag>` | Tirer une image d'un registre |
 | `docker push <user>/<repository>:<tag>` | Pousser une image vers un registre |
 | `docker search <test>` | Rechercher une image sur le registre officiel |
@@ -79,6 +85,8 @@ Docker est une plateforme pour lancer des applications dans des conteneurs logic
 | `docker logout` | Se déconnecter d'un registre |
 | `docker save <user>/<repository>:<tag>` | Exporter une image/répertoire en tant qu'archive tar |
 | `docker load` | Charger des images à partir d'une archive tar |
+| `docker build -t node-test:latest .` | Construire une image Docker à partir d'un fichier Dockerfile |
+| `docker build -t node-test:1.0.0 .` | Construire l'image avec un nom et une version spécifique |
 
 ## VOLUMES
 | Command | Description |
@@ -91,5 +99,14 @@ Docker est une plateforme pour lancer des applications dans des conteneurs logic
 | `docker volume prune` | Supprimer tous les volumes non référencés |
 | `docker run --rm --volumes-from <container> -v $(pwd):/backup busybox tar cvfz /backup/backup.tar.gz <container-path>` | Sauvegarder un conteneur |
 | `docker run --rm --volumes-from <container> -v $(pwd):/backup busybox sh -c "cd <container-path> && tar xvfz /backup/backup.tar.gz --strip 1"` | Restaurer un conteneur à partir d'une sauvegarde |
+| `docker run -it -v "./app:/app//" node-test bash` | Lancer l'image en montant un volume |
+| `docker run -it -v "./pwa:/pwa" node-test bash` | Lancer l'image avec un autre volume |
+| `docker run -it -v "./app:/app" ubuntu bash` | Lancer l'image Ubuntu avec un volume |
+
+## DIVERS
+| Command + option | Description |
+| :--------------: | :---------: |
+| `uname -a` | Version Linux du container |
+| `docker-compose up` |	Lancer les services définis dans docker-compose |
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

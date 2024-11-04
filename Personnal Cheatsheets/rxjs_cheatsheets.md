@@ -1,7 +1,8 @@
 # RXJS
 
 ## INTRODUCTION
-RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour la programmation réactive utilisant des Observables, facilitant la composition de code asynchrone ou basé sur des événements. Elle permet de manipuler des flux de données asynchrones comme des collections, en utilisant des opérateurs puissants pour créer, transformer et combiner ces flux.
+RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour la programmation réactive utilisant des Observables, facilitant la composition de code asynchrone ou basé sur des événements. Elle permet de manipuler des flux de données asynchrones comme des collections, en utilisant des opérateurs puissants pour créer, transformer et combiner ces flux.  
+Le système se base sur une partie Observable et une partie Souscription, l'un envoie de l'information tandis que l'autre écoute et modifie.
 
 ## OPERATEURS
 | Opérateurs | Fonction |
@@ -38,5 +39,14 @@ RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour 
 | `forkJoin` | - Attendre que plusieurs appels API se terminent pour traiter leurs résultats ensemble. <br> - Dans une application de reporting, rassembler des informations provenant de plusieurs endpoints d'API avant de générer un rapport final. |
 | `take` | - Prendre uniquement les premiers résultats d'une requête, par exemple pour une prévisualisation. <br> - Limiter les notifications d'un Observable à une seule émission, comme un message de bienvenue au premier accès d'un utilisateur. |
 | `takeUntil` | - Annuler une requête de mise à jour de profil dès que l'utilisateur quitte la page. <br> - Interrompre un flux de données en direct (comme un chat) dès qu'un utilisateur se déconnecte. |
+
+## OBSERVABLE
+- Un Observable est une fonction pure qui prend en paramètre un observer.
+- Un Observable définit un concept d'échange d'informations autour d'une Souscription.
+- Un Observable pur est lazy, c.a.d qu'il ne démarre que lorsqu'un observer l'écoute.
+- Un Observable peut être écouté et l'écoute stoppée à volonté.
+
+## SOUSCRIPTION
+- 
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

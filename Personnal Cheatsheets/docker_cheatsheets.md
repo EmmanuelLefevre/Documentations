@@ -8,7 +8,7 @@ Docker est une plateforme pour lancer des applications dans des conteneurs logic
 | :---: | :---: |
 | `docker run <image>` | Démarrer un nouveau conteneur à partir d'une image |
 | `docker run -it <image>` | Démarrer un nouveau conteneur en mode interactif |
-| `docker run --rm <image>` | Démarrer un nouveau conteneur et le supprimer à sa sortie |
+| `docker run --rm <image>` | Démarrer un nouveau conteneur et le supprimer automatiquement à sa fin |
 | `docker run -it node:16` | Démarrer un nouveau conteneur Node V16 |
 | `docker run -it node-test:latest bash` | Démarrer un conteneur et ouvrir un terminal interactif dans celui-ci |
 | `docker run -it -d <image>` | Faire tourner en arrière plan une image |

@@ -11,11 +11,14 @@ Un Observable est un modèle de programmation orienté événements, qui permet 
 
 ## TYPES
 - **Observable plain**  
-Simple stream (mono-stream), un stream unique par observer, il faut souscrire pour recevoir => new Observable()
+Simple stream (mono-stream), un stream unique par observer, il faut souscrire pour recevoir =>  
+new Observable()
 - **Subject**  
-Multicast (multi-stream), un stream est partagé par les obervers, il fournit la même valeur à chacun => new Subject()
+Multicast (multi-stream), un stream est partagé par les obervers, il fournit la même valeur à chacun =>  
+new Subject()
 - **BehaviorSubject**  
-Multicast (multi-stream) avec une valeur de départ, transmise quand on souscrit => new BehaviorSubject()
+Multicast (multi-stream) avec une valeur de départ, transmise quand on souscrit =>  
+new BehaviorSubject()
 
 ## METHODES DE NOTIFICATION
 Les Observables utilisent principalement quatre méthodes pour transmettre des informations à leurs observers, chacune remplissant un rôle distinct dans la gestion du flux de données.

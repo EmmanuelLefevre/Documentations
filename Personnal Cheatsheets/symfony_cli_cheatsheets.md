@@ -80,4 +80,6 @@ Symfony est un ensemble de composants PHP ainsi qu'un framework MVC libre écrit
 | `php bin/console config:dump-reference`| Afficher la configuration par défaut d'un bundle spécifique |
 | `composer require friendsofsymfony/user-bundle:"version"`| Installer FosUserBundle à la version spécifique |
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

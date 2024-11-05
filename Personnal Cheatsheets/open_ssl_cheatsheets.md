@@ -56,4 +56,6 @@ OpenSSL est un ensemble d'outils de chiffrement comprenant deux bibliothèques, 
 | `openssl rand -out <file> 32` | Générer une chaîne binaire aléatoire et l'enregistrer dans un fichier |
 | `openssl rand -hex 32` | Générer une chaîne hexadécimale aléatoire |
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

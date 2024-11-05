@@ -27,4 +27,6 @@ SQLite est une bibliothèque écrite en langage C qui fournit un moteur de base 
 | `.restore <file>` | Restaurer une base de données à partir d'un fichier |
 | `.dump` | Dumper la base de données sous forme d'instructions SQL |
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

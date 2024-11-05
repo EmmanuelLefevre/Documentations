@@ -77,4 +77,6 @@
 |`511`|Network Authentication Required|Indique que le client doit s'authentifier pour obtenir l'accès au réseau|
 |`599`|Network Connect Timeout Error|La connexion a expiré en raison d'un serveur surchargé, d'une erreur matérielle ou d'une erreur d'infrastructure|
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

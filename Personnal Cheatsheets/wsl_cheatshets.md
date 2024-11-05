@@ -28,5 +28,7 @@ Windows Subsystem for Linux (WSL) est une couche de compatibilité permettant d'
 | `netsh advfirewall firewall delete rule name=$port` | Supprimer la règle de pare-feu |
 | `netsh interface portproxy show v4tov4` | Afficher les transferts de port |
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
 

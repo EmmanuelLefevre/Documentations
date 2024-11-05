@@ -84,4 +84,6 @@ SQL (Structured Query Language) est un langage informatique standardisé utilis�
 | `REVOKE ALL PRIVILEGES ON <db> FROM '<user>'@'<host>'` | Révoquer tous les privilèges d'un utilisateur |
 | `FLUSH PRIVILEGES` | Recharger les privilèges des tables de droits |
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

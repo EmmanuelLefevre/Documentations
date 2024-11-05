@@ -65,8 +65,10 @@ Chaque observer obtient ainsi sa propre instance du flux de données, ce qui sig
 Les Cold Observables sont souvent utilisés pour des opérations qui doivent être exécutées à chaque nouvelle souscription, comme les appels HTTP ou la lecture d’un fichier.  
 
 **Exemple :**  
-```javascript
-const coldObservable = new Observable((observer) => {
+```typescript
+import { Observable } from 'rxjs';
+
+const coldObservable = new Observable<number>((observer) => {
   observer.next(Math.random()); // Produit une nouvelle valeur à chaque souscription
   observer.complete();
 });
@@ -82,8 +84,10 @@ Dans ce cas, l'Observable "chauffe" (d'où le terme hot) avant l’arrivée des 
 Les Hot Observables sont souvent utilisés dans des situations où les données sont générées de manière continue et doivent être partagées, comme les événements utilisateur, les WebSockets, ou les flux de capteurs.  
 
 **Exemple :**  
-```javascript
-const subject = new Subject();
+```typescript
+import { Subject } from 'rxjs';
+
+const subject = new Subject<number>();
 
 subject.subscribe(value => console.log('Observer 1:', value));
 

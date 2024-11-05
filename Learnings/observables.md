@@ -36,9 +36,25 @@ La méthode throw peut être utilisée pour signaler une erreur de manière expl
 La méthode complete est appelée lorsqu’un Observable a terminé d’émettre des valeurs, indiquant qu’il n’y aura plus de données futures à transmettre. Cette notification met fin à la souscription et signifie aux observers que le flux est arrivé à son terme sans erreurs. Elle est particulièrement utile pour indiquer la fin de tâches finies, comme des appels d'API ou des traitements de données.
 
 ## SOUSCRIPTION
+### Callback
+```javascript
+const subscription = observable.subscribe(
+  value => console.log(value),       // next
+  error => console.log(error),       // error
+  () => console.log("complete.."),   // complete
+);
+```
+### Object
+```javascript
+const subscription = observable.subscribe({
+  next: value => console.log(value),           // next
+  error: error => console.log(error),          // error
+  complete: () => console.log("complete.."),   // complete
+)};
+```
 
-⚠️ Penser à se désabonner (unsubscribe) afin d'éviter les fuites de mémoires! ⚠️  
-**Exception :** lors de l'utilisation du pipe async dans un template Angular, en effet celui-ci se désabonne automatiquement lors de la destruction du composant...
+⚠️ Penser à se désabonner (unsubscribe) afin d'éviter les fuites de mémoires (l'Observable continue à émettre même après la destruction du composant)! ⚠️  
+**Exception :** lors de l'utilisation du pipe async dans un template Angular. En effet celui-ci gère automatiquement la souscription et le désabonnement, lorsqu'un composant Angular est détruit, le pipe async se désabonne automatiquement de l'Observable.
 
 ## HOT/COLD
 En RxJS, les concepts de "hot" et "cold" Observables permettent de comprendre comment un Observable émet des données et de quelle façon celles-ci sont perçues par les observers qui s'y souscrivent.  

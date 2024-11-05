@@ -40,7 +40,7 @@ const coldObservable = new Observable<number>((observer) => {
 // Souscription à l'Observable
 coldObservable.subscribe(value => console.log('Observer 1:', value));
 coldObservable.subscribe(value => console.log('Observer 2:', value));
-// Chaque observateur reçoit une valeur différente car l'Observable est "froid".
+// Chaque Observer reçoit une valeur différente car l'Observable est "froid".
 ```
 
 - **Subject**  
@@ -56,11 +56,11 @@ const subject = new Subject<number>();
 subject.subscribe(value => console.log('Observer 1:', value));
 
 // Émettre une valeur immédiatement
-subject.next(Math.random());          // Les observateurs reçoivent la valeur émise
+subject.next(Math.random());          // Les Observers reçoivent la valeur émise
 
-// Souscription d'un deuxième observateur
+// Souscription d'un second Observer
 subject.subscribe(value => console.log('Observer 2:', value));
-subject.next(Math.random());          // Tous les observateurs reçoivent la même valeur
+subject.next(Math.random());          // Tous les Observers reçoivent la même valeur
 ```
 
 - **BehaviorSubject**  
@@ -75,12 +75,12 @@ const behaviorSubject = new BehaviorSubject<number>(Math.random());       // Val
 // Souscription au BehaviorSubject
 behaviorSubject.subscribe(value => console.log('Observer 1:', value));
 
-// Émettre une nouvelle valeur
+// Émettre la nouvelle valeur
 behaviorSubject.next(Math.random());
 
-// Souscription d'un deuxième observateur
+// Souscription d'un second Observer
 behaviorSubject.subscribe(value => console.log('Observer 2:', value));
-// Le deuxième observateur reçoit immédiatement la dernière valeur émise.
+// Le second Observer reçoit immédiatement la dernière valeur émise.
 ```
 
 ## SOUSCRIPTION

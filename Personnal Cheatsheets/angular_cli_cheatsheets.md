@@ -55,4 +55,6 @@ ng serve -o --port 4001
 ## COMPODOC URL
 [Compodoc](http://localhost:8080)
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

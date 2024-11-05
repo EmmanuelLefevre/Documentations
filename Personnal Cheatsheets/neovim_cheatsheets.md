@@ -83,4 +83,6 @@ Si flèches du clavier ne fonctionnent pas!
 | :--------------: | :------------------: |
 |`:set numéro`|Afficher numéro des lignes|
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

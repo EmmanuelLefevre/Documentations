@@ -44,4 +44,6 @@
 | `%RANDOM%` | Afficher un nombre aléatoire de 0 à 32767. |
 | `%OS%` | Windows_NT |
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

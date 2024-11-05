@@ -73,6 +73,18 @@
 - **Reporting et analytics avancés :** Des requêtes analytiques complexes et des rapports basés sur des jointures multiples.
 - **Standardisation et conformité :** Environnements où des normes strictes de conformité et de sécurité des données doivent être respectées.
 
+## Théorème de CAP
+🛠️ Le théorème de CAP (ou théorème de Brewer) est un principe fondamental en informatique distribué qui stipule qu'un système de base de données distribuée ne peut garantir simultanément que deux des trois propriétés suivantes en fonction des besoins spécifiques de l'application.  
+
+**Consistency (cohérence):**  
+Toutes les copies des données sont cohérentes et synchronisées à chaque opération. Autrement dit, chaque lecture renvoie toujours les mêmes données, quel que soit le noeud interrogé.  
+
+**Availability (disponibilité):**  
+Le système répond à chaque requête, même si certaines données ou noeuds sont indisponibles. Cela signifie qu'il y a toujours une réponse, même en cas de défaillance.  
+
+**Partition tolerance (tolérance au partitionnement):**  
+Le système continue de fonctionner, même en cas de perte ou de retard de communication entre certains noeuds du réseau. En cas de partitionnement, les données restent accessibles sur les noeuds disponibles.  
+
 ![Schéma théorème de CAP](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/cap_bdd.png)  
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

@@ -29,6 +29,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `take` | Limiter le nombre d’émissions d’un Observable à un certain nombre d'événements. |
 | `takeUntil` | Emettre des valeurs jusqu'à ce qu'un autre Observable émette une valeur. |
 | `pluck` | Extraire une propriété spécifiée d'un objet émis par un Observable. |
+| `reduce` | Accumuler les valeurs d'un Observable pour produire une seule valeur finale (selon une fonction d’accumulation spécifiée). | 
 
 ## CAS D'USAGE
 | Opérateurs | Cas d'usage |
@@ -53,6 +54,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `take` | - Prendre uniquement les premiers résultats d'une requête, par exemple pour une prévisualisation. <br> - Limiter les notifications d'un Observable à une seule émission, comme un message de bienvenue au premier accès d'un utilisateur. |
 | `takeUntil` | - Annuler une requête de mise à jour de profil dès que l'utilisateur quitte la page. <br> - Interrompre un flux de données en direct (comme un chat) dès qu'un utilisateur se déconnecte. |
 | `pluck` | - Extraire la propriété `name` d'un tableau d'objets utilisateurs. <br> - Extraire la valeur d'un input spécifique à partir d'un formulaire contenant plusieurs inputs. |
+| `reduce` | - Accumuler les scores de différentes parties pour obtenir le score final dans un jeu. <br> - Calculer la somme des montants de transactions financières d'un utilisateur pour obtenir le total des dépenses. |
 
 ## RESSOURCES UTILES
 [Reactive How](https://reactive.how/)  

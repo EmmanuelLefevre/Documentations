@@ -16,4 +16,6 @@ MySQL est un système de gestion de bases de données relationnelles (RDBMS). Il
 | `mysqldump -u root -p <database> > backup.sql` | Sauvegarder une base de données dans un fichier |
 | `mysql -u root -p <database> < backup.sql` | Restaurer une base de données à partir d'un fichier |
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

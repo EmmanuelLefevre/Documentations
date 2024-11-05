@@ -35,6 +35,49 @@ La méthode throw peut être utilisée pour signaler une erreur de manière expl
 - **complete()**  
 La méthode complete est appelée lorsqu’un Observable a terminé d’émettre des valeurs, indiquant qu’il n’y aura plus de données futures à transmettre. Cette notification met fin à la souscription et signifie aux observers que le flux est arrivé à son terme sans erreurs. Elle est particulièrement utile pour indiquer la fin de tâches finies, comme des appels d'API ou des traitements de données.
 
+## HOT/COLD
+En RxJS, les concepts de "hot" et "cold" Observables permettent de comprendre comment un Observable émet des données et de quelle façon celles-ci sont perçues par les observers qui s'y souscrivent.  
+
+### Cold
+Un Cold Observable est un Observable paresseux (lazy), qui ne commence à émettre des données que lorsque l’on y souscrit.  
+Chaque observer obtient ainsi sa propre instance du flux de données, ce qui signifie que chaque nouvelle souscription démarre un flux indépendant des autres.  
+Les Cold Observables sont souvent utilisés pour des opérations qui doivent être exécutées à chaque nouvelle souscription, comme les appels HTTP ou la lecture d’un fichier.  
+
+**Exemple :**  
+```javascript
+const coldObservable = new Observable((observer) => {
+  observer.next(Math.random()); // Produit une nouvelle valeur à chaque souscription
+  observer.complete();
+});
+
+coldObservable.subscribe(value => console.log('Observer 1:', value));
+coldObservable.subscribe(value => console.log('Observer 2:', value));
+// Les deux observers recevront des valeurs différentes, car le flux est relancé pour chaque souscription.
+```
+
+### Hot
+Un Hot Observable est un Observable qui commence à émettre des données immédiatement, indépendamment des souscriptions. Tous les observers qui s’y souscrivent reçoivent les mêmes valeurs au même moment.  
+Dans ce cas, l'Observable "chauffe" (d'où le terme hot) avant l’arrivée des observers, et ces derniers peuvent manquer des valeurs s’ils se souscrivent tardivement.  
+Les Hot Observables sont souvent utilisés dans des situations où les données sont générées de manière continue et doivent être partagées, comme les événements utilisateur, les WebSockets, ou les flux de capteurs.  
+
+**Exemple :**  
+```javascript
+const subject = new Subject();
+
+subject.subscribe(value => console.log('Observer 1:', value));
+
+subject.next(Math.random()); // Valeur émise immédiatement
+
+subject.subscribe(value => console.log('Observer 2:', value));
+// Les deux observers recevront la même valeur si souscrits avant l'émission.
+```
+
+### Différences clés entre Cold et Hot Observables
+| Type | Emission | Flux indépendant par observer | Synchronisation des valeurs |
+| :---: | :---: | :---: | :---: |
+| `Cold` | Au moment de la souscription. | Oui | Non |
+| `Hot`| Dès le démarrage de l’Observable. | Non | Oui, si souscrits avant émissions. |
+
 ***
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

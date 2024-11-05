@@ -57,7 +57,9 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 
 [RX Marble](https://rxmarbles.com/)  
 
-[Think RX](https://thinkrx.io/)
+[Think RX](https://thinkrx.io/)  
+
+[Reactive X](https://reactivex.io/)  
 
 ***
 

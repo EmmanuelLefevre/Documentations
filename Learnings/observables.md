@@ -9,8 +9,23 @@ Un Observable est un modèle de programmation orienté événements, qui permet 
 - Un Observable pur est lazy, c.a.d qu'il ne démarre que lorsqu'un Observer l'écoute.
 - Un Observable peut être écouté et l'écoute stoppée à volonté.
 
+## METHODES DE NOTIFICATION
+Les Observables utilisent principalement quatre méthodes pour transmettre des informations à leurs Observers, chacune remplissant un rôle distinct dans la gestion du flux de données.
+
+- **next(value)**  
+La méthode next est utilisée pour transmettre les valeurs au fur et à mesure de leur production. Chaque fois que l’Observable émet une valeur, elle est passée en argument de next, et chaque Observer souscrit recevra cette valeur en temps réel. Les Observers peuvent alors réagir à chaque émission, permettant un traitement continu et fluide des données reçues.
+
+- **error(error)**  
+La méthode error est appelée lorsque l'Observable rencontre une erreur irrécupérable. Cette méthode arrête immédiatement le flux de données en cours et signale l’erreur aux Observers. Ceux-ci peuvent alors gérer cette erreur dans une section de code dédiée, et l'Observable ne produira plus d'autres valeurs ni d'autres notifications après cette erreur.
+
+- **throw(error)**  
+La méthode throw peut être utilisée pour signaler une erreur de manière explicite dans un Observable ou dans un flux de données. Bien que throw ne soit pas toujours directement appelée dans un Observable, elle est souvent utilisée pour gérer les exceptions lors de la création des Observables personnalisés. Elle permet aux développeurs de définir des comportements d'erreur spécifiques.
+
+- **complete()**  
+La méthode complete est appelée lorsqu’un Observable a terminé d’émettre des valeurs, indiquant qu’il n’y aura plus de données futures à transmettre. Cette notification met fin à la souscription et signifie aux Observers que le flux est arrivé à son terme sans erreurs. Elle est particulièrement utile pour indiquer la fin de tâches finies, comme des appels d'API ou des traitements de données.  
+
 ## TYPES
-- **Observable plain**  
+- **Plain Observable**  
 Simple stream (mono-stream) => stream unique par Observer, il faut souscrire pour recevoir. L'Observable commence à émettre des valeurs uniquement lorsqu'un Observer s'y abonne. Chaque souscription reçoit une nouvelle émission.  
 
 ```typescript
@@ -68,22 +83,8 @@ behaviorSubject.subscribe(value => console.log('Observer 2:', value));
 // Le deuxième observateur reçoit immédiatement la dernière valeur émise.
 ```
 
-## METHODES DE NOTIFICATION
-Les Observables utilisent principalement quatre méthodes pour transmettre des informations à leurs Observers, chacune remplissant un rôle distinct dans la gestion du flux de données.
-
-- **next(value)**  
-La méthode next est utilisée pour transmettre les valeurs au fur et à mesure de leur production. Chaque fois que l’Observable émet une valeur, elle est passée en argument de next, et chaque Observer souscrit recevra cette valeur en temps réel. Les Observers peuvent alors réagir à chaque émission, permettant un traitement continu et fluide des données reçues.
-
-- **error(error)**  
-La méthode error est appelée lorsque l'Observable rencontre une erreur irrécupérable. Cette méthode arrête immédiatement le flux de données en cours et signale l’erreur aux Observers. Ceux-ci peuvent alors gérer cette erreur dans une section de code dédiée, et l'Observable ne produira plus d'autres valeurs ni d'autres notifications après cette erreur.
-
-- **throw(error)**  
-La méthode throw peut être utilisée pour signaler une erreur de manière explicite dans un Observable ou dans un flux de données. Bien que throw ne soit pas toujours directement appelée dans un Observable, elle est souvent utilisée pour gérer les exceptions lors de la création des Observables personnalisés. Elle permet aux développeurs de définir des comportements d'erreur spécifiques.
-
-- **complete()**  
-La méthode complete est appelée lorsqu’un Observable a terminé d’émettre des valeurs, indiquant qu’il n’y aura plus de données futures à transmettre. Cette notification met fin à la souscription et signifie aux Observers que le flux est arrivé à son terme sans erreurs. Elle est particulièrement utile pour indiquer la fin de tâches finies, comme des appels d'API ou des traitements de données.
-
 ## SOUSCRIPTION
+Lorsqu'un Observer s'abonne à un Observable, il utilise l'une des deux méthodes suivantes :  
 ### Callback
 ```javascript
 const subscription = observable.subscribe(

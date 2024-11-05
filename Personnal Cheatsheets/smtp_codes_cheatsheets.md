@@ -25,4 +25,6 @@
 | `553` | Action demandée non effectuée - nom de boîte aux lettres non autorisé |
 | `554` | Transaction échouée |
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

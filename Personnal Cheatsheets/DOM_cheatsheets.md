@@ -123,5 +123,6 @@ Le DOM (Document Object Model) est une interface de programmation permettant de 
 | `element.nextSibling` | Noeud suivant dans l’arborescence. |
 | `element.previousSibling` | Noeud précédent dans l’arborescence. |
 
+***
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

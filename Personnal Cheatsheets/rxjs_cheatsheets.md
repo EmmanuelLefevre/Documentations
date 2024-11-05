@@ -2,7 +2,9 @@
 
 ## INTRODUCTION
 RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour la programmation réactive utilisant des Observables, facilitant la composition de code asynchrone ou basé sur des événements. Elle permet de manipuler des flux de données asynchrones comme des collections, en utilisant des opérateurs puissants pour créer, transformer et combiner ces flux.  
-Le système se base sur une partie Observable et une partie Souscription, l'un envoie de l'information tandis que l'autre écoute et modifie.
+Le système se base sur une partie Observable et une partie Souscription, l'un envoie de l'information tandis que l'autre écoute et modifie.  
+
+[RxJS Documentation](https://rxjs.dev/)
 
 ## OPERATEURS
 | Opérateurs | Fonction |
@@ -43,6 +45,13 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `take` | - Prendre uniquement les premiers résultats d'une requête, par exemple pour une prévisualisation. <br> - Limiter les notifications d'un Observable à une seule émission, comme un message de bienvenue au premier accès d'un utilisateur. |
 | `takeUntil` | - Annuler une requête de mise à jour de profil dès que l'utilisateur quitte la page. <br> - Interrompre un flux de données en direct (comme un chat) dès qu'un utilisateur se déconnecte. |
 | `fromEvent` | - Créer un Observable qui émet des événements de clic sur un bouton pour déclencher des actions spécifiques dans l'interface utilisateur.  <br> - Ecouter les événements de saisie sur un champ de texte pour mettre à jour instantanément les données affichées à l'utilisateur. |
+
+## RESSOURCES UTILES
+[Reactive How](https://reactive.how/)  
+
+[RX Marble](https://rxmarbles.com/)  
+
+[Think RX](https://thinkrx.io/)
 
 ***
 

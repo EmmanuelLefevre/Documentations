@@ -1,12 +1,14 @@
 # OBSERVABLES
 
 ## INTRODUCTION
-Un Observable est un modèle de programmation orienté événements, qui permet de gérer et de réagir aux flux de données asynchrones. Ce concept repose sur l'échange d’informations entre un Observable et un Observer (ou abonné). Un Observable, une fois instancié, reste inactif tant qu'aucun Observer ne s'est souscrit pour écouter ses émissions, ce qui rend son fonctionnement lazy (paresseux). Lorsqu'un Observer souscrit, l'Observable commence alors à émettre les valeurs, erreurs ou signaux de complétion, auxquels l'Observer peut réagir en temps réel. Ce modèle est essentiel pour développer des applications réactives, notamment dans le traitement de données, les interfaces utilisateurs et les appels réseaux.
+Un Observable est un modèle de programmation orienté événements, qui permet de gérer et de réagir aux flux/stream de données asynchrones. Ce concept repose sur l'échange d’informations entre un Observable et un Observer (ou abonné).  
+Lorsqu'un Observer souscrit, l'Observable commence alors à émettre des valeurs (sauf dans le cas d'un Observable Hot où l'Observable émet dès son instanciation), ainsi que des erreurs ou signaux de complétion, auxquels l'Observer peut réagir en temps réel.  
+Ce modèle est essentiel pour développer des applications réactives, notamment dans le traitement de données, les interfaces utilisateurs et les appels réseaux.
 
 ## DEFINITION
 - Un Observable est une fonction pure qui prend en paramètre un Observer.
 - Un Observable définit un concept d'échange d'informations autour d'une Souscription.
-- Un Observable pur est lazy, c.a.d qu'il ne démarre que lorsqu'un Observer l'écoute.
+- Un Observable pur est lazy, c.a.d qu'une fois instancié il reste inactif tant qu'aucun Observer ne s'est souscrit pour écouter ses émissions.
 - Un Observable peut être écouté et l'écoute stoppée à volonté.
 
 ## METHODES DE NOTIFICATION

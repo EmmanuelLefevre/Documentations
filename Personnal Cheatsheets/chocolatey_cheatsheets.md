@@ -17,4 +17,6 @@ Chocolatey est un gestionnaire de packages et un installateur de ligne de comman
 | `choco outdated --local-only` | Répertorier les packages obsolètes installés localement |
 | `choco upgrade all --local-only` | MAJ tous les packages installés localement |
 
+***
+
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

@@ -26,6 +26,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `forkJoin` | Attendre que tous les Observables terminent pour émettre les derniers résultats. |
 | `take` | Limiter le nombre d’émissions d’un Observable à un certain nombre d'événements. |
 | `takeUntil` | Emettre des valeurs jusqu'à ce qu'un autre Observable émette une valeur. |
+| `pluck` | Extraire une propriété spécifiée d'un objet émis par un Observable. |
 
 ## CAS D'USAGE
 | Opérateurs | Cas d'usage |
@@ -47,6 +48,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `forkJoin` | - Attendre que plusieurs appels API se terminent pour traiter leurs résultats ensemble. <br> - Dans une application de reporting, rassembler des informations provenant de plusieurs endpoints d'API avant de générer un rapport final. |
 | `take` | - Prendre uniquement les premiers résultats d'une requête, par exemple pour une prévisualisation. <br> - Limiter les notifications d'un Observable à une seule émission, comme un message de bienvenue au premier accès d'un utilisateur. |
 | `takeUntil` | - Annuler une requête de mise à jour de profil dès que l'utilisateur quitte la page. <br> - Interrompre un flux de données en direct (comme un chat) dès qu'un utilisateur se déconnecte. |
+| `pluck` | - Extraire la propriété `name` d'un tableau d'objets utilisateurs. <br> - Extraire la valeur d'un input spécifique à partir d'un formulaire contenant plusieurs inputs. |
 
 ## RESSOURCES UTILES
 [Reactive How](https://reactive.how/)  

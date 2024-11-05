@@ -14,6 +14,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `from` | Créer un Observable à partir d'un tableau, d'un objet ou d'une promesse. |
 | `pipe` | Chaîner plusieurs opérateurs et appliquer des transformations successives sur un Observable. |
 | `map` | Transformer les valeurs émises par un Observable en un nouvel Observable (en appliquant une fonction). |
+| `merge` | Combiner plusieurs Observables en un seul Observable (sans se soucier de l'ordre d'émission des valeurs). |
 | `mergeMap` | Transformer les valeurs d'un Observable en un autre Observable et fusionner les résultats. |
 | `switchMap` | Annuler les anciennes requêtes et ne garder que la dernière lorsque de nouvelles valeurs sont émises. |
 | `exhaustMap` | Ignorer les nouvelles valeurs tant que l'Observable interne est actif et donc le traitement actuel non terminé. |
@@ -36,6 +37,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `from` | - Créer un Observable à partir d'un tableau d'entiers pour émettre chaque élément en séquence. <br> - Convertir une promesse en un Observable, permettant de gérer les résultats ou les erreurs d'une opération asynchrone. |
 | `pipe` | - Gestion des appels HTTP avec la manipulation des réponses. <br> - Gérer les événements de saisie d'un formulaire en temps réel pour valider et transformer les données saisies par l'utilisateur avant de les soumettre. |
 | `map` | - Transformer les réponses d'une API pour ne retourner que les informations nécessaires. <br> - Extraire des propriétés spécifiques d'objets dans un tableau pour effectuer des calculs ou des affichages. |
+| `merge` | - Émettre les résultats de plusieurs requêtes HTTP en parallèle et traiter les réponses lorsque toutes sont terminées. <br> - Fusionner les valeurs d'Observables émis par plusieurs capteurs dans une application IoT. |
 | `mergeMap` | - Effectuer des requêtes parallèles basées sur les valeurs d'un Observable sans avoir besoin de gérer l'ordre d'éxécution. <br> - Uploader plusieurs fichiers au fil du temps (sans se soucier de l'ordre) de manière asynchrone et indépendante sans annuler l'upload précedent. |
 | `switchMap` | - Lorsqu'un utilisateur modifie rapidement un champ de filtrage, switchMap peut être utilisé pour obtenir et afficher uniquement les résultats de la dernière recherche. <br> - Lors de l'abonnement à des notifications en temps réel, se désabonner des anciennes notifications lorsque l'utilisateur change de catégorie, ne recevant que celles de la catégorie actuellement sélectionnée. |
 | `exhaustMap` | - Si l'utilisateur clique trop rapidement sur un bouton de suppression, les clics supplémentaires seront ignorés jusqu'à ce que la première opération de suppression soit terminée. Permet d'ignorer toutes les émissions tant que l'on a pas de retour de l'Observable. <br> - Gérer des tâches en arrière-plan qui ne peuvent pas être exécutées en parallèle. |

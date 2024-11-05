@@ -10,6 +10,8 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | Opérateurs | Fonction |
 | :---: | :---: |
 | `subscribe` | S'abonner à un Observable pour recevoir ses émissions. |
+| `fromEvent` | Créer un Observable à partir d'un DOM event. |
+| `from` | Créer un Observable à partir d'un tableau, d'un objet ou d'une promesse. |
 | `pipe` | Chaîner plusieurs opérateurs et appliquer des transformations successives sur un Observable. |
 | `map` | Transformer les valeurs émises par un Observable en un nouvel Observable (en appliquant une fonction). |
 | `mergeMap` | Transformer les valeurs d'un Observable en un autre Observable et fusionner les résultats. |
@@ -24,12 +26,13 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `forkJoin` | Attendre que tous les Observables terminent pour émettre les derniers résultats. |
 | `take` | Limiter le nombre d’émissions d’un Observable à un certain nombre d'événements. |
 | `takeUntil` | Emettre des valeurs jusqu'à ce qu'un autre Observable émette une valeur. |
-| `fromEvent` | Créer un Observable à partir d'un DOM event. |
 
 ## CAS D'USAGE
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
 | `subscribe` | - Recevoir les mises à jour en temps réel d'un flux de données (comme des messages dans une application de chat). <br> - Ecouter les changements d'état d'un Observable pour mettre à jour l'interface utilisateur, par exemple en affichant un indicateur de chargement pendant une opération asynchrone. |
+| `fromEvent` | - Créer un Observable qui émet des événements de clic sur un bouton pour déclencher des actions spécifiques dans l'interface utilisateur.  <br> - Ecouter les événements de saisie sur un champ de texte pour mettre à jour instantanément les données affichées à l'utilisateur. |
+| `from` | - Créer un Observable à partir d'un tableau d'entiers pour émettre chaque élément en séquence. <br> - Convertir une promesse en un Observable, permettant de gérer les résultats ou les erreurs d'une opération asynchrone. |
 | `pipe` | - Gestion des appels HTTP avec la manipulation des réponses. <br> - Gérer les événements de saisie d'un formulaire en temps réel pour valider et transformer les données saisies par l'utilisateur avant de les soumettre. |
 | `map` | - Transformer les réponses d'une API pour ne retourner que les informations nécessaires. <br> - Extraire des propriétés spécifiques d'objets dans un tableau pour effectuer des calculs ou des affichages. |
 | `mergeMap` | - Effectuer des requêtes parallèles basées sur les valeurs d'un Observable sans avoir besoin de gérer l'ordre d'éxécution. <br> - Uploader plusieurs fichiers au fil du temps (sans se soucier de l'ordre) de manière asynchrone et indépendante sans annuler l'upload précedent. |
@@ -44,7 +47,6 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `forkJoin` | - Attendre que plusieurs appels API se terminent pour traiter leurs résultats ensemble. <br> - Dans une application de reporting, rassembler des informations provenant de plusieurs endpoints d'API avant de générer un rapport final. |
 | `take` | - Prendre uniquement les premiers résultats d'une requête, par exemple pour une prévisualisation. <br> - Limiter les notifications d'un Observable à une seule émission, comme un message de bienvenue au premier accès d'un utilisateur. |
 | `takeUntil` | - Annuler une requête de mise à jour de profil dès que l'utilisateur quitte la page. <br> - Interrompre un flux de données en direct (comme un chat) dès qu'un utilisateur se déconnecte. |
-| `fromEvent` | - Créer un Observable qui émet des événements de clic sur un bouton pour déclencher des actions spécifiques dans l'interface utilisateur.  <br> - Ecouter les événements de saisie sur un champ de texte pour mettre à jour instantanément les données affichées à l'utilisateur. |
 
 ## RESSOURCES UTILES
 [Reactive How](https://reactive.how/)  

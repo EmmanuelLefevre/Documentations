@@ -20,6 +20,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `exhaustMap` | Ignorer les nouvelles valeurs tant que l'Observable interne est actif et donc le traitement actuel non terminé. |
 | `concatMap` | Transformer et concaténer les valeurs émises par un Observable de manière séquentielle. |
 | `filter` | Sélectionner uniquement les valeurs d'un Observable qui satisfont une condition spécifique. |
+| `every` | Vérifier si toutes les valeurs d'un Observable répondent à une condition et émettre un boolean. |
 | `catchError` | Gérer les erreurs émises par un Observable. |
 | `debounceTime` | Ignorer les valeurs émises par un Observable pendant une durée spécifiée. |
 | `tap` | Exécuter des actions externes pour les valeurs émises par un Observable sans altérer ces valeurs. |
@@ -43,6 +44,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `exhaustMap` | - Si l'utilisateur clique trop rapidement sur un bouton de suppression, les clics supplémentaires seront ignorés jusqu'à ce que la première opération de suppression soit terminée. Permet d'ignorer toutes les émissions tant que l'on a pas de retour de l'Observable. <br> - Gérer des tâches en arrière-plan qui ne peuvent pas être exécutées en parallèle. |
 | `concatMap` | - Garantir que des appels HTTP indépendants sont effectués un par un dans l'ordre dans lequel ils ont été émis. <br> - Envoyer des notifications séquentiellement en fonction des événements de l'utilisateur. |
 | `filter` | - Filtrer les clics sur des boutons spécifiques dans une interface utilisateur pour n'exécuter des actions que sur ceux marqués comme importants. <br> - Filtrer les données reçues d'un flux d'API pour n'afficher que les éléments qui répondent à un certain critère, comme les produits en stock dans un e-commerce. <br>  |
+| `every` | - Valider que tous les items d'un panier en ligne sont disponibles avant de finaliser une commande. <br> - Vérifier si toutes les valeurs d'un flux de notes d'étudiants sont au-dessus d'une certaine moyenne pour décider de la réussite globale. |
 | `catchError` | - Gérer les erreurs lors d'appels API en affichant un message d'erreur à l'utilisateur. <br> - Renvoyer une valeur par défaut lorsque la requête échoue, pour éviter de casser le flux de l'application. |
 | `debounceTime` | - Attendre que l'utilisateur ait terminé de saisir dans le champ de recherche afin de limiter le nombre d'appels API. <br> - Utiliser debounceTime pour gérer les entrées d'un formulaire afin de ne valider les données qu'une fois que l'utilisateur a cessé de saisir, évitant ainsi des validations répétées. |
 | `tap` | - Log les valeurs d'un Observable pour le débogage. <br> - Exécuter une fonction de notification à chaque émission. |

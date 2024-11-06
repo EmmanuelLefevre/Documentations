@@ -169,16 +169,15 @@ connectableObservable.connect();
 ```
 
 - **Tableau récapitulatif**  
-| Type                 | Stream       | Hot/Cold | Description                                           |
-|----------------------|--------------|----------|-------------------------------------------------------|
-| `Plain Observable`   | Mono-stream  | Cold     | Flux indépendant pour chaque abonné                   |
-| `Subject`            | Multi-stream | Hot      | Flux partagé pour tous les abonnés                    |
-| `BehaviorSubject`    | Multi-stream | Hot      | Flux partagé avec valeur initiale, conserve la dernière valeur |
-| `ReplaySubject`      | Multi-stream | Hot      | Flux partagé avec historique des valeurs émises       |
-| `AsyncSubject`       | Multi-stream | Hot      | Envoie uniquement la dernière valeur à la complétion  |
-| `ReplayObservable`   | Mono-stream  | Cold     | Flux individuel avec historique pour chaque abonné    |
-| `ConnectableObservable` | Multi-stream | Hot   | Flux partagé démarré manuellement pour tous les abonnés |
-
+| Type | Stream | Description |
+| :---: | :---: | :---: |
+| `Plain Observable` | Mono-stream | Flux indépendant pour chaque abonné. |
+| `Subject` | Multi-stream | Flux partagé pour tous les abonnés. |
+| `BehaviorSubject` | Multi-stream | Flux partagé avec valeur initiale, conserve la dernière valeur. |
+| `ReplaySubject` | Multi-stream | Flux partagé avec historique des valeurs émises. |
+| `AsyncSubject` | Multi-stream | Envoie uniquement la dernière valeur à la complétion. |
+| `ReplayObservable` | Mono-stream | Flux individuel avec historique pour chaque abonné. |
+| `ConnectableObservable` | Multi-stream | Flux partagé démarré manuellement pour tous les abonnés. |
 
 ## SOUSCRIPTION
 Lorsqu'un Observer s'abonne à un Observable, il utilise l'une des deux méthodes suivantes :  

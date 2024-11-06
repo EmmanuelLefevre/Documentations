@@ -28,7 +28,8 @@ La méthode complete est appelée lorsqu’un Observable a terminé d’émettre
 
 ## TYPES
 - **Plain Observable**  
-Simple stream (mono-stream) => stream unique par Observer, il faut souscrire pour recevoir. L'Observable commence à émettre des valeurs uniquement lorsqu'un Observer s'y abonne. Chaque souscription reçoit une nouvelle émission.  
+Simplecast (mono-stream) => stream unique par Observer, chaque souscription crée un flux indépendant et il faut souscrire pour recevoir.  
+Ce Cold Observable commence à émettre des valeurs uniquement lorsqu'un Observer s'y abonne et chaque souscription reçoit une nouvelle émission.  Utile pour des flux uniques, indépendants pour chaque abonné.  
 
 ```typescript
 import { Observable } from 'rxjs';
@@ -46,7 +47,8 @@ coldObservable.subscribe(value => console.log('Observer 2:', value));
 ```
 
 - **Subject**  
-Multicast (multi-stream) => stream partagé par les Observers (partage les mêmes émissions), il fournit la même valeur à chacun.  
+Multicast (multi-stream) => stream partagé par les Observers (partage le même flux/émissions), il fournit la même valeur à chacun.  
+Le Subject est un Observable spécial qui permet de partager les mêmes émissions entre tous les abonnés. Il est également utilisé pour transformer un flux mono-stream en multicast, permettant à plusieurs Observers de recevoir les mêmes valeurs au même moment.  
 
 ```typescript
 import { Subject } from 'rxjs';
@@ -58,21 +60,23 @@ const subject = new Subject<number>();
 subject.subscribe(value => console.log('Observer 1:', value));
 
 // Émettre une valeur immédiatement
-subject.next(Math.random());          // Les Observers reçoivent la valeur émise
+subject.next(Math.random());     // Les Observers reçoivent la valeur émise
 
 // Souscription d'un second Observer
 subject.subscribe(value => console.log('Observer 2:', value));
-subject.next(Math.random());          // Tous les Observers reçoivent la même valeur
+subject.next(Math.random());      // Tous les Observers reçoivent la même valeur
 ```
 
 - **BehaviorSubject**  
-Multicast (multi-stream) + valeur de départ transmise quand on souscrit. Nécessite une valeur initiale et émet la dernière valeur à tout nouvel Observable. Il est utile pour garder un état et émettre toujours la dernière valeur.  
+Multicast (multi-stream) => partage le même flux de données entre les abonnés avec une valeur initiale (valeur de départ transmise quand on souscrit + émet la dernière valeur à tout nouvel Observable).  
+Le BehaviorSubject conserve la dernière valeur émise et l'envoie immédiatement à tout nouvel abonné, même s'il s'est souscrit après des émissions.  
+Il est utile pour garder un état et émettre toujours la dernière valeur et c’est un excellent choix pour stocker et émettre des états partagés.  
 
 ```typescript
 import { BehaviorSubject } from 'rxjs';
 
 // Création d'un BehaviorSubject avec une valeur initiale
-const behaviorSubject = new BehaviorSubject<number>(Math.random());       // Valeur initiale
+const behaviorSubject = new BehaviorSubject<number>(Math.random());     // Valeur initiale
 
 // Souscription au BehaviorSubject
 behaviorSubject.subscribe(value => console.log('Observer 1:', value));
@@ -83,6 +87,51 @@ behaviorSubject.next(Math.random());
 // Souscription d'un second Observer
 behaviorSubject.subscribe(value => console.log('Observer 2:', value));
 // Le second Observer reçoit immédiatement la dernière valeur émise.
+```
+
+- **ReplaySubject**  
+Multicast (multi-stream) => émet les valeurs passées aux abonnés actuels et futurs jusqu'à une limite spécifiée.  
+Le ReplaySubject stocke un certain nombre de valeurs passées (ou toutes si non limité) et les envoie à tout nouvel abonné dès sa souscription. Idéal pour fournir un historique à ceux qui s’abonnent après certaines émissions.  
+
+```typescript
+import { AsyncSubject } from 'rxjs';
+
+// Création d'un AsyncSubject
+const asyncSubject = new AsyncSubject<number>();
+
+// Souscriptions
+asyncSubject.subscribe(value => console.log('Observer 1:', value));
+
+asyncSubject.next(1);
+asyncSubject.next(2);
+asyncSubject.next(3);     // Seule cette valeur sera envoyée lors du complete()
+asyncSubject.complete();
+
+asyncSubject.subscribe(value => console.log('Observer 2:', value));     // Reçoit également 3
+```
+
+- **AsyncSubject**  
+Multicast (multi-stream) => 
+Ce type n'envoie la dernière valeur émise aux abonnés qu'à la complétion de l'observable. Utile dans les cas où l'on souhaite n'envoyer qu'une seule fois un résultat final (ex: résultat d'un appel HTTP).  
+
+```typescript
+
+```
+
+- **ReplayObservable**  
+Multicast (multi-stream) => 
+Similaire au ReplaySubject, sauf qu'il s'agit d'un observable qui émet des valeurs spécifiques jusqu'à ce qu'il atteigne un certain point. Ce type d'observable est moins courant mais utile pour conserver un historique de valeurs sur une période définie.  
+
+```typescript
+
+```
+
+- **ConnectableObservable**  
+Simplecast (mono-stream) => 
+Un ConnectableObservable est un type d’Observable qui ne commence pas automatiquement à émettre des valeurs lors de la souscription, mais qui nécessite l'appel de la méthode connect() pour démarrer.  
+
+```typescript
+
 ```
 
 ## SOUSCRIPTION

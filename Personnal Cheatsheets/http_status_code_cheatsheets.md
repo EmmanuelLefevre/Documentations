@@ -4,10 +4,10 @@
 - [CATEGORIES](#categories)
 - [LISTE COMPLETE](#liste-complete)
   - [1xx - Informations](#1xx---informations)
-  - [2xx - Succès](#liste-complete)
-  - [3xx - Redirection](#liste-complete)
-  - [4xx - Erreur client](#liste-complete)
-  - [4xx - Erreur serveur](#liste-compserveur)
+  - [2xx - Succès](#2xx---succès)
+  - [3xx - Redirection](#3xx---redirection)
+  - [4xx - Erreur client](#4xx---erreur-client)
+  - [4xx - Erreur serveur](#5xx---erreur-serveur)
 ## CATEGORIES
 | Code | Description |
 | :---: | :---: |

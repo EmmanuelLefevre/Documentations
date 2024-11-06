@@ -5,7 +5,9 @@
 - [DEFINITION](#definition)
 - [METHODES DE NOTIFICATION](#methodes-de-notification)
 - [TYPES](#types)
-- [Plain Observable](#plain-observable)
+  - [Plain Observable](#plain-observable)
+  - [Subject](#subject)
+  - [BehaviorSubject](#behaviorsubject)
 
 ## INTRODUCTION
 Un Observable est un modèle de programmation orienté événements, qui permet de gérer et de réagir aux flux/stream de données asynchrones. Ce concept repose sur l'échange d’informations entre un Observable et un Observer (ou abonné).  

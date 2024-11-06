@@ -53,6 +53,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `exhaustMap` | Ignorer les nouvelles valeurs tant que l'Observable interne est actif et donc le traitement actuel non terminé. |
 | `combineLatest` | Combiner plusieurs Observables pour émettre les dernières valeurs de chacun d'eux. |
 | `forkJoin` | Attendre que tous les Observables terminent pour émettre les derniers résultats. |
+| `zip` | - Combiner plusieurs flux en un seul en associant les valeurs correspondantes à partir de chaque flux émis en parallèle. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
@@ -64,6 +65,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `exhaustMap` | - Si l'utilisateur clique trop rapidement sur un bouton de suppression, les clics supplémentaires seront ignorés jusqu'à ce que la première opération de suppression soit terminée. Permet d'ignorer toutes les émissions tant que l'on a pas de retour de l'Observable. <br> - Gérer des tâches en arrière-plan qui ne peuvent pas être exécutées en parallèle. |
 | `combineLatest` | - Combiner les valeurs de plusieurs champs de formulaire pour une validation dynamique. <br> - Émettre les dernières données d'une source de données combinée. |
 | `forkJoin` | - Attendre que plusieurs appels API se terminent pour traiter leurs résultats ensemble. <br> - Dans une application de reporting, rassembler des informations provenant de plusieurs endpoints d'API avant de générer un rapport final. |
+| `zip` | - Combiner les résultats de plusieurs appels API où chaque réponse doit être traitée en parallèle, comme récupérer les informations d'un utilisateur et de ses commandes dans une application. <br> - Combiner plusieurs flux de valeurs de formulaire utilisateur pour créer un objet de données cohérent à envoyer au serveur, par exemple, combiner les flux de nom, email et mot de passe dans un formulaire d'inscription. |
 
 ## OPERATEURS DE GESTION D'ERREURS
 ### **Opérateurs**
@@ -80,16 +82,12 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 ### **Opérateurs**
 | Opérateurs | Fonction |
 | :---: | :---: |
-| `debounce` | Créer un Observable qui attend un délai après la dernière émission avant d'émettre une nouvelle valeur (réduire les émissions successives). |
-| `debounceTime` | Ignorer les valeurs émises par un Observable pendant une durée spécifiée. |
 | `take` | Limiter le nombre d’émissions d’un Observable à un certain nombre d'événements. |
 | `takeUntil` | Emettre des valeurs jusqu'à ce qu'un autre Observable émette une valeur. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
-| `debounce` | - Limiter la fréquence des émissions dans des scénarios comme la recherche en temps réel, où l'utilisateur tape rapidement, en retardant l’émission jusqu’à ce qu’il cesse de taper. <br> - Réduire les actions répétitives dans des événements fréquents comme le redimensionnement de la fenêtre, en émettant uniquement après un délai d'inactivité. |
-| `debounceTime` | - Limiter les appels API dans des champs de recherche en n’envoyant un appel qu’après un délai fixe, lorsque l’utilisateur a cessé de taper. <br> - Gérer les entrées de formulaire en validant les données seulement après que l'utilisateur ait cessé de saisir pendant un délai spécifique, évitant ainsi des validations répétées. |
 | `take` | - Prendre uniquement les premiers résultats d'une requête, par exemple pour une prévisualisation. <br> - Limiter les notifications d'un Observable à une seule émission, comme un message de bienvenue au premier accès d'un utilisateur. |
 | `takeUntil` | - Annuler une requête de mise à jour de profil dès que l'utilisateur quitte la page. <br> - Interrompre un flux de données en direct (comme un chat) dès qu'un utilisateur se déconnecte. |
 
@@ -108,26 +106,99 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `scan` | - Calculer le solde courant d'un compte après chaque transaction, en émettant le solde mis à jour à chaque opération. <br> - Suivre la progression d'un téléchargement ou d'une série d'actions en mettant à jour l'état après chaque étape réussie. |
 | `every` | - Valider que tous les items d'un panier en ligne sont disponibles avant de finaliser une commande. <br> - Vérifier si toutes les valeurs d'un flux de notes d'étudiants sont au-dessus d'une certaine moyenne pour décider de la réussite globale. |
 
-## OPERATEURS DE FUSION
+## OPERATEURS DE TEMPORISATION
+Ces opérateurs permettent de gérer des comportements liés au temps, comme les retards ou la régulation de la fréquence des émissions.  
 ### **Opérateurs**
 | Opérateurs | Fonction |
 | :---: | :---: |
+| `debounce` | Créer un Observable qui attend un délai après la dernière émission avant d'émettre une nouvelle valeur (réduire les émissions successives). |
+| `debounceTime` | Ignorer les valeurs émises par un Observable pendant une durée spécifiée. |
+| `delay` | Retarder l'émission des valeurs d'un Observable d'un certain délai. |
+| `throttleTime` | Émettre une valeur à intervalle régulier en limitant la fréquence des émissions. |
+| `interval` | 	Créer un Observable qui émet des valeurs à intervalles réguliers. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
+| `debounce` | - Limiter la fréquence des émissions dans des scénarios comme la recherche en temps réel, où l'utilisateur tape rapidement, en retardant l’émission jusqu’à ce qu’il cesse de taper. <br> - Réduire les actions répétitives dans des événements fréquents comme le redimensionnement de la fenêtre, en émettant uniquement après un délai d'inactivité. |
+| `debounceTime` | - Limiter les appels API dans des champs de recherche en n’envoyant un appel qu’après un délai fixe, lorsque l’utilisateur a cessé de taper. <br> - Gérer les entrées de formulaire en validant les données seulement après que l'utilisateur ait cessé de saisir pendant un délai spécifique, évitant ainsi des validations répétées. |
+| `delay` | - Retarder une action dans un processus pour donner du temps avant d'effectuer une autre opération. <br> - Différer l'exécution d'un événement, par exemple, afficher une alerte après un délai spécifique. |
+| `throttleTime` | - Limiter les appels API fréquents pour éviter une surcharge du serveur. <br> - Limiter la fréquence de recherche dans une barre de recherche, ne permettant de lancer la recherche que toutes les 500ms, même si l'utilisateur tape plus rapidement. |
+| `interval` | - Créer un Observable pour des tâches récurrentes, comme une mise à jour d'interface à intervalle régulier. <br> - Créer un Observable qui émet un événement toutes les 10 secondes pour surveiller l'état de l'application en arrière-plan. |
 
-## OPERATEURS DE SYNCHRONISATION
+## OPERATEURS DE MULTICAST
+Ces opérateurs permettent de créer des flux partagés qui ne réémettent pas les mêmes valeurs pour chaque abonné.  
 ### **Opérateurs**
 | Opérateurs | Fonction |
 | :---: | :---: |
+| `share` | Partager un Observable entre plusieurs abonnés. |
+| `publish` | Convertir un Observable en un observable multicast en utilisant un sujet. |
+| `refCount` | Connecter un Observable multicast uniquement lorsque l'un des abonnés commence à s'abonner. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
+| `share` | - Partager une source de données entre plusieurs abonnés sans refaire les calculs ou les requêtes. <br> - Partager un stream de données entre plusieurs composants pour éviter les appels API redondants. |
+| `publish` | - Diffuser un flux à plusieurs observateurs tout en maintenant un contrôle sur le début et la fin du flux. <br> - Diffuser un flux de données à plusieurs observateurs après un certain événement déclencheur, comme un clic utilisateur. |
+| `refCount` | - Maintenir une connexion ouverte pendant que des abonnés sont présents et la fermer lorsque tous les abonnés se désabonnent. <br> - Maintenir une connexion WebSocket active tant qu'il y a des abonnés et la fermer dès que tous se désabonnent. |
 
+## OPERATEURS DE MEMORISATION ET DE CACHING
+Ces opérateurs sont utiles pour mémoriser les résultats des Observables afin d'éviter de recalculer ou de recharger des données à chaque émission.  
+### **Opérateurs**
 | Opérateurs | Fonction |
 | :---: | :---: |
+| `share` | Partager et mémoriser les dernières valeurs émises d'un Observable pour les nouveaux abonnés. |
+| `replay` | Mémoriser les résultats d'un Observable pour éviter les appels répétitifs. |
+
+### **Cas d'usage**
+| Opérateurs | Cas d'usage |
+| :---: | :--- |
+| `share` | - Mémoriser les derniers résultats d'une requête API pour qu'un nouvel abonné puisse les récupérer sans faire une nouvelle requête. <br> - Partager un flux de données entre plusieurs abonnés sans déclencher plusieurs exécutions de la source, comme pour une souscription à une connexion WebSocket. |
+| `replay` | - Stocker les résultats des appels d'API pour éviter des répétitions inutiles et améliorer la réactivité de l'application. <br> - Permettre à de nouveaux abonnés d'accéder aux dernières valeurs d'un flux (comme les messages d'une discussion en temps réel) même s'ils rejoignent après qu'une partie de ces messages ait été émise. |
+
+## OPERATEURS DE GESTION DE LA CONCURRENCE
+Ces opérateurs permettent de contrôler la manière dont plusieurs Observables s'exécutent en parallèle, de manière séquentielle ou contrôlée.
+### **Opérateurs**
+| Opérateurs | Fonction |
+| :---: | :---: |
+| `concatAll` | Transformer un Observable d'Observables en un seul Observable qui émet les résultats des Observables internes un par un. |
+| `mergeAll` | Combiner les résultats de plusieurs Observables internes, émettant les valeurs dès qu'elles sont disponibles, sans attendre. |
+| `switchAll` | Ne garder que le dernier Observable interne et ignorer les autres. |
+
+### **Cas d'usage**
+| Opérateurs | Cas d'usage |
+| :---: | :--- |
+| `concatAll` | - Exécuter une série de tâches de manière séquentielle, une à la fois. <br> - Traiter les requêtes de manière ordonnée, en attendant qu'une tâche se termine avant de commencer la suivante, comme dans un système de file d'attente. |
+| `mergeAll` | - Lancer plusieurs appels API en parallèle et récupérer les résultats dès qu'ils sont prêts. <br> - Exécuter plusieurs requêtes HTTP en parallèle et traiter les réponses au fur et à mesure qu'elles arrivent, comme pour des recherches simultanées dans différents services. |
+| `switchAll` | - Passer à un nouveau flux de données (comme un flux de recherche) et ignorer les précédents. <br> - Gérer un flux de navigation dans une application, où un utilisateur change fréquemment de page et seule la dernière demande doit être prise en compte. |
+
+## OPERATEURS DE CONTROLE D'ETAT
+Ces opérateurs sont utiles pour gérer des états internes en fonction des émissions de l'Observable.  
+### **Opérateurs**
+| Opérateurs | Fonction |
+| :---: | :---: |
+| `startWith` | Ajouter une valeur initiale avant la première émission de l'Observable. |
+| `endWith` | Ajouter une valeur finale après la dernière émission de l'Observable. |
+
+### **Cas d'usage**
+| Opérateurs | Cas d'usage |
+| :---: | :--- |
+| `startWith` | - Initialiser un formulaire avec des valeurs par défaut avant que l'utilisateur n'effectue une action. <br> - Déclencher un état initial dans une application avant que les données réelles soient chargées, comme afficher un indicateur de chargement au début d'une requête. |
+| `endWith` | - Ajouter une notification de fin après la fin d'un traitement dans un flux. <br> - Ajouter un message de confirmation ou une action finale après le traitement d'une série d'événements, comme un message "Opération terminée" après la soumission d'un formulaire. |
+
+## OPERATEURS DE FLUX ET D'AUDIT
+Ces opérateurs permettent d'examiner ou de traiter des valeurs d'Observables sans les altérer, souvent utilisés pour le debug. De plus ils sont souvent liés à la gestion du temps et de l'optimisation des flux d'événements.   
+### **Opérateurs**
+| Opérateurs | Fonction |
+| :---: | :---: |
+| `auditTime` | Emettre une valeur après un délai spécifié en attendant les émissions successives. |
+| `bufferTime` | Regrouper les valeurs émises par un Observable dans des fenêtres de temps spécifiées. |
+
+### **Cas d'usage**
+| Opérateurs | Cas d'usage |
+| :---: | :--- |
+| `auditTime` | - Auditer les événements pendant une période de temps définie, comme les clics de souris. <br> - Mesurer le temps écoulé entre les actions d'un utilisateur sur une interface pour ajuster la réactivité d'une application, comme pour l'optimisation des animations. |
+| `bufferTime` | - Regrouper des événements en lots pour les traiter en un seul paquet, comme des événements de saisie. <br> - Regrouper les messages de chat envoyés par un utilisateur en un seul envoi après une période d'inactivité, afin de réduire le nombre de requêtes serveur. |
 
 ## RESSOURCES UTILES
 [Reactive How](https://reactive.how/)  

@@ -9,7 +9,7 @@
 - [OPERATEURS DE FILTRAGE](#operateurs-de-filtrage)
 - [OPERATEURS DE GESTION D'ERREURS](#operateurs-de-gestion-derreurs)
 - [OPERATEURS D'ARRET](#operateurs-darret)
-- [OPERATEURS DE TEMPORISATION](#operateurs-de-tamporisation)
+- [OPERATEURS DE TEMPORISATION](#operateurs-de-temporisation)
 - [OPERATEURS DE MULTICAST](#operateurs-de-multicast)
 - [OPERATEURS DE MEMORISATION ET DE CACHING](#operateurs-de-memorisation-et-de-caching)
 - [OPERATEURS DE GESTION DE LA CONCURRENCE](#operateurs-de-gestion-de-la-concurrence)

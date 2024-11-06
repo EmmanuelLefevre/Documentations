@@ -104,6 +104,7 @@ const subscription = observable.subscribe({
 )};
 ```
 
+
 ⚠️ Pensez à vous désabonner avec unsubscribe() afin d'éviter les fuites de mémoire, car l'Observable peut continuer à émettre même après la fin du cycle de vie du composant qui l'utilise !  
 **Exception :** lors de l'utilisation du pipe async dans un template Angular. En effet celui-ci gère automatiquement la souscription et le désabonnement, lorsqu'un composant Angular est détruit, le pipe async se désabonne automatiquement de l'Observable.
 

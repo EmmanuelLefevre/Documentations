@@ -7,7 +7,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 [RxJS Documentation](https://rxjs.dev/)  
 
 ## SOMMAIRE
-- [OPERATEURS DE COMPOSITION](## OPERATEURS DE COMPOSITION)  
+- [OPERATEURS DE COMPOSITION](##OPERATEURS DE COMPOSITION)  
 - [OPERATEURS DE CREATION](#OPERATEURS DE CREATION)
 
 ## OPERATEURS DE COMPOSITION

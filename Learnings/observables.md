@@ -132,15 +132,24 @@ asyncSubject.subscribe(value => console.log('Observer 2:', value     // Reçoit 
 ```
 
 - **ReplayObservable**  
-Multicast (multi-stream) => 
-Similaire au ReplaySubject, sauf qu'il s'agit d'un observable qui émet des valeurs spécifiques jusqu'à ce qu'il atteigne un certain point. Ce type d'observable est moins courant mais utile pour conserver un historique de valeurs sur une période définie.  
+Simplecast (mono-stream) => chaque abonné reçoit un flux indépendant qui rejoue certaines valeurs historiques.  
+Bien que semblable au ReplaySubject, un ReplayObservable fournit un historique défini aux abonnés, mais reste un mono-stream. Il émet des valeurs spécifiques jusqu'à ce qu'il atteigne un certain point.  
+Ce type d'observable est moins courant mais utile pour conserver un historique de valeurs sur une période définie ou pour créer des flux personnalisés avec des valeurs répétées.  
 
 ```typescript
+import { of } from 'rxjs';
+import { replay } from 'rxjs/operators';
 
+// Création d'un ReplayObservable avec un historique
+const replayObservable = of(1, 2, 3).pipe(replay(2));
+
+// Chaque souscription reçoit un flux unique
+replayObservable.subscribe(value => console.log('Observer 1:', value));     // Reçoit [1, 2, 3]
+replayObservable.subscribe(value => console.log('Observer 2:', value));     // Reçoit [1, 2, 3]
 ```
 
 - **ConnectableObservable**  
-Simplecast (mono-stream) => 
+Multicast (multi-stream) => 
 Un ConnectableObservable est un type d’Observable qui ne commence pas automatiquement à émettre des valeurs lors de la souscription, mais qui nécessite l'appel de la méthode connect() pour démarrer.  
 
 ```typescript

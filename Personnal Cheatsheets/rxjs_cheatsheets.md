@@ -12,6 +12,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `subscribe` | S'abonner à un Observable pour recevoir ses émissions. |
 | `fromEvent` | Créer un Observable à partir d'un DOM event. |
 | `from` | Créer un Observable à partir d'un tableau, d'un objet ou d'une promesse. |
+| `of` | Créer un Observable qui émet une séquence définie de valeurs de manière synchrone et complète immédiatement. |
 | `pipe` | Chaîner plusieurs opérateurs et appliquer des transformations successives sur un Observable. |
 | `map` | Transformer les valeurs émises par un Observable en un nouvel Observable (en appliquant une fonction). |
 | `merge` | Combiner plusieurs Observables en un seul Observable (sans se soucier de l'ordre d'émission des valeurs). |
@@ -38,6 +39,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `subscribe` | - Recevoir les mises à jour en temps réel d'un flux de données (comme des messages dans une application de chat). <br> - Ecouter les changements d'état d'un Observable pour mettre à jour l'interface utilisateur, par exemple en affichant un indicateur de chargement pendant une opération asynchrone. |
 | `fromEvent` | - Créer un Observable qui émet des événements de clic sur un bouton pour déclencher des actions spécifiques dans l'interface utilisateur.  <br> - Ecouter les événements de saisie sur un champ de texte pour mettre à jour instantanément les données affichées à l'utilisateur. |
 | `from` | - Créer un Observable à partir d'un tableau d'entiers pour émettre chaque élément en séquence. <br> - Convertir une promesse en un Observable, permettant de gérer les résultats ou les erreurs d'une opération asynchrone. |
+| `of` | - Simuler une séquence de valeurs (comme des valeurs constantes ou des données de test) pour simplifier les tests sans appel asynchrone. <br> - Initialiser rapidement un Observable avec une ou plusieurs valeurs précises pour un flux synchronisé. |
 | `pipe` | - Gestion des appels HTTP avec la manipulation des réponses. <br> - Gérer les événements de saisie d'un formulaire en temps réel pour valider et transformer les données saisies par l'utilisateur avant de les soumettre. |
 | `map` | - Transformer les réponses d'une API pour ne retourner que les informations nécessaires. <br> - Extraire des propriétés spécifiques d'objets dans un tableau pour effectuer des calculs ou des affichages. |
 | `merge` | - Émettre les résultats de plusieurs requêtes HTTP en parallèle et traiter les réponses lorsque toutes sont terminées. <br> - Fusionner les valeurs d'Observables émis par plusieurs capteurs dans une application IoT. |

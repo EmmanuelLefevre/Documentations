@@ -1,5 +1,12 @@
 # OBSERVABLES
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [DEFINITION](#definition)
+- [METHODES DE NOTIFICATION](#methodes-de-notification)
+- [TYPES](#types)
+- [Plain Observable](#plain-observable)
+
 ## INTRODUCTION
 Un Observable est un modèle de programmation orienté événements, qui permet de gérer et de réagir aux flux/stream de données asynchrones. Ce concept repose sur l'échange d’informations entre un Observable et un Observer (ou abonné).  
 Lorsqu'un Observer souscrit, l'Observable commence alors à émettre des valeurs (sauf dans le cas d'un Observable Hot où l'Observable émet dès son instanciation), ainsi que des erreurs ou signaux de complétion, auxquels l'Observer peut réagir en temps réel.  

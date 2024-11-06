@@ -1,5 +1,20 @@
 # BOM
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [OBJECT WINDOW](#object-window)
+- [OBJECT NAVIGATOR](#object-navigator)
+- [OBJECT LOCATION](#object_location)
+- [OBJECT HISTORY](#object-history)
+- [OBJECT SCREEN](#object-screen)
+- [OBJECT LOCAL STORAGE](#object-local-storage)
+- [OBJECT SESSION STORAGE](#object-session-storage)
+- [OBJECT PERFORMANCE](#object-performance)
+- [OBJECT CONSOLE](#object-console)
+- [OBJECT NOTIFICATION](#object-notification)
+- [OBJECT GEOLOCATION](#object-geolocation)
+- [OBJECT WEB WORKERS](#object-web-workers)
+
 ## INTRODUCTION
 Le BOM (Browser Object Model) permet aux développeurs d'interagir avec le navigateur web et d'accéder à des fonctionnalités qui ne font pas partie du DOM (Document Object Model).
 

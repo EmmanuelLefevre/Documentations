@@ -8,6 +8,7 @@
   - [3xx - Redirection](#3xx---redirection)
   - [4xx - Erreur client](#4xx---erreur-client)
   - [5xx - Erreur serveur](#5xx---erreur-serveur)
+
 ## CATEGORIES
 | Code | Description |
 | :---: | :---: |

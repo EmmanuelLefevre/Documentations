@@ -29,7 +29,7 @@ La méthode complete est appelée lorsqu’un Observable a terminé d’émettre
 ## TYPES
 ### **Plain Observable**  
 Simple-cast (mono-stream) => stream unique par Observer, chaque souscription crée un flux indépendant et il faut souscrire pour recevoir.  
-Ce Cold Observable commence à émettre des valeurs uniquement lorsqu'un Observer s'y abonne et chaque souscription reçoit une nouvelle émission.  Utile pour des flux uniques, indépendants pour chaque abonné.  
+Cet Observable commence à émettre des valeurs uniquement lorsqu'un Observer s'y abonne et chaque souscription reçoit une nouvelle émission.  Utile pour des flux uniques, indépendants pour chaque abonné.  
 
 ```typescript
 import { Observable } from 'rxjs';

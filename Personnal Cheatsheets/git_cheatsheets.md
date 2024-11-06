@@ -1,5 +1,29 @@
 # GIT
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [COMMANDES UTILES](#commandes-utiles)
+  - [Version du logiciel](#version-du-logiciel)
+  - [Initialiser dépôt local](#initialiser-dépôt-local)
+  - [Utilisateur](#utilisateur)
+  - [Clone/Pull](#clonepull)
+  - [Synchronisation du distant sur le local](#synchronisation-du-distant-sur-le-local)
+  - [Reconfigurer dépôt distant](#reconfigurer-dépôt-distant)
+  - [Commit](#commit)
+  - [Historique](#historique)
+  - [Statut](#statut)
+  - [Branche](#branche)
+  - [Récupérer branches distantes](#récupérer-branches-distantes)
+  - [Fusionner](#fusionner)
+  - [Push](#push)
+  - [Rebase](#rebase)
+  - [Stash](#stash)
+  - [Diff](#diff)
+  - [Suivi (.gitignore)](#suivi-gitignore)
+  - [Conflits](#conflits)
+  - [Tags](#tags)
+- [RESSOURCES UTILES](#ressources-utiles)
+
 ## INTRODUCTION
 Git est un logiciel de gestion de versions décentralisé.
 
@@ -23,7 +47,7 @@ Git est un logiciel de gestion de versions décentralisé.
 |`git config user.name`| Afficher le nom d'utilisateur configuré|
 |`git config user.email`| Afficher l'adresse e-mail configurée|
 
-### Clone/Pull:
+### Clone/Pull
 | Command + option | Description |
 | :--------------: | :---------: |
 |`git clone https://github.com/user.name/nomRepo.git`|Cloner un dépôt distant vers son local|

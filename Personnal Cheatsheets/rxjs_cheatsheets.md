@@ -12,7 +12,7 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 | `subscribe` | S'abonner à un Observable pour recevoir ses émissions. |
 | `fromEvent` | Créer un Observable à partir d'un DOM event. |
 | `from` | Créer un Observable à partir d'un tableau, d'un objet ou d'une promesse. |
-| `of` | Créer un Observable qui émet une séquence définie de valeurs de manière synchrone et complète immédiatement. |
+| `of` | Créer un Observable qui émet une série de valeurs spécifiques de façon immédiate et synchrone, et se termine aussitôt. |
 | `pipe` | Chaîner plusieurs opérateurs et appliquer des transformations successives sur un Observable. |
 | `map` | Transformer les valeurs émises par un Observable en un nouvel Observable (en appliquant une fonction). |
 | `merge` | Combiner plusieurs Observables en un seul Observable (sans se soucier de l'ordre d'émission des valeurs). |

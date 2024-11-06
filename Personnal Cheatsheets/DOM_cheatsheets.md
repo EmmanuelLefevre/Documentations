@@ -12,7 +12,7 @@
   - [Ecran Tactile Events](#ecran-tactile-events)
 - [FONCTIONS UTILITAIRES DE FENETRE](#fonctions-utilitaires-de-fenetre)
 - [GESTION DU STYLE](#gestion-du-style)
-- [ GESTION DE L'ARBORESCENCE](#gestion-de-larborescence)
+- [GESTION DE L'ARBORESCENCE](#gestion-de-larborescence)
 
 ## INTRODUCTION
 Le DOM (Document Object Model) est une interface de programmation permettant de représenter et d'interagir avec les documents HTML et XML d'une page web. Il organise le document sous forme d'une structure hiérarchique d'objets, où chaque élément, attribut ou morceau de texte devient un noeud. Grâce au DOM, les développeurs peuvent accéder, modifier, ajouter ou supprimer des éléments de la page en temps réel, ce qui rend les interactions dynamiques possibles dans un navigateur. Le DOM permet également de gérer des événements, notamment ceux de la souris et du clavier, pour rendre les pages interactives.

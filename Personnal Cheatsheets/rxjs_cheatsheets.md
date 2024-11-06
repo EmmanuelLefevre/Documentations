@@ -1,16 +1,27 @@
 # RXJS
 
-## INTRODUCTION
-RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour la programmation réactive utilisant des Observables, facilitant la composition de code asynchrone ou basé sur des événements. Elle permet de manipuler des flux de données asynchrones comme des collections, en utilisant des opérateurs puissants pour créer, transformer et combiner ces flux.  
-Le système se base sur une partie Observable et une partie Souscription, l'un envoie de l'information tandis que l'autre écoute et modifie.  
-
-[RxJS Documentation](https://rxjs.dev/)  
-
 ## SOMMAIRE
 - [INTRODUCTION](#introduction)
 - [OPERATEURS DE COMPOSITION](#operateurs-de-composition)
 - [OPERATEURS DE CREATION](#operateurs-de-creation)
 - [OPERATEURS DE TRANSFORMATION](#operateurs-de-transformation)
+- [OPERATEURS DE COMBINAISON](#operateurs-de-combinaison)
+- [OPERATEURS DE FILTRAGE](#operateurs-de-filtrage)
+- [OPERATEURS DE GESTION D'ERREURS](#operateurs-de-gestion-derreurs)
+- [OPERATEURS D'ARRET](#operateurs-darret)
+- [OPERATEURS DE TEMPORISATION](#operateurs-de-tamporisation)
+- [OPERATEURS DE MULTICAST](#operateurs-de-multicast)
+- [OPERATEURS DE MEMORISATION ET DE CACHING](#operateurs-de-memorisation-et-de-caching)
+- [OPERATEURS DE GESTION DE LA CONCURRENCE](#operateurs-de-gestion-de-la-concurrence)
+- [OPERATEURS DE FLUX ET D'AUDIT](#operateurs-de-flux-et-daudit)
+- [OPERATEURS UTILITAIRES](#operateurs-utilitaires)
+- [RESSOURCES UTILES](#ressources-utiles)
+
+## INTRODUCTION
+RxJS (Reactive Extensions for JavaScript) est une bibliothèque JavaScript pour la programmation réactive utilisant des Observables, facilitant la composition de code asynchrone ou basé sur des événements. Elle permet de manipuler des flux de données asynchrones comme des collections, en utilisant des opérateurs puissants pour créer, transformer et combiner ces flux.  
+Le système se base sur une partie Observable et une partie Souscription, l'un envoie de l'information tandis que l'autre écoute et modifie.  
+
+[RxJS Documentation](https://rxjs.dev/)  
 
 ## OPERATEURS DE COMPOSITION
 Ces opérateurs sont utilisés pour combiner d'autres opérateurs dans un flux fluide, facilitant la composition, ou encore gérer des états internes en fonction des émissions de l'Observable.  

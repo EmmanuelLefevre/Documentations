@@ -146,6 +146,7 @@ Ces opérateurs permettent de combiner ou d’accumuler les valeurs émises par 
 | Opérateurs | Fonction |
 | :---: | :---: |
 | `every` | Vérifier si toutes les valeurs d'un Observable répondent à une condition et émettre un boolean. |
+| `groupBy` | Permet de regrouper les éléments d'une collection (ou flux de données) en sous-groupes, en fonction d'une clé spécifique extraite de chaque élément. |
 | `reduce` | Accumuler les valeurs d'un Observable pour produire une seule valeur finale (selon une fonction d’accumulation spécifiée). |
 | `scan` | Accumuler les valeurs d'un Observable de manière incrémentielle, en émettant chaque valeur intermédiaire à chaque étape. |
 
@@ -153,6 +154,7 @@ Ces opérateurs permettent de combiner ou d’accumuler les valeurs émises par 
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
 | `every` | - Valider que tous les items d'un panier en ligne sont disponibles avant de finaliser une commande. <br> - Vérifier si toutes les valeurs d'un flux de notes d'étudiants sont au-dessus d'une certaine moyenne pour décider de la réussite globale. |
+| `groupBy` | - Regrouper des utilisateurs par âge dans une application de gestion de profils pour analyser les comportements par tranche d'âge. <br> - Regrouper les ventes par produit dans une application de suivi des transactions pour analyser la performance de chaque article. |
 | `reduce` | - Accumuler les scores de différentes parties pour obtenir le score final dans un jeu. <br> - Calculer la somme des montants de transactions financières d'un utilisateur pour obtenir le total des dépenses. |
 | `scan` | - Calculer le solde courant d'un compte après chaque transaction, en émettant le solde mis à jour à chaque opération. <br> - Suivre la progression d'un téléchargement ou d'une série d'actions en mettant à jour l'état après chaque étape réussie. |
 

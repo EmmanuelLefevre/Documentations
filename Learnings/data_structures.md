@@ -1,4 +1,12 @@
 # DATA STRUCTURES
+
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [TABLEAUX (ARRAY)](#tableaux-array)
+- [OBJETS (OBJECTS)](#objets-objects)
+- [DICTIONNAIRES (DICTIONARIES)](#dictionnaires-dictionaries)
+
+
 ## INTRODUCTION
 Dans le monde de la programmation informatique, les structures de données jouent un rôle fondamental dans l'organisation, la gestion et le stockage des informations. Elles permettent aux développeurs de structurer les données de manière efficace, facilitant ainsi l'accès, la modification et la manipulation des données au sein des applications. Une bonne compréhension des différentes structures de données est essentielle pour concevoir des algorithmes performants et optimiser les performances des logiciels.
 Les structures de données varient en complexité et en fonctionnalité, allant des types de données simples comme les tableaux et les listes chaînées, aux structures plus avancées comme les arbres et les graphes. Chacune de ces structures présente des caractéristiques spécifiques qui les rendent adaptées à des cas d'utilisation particuliers. Par exemple, les tableaux offrent un accès rapide aux éléments par index, tandis que les listes chaînées permettent une insertion et une suppression flexibles.

@@ -149,11 +149,23 @@ replayObservable.subscribe(value => console.log('Observer 2:', value));     // R
 ```
 
 - **ConnectableObservable**  
-Multicast (multi-stream) => 
-Un ConnectableObservable est un type d’Observable qui ne commence pas automatiquement à émettre des valeurs lors de la souscription, mais qui nécessite l'appel de la méthode connect() pour démarrer.  
+Multicast (multi-stream) => les abonnés partagent un flux déclenché manuellement.
+Un ConnectableObservable est un type d’Observable qui reste inactif (ne commence pas automatiquement à émettre des valeurs lors de la souscription) jusqu'à l'appel de la méthode connect().  
+Ce type de multicast est utile pour contrôler manuellement le moment où le flux de données démarre pour tous les abonnés en même temps.  
 
 ```typescript
+import { interval, ConnectableObservable } from 'rxjs';
+import { publish } from 'rxjs/operators';
 
+// Création d'un ConnectableObservable
+const connectableObservable = interval(1000).pipe(publish()) as ConnectableObservable<number>;
+
+// Souscriptions
+connectableObservable.subscribe(value => console.log('Observer 1:', value));
+connectableObservable.subscribe(value => console.log('Observer 2:', value));
+
+// Démarre la diffusion pour tous les abonnés
+connectableObservable.connect();
 ```
 
 ## SOUSCRIPTION

@@ -16,11 +16,11 @@
 - [SOUSCRIPTION](#souscription)
   - [Callback](#callback)
   - [Object](#object)
-- [HOT/COLD](#hotcold)
+- [COLD/HOT](#coldhot)
   - [Cold](#cold)
   - [Hot](#hot)
   - [Différences clés entre Cold et Hot Observables](#Différences-clés-entre-Cold-et-Hot-Observables)
-  - [Tableau récapitulatif hot/cold](#tableau-récapitulatif-hotcold)
+  - [Tableau récapitulatif cold/hot](#tableau-récapitulatif-coldhot)
 
 ## INTRODUCTION
 Un Observable est un modèle de programmation orienté événements, qui permet de gérer et de réagir aux flux/stream de données asynchrones. Ce concept repose sur l'échange d’informations entre un Observable et un Observer (ou abonné).  
@@ -223,7 +223,7 @@ const subscription = observable.subscribe({
 ⚠️ Pensez à vous désabonner avec unsubscribe() afin d'éviter les fuites de mémoire, car l'Observable peut continuer à émettre même après la fin du cycle de vie du composant qui l'utilise !  
 **Exception :** lors de l'utilisation du pipe async dans un template Angular. En effet celui-ci gère automatiquement la souscription et le désabonnement, lorsqu'un composant Angular est détruit, le pipe async se désabonne automatiquement de l'Observable.
 
-## HOT/COLD
+## COLD/HOT
 En RxJS, les concepts de "hot" et "cold" Observables permettent de comprendre comment un Observable émet des données et de quelle façon celles-ci sont perçues par les Observers qui s'y souscrivent.  
 
 ### Cold
@@ -270,9 +270,7 @@ subject.subscribe(value => console.log('Observer 2:', value));
 | `Cold` | Au moment de la souscription. | Oui | Non |
 | `Hot`| Dès le démarrage de l’Observable. | Non | Oui, si souscrites avant émissions. |
 
-<a name="tableau-recapitulatif-hot-cold"></a>
-
-### **Tableau récapitulatif hot/cold**  
+### **Tableau récapitulatif cold/hot**  
 | Type | Cold/Hot |
 | :---: | :---: |
 | `Plain Observable` | Cold |

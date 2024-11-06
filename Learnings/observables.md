@@ -12,7 +12,7 @@
   - [AsyncSubject](#asyncsubject)
   - [ReplayObservable](#replayobservable)
   - [ConnectableObservable](#connectableobservable)
-  - [Tableau récapitulatif](#tableau-récapitulatif-types)
+  - [Tableau récapitulatif types](#tableau-récapitulatif-types)
 - [SOUSCRIPTION](#souscription)
   - [Callback](#callback)
   - [Object](#object)
@@ -20,7 +20,7 @@
   - [Cold](#cold)
   - [Hot](#hot)
   - [Différences clés entre Cold et Hot Observables](#Différences-clés-entre-Cold-et-Hot-Observables)
-  - [Tableau récapitulatif](#tableau-récapitulatif-hot-cold)
+  - [Tableau récapitulatif hot/cold](#tableau-récapitulatif-hotcold)
 
 ## INTRODUCTION
 Un Observable est un modèle de programmation orienté événements, qui permet de gérer et de réagir aux flux/stream de données asynchrones. Ce concept repose sur l'échange d’informations entre un Observable et un Observer (ou abonné).  
@@ -190,9 +190,7 @@ connectableObservable.subscribe(value => console.log('Observer 2:', value));
 connectableObservable.connect();
 ```
 
-<a name="tableau-recapitulatif-types"></a>
-
-### **Tableau récapitulatif**  
+### **Tableau récapitulatif types**  
 | Type | Stream | Description |
 | :---: | :---: | :---: |
 | `Plain Observable` | Mono-stream | Flux indépendant pour chaque abonné. |
@@ -274,7 +272,7 @@ subject.subscribe(value => console.log('Observer 2:', value));
 
 <a name="tableau-recapitulatif-hot-cold"></a>
 
-### **Tableau récapitulatif**  
+### **Tableau récapitulatif hot/cold**  
 | Type | Cold/Hot |
 | :---: | :---: |
 | `Plain Observable` | Cold |

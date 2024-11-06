@@ -183,13 +183,13 @@ Ces opérateurs sont conçus pour contrôler les souscriptions à des Observable
 | Opérateurs | Fonction |
 | :---: | :---: |
 | `exhaust` | Ignorer les émissions tant qu'un Observable précédent est toujours en cours. |
-| `race` |  |
+| `race` | Faire en sorte que seule le premier Observable qui émette commence à diffuser ses valeurs (les autres sont ignorées). |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
 | `exhaust` | - Dans une IHM si un utilisateur clique trop rapidement sur un bouton de soumission, exhaust ignorera tous les clics supplémentaires tant que la première action n'est pas terminée. <br> - Lorsqu'un utilisateur lance plusieurs téléchargements en parallèle, exhaust peut être utilisé pour s'assurer qu'un nouveau téléchargement ne commencera pas tant que le téléchargement en cours n'est pas terminé. |
-| `race` |  |
+| `race` | - Choisir la première Observable réactive à une série d'événements pour démarrer un traitement. <br> - Gérer plusieurs flux où seul le plus rapide ou le plus pertinent (premier résultat d'une requête HTTP multi-sources) doit être pris en compte. |
 
 ## OPERATEURS DE TEMPORISATION
 Ces opérateurs permettent de gérer des comportements liés au temps, comme les retards ou la régulation de la fréquence des émissions.  
@@ -227,21 +227,21 @@ Ces opérateurs permettent de créer des flux partagés qui ne réémettent pas 
 | `refCount` | - Maintenir une connexion ouverte pendant que des abonnés sont présents et la fermer lorsque tous les abonnés se désabonnent. <br> - Maintenir une connexion WebSocket active tant qu'il y a des abonnés et la fermer dès que tous se désabonnent. |
 | `share` | - Mémoriser les derniers résultats d'une requête API pour qu'un nouvel abonné puisse les récupérer sans faire une nouvelle requête. <br> - Partager un flux de données entre plusieurs abonnés sans déclencher plusieurs exécutions de la source, comme pour une souscription à une connexion WebSocket. |
 
-## OPERATEUR DE MEMORISATION ET DE CACHING
+## OPERATEURS DE MEMORISATION ET DE CACHING
 Ces opérateurs sont utiles pour mémoriser les résultats des Observables afin d'éviter de recalculer ou de recharger des données à chaque émission.  
 ### **Opérateurs**
 | Opérateurs | Fonction |
 | :---: | :---: |
 | `replay` | Mémoriser les résultats d'un Observable pour éviter les appels répétitifs. |
-| `shareReplay` |  |
-| `publishReplay` |  |
+| `shareReplay` | Partager les dernières valeurs d'un Observable entre plusieurs abonnés, tout en mémorisant les émissions récentes. |
+| `publishReplay` | Mémoriser les dernières valeurs d'un Observable, avec la possibilité de contrôler quand le flux démarre. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
 | `replay` | - Stocker les résultats des appels d'API pour éviter des répétitions inutiles et améliorer la réactivité de l'application. <br> - Permettre à de nouveaux abonnés d'accéder aux dernières valeurs d'un flux (comme les messages d'une discussion en temps réel) même s'ils rejoignent après qu'une partie de ces messages ait été émise. |
-| `shareReplay` |  |
-| `publishReplay` |  |
+| `shareReplay` | - Éviter de refaire un appel réseau en partageant les valeurs des réponses entre plusieurs abonnés. <br> - Optimiser l'utilisation de mémoire en limitant le nombre d’émissions mémorisées. |
+| `publishReplay` | - Retenir des valeurs d'un Observable en mémoire pour les diffuser aux abonnés futurs. <br> - Démarrer l'émission des valeurs en différé, lorsque connect() est appelé, pour un contrôle précis de la diffusion. |
 
 ## OPERATEURS DE GESTION DE LA CONCURRENCE
 Ces opérateurs permettent de contrôler la manière dont plusieurs Observables s'exécutent en parallèle, de manière séquentielle ou contrôlée.

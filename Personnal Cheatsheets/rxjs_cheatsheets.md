@@ -89,19 +89,25 @@ Ces opérateurs permettent de ne laisser passer que certaines valeurs, ou de ne 
 ### **Opérateurs**
 | Opérateurs | Fonction |
 | :---: | :---: |
+| `distinct` | Emettre uniquement les valeurs distinctes (uniques) de l'Observable en éliminant les doublons. |
 | `filter` | Sélectionner uniquement les valeurs d'un Observable qui satisfont une condition spécifique. |
 | `first` | Emettre la première valeur d'un Observable qui satisfait une condition, ou la première valeur émise. |
 | `last` | Emettre la dernière valeur d'un Observable qui satisfait une condition, ou la dernière valeur émise. |
 | `skip` | Ignorer un certain nombre de valeurs émises par un Observable avant de commencer à les émettre. |
+| `skipUntil` | Ignorer les valeurs émises jusqu'à ce qu'un autre Observable émette une valeur. |
+| `skipWhile` | Ignorer les valeurs émises tant qu'une condition est vraie. |
 | `take` | Limiter le nombre de valeurs émises par un Observable à un nombre spécifié. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
+| `distinct` | - Filtrer les valeurs entrantes dans un formulaire pour s'assurer que l'utilisateur ne soumet pas plusieurs fois la même donnée, comme une adresse e-mail. <br> - Afficher une liste de produits en éliminant les doublons si un même produit est ajouté plusieurs fois à partir de différentes sources de données. |
 | `filter` | - Filtrer les clics sur des boutons spécifiques dans une interface utilisateur pour n'exécuter des actions que sur ceux marqués comme importants. <br> - Filtrer les données reçues d'un flux d'API pour n'afficher que les éléments qui répondent à un certain critère, comme les produits en stock dans un e-commerce. <br>  |
 | `first` | - Récupérer uniquement la première réponse valable d'une API qui renvoie plusieurs résultats. <br> - Obtenir la première valeur d'un flux de données lorsque l'on souhaite exécuter une action avec la première occurrence seulement. |
 | `last` | - Récupérer uniquement la dernière valeur émise par un Observable (dernière réponse d'un appel API avant de clôturer une session). <br> - Prendre la dernière valeur d'un flux de données dans un cas où seul le dernier état est nécessaire, comme la dernière mesure d'une température. |
 | `skip` | - Ignorer les premiers éléments d'un flux de données (ignorer les 5 premières pages de résultats dans une pagination). <br> - Ignorer les événements ou données inutiles au début d'un flux, comme les premières erreurs dans un traitement de données. |
+| `skipUntil` | - Ignorer les messages d'une application de messagerie jusqu'à ce qu'un utilisateur se connecte et soit prêt à recevoir des notifications. <br> - Ne commencer à traiter les données d'un capteur qu'une fois qu'une certaine condition (seuil de température) est atteinte. |
+| `skipWhile` | - Ignorer les messages dans un chat tant qu'un utilisateur n'est pas en ligne. <br> - Filtrer les résultats d'une recherche dans une application de e-commerce en ignorant les produits hors-stock jusqu'à ce qu'une mise à jour de l'inventaire ait lieu. |
 | `take` | - Limiter le nombre de résultats récupérés dans une requête API, comme prendre seulement les 5 premiers articles dans un flux de données. <br> - Récupérer uniquement un nombre précis d'événements (récupérer les 3 premiers clics d'un utilisateur). |
 
 ## OPERATEURS DE GESTION D'ERREURS

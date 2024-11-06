@@ -8,6 +8,19 @@
   - [Plain Observable](#plain-observable)
   - [Subject](#subject)
   - [BehaviorSubject](#behaviorsubject)
+  - [ReplaySubject](#replaysubject)
+  - [AsyncSubject](#asyncsubject)
+  - [ReplayObservable](#replayobservable)
+  - [ConnectableObservable](#connectableobservable)
+  - [Tableau récapitulatif](#tableau-récapitulatif)
+- [SOUSCRIPTION](#souscription)
+  - [Callback](#callback)
+  - [Object](#object)
+- [HOT/COLD](#hot/cold)
+  - [Cold](#cold)
+  - [Hot](#hot)
+  - [Différences clés entre Cold et Hot Observables](#Différences-clés-entre-Cold-et-Hot-Observables)
+  - [Tableau récapitulatif](#tableau-récapitulatif)
 
 ## INTRODUCTION
 Un Observable est un modèle de programmation orienté événements, qui permet de gérer et de réagir aux flux/stream de données asynchrones. Ce concept repose sur l'échange d’informations entre un Observable et un Observer (ou abonné).  

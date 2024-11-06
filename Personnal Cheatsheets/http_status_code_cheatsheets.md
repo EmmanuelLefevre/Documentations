@@ -1,6 +1,14 @@
 # HTTP STATUS CODE
 
-## CATÉGORIES
+## SOMMAIRE
+- [CATEGORIES](#categories)
+- [LISTE COMPLETE](#liste-complete)
+  - [1xx - Informations](#1xx---informations)
+  - [2xx - Succès](#liste-complete)
+  - [3xx - Redirection](#liste-complete)
+  - [4xx - Erreur client](#liste-complete)
+  - [4xx - Erreur serveur](#liste-compserveur)
+## CATEGORIES
 | Code | Description |
 | :---: | :---: |
 |**1XX**|Demandes d'information|
@@ -9,13 +17,18 @@
 |**4XX**|Erreurs client|
 |**5XX**|Erreurs serveur|
 
-## LISTE COMPLÈTE
+## LISTE COMPLETE
+### 1xx - Informations
 | Code | Nom | Description |
 | :---: | :---: | :---: |
 |`100`|Continue|Tout va bien jusqu'à présent et le client doit continuer avec la demande ou l'ignorer s'il est déjà terminé|
 |`101`|Switching Protocols|Le client a demandé au serveur de changer de protocole et le serveur a accepté de le faire|
 |`102`|Processing|Le serveur a reçu et traite la demande, mais n'a pas encore de réponse finale|
 |`103`|Early Hints|Utilisé pour renvoyer certains en-têtes de réponse avant le message HTTP final|
+
+### 2xx - Succès
+| Code | Nom | Description |
+| :---: | :---: | :---: |
 |`200`|OK|Demande réussie|
 |`201`|Created|Le serveur a reconnu la ressource créée|
 |`202`|Accepted|La demande du client a été reçue mais le serveur est encore en train de la traiter|
@@ -26,6 +39,10 @@
 |`207`|Multi-Status|Transmet des informations sur plusieurs ressources, pour des situations où plusieurs codes d'état peuvent être appropriés|
 |`208`|Already Reported|Les membres d'un lien DAV ont déjà été énumérés dans une partie précédente de la réponse multi-état|
 |`226`|IM Used|IM est une extension spécifique du protocole HTTP. L'extension permet à un serveur HTTP d'envoyer des diffs (changements) de ressources aux clients|
+
+### 3xx - Redirection
+| Code | Nom | Description |
+| :---: | :---: | :---: |
 |`300`|Multiple Choices|La demande a plus d'une réponse possible. L'agent utilisateur doit en choisir une|
 |`301`|Moved Permanently|L'URL de la ressource demandée a changé de manière permanente. La nouvelle URL est donnée dans la réponse|
 |`302`|Found|Ce code de réponse signifie que l'URI de la ressource demandée a changé temporairement|
@@ -34,6 +51,10 @@
 |`305`|Use Proxy|Défini dans une version précédente de la spécification HTTP pour indiquer qu'une réponse demandée doit être accessible par un proxy. (abandonné)|
 |`307`|Temporary Redirect|Le serveur envoie cette réponse pour diriger le client à obtenir la ressource demandée à un autre URI avec la même méthode que celle utilisée dans la demande précédente|
 |`308`|Permanent Redirect|Cela signifie que la ressource est maintenant située de manière permanente à un autre URI, spécifié par l'en-tête de réponse HTTP Location :|
+
+### 4xx - Erreur client
+| Code | Nom | Description |
+| :---: | :---: | :---: |
 |`400`|Bad Request|Le serveur n'a pas pu comprendre la demande|
 |`401`|Unauthorized|Le client ne s'est pas authentifié|
 |`402`|Payment Required|Ce code de réponse est réservé à un usage futur. Le but initial de ce code était de l'utiliser pour des systèmes de paiement numérique, cependant ce code d'état est très rarement utilisé et aucune convention standard n'existe|
@@ -64,6 +85,10 @@
 |`444`|Connection Closed Without Response|La connexion s'est ouverte, mais aucune donnée n'a été écrite|
 |`451`|Unavailable For Legal Reasons|L'agent utilisateur a demandé une ressource qui ne peut pas être légalement fournie (comme une page web censurée par un gouvernement)|
 |`499`|Client Closed Request|Le client a fermé la connexion, bien que le serveur ait déjà traité la demande|
+
+### 5xx - Erreur serveur
+| Code | Nom | Description |
+| :---: | :---: | :---: |
 |`500`|Internal Server Error|Le serveur a rencontré une situation qu'il ne sait pas comment gérer|
 |`501`|Not Implemented|La méthode de demande n'est pas prise en charge par le serveur et ne peut pas être traitée|
 |`502`|Bad Gateway|Cette réponse d'erreur signifie que le serveur, tout en agissant comme une passerelle pour obtenir une réponse nécessaire pour traiter la demande, a obtenu une réponse invalide|

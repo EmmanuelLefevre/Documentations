@@ -5,7 +5,13 @@
 - [TABLEAUX (ARRAY)](#tableaux-array)
 - [OBJETS (OBJECTS)](#objets-objects)
 - [DICTIONNAIRES (DICTIONARIES)](#dictionnaires-dictionaries)
-
+- [LISTES CHAINEES (LINKED LISTS)](#listes-chainees-linked-list)
+- [PILES (STACKS)](#piles-stacks)
+- [FILE (QUEUES)](#file-queues)
+- [ARBRE (TREES)](#arbre-trees)
+- [GRAPHS (GRAPHIQUES)](#graphs-graphiquess)
+- [ENSEMBLES (SETS)](#ensembles-sets)
+- [ENUMERABLE (ENUMERABLES)](#enumerable-enumerables)
 
 ## INTRODUCTION
 Dans le monde de la programmation informatique, les structures de données jouent un rôle fondamental dans l'organisation, la gestion et le stockage des informations. Elles permettent aux développeurs de structurer les données de manière efficace, facilitant ainsi l'accès, la modification et la manipulation des données au sein des applications. Une bonne compréhension des différentes structures de données est essentielle pour concevoir des algorithmes performants et optimiser les performances des logiciels.
@@ -13,7 +19,7 @@ Les structures de données varient en complexité et en fonctionnalité, allant 
 En outre, le choix de la structure de données appropriée peut avoir un impact significatif sur l'efficacité d'un algorithme, tant en termes de temps d'exécution que de consommation de mémoire. Ainsi, les développeurs doivent être en mesure de sélectionner la structure de données la mieux adaptée à leurs besoins, en tenant compte des exigences de performance et des contraintes de l'application.
 Dans cette perspective, cette exploration des structures de données en programmation informatique vise à fournir une compréhension approfondie de leurs principes, de leurs types et de leurs applications. En maîtrisant ces concepts, les programmeurs peuvent non seulement améliorer la qualité de leur code, mais aussi développer des applications plus robustes et performantes.
 
-## 1. TABLEAUX (ARRAY)
+## TABLEAUX (ARRAY)
 ### Introduction
 Les tableaux (ou arrays en anglais) sont l'une des structures de données les plus fondamentales et largement utilisées en programmation. Ils permettent de stocker des collections d'éléments de manière ordonnée et sont particulièrement efficaces pour accéder et manipuler ces éléments. En raison de leur simplicité et de leur efficacité, les tableaux sont souvent le choix par défaut pour de nombreuses applications, qu'il s'agisse de stocker des données temporaires ou de gérer des ensembles de valeurs.
 ### Caractéristiques
@@ -75,7 +81,7 @@ console.log("Moyenne des notes : ", calculerMoyenne(notes)); // Moyenne des note
 ### Conclusion
 Les tableaux sont une structure de données fondamentale en programmation qui offre des avantages significatifs en termes de rapidité d'accès et d'efficacité. Bien qu'ils présentent des limitations, comme une taille fixe et des opérations coûteuses d'insertion et de suppression, ils restent une option populaire pour de nombreuses applications. Comprendre les tableaux et leurs caractéristiques est essentiel pour tout développeur souhaitant optimiser ses algorithmes et ses programmes.
 
-## 2. OBJETS (OBJECTS)
+## OBJETS (OBJECTS)
 ### Introduction
 Les objets sont une structure de données fondamentale dans la programmation orientée objet (POO). Ils permettent de regrouper des données et des comportements sous une même entité, ce qui facilite la modélisation du monde réel et la gestion de la complexité des applications. Les objets sont composés de propriétés (ou attributs) et de méthodes (ou fonctions) qui interagissent avec ces propriétés.
 ### Caractéristiques
@@ -164,7 +170,7 @@ compteAlice.afficherSolde(); // Solde de Alice: 1300.
 ### Conclusion
 Les objets sont une structure de données essentielle en programmation orientée objet, offrant des avantages significatifs en termes de modélisation, de réutilisation du code et d'encapsulation. Bien qu'ils puissent introduire une certaine complexité et une surcharge de mémoire, leur capacité à représenter des entités du monde réel et à faciliter la maintenance du code en fait un choix privilégié pour de nombreuses applications. Une compréhension approfondie des objets et de leurs caractéristiques est cruciale pour tout développeur souhaitant tirer parti de la puissance de la programmation orientée objet.
 
-## 3. DICTIONNAIRES (DICTIONARIES)
+## DICTIONNAIRES (DICTIONARIES)
 ### Introduction
 Les dictionnaires (ou tables de hachage) sont des structures de données qui permettent de stocker des paires clé-valeur. Ils offrent un moyen efficace de récupérer des valeurs associées à des clés uniques, facilitant ainsi la gestion des données. Les dictionnaires sont largement utilisés dans de nombreux langages de programmation pour organiser les données de manière intuitive et efficace.
 ### Caractéristiques
@@ -237,7 +243,7 @@ for (let nom in annuaire) {
 ### Conclusion
 Les dictionnaires sont une structure de données puissante et polyvalente qui permet de gérer des paires clé-valeur de manière efficace. Leur rapidité d'accès et leur flexibilité en font un choix privilégié pour de nombreuses applications, qu'il s'agisse de stocker des données associatives ou de gérer des configurations. Une compréhension approfondie des dictionnaires et de leurs caractéristiques est essentielle pour tout développeur souhaitant tirer parti de cette structure de données dans ses projets.
 
-## 4. LISTES CHAINEES (LINKED LISTS)
+## LISTES CHAINEES (LINKED LISTS)
 ### Introduction
 Les listes chaînées sont une autre structure de données fondamentale qui permet de stocker une collection d'éléments de manière ordonnée. Contrairement aux tableaux, les listes chaînées utilisent des noeuds, où chaque noeud contient une valeur et une référence (ou pointeur) vers le noeud suivant. Cette structure permet une flexibilité accrue en termes d'insertion et de suppression d'éléments.
 ### Caractéristiques
@@ -326,7 +332,7 @@ maPlaylist.afficherPlaylist();
 ### Conclusion
 Les listes chaînées sont une structure de données importante qui offre une flexibilité en matière de taille et d'opérations d'insertion et de suppression. Bien qu'elles présentent des inconvénients, notamment en termes d'accès et d'utilisation de la mémoire, elles restent un choix privilégié pour de nombreuses applications nécessitant une gestion dynamique des données. Comprendre les listes chaînées et leurs caractéristiques est essentiel pour tout développeur souhaitant optimiser ses algorithmes et ses programmes.
 
-## 5. PILES (STACKS)
+## PILES (STACKS)
 ### Introduction
 Une pile (ou "stack" en anglais) est une structure de données qui suit le principe du dernier entré, premier sorti (LIFO). Cela signifie que le dernier élément ajouté à la pile est le premier à être retiré. On peut imaginer une pile comme une pile de livres : on ne peut ajouter ou retirer un livre qu'en manipulant celui qui se trouve au sommet.
 ### Caractéristiques
@@ -416,7 +422,7 @@ console.log("Page actuelle : ", historique.consulter()); // Page actuelle :  pag
 ### Conclusion
 L'utilisation d'une pile pour gérer l'historique de navigation est un excellent exemple d'application de cette structure de données, car elle permet une gestion efficace et intuitive des pages visitées.
 
-## 6. FILE (QUEUES)
+## FILE (QUEUES)
 ### Introduction
 Les files (ou queues en anglais) sont une structure de données fondamentale qui suit le principe FIFO (First In, First Out). Cela signifie que le premier élément ajouté à la file est le premier à être retiré. Les files sont couramment utilisées dans divers algorithmes et structures de données, notamment pour gérer des tâches, des événements ou des ressources partagées.
 ### Caractéristiques
@@ -492,7 +498,7 @@ console.log("Client en attente : ", fileBilletterie.consulter()); // Client en a
 fileBilletterie.defiler(); // Client Client 1 servi.
 console.log("Client en attente : ", fileBilletterie.consulter()); // Client en attente :  Client 2
 ```
-## 7. ARBRE (TREES)
+## ARBRE (TREES)
 Les arbres sont une structure de données hiérarchique qui permet de représenter des relations entre des éléments de manière organisée. Chaque arbre est composé de noeuds, où chaque noeud peut avoir plusieurs enfants, mais un seul parent. La structure des arbres est largement utilisée dans divers domaines, tels que les bases de données, les systèmes de fichiers et les algorithmes de recherche.
 ### Caractéristiques
 - **Hiérarchie**: Les arbres représentent des relations parent-enfant, ce qui permet une organisation hiérarchique des données.
@@ -581,7 +587,7 @@ arbre.parcourirInfixe(arbre.racine); // Sortie : 2, 3, 4, 5, 7
 ### Conclusion
 Les arbres sont une structure de données puissante qui permet de représenter des données de manière hiérarchique et organisée. Ils offrent des avantages significatifs en termes de recherche et d'organisation des données. Bien qu'ils présentent des complexités et des surcharges potentielles, leur utilisation dans des contextes variés en fait un choix essentiel pour de nombreux développeurs. Comprendre les arbres et leur utilisation est crucial pour optimiser les algorithmes et les structures de données dans les programmes.
 
-## 8. GRAPHS (GRAPHIQUES)
+## GRAPHS (GRAPHIQUES)
 ### Introduction
 Les graphes sont une structure de données fondamentale qui représente des ensembles d'objets connectés entre eux. Un graphe est composé de noeuds (ou sommets) et d'arêtes (ou liens) qui relient ces noeuds. Les graphes sont utilisés pour modéliser des relations complexes dans divers domaines, tels que les réseaux sociaux, les systèmes de transport, et les algorithmes de recherche.
 ### Caractéristiques
@@ -663,7 +669,7 @@ reseauSocial.afficher();
 ### Conclusion
 Les graphes sont une structure de données puissante qui permet de représenter des relations complexes entre des éléments. Leur flexibilité et leur capacité à modéliser des structures variées en font un choix essentiel dans de nombreux domaines. Comprendre les graphes et leur utilisation est crucial pour optimiser les algorithmes et les structures de données dans les programmes.
 
-## 9. ENSEMBLES (SETS)
+## ENSEMBLES (SETS)
 ### Introduction
 Les ensembles (ou sets en anglais) sont une structure de données qui permet de stocker des collections d'éléments uniques, sans ordre particulier. Les ensembles sont souvent utilisés pour effectuer des opérations sur des collections, comme l'union, l'intersection et la différence. Ils sont particulièrement utiles dans les cas où il est important d'éviter les doublons.
 ### Caractéristiques
@@ -735,7 +741,7 @@ utilisateurs.afficher(); // Utilisateurs uniques : Alice
 ### Conclusion
 Les ensembles sont une structure de données efficace et puissante qui facilite la gestion des collections d'éléments uniques. Leur capacité à éliminer les doublons et à offrir des performances élevées en fait un choix privilégié dans de nombreux contextes. Comprendre les ensembles et leur utilisation est essentiel pour tout développeur souhaitant optimiser ses algorithmes et ses programmes.
 
-## 10. ENUMERABLE (ENUMERABLES)
+## ENUMERABLE (ENUMERABLES)
 ### Introduction
 Les énumérables (ou enumerables en anglais) sont une structure de données qui permet de représenter un ensemble de valeurs sous forme d'une séquence. Ils sont souvent utilisés pour représenter des collections d'objets ou de valeurs qui peuvent être parcourues ou itérées. En programmation, les énumérables facilitent le traitement de collections de données en fournissant une interface standard pour l'itération.
 ### Caractéristiques

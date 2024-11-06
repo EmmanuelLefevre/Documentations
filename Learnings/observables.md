@@ -27,7 +27,7 @@ La méthode throw peut être utilisée pour signaler une erreur de manière expl
 La méthode complete est appelée lorsqu’un Observable a terminé d’émettre des valeurs, indiquant qu’il n’y aura plus de données futures à transmettre. Cette notification met fin à la souscription et signifie aux Observers que le flux est arrivé à son terme sans erreurs. Elle est particulièrement utile pour indiquer la fin de tâches finies, comme des appels d'API ou des traitements de données.  
 
 ## TYPES
-- **Plain Observable**  
+### **Plain Observable**  
 Simple-cast (mono-stream) => stream unique par Observer, chaque souscription crée un flux indépendant et il faut souscrire pour recevoir.  
 Ce Cold Observable commence à émettre des valeurs uniquement lorsqu'un Observer s'y abonne et chaque souscription reçoit une nouvelle émission.  Utile pour des flux uniques, indépendants pour chaque abonné.  
 
@@ -46,7 +46,7 @@ coldObservable.subscribe(value => console.log('Observer 2:', value));
 // Chaque Observer reçoit une valeur différente car l'Observable est "froid".
 ```
 
-- **Subject**  
+### **Subject**  
 Multi-cast (multi-stream) => stream partagé par les Observers (partage le même flux/émissions), il fournit la même valeur à chacun.  
 Le Subject est un Observable spécial qui permet de partager les mêmes émissions entre tous les abonnés. Il est également utilisé pour transformer un flux mono-stream en multicast, permettant à plusieurs Observers de recevoir les mêmes valeurs au même moment.  
 
@@ -67,7 +67,7 @@ subject.subscribe(value => console.log('Observer 2:', value));
 subject.next(Math.random());      // Tous les Observers reçoivent la même valeur
 ```
 
-- **BehaviorSubject**  
+### **BehaviorSubject**  
 Multi-cast (multi-stream) => partage le même flux de données entre les abonnés avec une valeur initiale (valeur de départ transmise quand on souscrit + émet la dernière valeur à tout nouvel Observable).  
 Le BehaviorSubject conserve la dernière valeur émise et l'envoie immédiatement à tout nouvel abonné, même s'il s'est souscrit après des émissions.  
 Il est utile pour garder un état et émettre toujours la dernière valeur et c’est un excellent choix pour stocker et émettre des états partagés.  
@@ -89,7 +89,7 @@ behaviorSubject.subscribe(value => console.log('Observer 2:', value));
 // Le second Observer reçoit immédiatement la dernière valeur émise.
 ```
 
-- **ReplaySubject**  
+### **ReplaySubject**  
 Multi-cast (multi-stream) => émet les valeurs passées aux abonnés actuels et futurs jusqu'à une limite spécifiée.  
 Le ReplaySubject stocke un certain nombre de valeurs passées (ou toutes si non limité) et les envoie à tout nouvel abonné dès sa souscription. Idéal pour fournir un historique à ceux qui s’abonnent après certaines émissions.  
 
@@ -110,7 +110,7 @@ asyncSubject.complete();
 asyncSubject.subscribe(value => console.log('Observer 2:', value));     // Reçoit également 3
 ```
 
-- **AsyncSubject**  
+### **AsyncSubject**  
 Multi-cast (multi-stream) => envoie uniquement la dernière valeur émise à la complétion de l’observable.  
 L’AsyncSubject ne diffuse une valeur qu’une fois l’observable complété et fournit uniquement cette dernière valeur à tous les abonnés. Très utile dans les cas où l'on ne souhaite que diffuser un résultat final unique (ex: réponse d'API).  
 
@@ -131,7 +131,7 @@ asyncSubject.complete();
 asyncSubject.subscribe(value => console.log('Observer 2:', value     // Reçoit également 3
 ```
 
-- **ReplayObservable**  
+### **ReplayObservable**  
 Simple-cast (mono-stream) => chaque abonné reçoit un flux indépendant qui rejoue certaines valeurs historiques.  
 Bien que semblable au ReplaySubject, un ReplayObservable fournit un historique défini aux abonnés, mais reste un mono-stream. Il émet des valeurs spécifiques jusqu'à ce qu'il atteigne un certain point.  
 Ce type d'observable est moins courant mais utile pour conserver un historique de valeurs sur une période définie ou pour créer des flux personnalisés avec des valeurs répétées.  
@@ -148,7 +148,7 @@ replayObservable.subscribe(value => console.log('Observer 1:', value));     // R
 replayObservable.subscribe(value => console.log('Observer 2:', value));     // Reçoit [1, 2, 3]
 ```
 
-- **ConnectableObservable**  
+### **ConnectableObservable**  
 Multi-cast (multi-stream) => les abonnés partagent un flux déclenché manuellement.
 Un ConnectableObservable est un type d’Observable qui reste inactif (ne commence pas automatiquement à émettre des valeurs lors de la souscription) jusqu'à l'appel de la méthode connect().  
 Ce type de multicast est utile pour contrôler manuellement le moment où le flux de données démarre pour tous les abonnés en même temps.  
@@ -168,7 +168,7 @@ connectableObservable.subscribe(value => console.log('Observer 2:', value));
 connectableObservable.connect();
 ```
 
-- **Tableau récapitulatif**  
+### **Tableau récapitulatif**  
 | Type | Stream | Description |
 | :---: | :---: | :---: |
 | `Plain Observable` | Mono-stream | Flux indépendant pour chaque abonné. |
@@ -246,7 +246,7 @@ subject.subscribe(value => console.log('Observer 2:', value));
 | Type | Emission | Flux indépendant par Observer | Synchronisation des valeurs |
 | :---: | :---: | :---: | :---: |
 | `Cold` | Au moment de la souscription. | Oui | Non |
-| `Hot`| Dès le démarrage de l’Observable. | Non | Oui, si souscrits avant émissions. |
+| `Hot`| Dès le démarrage de l’Observable. | Non | Oui, si souscrites avant émissions. |
 
 ***
 

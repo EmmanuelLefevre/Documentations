@@ -111,11 +111,24 @@ asyncSubject.subscribe(value => console.log('Observer 2:', value));     // Reço
 ```
 
 - **AsyncSubject**  
-Multicast (multi-stream) => 
-Ce type n'envoie la dernière valeur émise aux abonnés qu'à la complétion de l'observable. Utile dans les cas où l'on souhaite n'envoyer qu'une seule fois un résultat final (ex: résultat d'un appel HTTP).  
+Multicast (multi-stream) => envoie uniquement la dernière valeur émise à la complétion de l’observable.  
+L’AsyncSubject ne diffuse une valeur qu’une fois l’observable complété et fournit uniquement cette dernière valeur à tous les abonnés. Très utile dans les cas où l'on ne souhaite que diffuser un résultat final unique (ex: réponse d'API).  
 
 ```typescript
+import { AsyncSubject } from 'rxjs';
 
+// Création d'un AsyncSubject
+const asyncSubject = new AsyncSubject<number>();
+
+// Souscriptions
+asyncSubject.subscribe(value => console.log('Observer 1:', value));
+
+asyncSubject.next(1);
+asyncSubject.next(2);
+asyncSubject.next(3);     // Seule cette valeur sera envoyée lors du complete()
+asyncSubject.complete();
+
+asyncSubject.subscribe(value => console.log('Observer 2:', value     // Reçoit également 3
 ```
 
 - **ReplayObservable**  

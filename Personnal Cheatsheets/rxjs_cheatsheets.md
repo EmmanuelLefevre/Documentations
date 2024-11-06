@@ -96,7 +96,6 @@ Ces opérateurs permettent de ne laisser passer que certaines valeurs, ou de ne 
 | `skip` | Ignorer un certain nombre de valeurs émises par un Observable avant de commencer à les émettre. |
 | `skipUntil` | Ignorer les valeurs émises jusqu'à ce qu'un autre Observable émette une valeur. |
 | `skipWhile` | Ignorer les valeurs émises tant qu'une condition est vraie. |
-| `take` | Limiter le nombre de valeurs émises par un Observable à un nombre spécifié. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
@@ -108,7 +107,6 @@ Ces opérateurs permettent de ne laisser passer que certaines valeurs, ou de ne 
 | `skip` | - Ignorer les premiers éléments d'un flux de données (ignorer les 5 premières pages de résultats dans une pagination). <br> - Ignorer les événements ou données inutiles au début d'un flux, comme les premières erreurs dans un traitement de données. |
 | `skipUntil` | - Ignorer les messages d'une application de messagerie jusqu'à ce qu'un utilisateur se connecte et soit prêt à recevoir des notifications. <br> - Ne commencer à traiter les données d'un capteur qu'une fois qu'une certaine condition (seuil de température) est atteinte. |
 | `skipWhile` | - Ignorer les messages dans un chat tant qu'un utilisateur n'est pas en ligne. <br> - Filtrer les résultats d'une recherche dans une application de e-commerce en ignorant les produits hors-stock jusqu'à ce qu'une mise à jour de l'inventaire ait lieu. |
-| `take` | - Limiter le nombre de résultats récupérés dans une requête API, comme prendre seulement les 5 premiers articles dans un flux de données. <br> - Récupérer uniquement un nombre précis d'événements (récupérer les 3 premiers clics d'un utilisateur). |
 
 ## OPERATEURS DE GESTION D'ERREURS
 Ces opérateurs permettent de gérer les erreurs dans les flux, comme en effectuant une nouvelle tentative ou en capturant l'erreur.  
@@ -126,20 +124,24 @@ Ces opérateurs permettent de gérer les erreurs dans les flux, comme en effectu
 | `retry` | - Réessayer une connexion API plusieurs fois après un échec dans le cas d'une erreur temporaire. <br> - Réessayer une requête HTTP à un serveur après une erreur de réseau. |
 | `retryWhen` | - Implémenter une logique personnalisée, comme un délai exponentiel avant chaque nouvelle tentative de requête API. <br> - Réessayer une requête API uniquement si certaines conditions sont remplies (délai ou nombre spécifique de tentatives). |
 
-## OPERATEURS DE CONTROLE DU FLUX
+## OPERATEURS D'ARRET
+Ces opérateurs permettent de contrôler l'émission des éléments d'un Observable en interrompant ou en limitant la diffusion des valeurs selon certaines conditions ou critères.  
 ### **Opérateurs**
 | Opérateurs | Fonction |
 | :---: | :---: |
-| `take` | Limiter le nombre d’émissions d’un Observable à un certain nombre d'événements. |
+| `take` | Limiter le nombre de valeurs émises par un Observable à un nombre spécifié. |
 | `takeUntil` | Emettre des valeurs jusqu'à ce qu'un autre Observable émette une valeur. |
+| `takeWhile` | Emettre des valeurs tant qu'une condition spécifiée reste vraie. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
-| `take` | - Prendre uniquement les premiers résultats d'une requête lors d'une prévisualisation. <br> - Limiter les notifications d'un Observable à une seule émission, comme un message de bienvenue au premier accès d'un utilisateur. |
+| `take` | - Limiter le nombre de résultats récupérés dans une requête API, comme prendre seulement les 5 premiers articles dans un flux de données. <br> - Limiter les notifications d'un Observable à une seule émission, comme un message de bienvenue au premier accès d'un utilisateur. |
 | `takeUntil` | - Annuler une requête de mise à jour de profil dès que l'utilisateur quitte la page. <br> - Interrompre un flux de données en direct (comme un chat) dès qu'un utilisateur se déconnecte. |
+| `takeWhile` | - Prendre des valeurs jusqu'à ce qu'un certain critère soit atteint, comme ne récupérer que les notes des élèves tant qu'elles sont inférieures à 15. <br> - Filtrer les événements d'une surveillance jusqu'à ce qu'une condition soit remplie, comme écouter les clics sur une page tant que l'utilisateur est sur la page d'accueil. |
 
 ## OPERATEURS D'AGREGATION
+Ces opérateurs permettent de combiner ou d’accumuler les valeurs émises par un Observable, soit pour vérifier une condition globale, soit pour générer une valeur cumulée ou progressive à partir de l'ensemble des émissions.  
 ### **Opérateurs**
 | Opérateurs | Fonction |
 | :---: | :---: |

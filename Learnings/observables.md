@@ -248,6 +248,17 @@ subject.subscribe(value => console.log('Observer 2:', value));
 | `Cold` | Au moment de la souscription. | Oui | Non |
 | `Hot`| Dès le démarrage de l’Observable. | Non | Oui, si souscrites avant émissions. |
 
+### **Tableau récapitulatif**  
+| Type | Cold/Hot |
+| :---: | :---: |
+| `Plain Observable` | Cold |
+| `Subject` | Hot |
+| `BehaviorSubject` | Hot |
+| `ReplaySubject` | Hot |
+| `AsyncSubject` | Hot |
+| `ReplayObservable` | Cold|
+| `ConnectableObservable` | Hot |
+
 ***
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

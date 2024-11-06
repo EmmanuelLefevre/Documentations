@@ -50,7 +50,8 @@ Ces opérateurs modifient ou transforment les données émises par un observable
 | `map` | Transformer les valeurs émises par un Observable en un nouvel Observable (en appliquant une fonction). |
 | `mergeAll` | Combiner les résultats de plusieurs Observables internes, émettant les valeurs dès qu'elles sont disponibles, sans attendre. |
 | `pluck` | Extraire une propriété spécifiée d'un objet émis par un Observable. |
-| `switchMap` | Annuler les anciennes requêtes et ne garder que la dernière lorsque de nouvelles valeurs sont émises. |
+| `switch` | Annuler les émissions d'un Observable précédent dès qu'un nouvel Observable est émis et se souscrire uniquement au dernier Observable actif (basculer entre flux de données sans effectuer de transformation). |
+| `switchMap` | Lorsqu'un nouvel élément est émis par un Observable source, annuler l'abonnement à l'Observable précédent et se souscrire à un nouvel Observable issu de la transformation de l'élément émis (transformer les données et de n'émettre que celles du dernier flux actif). |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
@@ -60,6 +61,7 @@ Ces opérateurs modifient ou transforment les données émises par un observable
 | `map` | - Transformer les réponses d'une API pour ne retourner que les informations nécessaires. <br> - Extraire des propriétés spécifiques d'objets dans un tableau pour effectuer des calculs ou des affichages. |
 | `mergeAll` | - Lancer plusieurs appels API en parallèle et récupérer les résultats dès qu'ils sont prêts. <br> - Exécuter plusieurs requêtes HTTP en parallèle et traiter les réponses au fur et à mesure qu'elles arrivent, comme pour des recherches simultanées dans différents services. |
 | `pluck` | - Extraire la propriété `name` d'un tableau d'objets utilisateurs. <br> - Extraire la valeur d'un input spécifique à partir d'un formulaire contenant plusieurs inputs. |
+| `switch` | - Gérer les actions de navigation dans une interface, où le passage à une nouvelle vue annule toute émission en cours de la vue précédente. <br> - Arrêter l'écoute d'un flux de données lorsqu'un nouvel événement prend la priorité (systèmes de notification ou de mise à jour). |
 | `switchMap` | - Lorsqu'un utilisateur modifie rapidement un champ de filtrage, switchMap peut être utilisé pour obtenir et afficher uniquement les résultats de la dernière recherche. <br> - Lors de l'abonnement à des notifications en temps réel, se désabonner des anciennes notifications lorsque l'utilisateur change de catégorie, ne recevant que celles de la catégorie actuellement sélectionnée. |
 
 ## OPERATEURS DE COMBINAISON

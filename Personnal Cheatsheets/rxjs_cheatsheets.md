@@ -6,7 +6,10 @@ Le système se base sur une partie Observable et une partie Souscription, l'un e
 
 [RxJS Documentation](https://rxjs.dev/)
 
-## OPERATEURS DE COMPOSITION
+[OPERATEURS DE COMPOSITION](#ancre)  
+[OPERATEURS DE CREATION](#ancre)
+
+## `OPERATEURS DE COMPOSITION`
 Ces opérateurs sont utilisés pour combiner d'autres opérateurs dans un flux fluide, facilitant la composition, ou encore gérer des états internes en fonction des émissions de l'Observable.  
 ### **Opérateurs**
 | Opérateurs | Fonction |
@@ -22,7 +25,7 @@ Ces opérateurs sont utilisés pour combiner d'autres opérateurs dans un flux f
 | `pipe` | - Gestion des appels HTTP avec la manipulation des réponses. <br> - Gérer les événements de saisie d'un formulaire en temps réel pour valider et transformer les données saisies par l'utilisateur avant de les soumettre. |
 | `startWith` | - Initialiser un formulaire avec des valeurs par défaut avant que l'utilisateur n'effectue une action. <br> - Déclencher un état initial dans une application avant que les données réelles soient chargées, comme afficher un indicateur de chargement au début d'une requête. |
 
-## OPERATEURS DE CREATION
+## `OPERATEURS DE CREATION`
 Ces opérateurs servent à créer un observable à partir de différentes sources de données (tableaux, valeurs, promesses...).  
 ### **Opérateurs**
 | Opérateurs | Fonction |
@@ -38,7 +41,7 @@ Ces opérateurs servent à créer un observable à partir de différentes source
 | `from` | - Créer un Observable à partir d'un tableau d'entiers pour émettre chaque élément en séquence. <br> - Convertir une promesse en un Observable, permettant de gérer les résultats ou les erreurs d'une opération asynchrone. |
 | `fromEvent` | - Créer un Observable qui émet des événements de clic sur un bouton pour déclencher des actions spécifiques dans l'interface utilisateur.  <br> - Ecouter les événements de saisie sur un champ de texte pour mettre à jour instantanément les données affichées à l'utilisateur. |
 | `of` | - Simuler une séquence de valeurs (comme des valeurs constantes ou des données de test) pour simplifier les tests sans appel asynchrone. <br> - Initialiser rapidement un Observable avec une ou plusieurs valeurs précises pour un flux synchronisé. |
-| `subscribe` | - Recevoir les mises à jour en temps réel d'un flux de données (comme des messages dans une application de chat). <br> - Ecouter les changements d'état d'un Observable pour mettre à jour l'interface utilisateur, par exemple en affichant un indicateur de chargement pendant une opération asynchrone. |
+| `subscribe` | - S'abonner à un Observable pour recevoir ses valeurs émises et réagir en conséquence. <br> - Ecouter les changements d'état d'un Observable pour mettre à jour l'interface utilisateur, par exemple en affichant un indicateur de chargement pendant une opération asynchrone. |
 
 ## OPERATEURS DE TRANSFORMATION
 Ces opérateurs modifient ou transforment les données émises par un observable.  
@@ -117,7 +120,7 @@ Ces opérateurs permettent de gérer les erreurs dans les flux, comme en effectu
 | :---: | :---: |
 | `catchError` | Gérer les erreurs émises par un Observable. |
 | `retry` | Réessayer une opération en cas d'erreur, un nombre spécifique de fois. |
-| `retryWhen` | 	Réessayer une opération en cas d'erreur, mais avec une logique personnalisée pour chaque tentative. |
+| `retryWhen` | Réessayer une opération en cas d'erreur, mais avec une logique personnalisée pour chaque tentative. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
@@ -160,6 +163,18 @@ Ces opérateurs permettent de combiner ou d’accumuler les valeurs émises par 
 | `reduce` | - Accumuler les scores de différentes parties pour obtenir le score final dans un jeu. <br> - Calculer la somme des montants de transactions financières d'un utilisateur pour obtenir le total des dépenses. |
 | `scan` | - Calculer le solde courant d'un compte après chaque transaction, en émettant le solde mis à jour à chaque opération. <br> - Suivre la progression d'un téléchargement ou d'une série d'actions en mettant à jour l'état après chaque étape réussie. |
 
+## OPERATEURS DE SOUSCRIPTION
+Ces opérateurs sont conçus pour contrôler les souscriptions à des Observables en garantissant qu'une nouvelle émission ne déclenchera pas une nouvelle souscription tant que celle en cours n'est pas terminée.  
+### **Opérateurs**
+| Opérateurs | Fonction |
+| :---: | :---: |
+| `exhaust` | Ignorer les émissions tant qu'un Observable précédent est toujours en cours. |
+
+### **Cas d'usage**
+| Opérateurs | Cas d'usage |
+| :---: | :--- |
+| `exhaust` | - Dans une IHM si un utilisateur clique trop rapidement sur un bouton de soumission, exhaust ignorera tous les clics supplémentaires tant que la première action n'est pas terminée. <br> - Lorsqu'un utilisateur lance plusieurs téléchargements en parallèle, exhaust peut être utilisé pour s'assurer qu'un nouveau téléchargement ne commencera pas tant que le téléchargement en cours n'est pas terminé. |
+
 ## OPERATEURS DE TEMPORISATION
 Ces opérateurs permettent de gérer des comportements liés au temps, comme les retards ou la régulation de la fréquence des émissions.  
 ### **Opérateurs**
@@ -187,28 +202,26 @@ Ces opérateurs permettent de créer des flux partagés qui ne réémettent pas 
 | :---: | :---: |
 | `publish` | Convertir un Observable en un observable multicast en utilisant un sujet. |
 | `refCount` | Connecter un Observable multicast uniquement lorsque l'un des abonnés commence à s'abonner. |
-| `share` | Partager un Observable entre plusieurs abonnés. |
+| `share` | Partager et mémoriser les dernières valeurs émises d'un Observable pour les nouveaux abonnés. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
 | `publish` | - Diffuser un flux à plusieurs observateurs tout en maintenant un contrôle sur le début et la fin du flux. <br> - Diffuser un flux de données à plusieurs observateurs après un certain événement déclencheur, comme un clic utilisateur. |
 | `refCount` | - Maintenir une connexion ouverte pendant que des abonnés sont présents et la fermer lorsque tous les abonnés se désabonnent. <br> - Maintenir une connexion WebSocket active tant qu'il y a des abonnés et la fermer dès que tous se désabonnent. |
-| `share` | - Partager une source de données entre plusieurs abonnés sans refaire les calculs ou les requêtes. <br> - Partager un stream de données entre plusieurs composants pour éviter les appels API redondants. |
+| `share` | - Mémoriser les derniers résultats d'une requête API pour qu'un nouvel abonné puisse les récupérer sans faire une nouvelle requête. <br> - Partager un flux de données entre plusieurs abonnés sans déclencher plusieurs exécutions de la source, comme pour une souscription à une connexion WebSocket. |
 
-## OPERATEURS DE MEMORISATION ET DE CACHING
+## OPERATEUR DE MEMORISATION ET DE CACHING
 Ces opérateurs sont utiles pour mémoriser les résultats des Observables afin d'éviter de recalculer ou de recharger des données à chaque émission.  
 ### **Opérateurs**
 | Opérateurs | Fonction |
 | :---: | :---: |
 | `replay` | Mémoriser les résultats d'un Observable pour éviter les appels répétitifs. |
-| `share` | Partager et mémoriser les dernières valeurs émises d'un Observable pour les nouveaux abonnés. |
 
 ### **Cas d'usage**
 | Opérateurs | Cas d'usage |
 | :---: | :--- |
 | `replay` | - Stocker les résultats des appels d'API pour éviter des répétitions inutiles et améliorer la réactivité de l'application. <br> - Permettre à de nouveaux abonnés d'accéder aux dernières valeurs d'un flux (comme les messages d'une discussion en temps réel) même s'ils rejoignent après qu'une partie de ces messages ait été émise. |
-| `share` | - Mémoriser les derniers résultats d'une requête API pour qu'un nouvel abonné puisse les récupérer sans faire une nouvelle requête. <br> - Partager un flux de données entre plusieurs abonnés sans déclencher plusieurs exécutions de la source, comme pour une souscription à une connexion WebSocket. |
 
 ## OPERATEURS DE GESTION DE LA CONCURRENCE
 Ces opérateurs permettent de contrôler la manière dont plusieurs Observables s'exécutent en parallèle, de manière séquentielle ou contrôlée.

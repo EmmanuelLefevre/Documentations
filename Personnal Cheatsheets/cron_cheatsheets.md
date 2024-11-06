@@ -1,5 +1,9 @@
 # CRON
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [CARACTERES SPECIAUX](#caracteres-speciaux)
+
 ## INTRODUCTION
 Cron est un programme qui permet aux utilisateurs de systèmes Unix d'exécuter automatiquement des scripts, des commandes ou des logiciels à une date et une heure prédéfinies, ou selon un cycle prédéfini.
 
@@ -12,7 +16,7 @@ Cron est un programme qui permet aux utilisateurs de systèmes Unix d'exécuter 
 | `MONTH` | 1-12 | Déclencher tous les MOIS |
 | `DAY OF WEEK` | 0-6 | LUN-DIM Déclencher un jour spécifique de la semaine |
 
-## CARACTÈRES SPÉCIAUX
+## CARACTERES SPECIAUX
 | Caractère Spécial | Description |
 | :---: | :---: |
 | `*` | Déclencher à chaque unité de temps |

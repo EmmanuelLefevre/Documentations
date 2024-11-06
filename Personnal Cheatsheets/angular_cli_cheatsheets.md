@@ -1,5 +1,14 @@
 # ANGULAR
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [CLI installation](#cli-installation)
+- [CLI](#cli)
+  - [Nouveau projet](#nouveau-projet)
+  - [Serveur](#serveur)
+  - [Raccourcis](#raccourcis)
+- [COMPODOC URL](#compodoc-url)
+
 ## INTRODUCTION
 Angular est un framework de développement d'applications web.
 

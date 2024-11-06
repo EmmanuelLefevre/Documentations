@@ -5,7 +5,7 @@
 - [TABLEAUX (ARRAY)](#tableaux-array)
 - [OBJETS (OBJECTS)](#objets-objects)
 - [DICTIONNAIRES (DICTIONARIES)](#dictionnaires-dictionaries)
-- [LISTES CHAINEES (LINKED LISTS)](#listes-chainees-linked-list)
+- [LISTES CHAINEES (LINKED LISTS)](#listes-chainees-linked-lists)
 - [PILES (STACKS)](#piles-stacks)
 - [FILE (QUEUES)](#file-queues)
 - [ARBRE (TREES)](#arbre-trees)

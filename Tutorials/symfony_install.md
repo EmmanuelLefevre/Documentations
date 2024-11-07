@@ -1,5 +1,12 @@
 # SYMFONY
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [INSTALLATION](#installation)
+- [FIXTURES](#fixtures)
+- [LINTER](#linter)
+- [TESTS](#tests)
+
 ## INTRODUCTION
 Symfony est un ensemble de composants PHP ainsi qu'un framework MVC libre écrit en PHP. Il fournit des fonctionnalités modulables et adaptables qui permettent de faciliter et d’accélérer le développement d'un site web de manière robuste et modulaire. Il est développé par l'agence web française SensioLabs et son créateur Fabien Potencier.
 

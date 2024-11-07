@@ -1,10 +1,27 @@
 # TERMINALS CONFIG
+
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [IMPORTANT INFORMATIONS](#important-informations)
+- [FIRST STEP](#first-step)
+- [PACKAGE MANAGERS](#package-managers)
+- [UTILITIES](#utilities)
+- [FONTS](#fonts)
+- [NEOVIM](#neovim)
+- [OH-MY-POSH](#oh_my_posh)
+- [GIT BASH](#git-bash)
+- [Z JUMPER](#z-jumper)
+- [PSREADLINE](#psreadline)
+- [WSL](#wsl)
+
 ## INTRODUCTION
-🔥❤️ Tutorial to setup step by step awesome terminals and text editor! ❤️🔥
+🔥❤️ Tutorial to setup step by step awesome terminals and text editor! ❤️🔥  
 
 It was joinly tested on Windows 10 and 11.
+
 ## IMPORTANT INFORMATIONS
 🧨 If not explicitly mentioned, always place yourself in your user directory and launch your PowerShell as an admin! 🧨
+
 ## FIRST STEP
 ### Microsoft Store
 For beginning open Microsoft Store and install PowerShell.

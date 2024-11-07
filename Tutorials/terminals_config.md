@@ -8,7 +8,7 @@
 - [UTILITIES](#utilities)
 - [FONTS](#fonts)
 - [NEOVIM](#neovim)
-- [OH-MY-POSH](#oh_my_posh)
+- [OH MY POSH](#oh-my-posh)
 - [GIT BASH](#git-bash)
 - [Z JUMPER](#z-jumper)
 - [PSREADLINE](#psreadline)
@@ -230,7 +230,7 @@ nvim init.vim
 You have autocompletion for HTML, CSS, Javascript, Typescript in Neovim... GGWP 🤙
 
 [Neovim Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/neovim_cheatsheets.md)
-## OH-MY-POSH
+## OH MY POSH
 [Oh-My-Posh Documentation](https://ohmyposh.dev/docs/)
 
 Installation:

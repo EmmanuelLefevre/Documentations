@@ -8,6 +8,30 @@
   - [Redémarrage / arrêt](#redémarragearrêt)
   - [Navigation fichiers](#navigation-fichier)
   - [Affichage](#affichage)
+  - [Création répertoire](#création-répertoire)
+  - [Création fichier](#création-fichier)
+  - [Copier](#copier)
+  - [Déplacer / Renommer](#déplacerrenommer)
+  - [Effacer](#effacer)
+  - [Afficher contenu fichier](#afficher-contenu-fichier)
+  - [Trouver](#trouver)
+  - [Rechercher chaînes de caractères ou motif](#rechercher-chaînes-de-caractères-ou-motif)
+  - [Install packages](#install-packages)
+  - [Changer droit d'un fichier](#changer-droit-dun-fichier)
+  - [Correspondances de représentation des droits](#correspondance-de-représentation-des-droits)
+  - [Changer propriétaire fichier](#changer-propriétaire-fichier)
+  - [SSH](#ssh)
+  - [SCP](#scp)
+  - [Copier des fichiers entre le serveur et le client SSH de manière sécurisée!](#copier-des-fichiers-entre-le-serveur-et-le-client-de-manière-sécurisée!)
+  - [Espace disque](#espace-disque)
+  - [Processus mémoires](#processus-mémoires)
+  - [Processus](processus)
+  - [Archives](#archives)
+    - [TAR](#tar)
+    - [GZIP](#gzip)
+  - [Utilisateurs](#utilisateurs)
+  - [Logs](#logs)
+  - [Environnement](#environnement)
 
 ## INTRODUCTION
 Système d'exploitation open source de type Unix fondé sur le noyau Linux créé en 1991 par Linus Torvalds.
@@ -223,7 +247,8 @@ Connection SSH à une machine distante!
 |`ssh -D 8080 john@remotehost.example.com`|Configurer un tunnel SOCKS pour la redirection de trafic via la machine distante|
 
 ### SCP
-#### Copier des fichiers entre le serveur et le client SSH de manière sécurisée!
+Copier des fichiers entre le serveur et le client SSH de manière sécurisée!  
+
 | Command + option | Description |
 | :--------------: | :---------: |
 |`scp foo.txt john@remotehost.example.com:`|Transférer 'foo.txt' situé dans répertoire courant vers répertoire 'home' du compte 'john' de la machine 'remotehost.example.com'|
@@ -249,7 +274,7 @@ Connection SSH à une machine distante!
 |`df -h /mount_point`|Afficher l'espace disque disponible pour un point de montage spécifique|
 |`du -s /path/to/directory`|Afficher l'espace disque utilisé par le répertoire spécifié sans afficher les sous-répertoires|
 
-### ProcessuMémoires
+### Processus mémoires
 | Command + option | Description |
 | :--------------: | :---------: |
 |`free`|Afficher la mémoire libre et utilisée sur le système|

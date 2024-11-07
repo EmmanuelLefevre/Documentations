@@ -1,5 +1,10 @@
 # MYSQL
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [CONNECTION](#connection)
+- [BACKUP/RESTORE](#backuprestore)
+
 ## INTRODUCTION
 MySQL est un système de gestion de bases de données relationnelles (RDBMS). Il est distribué sous une double licence GPL et propriétaire. C'est l'un des logiciels de gestion de bases de données les plus utilisés au monde, tant par le grand public (principalement pour les applications web) que par des professionnels.
 

@@ -3,11 +3,20 @@
 ## SOMMAIRE
 - [INTRODUCTION](#introduction)
 - [IMPORTANT INFORMATIONS](#important-informations)
-- [FIRST STEP](#first-step)
-- [PACKAGE MANAGERS](#package-managers)
-- [UTILITIES](#utilities)
-- [FONTS](#fonts)
-- [NEOVIM](#neovim)
+- [POWERSHELL](#powershell)
+    - [First step](#first-step)
+    - [Package managers](#package-managers)
+        - [Chocolatey](#chocolatey)
+        - [Winget](#winget)
+    - [Utilities](#utilities)
+        - [NVM](#nvm)
+        - [NodeJs (add NPM by default)](#nodejs-add-npm-by-default)
+        - [Git](#git)
+        - [SSH](#ssh)
+    - [Fonts](#fonts)
+    - [Neovim](#neovim)
+    - [PLUG](#plug)
+    - [Yarn](#yarn)
 - [OH MY POSH](#oh-my-posh)
 - [GIT BASH](#git-bash)
 - [Z JUMPER](#z-jumper)
@@ -22,18 +31,19 @@ It was joinly tested on Windows 10 and 11.
 ## IMPORTANT INFORMATIONS
 🧨 If not explicitly mentioned, always place yourself in your user directory and launch your PowerShell as an admin! 🧨
 
-## FIRST STEP
-### Microsoft Store
+## POWERSHELL
+### First step
+#### Microsoft Store
 For beginning open Microsoft Store and install PowerShell.
-### PowerShell
+#### Customize PowerShell
 Customize PowerShell appearance:
 - Click the bottom chevron and go "parameters"
 - Edit the setings.json file
 - Add a color theme with your taste to personalize the prompt
 
 [Windows Terminal Color Theme Site](https://windowsterminalthemes.dev/)
-## PACKAGE MANAGERS
-### Chocolatey
+### Package managers
+#### Chocolatey
 Installation:
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
@@ -46,7 +56,7 @@ Update it:
 ```shell
 choco upgrade chocolatey
 ```
-### Winget
+#### Winget
 Installation:
 ```shell
 choco install microsoft-winget
@@ -59,8 +69,8 @@ Update it:
 ```shell
 choco upgrade microsoft-winget
 ```
-## UTILITIES
-### NVM
+### Utilities
+#### NVM
 NVM is used to have several versions of nodejs on the same computer and to easily change between them.
 Installation:
 ```shell
@@ -75,7 +85,7 @@ Update it:
 choco upgrade nvm
 ```
 [NVM Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/nvm_cheatsheets.md)
-### NodeJs (add NPM by default)
+#### NodeJs (add NPM by default)
 Installation:
 ##### With Chocolatey
 ```shell
@@ -94,7 +104,7 @@ Check installation:
 ```shell
 node -v
 ```
-### Git
+#### Git
 Installation:
 ##### With Chocolatey
 ```shell
@@ -114,12 +124,12 @@ Update it:
 choco upgrade git
 ```
 [Git Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/git_cheatsheets.md)
-### SSH
+#### SSH
 Setup a SSH connexion:
 
 [Personal Tutorial To Create A SSH Connexion With GPG Keys](https://github.com/EmmanuelLefevre/Documentations/blob/master/ssh_connection.md)
-## FONTS
-### Nerd Font
+### Fonts
+#### Nerd Font
 I love Fira Code Nerd Font but that’s just personal, take the one you like. The only thing is to install a nerd one, otherwise you won't have the dedicated icons.
 ```shell
 choco install nerd-fonts-firacode
@@ -134,7 +144,7 @@ Just click on it, windows will do the rest 😜
 [Nerd Fonts Download Site](https://www.nerdfonts.com/font-downloads)
 
 Now you can use the nerd font that you downloaded in PowerShell or VsCode, just setup in each one.
-## NEOVIM
+### Neovim
 Neovim is a powerfull text editor. It is directly inspired by Vim (a very common editor on Unix-type operating systems), of which it is a derivative (fork).
 
 [Neovim Wiki](https://github.com/neovim/neovim/blob/master/INSTALL.md)
@@ -158,7 +168,7 @@ New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\init.vim" -ItemType File
 Copy and paste this "raw" file content of this init.vim file into yours...
 
 [Gist Beck Brace](https://gist.github.com/BekBrace/73d1d179967a33853c5e079f68fdc93a)
-### Themes
+#### Themes
 Get a theme to your liking!
 
 [Neovim Themes Site](https://dotfyle.com/neovim/colorscheme/trending)  

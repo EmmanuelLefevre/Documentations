@@ -1,6 +1,19 @@
 # CONFIGURATION SERVEUR SUR WSL
+
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [COMMANDES WSL](#commmandes-wsl)
+- [INSTALLATION DE MARIADB](#installation-de-mariadb)
+- [CREATION D'UN UTILISATEUR ADMINISTRATEUR](#creation-dun-utlisateur-administrateur)
+- [CREATION D'UN UTILISATEUR STANDART](#creation-dun-utlisateur-standart)
+- [UTILISATION DE NETSTAT](#utilisation-de-netstat)
+- [SE CONNECTER A LINUX DEPUIS WINDOWS AVEC HEIDISQL](#se-connecter-a-linux-depuis-windows-avec-heidisql)
+- [INSTALLATION D'APACHE2](#installation-dapache2)
+- [CONFIGURATION GENERALE DU SERVEUR APACHE](#configuration-generale-du-serveur-apache)
+
 ## INTRODUCTION
 Cette documentation a pour objectif de guider l'utilisateur dans la configuration d'un environnement de serveur web sur Windows Subsystem for Linux (WSL) avec les technologies MariaDB et Apache2. Elle couvre les étapes essentielles, de la mise en place du serveur fonctionnel avec sa base de données et son projet web.
+
 ## COMMANDES WSL
 ### 1. Afficher les distributions installées
 ```shell
@@ -18,6 +31,7 @@ wsl --set-default-version 2
 ```shell
 wsl --shutdown
 ```
+
 ## INSTALLATION DE MARIADB
 ### 1. Afficher les services de la distribution
 ```shell
@@ -35,7 +49,7 @@ sudo service mariadb start
 ```shell
 sudo mysql_secure_installation
 ```
-## Création d'un utilisateur Administrateur
+## CREATION D'UN UTILISATEUR ADMINISTRATEUR
 ### 1. Se connecter à Mariadb
 ```shell
 sudo mariadb
@@ -56,7 +70,7 @@ exit
 ```shell
 mysqladmin -u admin -p version
 ```
-## Création d'un utilisateur Standard
+## CREATION D'UN UTILISATEUR STANDART
 ### 1. Se connecter en admin
 ```shell
 mysql -u admin -p

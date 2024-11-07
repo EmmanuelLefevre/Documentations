@@ -1,5 +1,15 @@
 # SQL
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [DATA DEFINITION LANGUAGE (DDL)](#data-definition-language-ddl)
+- [DATA MANIPULATION LANGUAGE (DML)](#data-manipulation-language-dml)
+  - [Utiliser du SQL](#utiliser-du-sql)
+  - [Ne pas utiliser du SQL](#ne-pas-utiliser-du-sql)
+  - [Utiliser du NoSQL](#utiliser-du-nosql)
+  - [Ne pas utiliser du NoSQL](#ne-pas-utiliser-du-nosql)
+- [THEOREME DE CAP](#theoreme-de-cap)
+
 ## INTRODUCTION
 SQL (Structured Query Language) est un langage informatique standardisé utilisé pour opérer des bases de données relationnelles. La partie langage de manipulation des données de SQL permet de rechercher, d'ajouter, de modifier ou de supprimer des données dans des bases de données relationnelles.
 

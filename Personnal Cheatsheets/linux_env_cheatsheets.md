@@ -2,7 +2,7 @@
 
 ## SOMMAIRE
 - [VARIABLES D'ENVIRONNEMENT](#variables-denvironnement)
-- [DEFINITION DES VARIABLES D'ENVIRONNEMENT](#definition-desèvariables-denvironnement)
+- [DEFINITION DES VARIABLES D'ENVIRONNEMENT](#definition-des-variables-denvironnement)
 - [EXPANSION DES PARAMETRES](#expansion-des-parametres)
 
 # VARIABLES D'ENVIRONNEMENT

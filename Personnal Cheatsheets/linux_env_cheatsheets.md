@@ -1,4 +1,11 @@
 # VARIABLES D'ENVIRONNEMENT POUR LINUX
+
+## SOMMAIRE
+- [VARIABLES D'ENVIRONNEMENT](#variables-denvironnement)
+- [DEFINITION DES VARIABLES D'ENVIRONNEMENT](#definition-desèvariables-denvironnement)
+- [EXPANSION DES PARAMETRES](#expansion-des-parametres)
+
+# VARIABLES D'ENVIRONNEMENT
 | Variable | Description |
 | :---: | :---: |
 | `$HOME` | Répertoire personnel de l'utilisateur actuel |
@@ -10,7 +17,7 @@
 | `$LANG` | Langue par défaut |
 | `$HOSTNAME` | Nom d'hôte de l'ordinateur |
 
-## DÉFINITION DES VARIABLES D'ENVIRONNEMENT
+## DEFINITION DES VARIABLES D'ENVIRONNEMENT
 | Commande | Description |
 | :---: | :---: |
 | `export VAR=value` | Définir une variable d'environnement |
@@ -21,7 +28,7 @@
 | `printenv` | Afficher toutes les variables d'environnement |
 | `echo $VAR` | Afficher la valeur d'une variable d'environnement |
 
-## EXPANSION DES PARAMÈTRES
+## EXPANSION DES PARAMETRES
 | Commande | Description |
 | :---: | :---: |
 | `${VAR}` | Valeur de la variable `VAR` |

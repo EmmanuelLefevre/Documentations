@@ -1,5 +1,13 @@
 # GITLAB LOCAL RUNNER
+
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [PROCEDURE](#procedures)
+- [COMMANDES UTILES](#commandes-utiles)
+
+## INTRODUCTION
 GitLab Runner est une application qui fonctionne avec GitLab pour exécuter des tâches CI/CD dans un pipeline.
+
 ## PROCEDURE
 ### 1. Lancer Powershell en admin
 [Doumentation Microsoft](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7#with-administrative-privileges-run-as-administrator)

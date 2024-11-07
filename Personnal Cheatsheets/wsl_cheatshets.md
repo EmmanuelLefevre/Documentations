@@ -1,5 +1,11 @@
 # WSL
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [SAUVEGARDE/RESTAURATION WSL](#sauvegarderestauration-wsl)
+- [LIENS SYMBOLIQUES](#liens-symboliques)
+- [RESEAU](#reseau)
+
 ## INTRODUCTION
 Windows Subsystem for Linux (WSL) est une couche de compatibilité permettant d'exécuter des exécutables binaires Linux (au format ELF) de manière native sur Windows.
 
@@ -19,7 +25,7 @@ Windows Subsystem for Linux (WSL) est une couche de compatibilité permettant d'
 | `sudo ln -s /mnt/c/Users/<user>/.ssh ~/.ssh` | Lier le dossier .ssh |
 | `sudo ln -s /mnt/c/Users/<user>/.kube ~/.kube` | Lier le dossier .kube |
 
-## RÉSEAU
+## RESEAU
 | Commande | Description |
 | :---: | :---: |
 | `netsh interface portproxy add v4tov4 listenport=$port connectport=$port connectaddress=$remoteaddr` | Ajouter un transfert de port |

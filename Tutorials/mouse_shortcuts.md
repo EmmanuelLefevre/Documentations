@@ -1,5 +1,10 @@
 # MOUSE SHORTCUTS
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [PROCEDURE](#procedure)
+- [BONUS](#bonus)
+
 ## INTRODUCTION
 Assign mouse shortcuts without builder software!  
 

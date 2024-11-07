@@ -15,7 +15,7 @@
         - [SSH](#ssh)
     - [Fonts](#fonts)
     - [Neovim](#neovim)
-    - [PLUG](#plug)
+    - [Plug](#plug)
     - [Yarn](#yarn)
 - [OH MY POSH](#oh-my-posh)
 - [GIT BASH](#git-bash)

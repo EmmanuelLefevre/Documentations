@@ -1,5 +1,16 @@
 # NEOVIM (fonctionne pour VIM)
 
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [COMMANDES UTILES](#commandes-utiles)
+  - [Modes](#modes)
+  - [Sauvegarder / Quitter](#sauvegarderquitter)
+  - [Commandes d'édition](#commandes-dédition)
+  - [Navigation dans le texte](#Navigation-dans-le-texte)
+  - [Navigation dans les lignes](#Navigation-dans-les-lignes)
+  - [Déplacement du curseur](#déplacement-du-curseur)
+  - [Réglages](#réglages)
+
 ## INTRODUCTION
 Neovim est un éditeur de texte (logiciel permettant la manipulation de fichiers texte).  Il est directement inspiré de Vim (un éditeur très répandu sur les systèmes d’exploitation de type Unix), dont il est un dérivé (fork).
 

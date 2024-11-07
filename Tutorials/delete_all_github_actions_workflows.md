@@ -1,4 +1,15 @@
 # DELETE ALL WORFLOWS FOR A REPOSITORY BY cURL script
+
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [CONFIGURATION](#configuration)
+  - [Créer un token d'accès personnel](#créer-un-token-dacces-personnel)
+  - [Script cURL utilisant l'API GitHub](#script-curl-utilisant-lapi-github)
+  - [WSL Terminal](#wsl-terminal)
+    - [Rendre le script exécutable](#rendre-le-script-exécutable)
+    - [Installer la bibliothèque jq](#installer-la-bibliothèque-jq)
+    - [Exécuter le script](#exécuter-le-script)
+
 ## INTRODUCTION
 Script cURL permettant de supprimer en masse les exécutions GitHub Actions via l'API GitHub.
 ## CONFIGURATION
@@ -39,7 +50,7 @@ sudo apt-get install jq
 ```shell
 sudo apt-get upgrade
 ```
-#### 4. Exécuter le script
+#### 3. Exécuter le script
 Dans le WSL =>
 ```shell
 cd /mnt/c/Users/darka/Desktop/Scripts

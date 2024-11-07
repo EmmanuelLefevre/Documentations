@@ -1,6 +1,13 @@
 # SSH
+
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [CONFIGURATION](#configuration)
+- [COMMANDES UTILES](#commandes-utiles)
+
 ## INTRODUCTION
 Configurer une connexion SSH avec github.com
+
 ## CONFIGURATION
 ### 1. Créer clés
 - ED
@@ -43,6 +50,7 @@ git remote -v
 ```
 Le retour de la commande doit affiché ce format =>  
 `origin git@github.com:<UserName>/<RepoName>.git`
+
 ## COMMANDES UTILES
 - Lister les clés ajoutées
 ```shell

@@ -3,7 +3,7 @@
 ## SOMMAIRE
 - [INTRODUCTION](#introduction)
 - [CERTIFICATE MANAGEMENT](#certificate-management)
-- [kEY MANAGEMENT](#key-management)
+- [KEY MANAGEMENT](#key-management)
 - [CERTIFICATE SIGNING](#certificate-signing)
 - [CERTIFICATE CONVERSION](#certificate-conversion)
 - [ENCRYPTION/DECRYPTION](#encryptiondecryption)

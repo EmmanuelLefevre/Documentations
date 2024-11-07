@@ -1,5 +1,15 @@
 # SGBD
 
+## SOMMAIRE
+- [SQL](#sql)
+- [NOSQL](#nosql)
+- [SQL OU NOSQL](#sql-ou-nosql)
+  - [Utiliser du SQL](#utiliser-du-sql)
+  - [Ne pas utiliser du SQL](#ne-pas-utiliser-du-sql)
+  - [Utiliser du NoSQL](#utiliser-du-nosql)
+  - [Ne pas utiliser du NoSQL](#ne-pas-utiliser-du-nosql)
+- [THEOREME DE CAP](#theoreme-de-cap)
+
 ## SQL
 | SQL | Type | Description |
 | :---: | :---: | :--- |
@@ -45,7 +55,7 @@
 | `Couchbase (support de graphes)` | Hybride | Couchbase offre des capacités de graphe en plus de son modèle orienté document, permettant une gestion flexible des relations entre les données. |
 | `Amazon Neptune (configuration lecture seule)` | Graphe | En mode lecture seule, Amazon Neptune assure une haute disponibilité et peut être utilisé pour interroger des données de manière fiable, même en cas de partitionnement. |
 
-## SQL ou NoSQL
+## SQL OU NOSQL
 ### Utiliser du SQL
 - **Données structurés :** Données organisées dans des tables avec des schémas bien définis, facilitant la gestion des relations entre les différentes entités.
 - **Transactions critiques :** Applications qui nécessitent des transactions sécurisées et conformes aux normes ACID (systèmes bancaires ou de gestion de la chaîne d'approvisionnement).
@@ -73,7 +83,7 @@
 - **Reporting et analytics avancés :** Des requêtes analytiques complexes et des rapports basés sur des jointures multiples.
 - **Standardisation et conformité :** Environnements où des normes strictes de conformité et de sécurité des données doivent être respectées.
 
-## Théorème de CAP
+## THEOREME DE CAP
 🛠️ Le théorème de CAP (ou théorème de Brewer) est un principe fondamental en informatique distribué qui stipule qu'un système de base de données distribuée ne peut garantir simultanément que deux des trois propriétés suivantes en fonction des besoins spécifiques de l'application.  
 
 **Consistency (cohérence):**  

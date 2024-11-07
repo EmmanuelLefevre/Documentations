@@ -3,7 +3,12 @@
 ## SOMMAIRE
 - [INTRODUCTION](#introduction)
 - [BASIC](#basic)
-- [Variables d'environnement](#variables-denvironnement)
+- [🌍 Variables d'environnement 🌍](#variables-denvironnement)
+- [🚀 Services de démarrage 🚀](#services-de-démarrage)
+- [🔑 Gestionnaire d'informations d'identification 🔑](#gestionnaire-dinformations-didentification)
+- [❌ Shutdown pc ❌](#shutdown-pc)
+- [♻️ Relaunch pc ♻️](#relaunch-pc)
+- [🎨 Personnalisation des icônes 🎨](#personnnalisation-des-icônes)
 
 ## INTRODUCTION
 Tutoriel pour créer des raccourcis sur le bureau Windows afin d'accéder plus rapidement à certaines fonctionnalités qui ne peuvent pas être ajoutées au menu démarrer.

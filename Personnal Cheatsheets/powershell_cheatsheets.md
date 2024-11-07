@@ -1,6 +1,25 @@
 # POWERSHELL
 
-## Introduction
+## SOMMAIRE
+- [INTRODUCTION](#introduction)
+- [COMMANDES UTILES](#commandes-utiles)
+  - [Lancer l'invite de commande](#lancer-linvite-de-commande)
+  - [Informations système](#informations-système)
+  - [Gestion des processus](#gestion-des-processus)
+- [GESTION DES UTILISATEURS](#gestion-des-utilisateurs)
+- [GESTION DES FICHIERS ET DES DOSSIERS](#gestion-des-fichiers-et-dossiers)
+- [AFFICHER LES ADRESSES IP](#afficher-les-adresses-ip)
+- [GESTION DU RESEAU](#gestion-du-reseau)
+  - [Diagnostique réseau](#diagnostique-réseau)
+  - [Gestion du cache DNS](#gestion-du-cache-dns)
+  - [Processus](#processus)
+  - [Gestion des services](#gestion-des-services)
+- [MAJ WINDOWS](#maj-windows)
+- [FONCTIONNALITES WINDOWS](#fonctionnalites-windows)
+- [CONNEXION A UN ORDINATEUR DISTANT](#connexion-a-un-ordinateur-distant)
+- [GESTION D'ARRET DE L'ORDINATEUR](#gestion-darret-de-lordinateur)
+
+## INTRODUCTION
 Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad) est une suite logicielle développée par Microsoft qui intègre une interface en ligne de commande, un langage de script nommé PowerShell ainsi qu'un kit de développement.
 
 ## COMMANDES UTILES
@@ -24,7 +43,7 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`Start-Process <processus>`|Démarrer un nouveau processus|
 |`Wait-Process -Name <processus>`|Attendre qu'un processus se termine|
 
-## Gestion des utilisateurs
+## GESTION DES UTILISATEURS
 | Commande | Description |
 | :---: | :---: |
 |`Get-LocalUser`|Lister les utilisateurs locaux|
@@ -34,7 +53,7 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`Add-LocalGroupMember -Group Administrators -Member <utilisateur>`|Ajouter un utilisateur au groupe Administrateurs|
 |`Remove-LocalGroupMember -Group Administrators -Member <utilisateur>`|Supprimer un utilisateur du groupe Administrateurs|
 
-## Gestion des fichiers et dossiers
+## GESTION DES FICHIERS ET DES DOSSIERS
 | Commande | Description |
 | :---: | :---: |
 |`Get-ChildItem`|Lister les fichiers et répertoires|
@@ -49,7 +68,7 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`Copy-Item SOURCE DEST -Recurse`|Copier un répertoire|
 |`Move-Item SOURCE DEST`|Déplacer un fichier ou un répertoire|
 
-### Afficher les adresses IP
+## AFFICHER LES ADRESSES IP
 | Command          | Description          |
 | :--------------: | :------------------: |
 |`ipconfig`|Paramètres de connexion réseau de base|
@@ -57,7 +76,7 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`ipconfig /release`|Libérer l'adresse IP actuelle (DHCP)|
 |`ipconfig /renew`|Renouveler l'adresse IP actuelle (DHCP)|
 
-## Gestion du réseau
+## GESTION DU RESEAU
 | Commande | Description |
 | :---: | :---: |
 |`Get-NetIPAddress`|Lister les adresses IP|
@@ -101,21 +120,21 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`net stop <nom_du_service>`|Arrêter un service Windows|
 |`net start`|Afficher les connexions réseau et les ports d'écoute|
 
-## MAJ Windows
+## MAJ WINDOWS
 | Commande | Description |
 | :---: | :---: |
 |`Install-Module -Name PSWindowsUpdate`|Installer le module PSWindowsUpdate|
 |`Get-Command -Module PSWindowsUpdate`|Lister toutes les commandes dans le module PSWindowsUpdate|
 |`Get-WUInstall`|Installer les mises à jour Windows|
 
-## Fonctionnalités Windows
+## FONCTIONNALITES WINDOWS
 | Commande | Description |
 | :---: | :---: |
 |`Get-WindowsFeature`|Lister les fonctionnalités Windows|
 |`Install-WindowsFeature <fonctionnalité>`|Installer une fonctionnalité Windows|
 |`Uninstall-WindowsFeature <fonctionnalité>`|Désinstaller une fonctionnalité Windows|
 
-## Connexion à un ordinateur distant
+## CONNEXION A UN ORDINATEUR DISTANT
 | Commande | Description |
 | :---: | :---: |
 |`Enter-PSSession -ComputerName <nom> -Credential <utilisateur>`|Ouvrir une nouvelle session distante|
@@ -123,7 +142,7 @@ Windows PowerShell (anciennement Microsoft Command Shell (MSH) nom de code Monad
 |`Invoke-Command -ComputerName <nom> -ScriptBlock { <commande> }`|Exécuter une commande sur un ordinateur distant|
 |`Invoke-Command -ComputerName <nom> -FilePath <script>`|Exécuter un script sur un ordinateur distant|
 
-### Gestion de l'arrêt de l'ordinateur
+## GESTION D'ARRET DE L'ORDINATEUR
 | Command          | Description          |
 | :--------------: | :------------------: |
 |`shutdown -s -t 3600`|Arrêter l'ordinateur dans 1 heure|

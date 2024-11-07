@@ -4,7 +4,7 @@
 - [INTRODUCTION](#introduction)
 - [COMMANDES UTILES](#commandes-utiles)
   - [Modes](#modes)
-  - [Sauvegarder / Quitter](#sauvegarder-quitter)
+  - [Sauvegarder / Quitter](#sauvegarder--quitter)
   - [Commandes d'édition](#commandes-dédition)
   - [Navigation dans le texte](#Navigation-dans-le-texte)
   - [Navigation dans les lignes](#Navigation-dans-les-lignes)

@@ -35,7 +35,7 @@ Create a file named init.vim:
 New-Item -Path "$env:USERPROFILE\DailyStreak\.github\workflows\daily_push.yaml" -ItemType File
 ```
 Copy and paste this "raw" file content of this daily_push.yaml file into yours...  
-[daily_push.yaml File](https://github.com/EmmanuelLefevre/DailyStreakAutomation/blob/main/.github/workflows/daily_push.yml)  
+[daily_push.yaml](https://github.com/EmmanuelLefevre/DailyStreakAutomation/blob/main/.github/workflows/daily_push.yml)  
 
 💡 The markdown log file streak.md will be created by the workflow if it does not already exist...
 
@@ -46,6 +46,7 @@ DailyStreakAutomation > Settings > Secrets and variables > Actions > New reposit
 
 ![Email Repository Secret](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/email_repository_secret.png)  
 
+Your markdown log file 🔥  
 ![Streak Log Markdown](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/streak_log_markdown.png)  
 
 ## WARNING

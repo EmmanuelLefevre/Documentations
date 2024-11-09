@@ -1,6 +1,6 @@
 # TERMINALS CONFIG
 
-## SOMMAIRE
+## SUMMARY
 - [INTRODUCTION](#introduction)
 - [IMPORTANT INFORMATIONS](#important-informations)
 - [POWERSHELL](#powershell)

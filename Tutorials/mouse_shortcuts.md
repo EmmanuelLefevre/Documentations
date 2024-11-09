@@ -1,6 +1,6 @@
 # MOUSE SHORTCUTS
 
-## SOMMAIRE
+## SUMMARY
 - [INTRODUCTION](#introduction)
 - [PROCEDURE](#procedure)
 - [BONUS](#bonus)

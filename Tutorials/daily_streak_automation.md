@@ -14,6 +14,7 @@ The workflow is scheduled to run automatically every day using a cron trigger un
 ## CONFIGURATION
 ### Create a repository
 Choose an explicit name like "DailyStreakAutomation".  
+
 ⚠️ Set it to public visibility if you use an activity or streak tracking plugin like [GitHub Streak].  
 
 Setup your action in your new repository =>  
@@ -32,8 +33,10 @@ Create a file named init.vim:
 ```powershell
 New-Item -Path "$env:USERPROFILE\DailyStreak\.github\workflows\daily_push.yaml" -ItemType File
 ```
-Copy and paste this "raw" file content of this daily_push.yaml file into yours...
+Copy and paste this "raw" file content of this daily_push.yaml file into yours...  
 [daily_push.yaml File](https://github.com/EmmanuelLefevre/DailyStreakAutomation/blob/main/.github/workflows/daily_push.yml)  
+
+💡 The markdown file streak.md will be created by the workflow if it does not already exist...
 
 ### Setup the email repository secret
 ⚠️ Exposing your email in a YAML file (especially in a public repository) is risky!  

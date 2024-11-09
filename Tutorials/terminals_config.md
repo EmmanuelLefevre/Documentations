@@ -165,7 +165,7 @@ Create a file named init.vim:
 ```powershell
 New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\init.vim" -ItemType File
 ```
-Copy and paste this "raw" file content of this init.vim file into yours...
+Copy and paste the "raw" file content of this init.vim file into yours...
 
 [Gist Beck Brace](https://gist.github.com/BekBrace/73d1d179967a33853c5e079f68fdc93a)
 #### Themes

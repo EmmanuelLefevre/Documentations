@@ -52,7 +52,7 @@ DailyStreakAutomation > Settings > Secrets and variables > Actions > New reposit
 Perhaps you will be forced to launch the first workflow manually because it turns out that it doesn't always work as expected!  
 The option has been added in the worflow to allow it.  
 
-![Run Workflow Manually](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/streak_log_markdown.png)  
+![Run Workflow Manually](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/run_workflow_manually.png)  
 
 ***
 

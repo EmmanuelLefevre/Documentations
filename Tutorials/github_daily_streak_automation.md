@@ -6,6 +6,7 @@
   - [Create a repository](#create-a-repository)
   - [Create the workflow](#create-the-workflow)
   - [Setup the email repository secret](#setup-the-email-repository-secret)
+- [WARNING](#warning)
 
 ## INTRODUCTION
 This GitHub Actions workflow was designed to automate a daily commit, allowing the user to maintain a streak of continuous commits on GitHub without interruption. This regular process, which can avoid forgetting a daily update, contributes to the visibility of the user's activity on their GitHub profile.  
@@ -43,7 +44,15 @@ Copy and paste this "raw" file content of this daily_push.yaml file into yours..
 
 DailyStreakAutomation > Settings > Secrets and variables > Actions > New repository secret  
 
-![Email Repository Secret](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/email_repository_secret.png)
+![Email Repository Secret](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/email_repository_secret.png)  
+
+![Streak Log Markdown](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/streak_log_markdown.png)  
+
+## WARNING
+Perhaps you will be forced to launch the first workflow manually because it turns out that it doesn't always work as expected!  
+If so run the workflow manually 
+
+![Run Workflow Manually](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/streak_log_markdown.png)  
 
 ***
 

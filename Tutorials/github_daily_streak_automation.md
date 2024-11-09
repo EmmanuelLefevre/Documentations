@@ -37,7 +37,7 @@ New-Item -Path "$env:USERPROFILE\DailyStreak\.github\workflows\daily_push.yaml" 
 Copy and paste this "raw" file content of this daily_push.yaml file into yours...  
 [daily_push.yaml File](https://github.com/EmmanuelLefevre/DailyStreakAutomation/blob/main/.github/workflows/daily_push.yml)  
 
-💡 The markdown file streak.md will be created by the workflow if it does not already exist...
+💡 The markdown log file streak.md will be created by the workflow if it does not already exist...
 
 ### Setup the email repository secret
 ⚠️ Exposing your email in a YAML file (especially in a public repository) is risky!  
@@ -50,7 +50,7 @@ DailyStreakAutomation > Settings > Secrets and variables > Actions > New reposit
 
 ## WARNING
 Perhaps you will be forced to launch the first workflow manually because it turns out that it doesn't always work as expected!  
-The option has been added in the worflow to allow it.  
+The option has been added in the worflow to allow it, but it will only work once when initializing the workflow.  
 
 ![Run Workflow Manually](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/run_workflow_manually.png)  
 

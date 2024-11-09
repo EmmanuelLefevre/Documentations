@@ -1,4 +1,4 @@
-# GITHUB DAILY STREAK AUTOMATION
+# GITHUB DAILY PUSH AUTOMATION
 
 ## SUMMARY
 - [INTRODUCTION](#introduction)
@@ -14,7 +14,7 @@ The workflow is scheduled to run automatically every day using a cron trigger un
 
 ## CONFIGURATION
 ### Create a repository
-Choose an explicit name like "GithubDailyStreakAutomation".  
+Choose an explicit name like "DailyPush".  
 
 ⚠️ Set it to public visibility if you use an activity or streak tracking plugin like [GitHub Streak].  
 
@@ -27,13 +27,13 @@ DailyStreakAutomation > Settings > Actions > General
 Save each sections!
 
 ### Create the workflow
-Create a workflow folder call "DailyStreak":
+Create a workflow folder call "DailyPush":
 ```powershell
-mkdir -p "$env:USERPROFILE\DailyStreak\.github\workflows"
+mkdir -p "$env:USERPROFILE\DailyPush\.github\workflows"
 ```
 Create a file named init.vim:
 ```powershell
-New-Item -Path "$env:USERPROFILE\DailyStreak\.github\workflows\daily_push.yaml" -ItemType File
+New-Item -Path "$env:USERPROFILE\DailyPush\.github\workflows\daily_push.yaml" -ItemType File
 ```
 Copy and paste the "raw" file content of this [daily_push.yaml](https://github.com/EmmanuelLefevre/GithubDailyStreakAutomation/blob/main/.github/workflows/daily_push.yml) file into yours...  
 

@@ -23,6 +23,7 @@ DailyStreakAutomation > Settings > Actions > General
 - "Allow all actions and reusable workflows"
 - "Require approval for first-time contributors"
 - "Read and write permissions"  
+
 Save each sections!
 
 ### Create the workflow

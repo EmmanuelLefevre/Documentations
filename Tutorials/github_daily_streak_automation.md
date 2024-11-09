@@ -50,7 +50,7 @@ DailyStreakAutomation > Settings > Secrets and variables > Actions > New reposit
 
 ## WARNING
 Perhaps you will be forced to launch the first workflow manually because it turns out that it doesn't always work as expected!  
-The option has been added in the worflow to allow it, but it will only work once when initializing the workflow.  
+The option has been added in the worflow to allow it, but it will only work once when initializing the workflow. If you do it again then it will fail...  
 
 ![Run Workflow Manually](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/run_workflow_manually.png)  
 

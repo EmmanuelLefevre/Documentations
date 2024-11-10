@@ -6,14 +6,17 @@ NVM (Node Version Manager) est un gestionnaire de versions pour NodeJs qui perme
 ## COMMANDES UTILES
 | Command + option | Description |
 | :--------------: | :---------: |
-|`nvm install node`|Installer la dernière version stable|
-|`nvm install <version>`|Installer une version spécifique|
-|`nvm current`|Afficher la version utilisée|
-|`nvm use <version>`|Utiliser une version spécifique|
-|`nvm ls`|Lister les versions installées|
-|`nvm uninstall <version>`|Désinstaller une version spécifique|
-|`nvm ls-remote`|Lister les versions disponibles au téléchargement|
-|`nvm alias default <version>`|Installer une version par défaut|
+| `nvm install latest` | Installer la dernière version stable. |
+| `nvm install <version>` | Installer une version spécifique. |
+| `nvm uninstall <version>` | Désinstaller une version spécifique. |
+| `nvm current` | Afficher la version utilisée. |
+| `nvm use <version>` | Utiliser une version spécifique. |
+| `nvm ls` | Lister les versions installées. |
+| `nvm ls-remote` | Lister les versions disponibles au téléchargement. |
+| `nvm alias default <version>` | Installer une version par défaut. |
+| `nvm on` | Activer NVM. |
+| `nvm off` | Désactiver NVM. |
+| `nvm debug` | Vérifiez processus NVM4W. |
 
 ***
 

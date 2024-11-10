@@ -71,11 +71,18 @@ choco upgrade microsoft-winget
 ```
 ### Utilities
 #### NVM
-NVM is used to have several versions of nodejs on the same computer and to easily change between them.
-Installation:
-```shell
-choco install nvm
-```
+NVM is used to have several versions of nodejs on the same computer and to easily change between them.  
+Installation:  
+[NVM Download](https://github.com/coreybutler/nvm-windows)  
+
+Click on Download.  
+![Download Button](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/nvm_dwld.png)  
+
+Click on the nvm-setup.exe asset which is the installation file for the tool.  
+![File setup.exe](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/nvm_setup_exe.png)  
+
+Run the the downloaded .exe file...  
+
 Check installation:
 ```shell
 nvm --version

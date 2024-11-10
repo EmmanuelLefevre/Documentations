@@ -85,11 +85,7 @@ Run the the downloaded .exe file...
 
 Check installation:
 ```shell
-nvm --version
-```
-Update it:
-```shell
-choco upgrade nvm
+nvm -v
 ```
 [NVM Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/nvm_cheatsheets.md)
 #### NodeJs (add NPM by default)

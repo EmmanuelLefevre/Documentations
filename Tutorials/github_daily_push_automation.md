@@ -6,11 +6,11 @@
   - [Create a repository](#create-a-repository)
   - [Create the workflow](#create-the-workflow)
   - [Setup the email repository secret](#setup-the-email-repository-secret)
-- [WARNING](#warning)
 
 ## INTRODUCTION
 This GitHub Actions workflow was designed to automate a daily commit, allowing the user to maintain a streak of continuous commits on GitHub without interruption. This regular process, which can avoid forgetting a daily update, contributes to the visibility of the user's activity on their GitHub profile.  
 The workflow is scheduled to run automatically every day using a cron trigger under the schedule field. Alternatively, it can also be triggered manually with workflow_dispatch.  
+![Run Workflow Manually](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/run_workflow_manually.png)  
 
 ## CONFIGURATION
 ### Create a repository
@@ -48,12 +48,6 @@ DailyStreakAutomation > Settings > Secrets and variables > Actions > New reposit
 
 Your markdown log file 🔥  
 ![Streak Log Markdown](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/streak_log_markdown.png)  
-
-## WARNING
-Perhaps you will be forced to launch the first workflow manually because it turns out that it doesn't always work as expected!  
-The option has been added in the worflow to allow it, but it will only work once when initializing the workflow. If you do it again then it will fail...  
-
-![Run Workflow Manually](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/run_workflow_manually.png)  
 
 ***
 

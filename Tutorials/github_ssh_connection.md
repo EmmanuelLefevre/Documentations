@@ -35,12 +35,12 @@ ssh-add C:/Users/darka/.ssh/github_id_ed
 ```shell
 ssh -T git@github.com
 ```
-### 7. Configurer le repository en SSH
+### 7. Configurer le repository local en SSH
 Récupérer le lien SSH dans le repository distant. Ici =>
 
 git@github.com:EmmanuelLefevre/Documentations.git
 
-Se placer dans le path du repository!
+Se placer dans le path du repository local!
 ```shell
 git remote set-url origin git@github.com:EmmanuelLefevre/Documentations.git
 ```

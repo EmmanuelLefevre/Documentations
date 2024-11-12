@@ -22,7 +22,7 @@ Script cURL permettant de supprimer en masse les exécutions GitHub Actions via 
 - Générer le token
 ### 2. Script cURL utilisant l'API GitHub
 ```shell
-REPO="EmmanuelLefevre/nom-du-repo" # Remplacer par son dépôt
+REPO="<GITHUB_USERNAME>/nom-du-repo" # Remplacer par son dépôt
 TOKEN="ton_personal_access_token" # Remplacer par le token crée
 
 # Lister les runs à supprimer
@@ -53,7 +53,7 @@ sudo apt-get upgrade
 #### 3. Exécuter le script
 Dans le WSL =>
 ```shell
-cd /mnt/c/Users/darka/Desktop/Scripts
+cd /mnt/c/Users/<UserName>/Desktop/Scripts
 ```
 ```shell
 ./delete_workflows.sh

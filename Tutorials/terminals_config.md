@@ -87,7 +87,7 @@ Check installation:
 ```shell
 nvm -v
 ```
-[NVM Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/nvm_cheatsheets.md)
+[NVM Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/Personnal%20Cheatsheets/nvm_cheatsheets.md)
 #### NodeJs (add NPM by default)
 Installation:
 ##### With Chocolatey
@@ -126,11 +126,11 @@ Update it:
 ```shell
 choco upgrade git
 ```
-[Git Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/git_cheatsheets.md)
+[Git Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/Personnal%20Cheatsheets/git_cheatsheets.md)
 #### SSH
 Setup a SSH connexion:
 
-[Personal Tutorial To Create A SSH Connexion With GPG Keys](https://github.com/EmmanuelLefevre/Documentations/blob/master/ssh_connection.md)
+[Personal Tutorial To Create A SSH Connexion With GPG Keys](https://github.com/EmmanuelLefevre/Documentations/blob/master/Tutorials/github_ssh_connection.md)
 ### Fonts
 #### Nerd Font
 I love Fira Code Nerd Font but that’s just personal, take the one you like. The only thing is to install a nerd one, otherwise you won't have the dedicated icons.
@@ -242,7 +242,7 @@ nvim init.vim
 
 You have autocompletion for HTML, CSS, Javascript, Typescript in Neovim... GGWP 🤙
 
-[Neovim Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/neovim_cheatsheets.md)
+[Neovim Personal CheatSheets](https://github.com/EmmanuelLefevre/Documentations/blob/master/Personnal%20Cheatsheets/neovim_cheatsheets.md)
 ## OH MY POSH
 [Oh-My-Posh Documentation](https://ohmyposh.dev/docs/)
 

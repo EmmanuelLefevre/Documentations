@@ -13,12 +13,14 @@ Tutoriel pour créer des raccourcis sur le bureau Windows afin d'accéder plus r
 5. Bouton "Terminer"
 
 ## 🌍 Variables d'environnement 🌍
+Accéder aux variables d'environnement système.
 ```shell
 rundll32.exe sysdm.cpl,EditEnvironmentVariables
 ```
 Right click sur le raccourci > Propriétés > Avancé > Cocher "Exécuter en tant qu'administrateur"
 
 ## 🚀 Services de démarrage 🚀
+Accéder aux services de démarrage Windows.
 ```shell
 services.msc
 ```
@@ -27,6 +29,12 @@ services.msc
 Permet de gérer les informations d'identification pour les connexions à des sites web, des réseaux, des applications ou des services Windows spécifiques.
 ```shell
 control /name Microsoft.CredentialManager
+```
+
+## 🔑 Gestionnaire de périphériques 🔑
+Accéder au gestionnaire de périphériques.
+```shell
+devmgmt.msc
 ```
 
 ## ❌ Shutdown pc ❌

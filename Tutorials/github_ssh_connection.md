@@ -18,6 +18,10 @@ ssh-keygen -t ed25519 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
 ```shell
 ssh-keygen -t rsa -b 4096 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
 ```
+- ECDSA
+```shell
+ssh-keygen -t ecdsa -b 521 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
+```
 ### 2. Vérifier création clés
 ```shell
 ls ~/.ssh

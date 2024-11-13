@@ -31,7 +31,7 @@ Permet de gérer les informations d'identification pour les connexions à des si
 control /name Microsoft.CredentialManager
 ```
 
-## 🔑 Gestionnaire de périphériques 🔑
+## 🔌 Gestionnaire de périphériques 🔌
 Accéder au gestionnaire de périphériques.
 ```shell
 devmgmt.msc

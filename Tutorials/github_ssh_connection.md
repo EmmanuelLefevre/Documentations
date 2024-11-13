@@ -12,11 +12,11 @@ Configurer une connexion SSH avec github.com
 ### 1. Créer clés
 - ED
 ```shell
-ssh-keygen -t ed25519 -C "waiasiaa@protonmail.com" -f ~/.ssh/github_id_ed
+ssh-keygen -t ed25519 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
 ```
 - RSA
 ```shell
-ssh-keygen -t rsa -b 4096 -C "waiasiaa@protonmail.com" -f ~/.ssh/github_id_ed
+ssh-keygen -t rsa -b 4096 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
 ```
 ### 2. Vérifier création clés
 ```shell
@@ -28,21 +28,19 @@ eval "$(ssh-agent -s)"
 ```
 ### 4. Ajouter clé privée à ssh-agent
 ```shell
-ssh-add C:/Users/darka/.ssh/github_id_ed
+ssh-add C:/Users/<UserName>/.ssh/github_id_ed
 ```
 ### 5. => github.com Ajouter la clé (Profile>Settings>SSH and GPG keys)
 ### 6. Tester la connection
 ```shell
 ssh -T git@github.com
 ```
-### 7. Configurer le repository en SSH
-Récupérer le lien SSH dans le repository distant. Ici =>
+### 7. Configurer le repository local en SSH
+Récupérer le lien SSH dans le repository distant.  
 
-git@github.com:EmmanuelLefevre/Documentations.git
-
-Se placer dans le path du repository!
+Se placer dans le path du repository local!
 ```shell
-git remote set-url origin git@github.com:EmmanuelLefevre/Documentations.git
+git remote set-url origin git@github.com:<UserName>/<RepoName>.git
 ```
 Vérifier la configuration:
 ```shell
@@ -62,7 +60,7 @@ ssh-add -D
 ```
 - Supprimer une clé
 ```shell
-ssh-add -d C:/Users/darka/.ssh/github_id_ed
+ssh-add -d C:/Users/<UserName>/.ssh/github_id_ed
 ```
 - Agent PID
 ```shell

@@ -23,8 +23,12 @@ Les fonctionnalités principales d’SSH incluent:
 - **Authentification par clés publiques:** Améliore la sécurité en remplaçant l’authentification par mot de passe par un système de clés publique/privée.  
 
 ## WARNING
-Sur Windows, utilisez les chemins comme C:/Users/<UserName>/.ssh/github_id_ed.  
-Sur Linux/Mac, utilisez ~/.ssh/github_id_ed.
+Sur Windows, utilisez ces chemins:  
+- C:/Users/<UserName>/.ssh/github_id_ed
+- $env:USERPROFILE\.ssh\github_id_ed  
+
+Sur Linux/Mac, utilisez:  
+- ~/.ssh/github_id_ed
 
 ## COMMANDES
 ### Connexion et authentification

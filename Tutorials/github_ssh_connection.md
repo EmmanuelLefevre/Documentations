@@ -23,7 +23,7 @@ ssh-keygen -t rsa -b 4096 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_rsa
 ```shell
 ssh-keygen -t ecdsa -b 521 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ecdsa
 ```
-#### Windows
+#### Windows Powershell
 - ED
 ```shell
 ssh-keygen -t ed25519 -C "<YOUR_GITHUB_EMAIL>" -f "$env:USERPROFILE\.ssh\github_id_ed"

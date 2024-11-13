@@ -15,7 +15,7 @@
 - [COMMANDES UTILES](#commandes-utiles)
 
 ## INTRODUCTION
-Configurer une connexion SSH avec github.com
+Configurer une connexion SSH avec github.com.
 
 ## CONFIGURATION
 ### 1. Créer clés

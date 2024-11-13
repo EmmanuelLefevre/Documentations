@@ -4,7 +4,7 @@
 - [INTRODUCTION](#introduction)
 - [WARNING](#warning)
 - [COMMANDES](#commandes)
-  - [Connexion et authentification](#connexion-et-authentification)
+  - [Connection et authentification](#connection-et-authentification)
   - [Création des clés](#création-des-clés)
   - [Vérification et gestion des clés](#vérification-et-gestion-des-clés)
   - [Transfert de fichiers](#transfert-de-fichiers)
@@ -31,7 +31,7 @@ Sur Linux/Mac, utilisez:
 - ~/.ssh/github_id_ed
 
 ## COMMANDES
-### Connexion et authentification
+### Connection et authentification
 | Command | Description |
 | :---: | :---: |
 | `ssh user@host` | Se connecter à un serveur SSH. |

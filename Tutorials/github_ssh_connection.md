@@ -17,11 +17,11 @@ ssh-keygen -t ed25519 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
 ```
 - RSA
 ```shell
-ssh-keygen -t rsa -b 4096 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
+ssh-keygen -t rsa -b 4096 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_rsa
 ```
 - ECDSA
 ```shell
-ssh-keygen -t ecdsa -b 521 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
+ssh-keygen -t ecdsa -b 521 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ecdsa
 ```
 #### Windows
 - ED

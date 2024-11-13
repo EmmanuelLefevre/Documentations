@@ -10,6 +10,7 @@ Configurer une connexion SSH avec github.com
 
 ## CONFIGURATION
 ### 1. Créer clés
+#### WSL
 - ED
 ```shell
 ssh-keygen -t ed25519 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
@@ -22,6 +23,20 @@ ssh-keygen -t rsa -b 4096 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
 ```shell
 ssh-keygen -t ecdsa -b 521 -C "<YOUR_GITHUB_EMAIL>" -f ~/.ssh/github_id_ed
 ```
+#### Windows
+- ED
+```shell
+ssh-keygen -t ed25519 -C "<YOUR_GITHUB_EMAIL>" -f "$env:USERPROFILE\.ssh\github_id_ed"
+```
+- RSA
+```shell
+ssh-keygen -t rsa -b 4096 -C "<YOUR_GITHUB_EMAIL>" -f "$env:USERPROFILE\.ssh\github_id_rsa"
+```
+- ECDSA
+```shell
+ssh-keygen -t ecdsa -b 521 -C "<YOUR_GITHUB_EMAIL>" -f "$env:USERPROFILE\.ssh\github_id_ecdsa"
+```
+
 ### 2. Vérifier création clés
 ```shell
 ls ~/.ssh

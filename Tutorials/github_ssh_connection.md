@@ -3,6 +3,15 @@
 ## SOMMAIRE
 - [INTRODUCTION](#introduction)
 - [CONFIGURATION](#configuration)
+  - [1. Créer clés](#1-créer-clés)
+    - [WSL](#wsl)
+    - [Windows Powershell](#windows-powershell)
+  - [2. Vérifier création clés](#2-vérifier-création-clés)
+  - [3. Démarrer ssh-agent](#3-démarrer-ssh-agent)
+  - [4. Ajouter clé privée à ssh-agent](#4-ajouter-clé-privée-à-ssh-agent)
+  - [5. Ajouter la clé](#5-ajouter-la-clé)
+  - [6. Tester la connexion](#6-tester-la-connexion)
+  - [7. Configurer le repository local en SSH](#7-configurer-le-repository-local-en-ssh)
 - [COMMANDES UTILES](#commandes-utiles)
 
 ## INTRODUCTION
@@ -41,7 +50,8 @@ ssh-keygen -t ecdsa -b 521 -C "<YOUR_GITHUB_EMAIL>" -f "$env:USERPROFILE\.ssh\gi
 ```shell
 ls ~/.ssh
 ```
-### 3. Démarrer ssh-agent (environnement où les clés sont stockées)
+### 3. Démarrer ssh-agent
+Le ssh-agent est l'environnement où les clés sont stockées...
 ```shell
 eval "$(ssh-agent -s)"
 ```
@@ -49,7 +59,9 @@ eval "$(ssh-agent -s)"
 ```shell
 ssh-add C:/Users/<UserName>/.ssh/github_id_ed
 ```
-### 5. => github.com Ajouter la clé (Profile>Settings>SSH and GPG keys)
+### 5. Ajouter la clé
+=> github.com  
+Profile > Settings > SSH and GPG keys
 ### 6. Tester la connection
 ```shell
 ssh -T git@github.com

@@ -47,7 +47,7 @@ DailyStreakAutomation > Settings > Secrets and variables > Actions > New reposit
 ![Email Repository Secret](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/email_repository_secret.png)  
 
 Your markdown log file 🔥  
-![Streak Log Markdown](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/streak_log_markdown.png)  
+![Streak Log Markdown](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/github_streak_log.png)  
 
 ***
 

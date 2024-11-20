@@ -87,8 +87,9 @@ Git est un logiciel de gestion de versions décentralisé.
 ### Branche
 | Command + option | Description |
 | :--------------: | :---------: |
-| `git branch -a` | Afficher toutes les branches. |
 | `git branch` | Indiquer la branche sur laquelle on se trouve. |
+| `git branch -a` | Afficher toutes les branches. |
+| `git branch -r` | Afficher toutes les branches disponibles sur le dépôt distant. |
 | `git branch <nameOfBranch>` | Créer branche. |
 | `git checkout <nameOfBranch>` | Se déplacer vers la branche spécifiée. |
 | `git switch <nameOfBranch>` | Se déplacer vers la branche spécifiée. |

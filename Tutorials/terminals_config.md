@@ -76,10 +76,10 @@ Installation:
 [NVM Download](https://github.com/coreybutler/nvm-windows)  
 
 Click on Download.  
-![Download Button](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/nvm_dwld.png)  
+![Download Button](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/nvm_dwld.png)  
 
 Click on the nvm-setup.exe asset which is the installation file for the tool.  
-![File setup.exe](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/nvm_setup_exe.png)  
+![File setup.exe](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/nvm_setup_exe.png)  
 
 Run the the downloaded .exe file...  
 
@@ -184,7 +184,7 @@ New-Item -Path "$env:USERPROFILE\AppData\Local\nvim\themes" -ItemType Directory
 Now you can copy the name of your theme inside the "themes" folder.
 Apply your theme inside the init.vim file:
 
-![Apply Neovim Theme](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/apply_neovim_theme.png)
+![Apply Neovim Theme](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/apply_neovim_theme.png)
 
 ⚠️ Configuration isn't entirely done, don't worry if Neovim does not launch correctly! ⚠️
 ### Plug
@@ -209,7 +209,7 @@ We should now install the Neovim modules thanks to Plug!
 In the lower part of Neovim you can see the prompt 🕶️  
 Enter "PlugInstall" in it and validate.
 
-![Neovim Install Modules](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/plug_install.png)
+![Neovim Install Modules](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/plug_install.png)
 
 Wait for the installation to complete, go make yourself a coffee ☕☕☕
 ### Yarn
@@ -238,7 +238,7 @@ cd "$env:USERPROFILE\AppData\Local\nvim"
 nvim init.vim
 ```
 
-![Yarn Install](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/yarn_install.png)
+![Yarn Install](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/yarn_install.png)
 
 You have autocompletion for HTML, CSS, Javascript, Typescript in Neovim... GGWP 🤙
 
@@ -290,11 +290,11 @@ Import-Module Terminal-Icons
 
 👨‍💻 Take a look to see what is possible with this configuration file 👨‍💻
 
-[PowerShell Personal Profile](https://github.com/EmmanuelLefevre/Settings/blob/main/Powershell/Microsoft.PowerShell_profile.ps1)
+[PowerShell Personal Profile](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/Powershell/Microsoft.PowerShell_profile.ps1)
 
-![PowerShell Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/powershell.png)
+![PowerShell Screen](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/powershell.png)
 
-![PowerShell Functions Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/powershell2.png)
+![PowerShell Functions Screen](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/powershell2.png)
 
 ##### Themes
 Apply a prompt theme to your terminal due to Oh-My-Posh:
@@ -311,7 +311,7 @@ For custom ones
 // Replace the other import by your custom theme
 oh-my-posh init pwsh --config "$env:USERPROFILE/Documents/PowerShell/powershell_profile_custom.json" | Invoke-Expression
 ```
-[Oh-My-Posh Personal Theme For Powershell](https://github.com/EmmanuelLefevre/Settings/blob/main/Powershell/powershell_profile_darka.json)
+[Oh-My-Posh Personal Theme For Powershell](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/Powershell/powershell_profile_darka.json)
 ## GIT BASH
 If they do not exist create these two files in the user directory.
 ```powershell
@@ -358,9 +358,9 @@ Apply the themes again for effective changes.
 
 👨‍💻 Take a look to see what is possible with a custom theme 👨‍💻
 
-[Oh-My-Posh Personal Theme For Git Bash](https://github.com/EmmanuelLefevre/Settings/blob/main/GitBash/gitbash_profile_darka.json)
+[Oh-My-Posh Personal Theme For Git Bash](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/GitBash/gitbash_profile_darka.json)
 
-![GitBash Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/gitbash.png)
+![GitBash Screen](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/gitbash.png)
 
 ## Z JUMPER
 The Z plugin adds z directory jumping to PowerShell, you could quickly open directories that you frequent on the command line or jump to a one without entering the exact folder name.
@@ -423,7 +423,7 @@ clear
 ```
 ⚠️ Don't forget the "Next steps" part... (these steps may be different depending on your version of windows and the version of Homebrew). Follow the recommendation regarding the installation of GCC.  
 
-![Homebrew Next Steps](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/homebrew_install.png)
+![Homebrew Next Steps](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/homebrew_install.png)
 
 Upgrade Homebrew:
 ```shell
@@ -487,9 +487,9 @@ source ~/.bashrc
 ```
 Samely as PowerShell or GitBash you could create your own theme.  
 
-[Oh-My-Posh Personal Theme For WSL](https://github.com/EmmanuelLefevre/Settings/blob/main/WSL/wsl_profile_darka.json)
+[Oh-My-Posh Personal Theme For WSL](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/WSL/wsl_profile_darka.json)
 
-![WSL Screen](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/wsl.png)
+![WSL Screen](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/wsl.png)
 
 ### Disable the daily message in WSL
 ```shell
@@ -497,15 +497,15 @@ touch ~/.hushlogin
 ```
 
 ***
-🔎🔎🔎 You could find a few of my personal settings here 🔎🔎🔎  
+🔎🔎🔎 You could find a few of my personal dot files here 🔎🔎🔎  
 
-[Emmanuel Lefevre Personal Settings](https://github.com/EmmanuelLefevre/Settings)  
+[Emmanuel Lefevre Personal Dotfiles](https://github.com/EmmanuelLefevre/Dotfiles)  
 ***
 🔥🔥🔥 You're now a fucking terminal user!!! 🔥🔥🔥
 
 ***
 
-⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "[Dotfiles](https://github.com/EmmanuelLefevre/Dotfiles)" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
 
 ***
 

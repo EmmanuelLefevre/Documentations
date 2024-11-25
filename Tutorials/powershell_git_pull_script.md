@@ -210,7 +210,7 @@ function Get-RepositoriesInfo {
 
 ⚠️ I you don't use a personal token to request the Github API don't forget to switch the visibility of your remote repository to public, if not this script will not be able to update your local repository. To set up an identification token on the Github API, go to the next "Bonus"" section...
 
-![Script Screen](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/git_pull_script.png)
+![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script.png)
 
 ## 😍 Bonus 😍
 
@@ -268,4 +268,4 @@ $response = Invoke-RestMethod -Uri $repoUrl -Method Get -Headers @{ Authorizatio
 
 ***
 
-⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "[Dotfiles](https://github.com/EmmanuelLefevre/Dotfiles)" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the [Dotfiles](https://github.com/EmmanuelLefevre/Dotfiles) one (click on the "Star" button at the top right of the repository page). Thanks 🤗

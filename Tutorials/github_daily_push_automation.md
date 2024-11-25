@@ -44,10 +44,10 @@ Copy and paste the "raw" file content of this [daily_push.yaml](https://github.c
 
 DailyStreakAutomation > Settings > Secrets and variables > Actions > New repository secret  
 
-![Email Repository Secret](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/email_repository_secret.png)  
+![Email Repository Secret](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/email_repository_secret.png)  
 
 Your markdown log file 🔥  
-![Streak Log Markdown](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/github_streak_log.png)  
+![Streak Log Markdown](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/github_streak_log.png)  
 
 ***
 

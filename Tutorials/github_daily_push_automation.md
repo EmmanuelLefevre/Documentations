@@ -10,7 +10,7 @@
 ## INTRODUCTION
 This GitHub Actions workflow was designed to automate a daily commit, allowing the user to maintain a streak of continuous commits on GitHub without interruption. This regular process, which can avoid forgetting a daily update, contributes to the visibility of the user's activity on their GitHub profile.  
 The workflow is scheduled to run automatically every day using a cron trigger under the schedule field. Alternatively, it can also be triggered manually with workflow_dispatch.  
-![Run Workflow Manually](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/run_workflow_manually.png)  
+![Run Workflow Manually](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/run_workflow_manually.png)  
 
 ## CONFIGURATION
 ### Create a repository

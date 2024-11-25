@@ -10,7 +10,7 @@
 ## INTRODUCTION
 This GitHub Actions workflow was designed to automate a daily commit, allowing the user to maintain a streak of continuous commits on GitHub without interruption. This regular process, which can avoid forgetting a daily update, contributes to the visibility of the user's activity on their GitHub profile.  
 The workflow is scheduled to run automatically every day using a cron trigger under the schedule field. Alternatively, it can also be triggered manually with workflow_dispatch.  
-![Run Workflow Manually](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/run_workflow_manually.png)  
+![Run Workflow Manually](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/run_workflow_manually.png)  
 
 ## CONFIGURATION
 ### Create a repository
@@ -44,11 +44,11 @@ Copy and paste the "raw" file content of this [daily_push.yaml](https://github.c
 
 DailyStreakAutomation > Settings > Secrets and variables > Actions > New repository secret  
 
-![Email Repository Secret](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/email_repository_secret.png)  
+![Email Repository Secret](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/email_repository_secret.png)  
 
 Your markdown log file 🔥  
-![Streak Log Markdown](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/github_streak_log.png)  
+![Streak Log Markdown](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/github_streak_log.png)  
 
 ***
 
-⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "[Dotfiles](https://github.com/EmmanuelLefevre/Dotfiles)" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

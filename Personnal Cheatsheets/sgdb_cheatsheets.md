@@ -95,8 +95,8 @@ Le système répond à chaque requête, même si certaines données ou noeuds so
 **Partition tolerance (tolérance au partitionnement):**  
 Le système continue de fonctionner, même en cas de perte ou de retard de communication entre certains noeuds du réseau. En cas de partitionnement, les données restent accessibles sur les noeuds disponibles.  
 
-![Schéma théorème de CAP](https://github.com/EmmanuelLefevre/Settings/blob/main/MarkdownImg/cap_bdd.png)  
+![Schéma théorème de CAP](https://github.com/EmmanuelLefevre/Dotfiles/blob/main/MarkdownImg/cap_bdd.png)  
 
 ***
 
-⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "Settings" one (click on the "Star" button at the top right of the repository page). Thanks 🤗
+⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the "[Dotfiles](https://github.com/EmmanuelLefevre/Dotfiles)" one (click on the "Star" button at the top right of the repository page). Thanks 🤗

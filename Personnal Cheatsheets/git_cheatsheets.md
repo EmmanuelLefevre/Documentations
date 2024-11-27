@@ -7,6 +7,7 @@
   - [Initialiser dépôt local](#initialiser-dépôt-local)
   - [Utilisateur](#utilisateur)
   - [Clone/Pull](#clonepull)
+  - [Push](#push)
   - [Reconfigurer dépôt distant](#reconfigurer-dépôt-distant)
   - [Commit](#commit)
   - [Branche](#branche)
@@ -14,7 +15,6 @@
   - [Historique](#historique)
   - [Statut](#statut)
   - [Récupérer branches distantes](#récupérer-branches-distantes)
-  - [Push](#push)
   - [Rebase](#rebase)
   - [Stash](#stash)
   - [Diff](#diff)
@@ -54,6 +54,12 @@ Git est un logiciel de gestion de versions décentralisé.
 | `git clone https://github.com/<Username>/<RepositoryName>.git` | Cloner dépôt distant vers local en HTTPS. |
 | `git clone git@github.com:<Username>/<RepositoryName>` | Cloner dépôt distant vers local en SSH. |
 | `git pull origin master` | Récupérer MAJ branche 'master' du distant pour les fusionner avec la branche locale actuelle. |
+
+### Push
+| Command + option | Description |
+| :--------------: | :---------: |
+| `git push origin master` | Pousser les commits locaux de la branche 'master' sur la branche 'master' du distant. |
+| `git push origin master --force` | Succeptible de supprimer l'historique des commits!!! |
 
 ### Reconfigurer dépôt distant
 | Command + option | Description |
@@ -120,12 +126,6 @@ Git est un logiciel de gestion de versions décentralisé.
 | Command + option | Description |
 | :--------------: | :---------: |
 | `git fetch --all` | Récupérer toutes les branches/objets du dépôt distant sans les fusionner dans les branches locales (permet d'examiner les MAJ avant de fusionner). |
-
-### Push
-| Command + option | Description |
-| :--------------: | :---------: |
-| `git push origin master` | Pousser les commits locaux de la branche 'master' sur la branche 'master' du distant. |
-| `git push origin master --force` | Succeptible de supprimer l'historique des commits!!! |
 
 ### Rebase
 | Command + option | Description |

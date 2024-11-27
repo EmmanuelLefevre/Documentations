@@ -9,9 +9,10 @@
   - [Clone/Pull](#clonepull)
   - [Reconfigurer dépôt distant](#reconfigurer-dépôt-distant)
   - [Commit](#commit)
+  - [Branche](#branche)
+  - [Reset](#reset)
   - [Historique](#historique)
   - [Statut](#statut)
-  - [Branche](#branche)
   - [Récupérer branches distantes](#récupérer-branches-distantes)
   - [Push](#push)
   - [Rebase](#rebase)
@@ -41,24 +42,26 @@ Git est un logiciel de gestion de versions décentralisé.
 ### Utilisateur
 | Command + option | Description |
 | :--------------: | :---------: |
-| `git config --global user.name "user"` | Configurer le nom d'utilisateur global. |
-| `git config --global user.email "user@email.com"` | Configurer l'adresse e-mail globale. |
+| `git config --global user.name "<Username>"` | Configurer le nom d'utilisateur global. |
+| `git config --global user.email "<UserEmail>"` | Configurer l'adresse e-mail globale. |
 | `git config --list` | Afficher toutes les configurations actuelles. |
-| `git config user.name` | Afficher le nom d'utilisateur configuré. |
-| `git config user.email` | Afficher l'adresse e-mail configurée. |
+| `git config user.name` | Afficher nom d'utilisateur configuré. |
+| `git config user.email` | Afficher adresse e-mail configurée. |
 
 ### Clone/Pull
 | Command + option | Description |
 | :--------------: | :---------: |
-| `git clone https://github.com/user.name/nomRepo.git` | Cloner un dépôt distant vers son local. |
-| `git pull origin master` | Récupérer les MAJ de la branche 'master' du distant pour les fusionner avec la branche locale actuelle. |
+| `git clone https://github.com/<Username>/<RepositoryName>.git` | Cloner dépôt distant vers local en HTTPS. |
+| `git clone git@github.com:<Username>/<RepositoryName>` | Cloner dépôt distant vers local en SSH. |
+| `git pull origin master` | Récupérer MAJ branche 'master' du distant pour les fusionner avec la branche locale actuelle. |
 
 ### Reconfigurer dépôt distant
 | Command + option | Description |
 | :--------------: | :---------: |
 | `git remote -v`| Afficher remotes URL (SSH ou HTTPS). |
 | `git remote rm origin` | Effacer l'ancien remote nommé "origin". |
-| `git remote add origin https://github.com/user.name/nomRepo.git` | Lier le dépôt local au dépôt distant spécifié. |
+| `git remote add origin https://github.com/<Username>/<RepositoryName>.git` | Lier dépôt local au dépôt distant en HTTPS. |
+| `git remote add origin git@github.com:<Username>/<RepositoryName>` | Lier dépôt local au dépôt distant en SSH. |
 
 ### Commit
 | Command + option | Description |
@@ -67,22 +70,9 @@ Git est un logiciel de gestion de versions décentralisé.
 | `git add foo.txt` | Ajouter un fichier modifié au staging. |
 | `git commit -m "commentaire"` | Créer un commit avec un message de commentaire. |
 | `git commit -m "commentaire" -a` | Ajouter et créer un commit en une seule ligne. |
-| `git checkout commitIdentifiant` | Se replacer sur un commit spécifique. |
-| `git reset --hard` | Annuler les fichiers ajoutés avec `git add .` |
+| `git checkout <commitHash>` | Se replacer sur un commit spécifique. |
 | `git commit --amend -m "newMessage"` | Modifier le message du dernier commit. |
-| `git checkout -b <nameOfBranch> <commitID>` | Récupérer une branche supprimée en pointant vers un commit spécifique. |
-
-### Historique
-| Command + option | Description |
-| :--------------: | :---------: |
-| `git log --oneline` | Afficher liste des commits de manière concise. |
-| `git log --date=local` | Afficher liste des commits avec des dates locales. |
-| `git log --graph --oneline --decorate` | Afficher liste des commits sous forme graphique avec des références. |
-
-### Statut
-| Command + option | Description |
-| :--------------: | :---------: |
-| `git status` | Vérifier le statut des fichiers. |
+| `git checkout -b <nameOfBranch> <commitHash>` | Récupérer une branche supprimée en pointant vers un commit spécifique. |
 
 ### Branche
 | Command + option | Description |
@@ -99,6 +89,33 @@ Git est un logiciel de gestion de versions décentralisé.
 | `git branch -D <nameOfBranch>` | Supprimer branche locale non fusionnée. |
 | `git push origin --delete <nameOfBranch>` | Supprimer branche distante. |
 
+### Reset
+| Command + option | Description |
+| :--------------: | :---------: |
+| `git reset --soft <CommitHash>` | Réinitialise le pointeur HEAD à <CommitHash> et garde les changements dans l'index (permet de refaire un commit sans perdre de modifications). |
+| `git reset --mixed <CommitHash>` | Réinitialise le pointeur HEAD à <CommitHash> et garde les changements dans le répertoire de travail mais réinitialise l'index. |
+| `git reset --hard <CommitHash>` | Réinitialise le pointeur HEAD à <CommitHash>, réinitialise l'index et le répertoire de travail, perdant ainsi toutes les modifications non commises. |
+| `git reset --hard` | Réinitialise le pointeur HEAD à la dernière révision, réinitialise l'index et le répertoire de travail, perdant toutes les modifications non commitées. |
+
+| Command | Modifie l'index | Modifie répertoire de travail | Perte modifs non sauvegardées |
+| :--------------: | :---------: | :---------: | :---------: |
+| `git reset --soft <CommitHash>` | Oui | Non | Non |
+| `git reset --mixed <CommitHash>` | Oui | Non | Non |
+| `git reset --hard <CommitHash>` | Oui | Oui | Oui |
+| `git reset --hard` | Oui | Oui | Oui |
+
+### Historique
+| Command + option | Description |
+| :--------------: | :---------: |
+| `git log --oneline` | Afficher liste des commits de manière concise. |
+| `git log --date=local` | Afficher liste des commits avec des dates locales. |
+| `git log --graph --oneline --decorate` | Afficher liste des commits sous forme graphique avec des références. |
+
+### Statut
+| Command + option | Description |
+| :--------------: | :---------: |
+| `git status` | Vérifier le statut des fichiers. |
+
 ### Récupérer branches distantes
 | Command + option | Description |
 | :--------------: | :---------: |
@@ -107,7 +124,6 @@ Git est un logiciel de gestion de versions décentralisé.
 ### Push
 | Command + option | Description |
 | :--------------: | :---------: |
-| `git remote add origin https://github.com/user.name/nomRepo.git` | Lier le dépôt local au dépôt distant spécifié. |
 | `git push origin master` | Pousser les commits locaux de la branche 'master' sur la branche 'master' du distant. |
 | `git push origin master --force` | Succeptible de supprimer l'historique des commits!!! |
 

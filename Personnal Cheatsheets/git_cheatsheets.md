@@ -93,9 +93,10 @@ Git est un logiciel de gestion de versions décentralisé.
 | `git branch <nameOfBranch>` | Créer branche. |
 | `git checkout <nameOfBranch>` | Se déplacer vers la branche spécifiée. |
 | `git switch <nameOfBranch>` | Se déplacer vers la branche spécifiée. |
-| `git checkout -b <nameOfBranch>` | Créer une branche et switcher dessus. |
-| `git branch -d <nameOfBranch>` | Supprimer une branche fusionnée. |
-| `git branch -D <nameOfBranch>` | Supprimer une branche non fusionnée. |
+| `git checkout -b <nameOfBranch>` | Créer branche et switcher dessus. |
+| `git branch -d <nameOfBranch>` | Supprimer branche locale fusionnée. |
+| `git branch -D <nameOfBranch>` | Supprimer branche locale non fusionnée. |
+| `git push origin --delete <nameOfBranch>` | Supprimer branche distante. |
 
 ### Récupérer branches distantes
 | Command + option | Description |

@@ -187,15 +187,15 @@ git switch master
 ```shell
 git pull origin master
 ```
-#### 2. Fusionner la branche cible sur la master
+#### 3. Fusionner la branche cible sur la master
 ```shell
 git merge <nameOfBranch>
 ```
-#### 3. SUPPRIMER la branche locale
+#### 4. Supprimer la branche locale
 ```shell
 git branch -d <nameOfBranch>
 ```
-#### 3. Puis la branche distante
+#### 5. Puis la branche distante
 ```shell
 git push origin --delete <nameOfBranch>
 ```

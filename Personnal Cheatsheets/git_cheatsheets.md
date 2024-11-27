@@ -70,7 +70,7 @@ Git est un logiciel de gestion de versions décentralisé.
 | `git checkout commitIdentifiant` | Se replacer sur un commit spécifique. |
 | `git reset --hard` | Annuler les fichiers ajoutés avec `git add .` |
 | `git commit --amend -m "newMessage"` | Modifier le message du dernier commit. |
-| `git checkout -b nameOfBranch <commitID>` | Récupérer une branche supprimée en pointant vers un commit spécifique. |
+| `git checkout -b <nameOfBranch> <commitID>` | Récupérer une branche supprimée en pointant vers un commit spécifique. |
 
 ### Historique
 | Command + option | Description |
@@ -114,18 +114,18 @@ Git est un logiciel de gestion de versions décentralisé.
 ### Rebase
 | Command + option | Description |
 | :--------------: | :---------: |
-| `git rebase nameOfBranch` | Déplacer ou combiner une série de commits vers une nouvelle base. |
+| `git rebase <nameOfBranch> | Déplacer ou combiner une série de commits vers une nouvelle base. |
 
 ### Stash
 | Command + option | Description |
 | :--------------: | :---------: |
 | `git stash` | Mettre en attente modifications. |
-| `git stash list` | Afficher liste modifications en attente. |
-| `git stash clear` | Supprimer toutes les modifications en attente. |
+| `git stash list` | Afficher historique modifications en attente. |
 | `git stash apply` | Récupérer dernier stash. |
 | `git stash apply stash@{number}` | Récupérer un stash spécifique. |
-| `git stash pop` | Appliquer dernier stash et le supprimer de la liste des stashes. |
+| `git stash pop` | Appliquer dernier stash et le supprimer de la liste. |
 | `git stash drop "stash@{number}"` | Supprimer stash spécifique sans l'appliquer. |
+| `git stash clear` | Supprimer toutes les modifications en attente et l'historique. |
 | `git stash branch <nameOfBranch>` | Créer branche contenant les modifications du stash. |
 
 ### Diff
@@ -173,15 +173,15 @@ git pull origin master
 ```
 #### 2. Fusionner la branche cible sur la master
 ```shell
-git merge nameOfBranch
+git merge <nameOfBranch>
 ```
 #### 3. SUPPRIMER la branche locale
 ```shell
-git branch -d nameOfBranch
+git branch -d <nameOfBranch>
 ```
 #### 3. Puis la branche distante
 ```shell
-git push origin --delete nameOfBranch
+git push origin --delete <nameOfBranch>
 ```
 
 ## RESSOURCES UTILES

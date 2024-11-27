@@ -103,7 +103,7 @@ Git est un logiciel de gestion de versions décentralisé.
 | `git reset --hard <CommitHash>` | Réinitialise le pointeur HEAD à <CommitHash>, réinitialise l'index et le répertoire de travail, perdant ainsi toutes les modifications non commises. |
 | `git reset --hard` | Réinitialise le pointeur HEAD à la dernière révision, réinitialise l'index et le répertoire de travail, perdant toutes les modifications non commitées. |
 
-| Command | Modifie l'index | Modifie répertoire de travail | Perte modifs non sauvegardées |
+| Command | Modifie l'index | Modifie répertoire de travail | Perte de modifications non sauvegardées |
 | :--------------: | :---------: | :---------: | :---------: |
 | `git reset --soft <CommitHash>` | Oui | Non | Non |
 | `git reset --mixed <CommitHash>` | Oui | Non | Non |

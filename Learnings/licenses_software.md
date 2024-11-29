@@ -2,7 +2,7 @@
 
 ## SOMMAIRE
 - [INTRODUCTION](#introduction)
-- [OPEN-SOURCE ET LIBRES](#opensource-et-libres)
+- [OPEN-SOURCE ET LIBRES](#open-source-et-libres)
 - [HYBRIDE](#hybride)
   - [MIT](#mit)
 - [OPEN-SOURCE](#opensource)

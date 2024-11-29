@@ -5,13 +5,13 @@
 - [OPEN-SOURCE ET LIBRES](#open-source-et-libres)
 - [HYBRIDE](#hybride)
   - [MIT](#mit)
-- [OPEN-SOURCE](#opensource)
-  - [Apache 2.0](#apache20)
+- [OPEN-SOURCE](#open-source)
+  - [Apache 2.0](#apache-20)
   - [BSD](#bsd)
 - [LIBRE](#libre)
   - [GPLv3](#gplv3)
   - [LGPL](#lgpl)
-  - [MPL 2.0](#mpl20)
+  - [MPL 2.0](#mpl-20)
   - [MPL](#mpl)
   - [Public Domain](#public-domain)
   - [CC0](#cc0)
@@ -297,7 +297,7 @@ La Beerware License est très permisssive. Elle permet l'utilisation, la modific
 | `Clause de "Notice"` |++ | +++ | +++ | ++ | ++ | ++ | ++ | ++++ | ++++ | ++++ | +++ |
 | `Garanties` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | `Projets propriétaires` | +++ | ++ | 0 | +++ | + | ++ | ++ | ++++ | ++++ | ++++ | +++ |
-| `Utilisation commerciale` | +++ |  | + | +++ | +++ | ++ | ++ | ++++ | ++++ | ++++ | ++++ |
+| `Utilisation commerciale` | +++ | +++ | + | +++ | +++ | ++ | ++ | ++++ | ++++ | ++++ | ++++ |
 | `Propriété intellectuelle` | + | +++ | +++ | + | +++ | ++ | +++ | +++ | ++++ | ++++ | +++ |
 
 ### PERMISSIVES / COPYLEFT
@@ -306,22 +306,6 @@ La Beerware License est très permisssive. Elle permet l'utilisation, la modific
 | Permissives | +++ | +++ | + | +++ | +++ | +++ | +++ | +++ | +++ | +++ | +++ |
 | Copyleft | 0 | 0 | +++ | 0 | +++ | + | + | 0 | 0 | 0 | 0 |
 
-## PROPRIÉTAIRES
-
-
 ***
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the [Dotfiles](https://github.com/EmmanuelLefevre/Dotfiles) one (click on the "Star" button at the top right of the repository page). Thanks 🤗
-
-
-| Caractéristiques | BSD |
-| :---: | :---: |
-| `Liberté d'utilisation` |  |
-| `Modifications` |  |
-| `Redistribution` |  |
-| `Gestion des brevets` |  |
-| `Clause de "Notice"` |  |
-| `Garanties` |  |
-| `Projets dérivés propriétaires` |  |
-| `Utilisation des marques` |  |
-| `Propriété intellectuelle` |  |

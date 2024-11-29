@@ -269,17 +269,17 @@ La Beerware License est très permisssive. Elle permet l'utilisation, la modific
 ### COMPARATIF
 | Caractéristiques | MIT | Apache 2.0 | GPL | BSD | LGPL | MPL 2.0 | MPL | Public Domain | CC0 | Unlicense | Beerware License |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| `Simplicité` |  |  |  |  |  |  |  |  |  |  |  |
-| `Liberté d'utilisation` |  |  |  |  |  |  |  |  |  |  |  |
-| `Attribution` |  |  |  |  |  |  |  |  |  |  |  |
-| `Modifications` |  |  |  |  |  |  |  |  |  |  |  |
-| `Redistribution` |  |  |  |  |  |  |  |  |  |  |  |
-| `Brevets` |  |  |  |  |  |  |  |  |  |  |  |
-| `Clause de "Notice"` |  |  |  |  |  |  |  |  |  |  |  |
-| `Garanties` |  |  |  |  |  |  |  |  |  |  |  |
-| `Projets propriétaires` |  |  |  |  |  |  |  |  |  |  |  |
-| `Utilisation commerciale` |  |  |  |  |  |  |  |  |  |  |  |
-| `Propriété intellectuelle` |  |  |  |  |  |  |  |  |  |  |  |
+| `Simplicité` | +++ | ++	| + |	+++ |	+++ |	++ | ++ |	++++ | ++++ | ++++ | +++ |
+| `Liberté d'utilisation` | +++ |	+++ |	+ |	+++ |	++ | ++ | ++ | ++++ | ++++ | ++++ | ++++ |
+| `Attribution` | ++ | +++ | +++ | ++ | +++ | ++ | ++ | ++++ | ++++ | ++++ | +++ |
+| `Modifications` | +++ | ++ | +++ | +++ | ++ | ++ | ++ | ++++ | ++++ | ++++ | +++ |
+| `Redistribution` | +++ | +++ | +++ | +++ | ++ | ++ | ++ | ++++ | ++++ | ++++ | +++ |
+| `Brevets` | + | +++ | + | + | ++ | ++ | ++ | ++++ | ++++ | ++++ | +++ |
+| `Clause de "Notice"` |++ | +++ | +++ | ++ | ++ | ++ | ++ | ++++ | ++++ | ++++ | +++ |
+| `Garanties` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `Projets propriétaires` | +++ | ++ | 0 | +++ | + | ++ | ++ | ++++ | ++++ | ++++ | +++ |
+| `Utilisation commerciale` | +++ |  | + | +++ | +++ | ++ | ++ | ++++ | ++++ | ++++ | ++++ |
+| `Propriété intellectuelle` | + | +++ | +++ | + | +++ | ++ | +++ | +++ | ++++ | ++++ | +++ |
 
 ### PERMISSIVES / COPYLEFT
 | Type | MIT | Apache 2.0 | GPL | BSD | LGPL | MPL 2.0 | MPL | Public Domain | CC0 | Unlicense | Beerware License |

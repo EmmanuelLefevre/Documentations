@@ -309,5 +309,3 @@ La Beerware License est très permisssive. Elle permet l'utilisation, la modific
 ***
 
 ⭐⭐⭐ I hope you enjoy it, if so don't hesitate to leave a like on this repository and on the [Dotfiles](https://github.com/EmmanuelLefevre/Dotfiles) one (click on the "Star" button at the top right of the repository page). Thanks 🤗
-
-

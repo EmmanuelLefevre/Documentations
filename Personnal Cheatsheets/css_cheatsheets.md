@@ -19,3 +19,4 @@ Le terme "Cascading" dans CSS fait référence à la manière dont les règles d
 | `linear` | L'animation se fait à une vitesse constante. |
 | `steps` | Crée des transitions par étapes. |
 | `cubic-bezier()` | Permet de créer une courbe personnalisée pour l'animation. |
+| `infinite` | L'animation s'éxécute à l'infini. |

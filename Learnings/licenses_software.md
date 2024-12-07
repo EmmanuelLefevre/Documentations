@@ -67,11 +67,11 @@ Ex: MIT, BSD, ISC.
 Le logiciel est bien soumis au droit d'auteur, mais plutôt que d'utiliser ces droits pour restreindre l'usage que peuvent en faire les utilisateurs ceux-ci sont utilisés pour assurer que tous les utilisateurs auront ces libertés.
 Elles imposent donc que les travaux dérivés soient distribués sous la même licence, garantissant que le code reste libre.  
 Ex: GPL, AGPL, LGPL.  
-**Copyleft fort**  
+**- Copyleft fort**  
 Contraint tout projet dérivé à adopter la même licence.  
-**Copyleft faible**  
+**- Copyleft faible**  
 Permet un mélange avec du code propriétaire, sous certaines conditions.  
-**Copyleft modéré**  
+**- Copyleft modéré**  
 S'applique uniquement aux fichiers modifiés ou spécifiques sous licence.  
 
 ## HYBRIDE

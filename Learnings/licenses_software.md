@@ -25,22 +25,22 @@
 Les licences jouent un rôle fondamental dans le monde du logiciel. Elles définissent les droits et obligations des utilisateurs, des développeurs et des distributeurs concernant l'utilisation, la modification et la redistribution des programmes. Qu'il s'agisse de logiciels propriétaires ou open source, chaque licence représente un cadre légal qui détermine comment un logiciel peut être utilisé et partagé.  
 
 **1. Protéger les droits d'auteur**  
-Les licences assurent que le travail des développeurs est respecté et protégé par la loi.
+Les licences assurent que le travail des développeurs est respecté et protégé par la loi.  
 **2. Encadrer l'utilisation**  
-Elles définissent clairement ce que les utilisateurs peuvent ou ne peuvent pas faire avec un logiciel.
+Elles définissent clairement ce que les utilisateurs peuvent ou ne peuvent pas faire avec un logiciel.  
 **3. Favoriser l'innovation**  
-Certaines licences encouragent la collaboration et le partage de code, tandis que d'autres protègent des modèles économiques spécifiques.
+Certaines licences encouragent la collaboration et le partage de code, tandis que d'autres protègent des modèles économiques spécifiques.  
 **4. Réduire les risques juridiques**  
 Un cadre clair permet d’éviter les litiges en cas de mésentente ou d’utilisation abusive.  
 
 ### Classification des licences
 Les licences logicielles peuvent être regroupées en trois grandes catégories.  
 
-- Licences propriétaires:  
+- **Licences propriétaires:**  
 Elles restreignent l'accès au code source et imposent souvent des limites strictes sur l'utilisation et la redistribution.
-- Licenses open-source:  
+- **Licenses open-source:**  
 Elles mettent l'accent sur la transparence et l'ouverture, mais n'imposent pas nécessairement de partager les modifications (sauf selon les termes spécifiques de la licence).
-- Licenses libres:  
+- **Licenses libres:**  
 Elles concernent la liberté d'utiliser, modifier, partager et redistribuer le code, souvent avec des exigences d'ouverture (copyleft).  
 
 Les licenses open-source et libre offrent des droits étendus, souvent avec l'objectif de promouvoir le partage et la collaboration.
@@ -49,30 +49,30 @@ Les licenses open-source et libre offrent des droits étendus, souvent avec l'ob
 L'univers de l'open source repose sur le partage, la collaboration et la transparence. Cependant, ces principes ne peuvent fonctionner sans un cadre juridique clair pour protéger les droits des créateurs tout en offrant des libertés aux utilisateurs. C'est ici qu'interviennent les licences open source, des documents légaux qui définissent les conditions d'utilisation, de modification et de redistribution d'un logiciel.  
 
 **1. Protéger les auteurs**  
-Elles garantissent que le travail des développeurs est utilisé dans les conditions qu'ils définissent.
+Elles garantissent que le travail des développeurs est utilisé dans les conditions qu'ils définissent.  
 **2. Assurer les droits des utilisateurs**  
-Elles précisent ce que les utilisateurs peuvent faire avec le logiciel (ex: utiliser, modifier ou distribuer).
+Elles précisent ce que les utilisateurs peuvent faire avec le logiciel (ex: utiliser, modifier ou distribuer).  
 **3. Éviter les litiges**  
-Elles établissent un cadre légal qui réduit les risques de conflits.
+Elles établissent un cadre légal qui réduit les risques de conflits.  
 **4. Encourager l'innovation**  
 En facilitant le partage et la réutilisation des logiciels elles stimulent la collaboration et le développement technologique.  
 
 Ces licences open-source/libre peuvent être regroupées en deux grandes catégories.  
 
-- Licences permissives:  
+- **Licences permissives:**  
 Elles offrent une grande liberté, permettant d'utiliser, modifier et redistribuer le logiciel sans beaucoup de restrictions.  
 Ex: MIT, BSD, ISC.  
 
-- Licences avec copyleft:  
+- **Licences avec copyleft:**  
 Le logiciel est bien soumis au droit d'auteur, mais plutôt que d'utiliser ces droits pour restreindre l'usage que peuvent en faire les utilisateurs ceux-ci sont utilisés pour assurer que tous les utilisateurs auront ces libertés.
 Elles imposent donc que les travaux dérivés soient distribués sous la même licence, garantissant que le code reste libre.  
 Ex: GPL, AGPL, LGPL.  
 **Copyleft fort**  
-Contraint tout projet dérivé à adopter la même licence.
+Contraint tout projet dérivé à adopter la même licence.  
 **Copyleft faible**  
-Permet un mélange avec du code propriétaire, sous certaines conditions.
+Permet un mélange avec du code propriétaire, sous certaines conditions.  
 **Copyleft modéré**  
-S'applique uniquement aux fichiers modifiés ou spécifiques sous licence.
+S'applique uniquement aux fichiers modifiés ou spécifiques sous licence.  
 
 ## HYBRIDE
 ### MIT
@@ -151,7 +151,7 @@ Contrairement à d'autres licences comme la GPL, la licence BSD ne impose pas de
 
 ## LIBRE
 ### GPLv3
-**Copyleft fort**
+**Copyleft fort**  
 La licence GPLv3 (GNU General Public License version 3) est une licence de logiciel libre qui garantit aux utilisateurs la liberté d'étudier, de partager et de modifier un logiciel.  
 Sa principale caractéristique est le copyleft, une condition stipulant que toute redistribution ou modification du code source doit être faite sous la même licence GPL, ce qui assure que le logiciel et ses dérivés restent libres.  
 La GPLv3 inclut également des protections contre les violations de brevets, interdisant aux contributeurs d'engager des poursuites pour violation de brevet. Elle vise à renforcer la liberté des utilisateurs tout en prévenant l'appropriation privée des logiciels libres.
@@ -170,7 +170,7 @@ La GPLv3 inclut également des protections contre les violations de brevets, int
 | **Propriété intellectuelle** | L'auteur conserve les droits d'auteur sur le code source, mais accorde aux utilisateurs des droits d'utilisation, de modification et de redistribution sous les termes de la GPL. |
 
 ### LGPL
-**Copyleft faible**
+**Copyleft faible**  
 La license LGPL (Lesser General Public License) plus permissive de la GPL. Elle permet l'utilisation du code dans des logiciels propriétaires, à condition que les modifications apportées au code LGPL soient ouvertes. C'est une bonne option pour les bibliothèques logicielles qui peuvent être intégrées dans des projets commerciaux.  
 
 | Caractéristiques | LGPL |
@@ -187,7 +187,7 @@ La license LGPL (Lesser General Public License) plus permissive de la GPL. Elle 
 | **Propriété intellectuelle** | Les droits d'auteur sont maintenus par l'auteur ou le contributeur, mais la licence LGPL accorde des droits étendus pour l'utilisation, la modification et la redistribution. |
 
 ### MPL 2.0
-**Copyleft modéré**
+**Copyleft modéré**  
 La MPL (Mozilla Public License) est une licence copyleft modérée, permettant de combiner le code MPL avec du code propriétaire dans un même projet. Elle exige que les fichiers modifiés sous MPL soient redistribués sous la même licence, mais permet de garder d'autres parties du code sous une licence différente.  
 
 | Caractéristiques | MPL 2.0 |
@@ -204,7 +204,7 @@ La MPL (Mozilla Public License) est une licence copyleft modérée, permettant d
 | **Propriété intellectuelle** | La licence MPL permet de conserver les droits d'auteur tout en permettant la redistribution et la modification du code sous certaines conditions. |
 
 ### MPL
-**Copyleft modéré**
+**Copyleft modéré**  
 La license MPL (Mozilla Open Source License) de redistribuer les modifications sous la même licence, mais les autres parties du code peuvent être sous une licence différente. Elle est souvent utilisée pour les projets de la Mozilla Foundation, comme Firefox.  
 
 | Caractéristiques | MPL |

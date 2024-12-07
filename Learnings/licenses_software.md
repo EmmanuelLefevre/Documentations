@@ -151,7 +151,7 @@ Contrairement à d'autres licences comme la GPL, la licence BSD ne impose pas de
 
 ## LIBRE
 ### GPLv3
-**Copyleft fort**  
+**Copyleft fort.**  
 La licence GPLv3 (GNU General Public License version 3) est une licence de logiciel libre qui garantit aux utilisateurs la liberté d'étudier, de partager et de modifier un logiciel.  
 Sa principale caractéristique est le copyleft, une condition stipulant que toute redistribution ou modification du code source doit être faite sous la même licence GPL, ce qui assure que le logiciel et ses dérivés restent libres.  
 La GPLv3 inclut également des protections contre les violations de brevets, interdisant aux contributeurs d'engager des poursuites pour violation de brevet. Elle vise à renforcer la liberté des utilisateurs tout en prévenant l'appropriation privée des logiciels libres.
@@ -170,7 +170,7 @@ La GPLv3 inclut également des protections contre les violations de brevets, int
 | **Propriété intellectuelle** | L'auteur conserve les droits d'auteur sur le code source, mais accorde aux utilisateurs des droits d'utilisation, de modification et de redistribution sous les termes de la GPL. |
 
 ### LGPL
-**Copyleft faible**  
+**Copyleft faible.**  
 La license LGPL (Lesser General Public License) plus permissive de la GPL. Elle permet l'utilisation du code dans des logiciels propriétaires, à condition que les modifications apportées au code LGPL soient ouvertes. C'est une bonne option pour les bibliothèques logicielles qui peuvent être intégrées dans des projets commerciaux.  
 
 | Caractéristiques | LGPL |
@@ -187,7 +187,7 @@ La license LGPL (Lesser General Public License) plus permissive de la GPL. Elle 
 | **Propriété intellectuelle** | Les droits d'auteur sont maintenus par l'auteur ou le contributeur, mais la licence LGPL accorde des droits étendus pour l'utilisation, la modification et la redistribution. |
 
 ### MPL 2.0
-**Copyleft modéré**  
+**Copyleft modéré.**  
 La MPL (Mozilla Public License) est une licence copyleft modérée, permettant de combiner le code MPL avec du code propriétaire dans un même projet. Elle exige que les fichiers modifiés sous MPL soient redistribués sous la même licence, mais permet de garder d'autres parties du code sous une licence différente.  
 
 | Caractéristiques | MPL 2.0 |
@@ -204,7 +204,7 @@ La MPL (Mozilla Public License) est une licence copyleft modérée, permettant d
 | **Propriété intellectuelle** | La licence MPL permet de conserver les droits d'auteur tout en permettant la redistribution et la modification du code sous certaines conditions. |
 
 ### MPL
-**Copyleft modéré**  
+**Copyleft modéré.**  
 La license MPL (Mozilla Open Source License) de redistribuer les modifications sous la même licence, mais les autres parties du code peuvent être sous une licence différente. Elle est souvent utilisée pour les projets de la Mozilla Foundation, comme Firefox.  
 
 | Caractéristiques | MPL |

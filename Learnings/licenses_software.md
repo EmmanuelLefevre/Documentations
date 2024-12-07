@@ -286,7 +286,7 @@ La Beerware License est très permisssive. Elle permet l'utilisation, la modific
 
 ## RÉCAPITULATIF
 ### COMPARATIF
-| Caractéristiques | MIT | Apache 2.0 | GPL | BSD | LGPL | MPL 2.0 | MPL | Public Domain | CC0 | Unlicense | Beerware License |
+| Caractéristiques | MIT | Apache 2.0 | GPLv3 | BSD | LGPL | MPL 2.0 | MPL | Public Domain | CC0 | Unlicense | Beerware License |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Simplicité** | +++ | ++	| + |	+++ |	+++ |	++ | ++ |	++++ | ++++ | ++++ | +++ |
 | **Liberté d'utilisation** | +++ |	+++ |	+ |	+++ |	++ | ++ | ++ | ++++ | ++++ | ++++ | ++++ |
@@ -301,7 +301,7 @@ La Beerware License est très permisssive. Elle permet l'utilisation, la modific
 | **Propriété intellectuelle** | + | +++ | +++ | + | +++ | ++ | +++ | +++ | ++++ | ++++ | +++ |
 
 ### PERMISSIVES / COPYLEFT
-| Type | MIT | Apache 2.0 | GPL | BSD | LGPL | MPL 2.0 | MPL | Public Domain | CC0 | Unlicense | Beerware License |
+| Type | MIT | Apache 2.0 | GPLv3 | BSD | LGPL | MPL 2.0 | MPL | Public Domain | CC0 | Unlicense | Beerware License |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Permissives** | +++ | +++ | + | +++ | +++ | +++ | +++ | +++ | +++ | +++ | +++ |
 | **Copyleft** | 0 | 0 | +++ | 0 | +++ | + | + | 0 | 0 | 0 | 0 |

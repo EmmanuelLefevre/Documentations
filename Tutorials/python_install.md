@@ -11,7 +11,7 @@ Créé par Guido van Rossum au début des années 1990, Python a été conçu po
 1. **Lisibilité et simplicité :**  
 La syntaxe de Python est souvent comparée à du pseudo-code, ce qui le rend particulièrement intuitif, même pour les débutants.
 2. **Polyvalence :**  
-Python est utilisé dans de nombreux domaines :
+  Python est utilisé dans de nombreux domaines :
   - Data science et machine learning (Pandas, NumPy, Pyarrow, Polars ,TensorFlow, Matplot, Sklearn ...)
   - Développement web (Django, Flask)
   - Automatisation et scripting

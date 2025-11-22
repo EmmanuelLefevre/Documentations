@@ -1173,6 +1173,7 @@ Setup your username and token in the environment variables.
 ![Second Step](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_config_environement_variable_step_2.png)
 
 Repeat operation for the username...
+⚠️ You might need to restart your computer so that the environment variables are correctly applied.
 
 ***
 

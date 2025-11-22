@@ -45,7 +45,7 @@ wt.exe -p "PowerShell" -d . -- pwsh.exe -ExecutionPolicy Bypass -File "C:\Users\
 Right click on shortcut > Properties > Change icon
 Icon path:
 ```shell
-C:\Program Files\WindowsApps\Microsoft.PowerShell_7.4.6.0_x64__8wekyb3d8bbwe\pwsh.exe
+C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.exe
 ```
 8. Create the file "run_powershell_git_pull_script.ps1" in this path:
 ```powershell
@@ -57,7 +57,7 @@ New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_sc
 . "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 
 # Call function
-git_pull
+gpull
 
 # Close terminal
 Write-Host ""

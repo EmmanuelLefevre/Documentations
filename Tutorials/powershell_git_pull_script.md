@@ -176,52 +176,11 @@ function gpull {
       }
 
       ######## DETECT NEW BRANCHES ########
+      # Calculate which remote branches are missing locally
       $newBranchesToTrack = Get-NewRemoteBranches
 
-      # Interactively track new remote branches
-      if ($newBranchesToTrack) {
-        foreach ($newBranchRef in $newBranchesToTrack) {
-          $null = $newBranchRef -match '^[^/]+/(.+)$'
-          $localBranchName = $Matches[1]
-
-          Write-Host -NoNewline "❤️ New remote branches found ❤️ =>" -ForegroundColor Blue
-          Write-Host "🦄 $localBranchName 🦄" -ForegroundColor DarkCyan
-
-          # Show latest commit message
-          $latestCommitMsg = git log -1 --format="%s" $newBranchRef
-          if ($latestCommitMsg) {
-            Write-Host -NoNewline "Commit message : " -ForegroundColor Magenta
-            Write-Host "$latestCommitMsg" -ForegroundColor Cyan
-          }
-
-          # Ask user
-          Write-Host -NoNewline "Pull " -ForegroundColor Magenta
-          Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
-          Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
-
-          $choice = Read-Host
-          if ($choice -match '^(Y|y|yes|^)$') {
-            Write-Host -NoNewline "⏳ Creating local branch " -ForegroundColor Magenta
-            Write-Host "$localBranchName" -ForegroundColor Red
-
-            # Create local branch tracking remote branch
-            git branch --track --quiet $localBranchName $newBranchRef
-
-            # Check if branch creation worked
-            if ($LASTEXITCODE -eq 0) {
-              Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
-              Write-Host " successfully pulled ✅" -ForegroundColor Green
-            }
-            # If branch creation failed
-            else {
-              Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
-              Write-Host "⚠️ New creation branch has failed ! ⚠️" -ForegroundColor Red
-            }
-          }
-        }
-
-        Show-Separator -Length 80 -ForegroundColor DarkGray
-      }
+      ######## USER PERMISSION TO PULL NEW BRANCHES ########
+      Invoke-NewBranchTracking -NewBranches $newBranchesToTrack
 
       # Find all local branches that have a remote upstream
       $branchesToUpdate = git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads | ForEach-Object {
@@ -918,6 +877,65 @@ function Get-NewRemoteBranches {
   }
 
   return $branchesFound
+}
+
+##########---------- Interactive process to track new branches ----------##########
+function Invoke-NewBranchTracking {
+  param (
+    [array]$NewBranches
+  )
+
+  ######## GUARD CLAUSE : NO NEW BRANCHES ########
+  # If the list is empty or null, nothing to do
+  if (-not $NewBranches -or $NewBranches.Count -eq 0) {
+    return
+  }
+
+  ######## USER INTERACTION LOOP ########
+  foreach ($newBranchRef in $NewBranches) {
+    # Extract local name (ex: origin/feature/x -> feature/x)
+    $null = $newBranchRef -match '^[^/]+/(.+)$'
+    $localBranchName = $Matches[1]
+
+    # Display Branch Found
+    Write-Host -NoNewline "❤️ New remote branches found ❤️ =>" -ForegroundColor Blue
+    Write-Host "🦄 $localBranchName 🦄" -ForegroundColor DarkCyan
+
+    # Get and show latest commit message
+    $latestCommitMsg = git log -1 --format="%s" $newBranchRef 2>$null
+    if ($latestCommitMsg) {
+      Write-Host -NoNewline "Commit message : " -ForegroundColor Magenta
+      Write-Host "$latestCommitMsg" -ForegroundColor Cyan
+    }
+
+    # Ask user permission
+    Write-Host -NoNewline "Pull " -ForegroundColor Magenta
+    Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
+    Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
+
+    $choice = Read-Host
+    if ($choice -match '^(Y|y|yes|^)$') {
+      Write-Host -NoNewline "⏳ Creating local branch " -ForegroundColor Magenta
+      Write-Host "$localBranchName" -ForegroundColor Red
+
+      # Create local branch tracking remote branch
+      git branch --track --quiet $localBranchName $newBranchRef 2>$null
+
+      # Check if branch creation worked
+      if ($LASTEXITCODE -eq 0) {
+        Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
+        Write-Host " successfully pulled ✅" -ForegroundColor Green
+      }
+      # If branch creation failed
+      else {
+        Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
+        Write-Host "⚠️ New creation branch has failed ! ⚠️" -ForegroundColor Red
+      }
+    }
+  }
+
+  ######## UI : END SEPARATOR ########
+  Show-Separator -Length 80 -ForegroundColor DarkGray
 }
 
 ##########---------- Show last commit date regardless of branch ----------##########

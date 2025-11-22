@@ -1156,7 +1156,7 @@ function Get-RepositoriesInfo {
 
 Request the github api with a personnal token to increase the rate limit and be able to update a private repository...
 
-On github.com:  
+1. On github.com:  
 Settings > Developer settings > Personal access tokens > Tokens (classic) > Generate new token > Generate new token (classic)
 
 - Input "Note": Your token name...
@@ -1166,7 +1166,7 @@ Settings > Developer settings > Personal access tokens > Tokens (classic) > Gene
 
 ⚠️ Be careful to copy your token because it will no longer be visible afterwards!
 
-On windows:  
+2. On windows:  
 Setup your username and token in the environment variables.
 ![First Step](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_config_environement_variable_step_1.png)  
 

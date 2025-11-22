@@ -197,6 +197,9 @@ function gpull {
       # Organize branches : Main -> Dev -> Others by alphabetical
       $sortedBranchesToUpdate = Get-SortedBranches -Branches $branchesToUpdate
 
+      # Show separator only if there is more than 1 branch to process
+      $shouldShowSeparator = ($sortedBranchesToUpdate.Count -gt 1)
+
       # Track repository state
       $repoIsInSafeState = $true
 
@@ -223,7 +226,9 @@ function gpull {
         }
 
         ######## GUARD CLAUSE : ALREADY UP-TO-DATE ########
-        if (Test-IsUpToDate -LocalBranch $branch.Local -RemoteBranch $branch.Remote) {
+        if (Test-IsUpToDate -LocalBranch $branch.Local `
+                            -RemoteBranch $branch.Remote `
+                            -ShowSeparator $shouldShowSeparator) {
           continue
         }
 
@@ -234,7 +239,8 @@ function gpull {
         # Execute the update strategy and get the result status
         $updateStatus = Invoke-BranchUpdateStrategy -LocalBranch $branch.Local `
                                                     -RemoteBranch $branch.Remote `
-                                                    -RepoName $repoName
+                                                    -RepoName $repoName `
+                                                    -ShowSeparator $shouldShowSeparator
 
         ######## GUARD CLAUSE : UPDATE FAILED ########
         # If update failed critically, mark repo as unsafe and stop
@@ -245,9 +251,9 @@ function gpull {
       }
 
       ######## STATUS REPORT ########
-      # If no branch needed pull
-      if ($anyBranchNeededPull -eq $false) {
-        Write-Host "All branches are being updated 🤙" -ForegroundColor Green
+      # If no branch needed pull and there was more than one branch to check
+      if (($anyBranchNeededPull -eq $false) -and ($sortedBranchesToUpdate.Count -gt 1)) {
+        Write-Host "All branches already updated 🤙" -ForegroundColor Green
       }
 
       # Track whether user's branch has been deleted
@@ -761,6 +767,7 @@ function Test-WorkingTreeClean {
         Write-Host " $_" -ForegroundColor DarkCyan
       }
     }
+
     Show-Separator -Length 80 -ForegroundColor DarkGray
 
     return $false
@@ -784,6 +791,7 @@ function Test-UnpushedCommits {
     Write-Host -NoNewline "⚠️ Branch ahead => " -ForegroundColor Red
     Write-Host -NoNewline "$BranchName" -ForegroundColor Magenta
     Write-Host " has unpushed commits. Pull avoided to prevent a merge ! ⚠️" -ForegroundColor Red
+
     Show-Separator -Length 80 -ForegroundColor DarkGray
 
     return $true
@@ -797,7 +805,8 @@ function Test-UnpushedCommits {
 function Test-IsUpToDate {
   param (
     [string]$LocalBranch,
-    [string]$RemoteBranch
+    [string]$RemoteBranch,
+    [bool]$ShowSeparator = $true
   )
 
   ######## DATA RETRIEVAL ########
@@ -814,7 +823,11 @@ function Test-IsUpToDate {
   if ($localCommit -eq $remoteCommit) {
     Write-Host -NoNewline "$LocalBranch" -ForegroundColor Red
     Write-Host " is already updated ✅" -ForegroundColor Green
-    Show-Separator -Length 80 -ForegroundColor DarkGray
+
+    if ($ShowSeparator) {
+      Show-Separator -Length 80 -ForegroundColor DarkGray
+    }
+
     return $true
   }
 
@@ -828,7 +841,8 @@ function Invoke-BranchUpdateStrategy {
   param (
     [string]$LocalBranch,
     [string]$RemoteBranch,
-    [string]$RepoName
+    [string]$RepoName,
+    [bool]$ShowSeparator = $true
   )
 
   # Default state
@@ -911,7 +925,9 @@ function Invoke-BranchUpdateStrategy {
       Write-Host -NoNewline "$LocalBranch" -ForegroundColor Red
       Write-Host " successfully updated ✅" -ForegroundColor Green
 
-      Show-Separator -Length 80 -ForegroundColor DarkGray
+      if ($ShowSeparator) {
+        Show-Separator -Length 80 -ForegroundColor DarkGray
+      }
     }
     'Failed' {
       Write-Host "⚠️ "
@@ -978,6 +994,7 @@ function Show-LastCommitDate {
     Write-Host -NoNewline "$formattedDate" -ForegroundColor Cyan
     Write-Host -NoNewline " on " -ForegroundColor DarkYellow
     Write-Host "$branchName" -ForegroundColor Magenta
+
     Show-Separator -Length 80 -ForegroundColor DarkGray
   }
   catch {
@@ -1181,6 +1198,9 @@ function Invoke-MergedCleanup {
   # Define protected branches (never delete these)
   $protectedBranches   = @("dev", "develop", "main", "master")
 
+  # Get current branch name to ensure we don't try to delete it
+  $currentBranch = (git rev-parse --abbrev-ref HEAD).Trim()
+
   # Use hash table to collect merged branches (avoids duplicates if merged in both dev and main)
   $allMergedBranches = @{}
 
@@ -1189,7 +1209,9 @@ function Invoke-MergedCleanup {
     if (git branch --list $intBranch) {
       # Get branches merged into this integration branch
       git branch --merged $intBranch | ForEach-Object {
-        $branchName = $_.Trim()
+        $branchName = $_ -replace '^\*\s+', ''
+        $branchName = $branchName.Trim()
+
         $allMergedBranches[$branchName] = $true
       }
     }
@@ -1198,7 +1220,7 @@ function Invoke-MergedCleanup {
   ######## FILTERING ########
   # Filter list to keep only branches that can be cleaned (not current and not protected ones)
   $branchesToClean = $allMergedBranches.Keys | Where-Object {
-    ($_ -ne $OriginalBranch) -and (-not ($protectedBranches -icontains $_))
+    ($_ -ne $OriginalBranch) -and ($_ -ne $currentBranch) -and (-not ($protectedBranches -icontains $_))
   }
 
   ######## GUARD CLAUSE : NOTHING TO CLEAN ########

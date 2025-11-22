@@ -244,161 +244,25 @@ function gpull {
         }
       }
 
+      ######## STATUS REPORT ########
       # If no branch needed pull
       if ($anyBranchNeededPull -eq $false) {
-        Write-Host "All branches already updated 🤙" -ForegroundColor Green
+        Write-Host "All branches are being updated 🤙" -ForegroundColor Green
       }
 
       # Track whether user's branch has been deleted
       [bool]$originalBranchWasDeleted = $false
 
-      # Define protected branches
-      $protectedBranches = @("dev", "develop", "main", "master")
-
-      # Interactive prune
-      $orphanedBranches = git branch -vv | Select-String -Pattern '\[.*: gone\]' | ForEach-Object {
-        $line = $_.Line.Trim()
-        if ($line -match '^\*?\s*([\S]+)') {
-          $Matches[1]
-        }
+      ######## CLEANUP : ORPHANED BRANCHES ########
+      # Ask to clean branches that no longer exist on remote
+      if (Invoke-OrphanedCleanup -OriginalBranch $originalBranch) {
+        $originalBranchWasDeleted = $true
       }
 
-      # Filter protected branches
-      $orphanedBranchesToClean = $orphanedBranches | Where-Object { -not ($protectedBranches -icontains $_) }
-
-      # Cleaning up orphaned branches
-      if ($orphanedBranchesToClean.Count -gt 0) {
-        Write-Host "🧹 Cleaning up orphaned local branches..." -ForegroundColor DarkYellow
-
-        foreach ($orphaned in $orphanedBranchesToClean) {
-          # Ask user
-          Write-Host -NoNewline "Do you want to delete the orphaned local branch " -ForegroundColor Magenta
-          Write-Host -NoNewline "$orphaned" -ForegroundColor Red
-          Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
-
-          $choice = Read-Host
-          if ($choice -match '^(Y|y|yes|^)$') {
-            Write-Host -NoNewline "👉 Removal of " -ForegroundColor Magenta
-            Write-Host -NoNewline "$orphaned" -ForegroundColor Red
-            Write-Host " branch..." -ForegroundColor Magenta
-
-            # Secure removal
-            git branch -d $orphaned *> $null
-
-            # Check if deletion worked
-            if ($LASTEXITCODE -eq 0) {
-              Write-Host -NoNewline "$orphaned" -ForegroundColor Red
-              Write-Host " successfully deleted ✅" -ForegroundColor Green
-
-              if ($orphaned -eq $originalBranch) { $originalBranchWasDeleted = $true }
-            }
-            # If deletion failed (probably unmerged changes)
-            else {
-              Write-Host -NoNewline "⚠️ Branch " -ForegroundColor Red
-              Write-Host -NoNewline "$orphaned" -ForegroundColor Magenta
-              Write-Host " contains unmerged changes ! ⚠️" -ForegroundColor Red
-
-              Write-Host -NoNewline "Force the deletion of " -ForegroundColor Magenta
-              Write-Host -NoNewline "$orphaned" -ForegroundColor Red
-              Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
-
-              $forceChoice = Read-Host
-              if ($forceChoice -match '^(Y|y|yes|^)$') {
-                # Forced removal
-                git branch -D $orphaned *> $null
-
-                # Check if forced deletion worked
-                if ($LASTEXITCODE -eq 0) {
-                  Write-Host -NoNewline "$orphaned" -ForegroundColor Red
-                  Write-Host " successfully deleted ✅" -ForegroundColor Green
-
-                  # Mark original branch as deleted
-                  if ($orphaned -eq $originalBranch) {
-                    $originalBranchWasDeleted = $true
-                  }
-
-                  # Move to next orphaned branch
-                  continue
-                }
-                # If forced deletion failed
-                else {
-                  Write-Host -NoNewline "⚠️ Unexpected error. Failure to remove " -ForegroundColor Red
-                  Write-Host "$orphaned ⚠️" -ForegroundColor Magenta
-                }
-              }
-              # User refuses forced deletion
-              else {
-                Write-Host -NoNewline "👍 Local branch  " -ForegroundColor Green
-                Write-Host -NoNewline "$orphaned" -ForegroundColor Magenta
-                Write-Host " kept 👍" -ForegroundColor Green
-              }
-            }
-          }
-        }
-      }
-
-      # Integration branches to check
-      $integrationBranches = @("main", "master", "develop", "dev")
-
-      # Use hash table to collect merged branches (avoids duplicates)
-      $allMergedBranches = @{}
-
-      foreach ($intBranch in $integrationBranches) {
-        # Check if integration branch exists locally
-        if (git branch --list $intBranch) {
-          # Get merged branches into this branch
-          $branchesMergedIntoThisOne = git branch --merged $intBranch | ForEach-Object { $_.Trim() }
-
-          # Add them to list
-          foreach ($branch in $branchesMergedIntoThisOne) {
-            $allMergedBranches[$branch] = $true
-          }
-        }
-      }
-
-      # Filter list to keep only branches that can be cleaned
-      $mergedBranchesToClean = $allMergedBranches.Keys | Where-Object {
-        ( $_ -ne $originalBranch ) -and ( -not ($protectedBranches -icontains $_) )
-      }
-
-      # Remove integration branches from list
-      if ($mergedBranchesToClean.Count -gt 0) {
-        # Cleaning up merged branches
-        Write-Host "🧹 Cleaning up branches that have already being merged..." -ForegroundColor DarkYellow
-
-        foreach ($merged in $mergedBranchesToClean.Keys) {
-          # Ask user
-          Write-Host -NoNewline "Branch " -ForegroundColor Magenta
-          Write-Host -NoNewline "$merged" -ForegroundColor Red
-          Write-Host -NoNewline " is already merged. Delete ? (Y/n): " -ForegroundColor Magenta
-
-          $choice = Read-Host
-          if ($choice -match '^(Y|y|yes|^)$') {
-            Write-Host -NoNewline "👉 Removal of " -ForegroundColor Magenta
-            Write-Host -NoNewline "$merged" -ForegroundColor Red
-            Write-Host " branch..." -ForegroundColor Magenta
-
-            # Secure removal (guaranteed to work because --merged)
-            git branch -d $merged *> $null
-
-            # Check if deletion worked
-            if ($LASTEXITCODE -eq 0) {
-              Write-Host -NoNewline "$merged" -ForegroundColor Red
-              Write-Host " successfully deleted ✅" -ForegroundColor Green
-
-              # Check if original branch has been deleted
-              if ($merged -eq $originalBranch) {
-                # Mark original branch as deleted
-                $originalBranchWasDeleted = $true
-              }
-            }
-            # If deletion failed
-            else {
-              Write-Host -NoNewline "⚠️ Unexpected error. Failure to remove " -ForegroundColor Red
-              Write-Host "$orphaned ⚠️" -ForegroundColor Magenta
-            }
-          }
-        }
+      ######## CLEANUP : MERGED BRANCHES ########
+      # Ask to clean branches that are already merged into main/dev
+      if (Invoke-MergedCleanup -OriginalBranch $originalBranch) {
+        $originalBranchWasDeleted = $true
       }
 
       ######## WORKFLOW INFO ########
@@ -1200,6 +1064,191 @@ function Show-LatestCommitMessage {
   }
 }
 
+##########---------- Interactive cleanup of orphaned (gone) branches ----------##########
+function Invoke-OrphanedCleanup {
+  param (
+    [string]$OriginalBranch
+  )
+
+  ######## DATA RETRIEVAL ########
+  # Define protected branches (never delete them)
+  $protectedBranches = @("dev", "develop", "main", "master")
+
+  # Get current branch name to ensure we don't try to delete it
+  $currentBranch = (git rev-parse --abbrev-ref HEAD)
+
+  # Find branches marked as ': gone]' in git verbose output
+  $orphanedBranches = git branch -vv | Select-String -Pattern '\[.*: gone\]' | ForEach-Object {
+    $line = $_.Line.Trim()
+    if ($line -match '^\*?\s*([\S]+)') {
+      $Matches[1]
+    }
+  }
+
+  # Filter, remove protected branches and current branch from list
+  $branchesToClean = $orphanedBranches | Where-Object {
+    ($_ -ne $currentBranch) -and (-not ($protectedBranches -icontains $_))
+  }
+
+  ######## GUARD CLAUSE : NOTHING TO CLEAN ########
+  # Original branch was NOT deleted (or empty list)
+  if (-not $branchesToClean -or $branchesToClean.Count -eq 0) {
+    return $false
+  }
+
+  Write-Host "🧹 Cleaning up orphaned local branches..." -ForegroundColor DarkYellow
+
+  $originalWasDeleted = $false
+
+  ######## INTERACTIVE CLEANUP LOOP ########
+  foreach ($orphaned in $branchesToClean) {
+    # Ask user
+    Write-Host -NoNewline "Do you want to delete the orphaned local branch " -ForegroundColor Magenta
+    Write-Host -NoNewline "$orphaned" -ForegroundColor Red
+    Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
+
+    $choice = Read-Host
+    if ($choice -match '^(Y|y|yes|^)$') {
+      Write-Host -NoNewline "👉 Removal of " -ForegroundColor Magenta
+      Write-Host -NoNewline "$orphaned" -ForegroundColor Red
+      Write-Host " branch..." -ForegroundColor Magenta
+
+      # Attempt secure removal
+      git branch -d $orphaned *> $null
+
+      # Check if deletion worked
+      if ($LASTEXITCODE -eq 0) {
+        Write-Host -NoNewline "$orphaned" -ForegroundColor Red
+        Write-Host " successfully deleted ✅" -ForegroundColor Green
+        if ($orphaned -eq $OriginalBranch) {
+          $originalWasDeleted = $true
+        }
+      }
+      # If deletion failed (probably unmerged changes)
+      else {
+        Write-Host -NoNewline "⚠️ Branch " -ForegroundColor Red
+        Write-Host -NoNewline "$orphaned" -ForegroundColor Magenta
+        Write-Host " contains unmerged changes ! ⚠️" -ForegroundColor Red
+
+        Write-Host -NoNewline "Force the deletion of " -ForegroundColor Magenta
+        Write-Host -NoNewline "$orphaned" -ForegroundColor Red
+        Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
+
+        $forceChoice = Read-Host
+        if ($forceChoice -match '^(Y|y|yes|^)$') {
+          # Forced removal
+          git branch -D $orphaned *> $null
+
+          # Check if forced deletion worked
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host -NoNewline "$orphaned" -ForegroundColor Red
+            Write-Host " successfully deleted ✅" -ForegroundColor Green
+
+            # Mark original branch as deleted
+            if ($orphaned -eq $OriginalBranch) {
+              $originalWasDeleted = $true
+            }
+          }
+          # If forced deletion failed
+          else {
+            Write-Host -NoNewline "⚠️ Unexpected error. Failure to remove " -ForegroundColor Red
+            Write-Host "$orphaned ⚠️" -ForegroundColor Magenta
+          }
+        }
+        # User refuses forced deletion
+        else {
+          Write-Host -NoNewline "👍 Local branch  " -ForegroundColor Green
+          Write-Host -NoNewline "$orphaned" -ForegroundColor Magenta
+          Write-Host " kept 👍" -ForegroundColor Green
+        }
+      }
+    }
+  }
+
+  return $originalWasDeleted
+}
+
+##########---------- Interactive cleanup of fully merged branches ----------##########
+function Invoke-MergedCleanup {
+  param (
+    [string]$OriginalBranch
+  )
+
+  ######## DATA RETRIEVAL ########
+  # Define integration branches to check against
+  $integrationBranches = @("main", "master", "develop", "dev")
+
+  # Define protected branches (never delete these)
+  $protectedBranches   = @("dev", "develop", "main", "master")
+
+  # Use hash table to collect merged branches (avoids duplicates if merged in both dev and main)
+  $allMergedBranches = @{}
+
+  foreach ($intBranch in $integrationBranches) {
+    # Check if integration branch exists locally
+    if (git branch --list $intBranch) {
+      # Get branches merged into this integration branch
+      git branch --merged $intBranch | ForEach-Object {
+        $branchName = $_.Trim()
+        $allMergedBranches[$branchName] = $true
+      }
+    }
+  }
+
+  ######## FILTERING ########
+  # Filter list to keep only branches that can be cleaned (not current and not protected ones)
+  $branchesToClean = $allMergedBranches.Keys | Where-Object {
+    ($_ -ne $OriginalBranch) -and (-not ($protectedBranches -icontains $_))
+  }
+
+  ######## GUARD CLAUSE : NOTHING TO CLEAN ########
+  if (-not $branchesToClean -or $branchesToClean.Count -eq 0) {
+    # Original branch was NOT deleted
+    return $false
+  }
+
+  Write-Host "🧹 Cleaning up branches that have already being merged..." -ForegroundColor DarkYellow
+
+  $originalWasDeleted = $false
+
+  ######## INTERACTIVE CLEANUP LOOP ########
+  foreach ($merged in $branchesToClean) {
+    # Ask user
+    Write-Host -NoNewline "Branch " -ForegroundColor Magenta
+    Write-Host -NoNewline "$merged" -ForegroundColor Red
+    Write-Host -NoNewline " is already merged. Delete ? (Y/n): " -ForegroundColor Magenta
+
+    $choice = Read-Host
+    if ($choice -match '^(Y|y|yes|^)$') {
+      Write-Host -NoNewline "👉 Removal of " -ForegroundColor Magenta
+      Write-Host -NoNewline "$merged" -ForegroundColor Red
+      Write-Host " branch..." -ForegroundColor Magenta
+
+      # Secure removal (guaranteed to work because we checked --merged)
+      git branch -d $merged *> $null
+
+      # Check if deletion worked
+      if ($LASTEXITCODE -eq 0) {
+        Write-Host -NoNewline "$merged" -ForegroundColor Red
+        Write-Host " successfully deleted ✅" -ForegroundColor Green
+
+        # Check if original branch has been deleted
+        if ($merged -eq $OriginalBranch) {
+          # Mark original branch as deleted
+          $originalWasDeleted = $true
+        }
+      }
+      # If deletion failed
+      else {
+        Write-Host -NoNewline "⚠️ Unexpected error. Failure to remove " -ForegroundColor Red
+        Write-Host "$merged ⚠️" -ForegroundColor Magenta
+      }
+    }
+  }
+
+  return $originalWasDeleted
+}
+
 ##########---------- Check for unmerged commits in main from dev ----------##########
 function Show-MergeAdvice {
   ######## DATA RETRIEVAL ########
@@ -1370,7 +1419,6 @@ function Show-NetworkOrSystemError {
     Write-Host -NoNewline "$Message" -ForegroundColor Red
   }
 }
-
 ```
 
 ⚠️ I you don't use a personal token to request the Github API this script will not work. To set up an identification token on the Github API and environements variables, go to the next "Bonus"" section...

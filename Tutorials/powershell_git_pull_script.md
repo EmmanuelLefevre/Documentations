@@ -175,13 +175,6 @@ function gpull {
         # Move next repository
       }
 
-      ######## DETECT NEW BRANCHES ########
-      # Calculate which remote branches are missing locally
-      $newBranchesToTrack = Get-NewRemoteBranches
-
-      ######## USER PERMISSION TO PULL NEW BRANCHES ########
-      Invoke-NewBranchTracking -NewBranches $newBranchesToTrack
-
       ######## DATA RETRIEVAL : TRACKED BRANCHES ########
       # Find all local branches that have a remote upstream
       $branchesToUpdate = Get-LocalBranchesWithUpstream
@@ -197,18 +190,22 @@ function gpull {
       # Organize branches : Main -> Dev -> Others by alphabetical
       $sortedBranchesToUpdate = Get-SortedBranches -Branches $branchesToUpdate
 
-      # Show separator only if there is more than 1 branch to process
-      $shouldShowSeparator = ($sortedBranchesToUpdate.Count -gt 1)
-
       # Track repository state
       $repoIsInSafeState = $true
 
       # Track if any branch needed a pull
       $anyBranchNeededPull = $false
 
+      # Separator control
+      $branchCount = $sortedBranchesToUpdate.Count
+      $i = 0
+
       ######## UPDATE LOOP ########
       # Iterate over each branch found to pull updates from remote
       foreach ($branch in $sortedBranchesToUpdate) {
+        # Increment iteration counter
+        $i++
+
         ######## GUARD CLAUSE : CHECKOUT ########
         if (-not (Invoke-SafeCheckout -TargetBranch $branch.Local -OriginalBranch $originalBranch)) {
           $repoIsInSafeState = $false
@@ -227,8 +224,13 @@ function gpull {
 
         ######## GUARD CLAUSE : ALREADY UP-TO-DATE ########
         if (Test-IsUpToDate -LocalBranch $branch.Local `
-                            -RemoteBranch $branch.Remote `
-                            -ShowSeparator $shouldShowSeparator) {
+                            -RemoteBranch $branch.Remote) {
+
+          # If not last branch, display separator
+          if ($i -lt $branchCount) {
+            Show-Separator -Length 80 -ForegroundColor DarkGray
+          }
+
           continue
         }
 
@@ -239,8 +241,7 @@ function gpull {
         # Execute the update strategy and get the result status
         $updateStatus = Invoke-BranchUpdateStrategy -LocalBranch $branch.Local `
                                                     -RemoteBranch $branch.Remote `
-                                                    -RepoName $repoName `
-                                                    -ShowSeparator $shouldShowSeparator
+                                                    -RepoName $repoName
 
         ######## GUARD CLAUSE : UPDATE FAILED ########
         # If update failed critically, mark repo as unsafe and stop
@@ -248,13 +249,27 @@ function gpull {
           $repoIsInSafeState = $false
           break
         }
+
+        # If execution was successful (Success or Skipped) and not last one, display separator
+        if ($updateStatus -ne 'Failed' -and $i -lt $branchCount) {
+          Show-Separator -Length 80 -ForegroundColor DarkGray
+        }
       }
 
       ######## STATUS REPORT ########
       # If no branch needed pull and there was more than one branch to check
       if (($anyBranchNeededPull -eq $false) -and ($sortedBranchesToUpdate.Count -gt 1)) {
-        Write-Host "All branches already updated 🤙" -ForegroundColor Green
+        Show-Separator -Length 80 -ForegroundColor DarkGray
+
+        Write-Host "All branches are being updated 🤙" -ForegroundColor Green
       }
+
+      ######## DETECT NEW BRANCHES ########
+      # Calculate which remote branches are missing locally
+      $newBranchesToTrack = Get-NewRemoteBranches
+
+      ######## USER PERMISSION TO PULL NEW BRANCHES ########
+      Invoke-NewBranchTracking -NewBranches $newBranchesToTrack
 
       # Track whether user's branch has been deleted
       [bool]$originalBranchWasDeleted = $false
@@ -271,11 +286,26 @@ function gpull {
         $originalBranchWasDeleted = $true
       }
 
+      ######## UI : PRE-CALCULATION ########
+      $mergeWillDisplayMessage   = Show-MergeAdvice -DryRun
+      $restoreWillDisplayMessage = Restore-UserLocation -RepoIsSafe $repoIsInSafeState `
+                                              -OriginalBranch $originalBranch `
+                                              -OriginalWasDeleted $originalBranchWasDeleted `
+                                              -DryRun
+
+      ######## SEPARATOR MANAGEMENT ########
+      # If one OR other
+      if ($mergeWillDisplayMessage -or $restoreWillDisplayMessage) {
+        Show-Separator -Length 80 -ForegroundColor DarkGray
+      }
+
       ######## WORKFLOW INFO ########
       Show-MergeAdvice
 
       ######## RETURN STRATEGY ########
-      Restore-UserLocation -OriginalBranch $originalBranch -RepoIsSafe $repoIsInSafeState -OriginalWasDeleted $originalBranchWasDeleted
+      Restore-UserLocation -OriginalBranch $originalBranch `
+                          -RepoIsSafe $repoIsInSafeState `
+                          -OriginalWasDeleted $originalBranchWasDeleted
     }
     catch {
       ######## ERROR CONTEXT ANALYSIS ########
@@ -299,7 +329,7 @@ function gpull {
       # No HTTP response
       else {
         Show-NetworkOrSystemError -RepoName $repoName `
-                                    -Message $_.Exception.Message
+                                  -Message $_.Exception.Message
       }
     }
 
@@ -413,36 +443,27 @@ function Get-RepositoriesInfo {
   }
 }
 
-##########---------- Display a separator line with custom length and colors ----------##########
-function Show-Separator {
+##########---------- Check if local repository path exists ----------##########
+function Test-LocalRepoExists {
   param (
-    [Parameter(Mandatory=$true)]
-    [int]$Length,
-
-    [Parameter(Mandatory=$true)]
-    [System.ConsoleColor]$ForegroundColor,
-
-    [Parameter(Mandatory=$false)]
-    [System.ConsoleColor]$BackgroundColor,
-
-    [Parameter(Mandatory=$false)]
-    [switch]$NoNewline
+    [string]$Name,
+    [string]$Path
   )
 
-  ######## DATA PREPARATION ########
-  # Create line string based on requested length
-  $line = "─" * $Length
+  ######## GUARD CLAUSE : PATH NOT FOUND ########
+  # Check if the path variable is defined AND if the folder exists on disk
+  if (-not ($Path -and (Test-Path -Path $Path))) {
+    Write-Host -NoNewline "⚠️ Local repository path for " -ForegroundColor Red
+    Write-Host -NoNewline "$Name" -ForegroundColor White -BackgroundColor Magenta
+    Write-Host " doesn't exist ⚠️" -ForegroundColor Red
+    Write-Host "Path searched 👉 " -ForegroundColor DarkYellow
+    Write-Host "$Path" -ForegroundColor Red
 
-  ######## GUARD CLAUSE : WITH BACKGROUND COLOR ########
-  # If a background color is specified, handle it specific way and exit
-  if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
-    Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor -BackgroundColor $BackgroundColor
-    return
+    return $false
   }
 
-  ######## STANDARD DISPLAY ########
-  # Otherwise (default behavior), display with foreground color only
-  Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor
+  ######## RETURN SUCCESS ########
+  return $true
 }
 
 ##########---------- Check if folder is a valid git repository ----------##########
@@ -459,29 +480,6 @@ function Test-IsGitRepository {
     Write-Host -NoNewline "$Name" -ForegroundColor White -BackgroundColor Magenta
     Write-Host " found but it's NOT a git repository ⛔" -ForegroundColor Red
     Write-Host "Missing .git folder inside 👉 " -ForegroundColor DarkYellow
-    Write-Host "$Path" -ForegroundColor Red
-
-    return $false
-  }
-
-  ######## RETURN SUCCESS ########
-  return $true
-}
-
-##########---------- Check if local repository path exists ----------##########
-function Test-LocalRepoExists {
-  param (
-    [string]$Name,
-    [string]$Path
-  )
-
-  ######## GUARD CLAUSE : PATH NOT FOUND ########
-  # Check if the path variable is defined AND if the folder exists on disk
-  if (-not ($Path -and (Test-Path -Path $Path))) {
-    Write-Host -NoNewline "⚠️ Local repository path for " -ForegroundColor Red
-    Write-Host -NoNewline "$Name" -ForegroundColor White -BackgroundColor Magenta
-    Write-Host " doesn't exist ⚠️" -ForegroundColor Red
-    Write-Host "Path searched 👉 " -ForegroundColor DarkYellow
     Write-Host "$Path" -ForegroundColor Red
 
     return $false
@@ -520,6 +518,67 @@ function Test-LocalRemoteMatch {
   return $true
 }
 
+##########---------- Show last commit date regardless of branch ----------##########
+function Show-LastCommitDate {
+  ######## DATA RETRIEVAL ########
+  # Retrieve all remote branches sorted by date
+  $allRefs = git for-each-ref --sort=-committerdate refs/remotes --format="%(refname:short) %(committerdate:iso-strict)" 2>$null
+
+  ######## GUARD CLAUSE : NO REFS RETRIEVED ########
+  # Check if we got a result
+  if ([string]::IsNullOrWhiteSpace($allRefs)) {
+    return
+  }
+
+  ######## FILTERING ########
+  # Exclude "HEAD" references (ex: origin/HEAD) and select most recent
+  $lastCommitInfo = $allRefs | Where-Object {
+    ($_ -notmatch '/HEAD\s') -and ($_ -match '/')
+  } | Select-Object -First 1
+
+  ######## GUARD CLAUSE : NO MATCHING BRANCH ########
+  if ([string]::IsNullOrWhiteSpace($lastCommitInfo)) {
+    return
+  }
+
+  # Separate the chain into two
+  $parts = $lastCommitInfo -split ' ', 2
+
+  ######## GUARD CLAUSE : DATA INTEGRITY FAIL ########
+  # Check data integrity (must have Branch + Date)
+  if ($parts.Length -ne 2) {
+    return
+  }
+
+  ######## PROCESSING / DISPLAY ########
+  # Clean up branch name (Remove "origin/")
+  $branchName = $parts[0] -replace '^.*?/', ''
+  $dateString = $parts[1]
+
+  try {
+    # Convert ISO string into [datetime] object
+    [datetime]$commitDate = $dateString
+
+    # Define culture on "en-US"
+    $culture = [System.Globalization.CultureInfo]'en-US'
+
+    # Format date (ex: Monday 13 September 2025)
+    $formattedDate = $commitDate.ToString('dddd dd MMMM yyyy', $culture)
+
+    # Display formatted message
+    Write-Host -NoNewline "📈 Last repository commit : " -ForegroundColor DarkYellow
+    Write-Host -NoNewline "$formattedDate" -ForegroundColor Cyan
+    Write-Host -NoNewline " on " -ForegroundColor DarkYellow
+    Write-Host "$branchName" -ForegroundColor Magenta
+
+    Show-Separator -Length 80 -ForegroundColor DarkGray
+  }
+  catch {
+    # If date parsing fails, exit silently
+    return
+  }
+}
+
 ##########---------- Check if git fetch succeeded ----------##########
 function Test-GitFetchSuccess {
   param ([int]$ExitCode)
@@ -535,119 +594,6 @@ function Test-GitFetchSuccess {
 
   ######## RETURN SUCCESS ########
   return $true
-}
-
-##########---------- Calculate new remote branches to track ----------##########
-function Get-NewRemoteBranches {
-  ######## DATA RETRIEVAL ########
-  # Get all remote branches (excluding HEAD) and local branches
-  $allRemoteRefs = git for-each-ref --format="%(refname:short)" refs/remotes | Where-Object { $_ -notmatch '/HEAD$' }
-  $allLocalBranches = git for-each-ref --format="%(refname:short)" refs/heads
-
-  # List to store new branches to track
-  $branchesFound = @()
-
-  ######## PROCESSING LOOP ########
-  # Iterate through remote branches to find those not tracked locally
-  foreach ($remoteRef in $allRemoteRefs) {
-
-    # Extract local name from remote ref (ex: "origin/feature/x" -> "feature/x")
-    if ($remoteRef -match '^[^/]+/(.+)$') {
-      $localEquivalent = $Matches[1]
-
-      ######## GUARD CLAUSE : IGNORED PREFIXES ########
-      # Define prefixes to exclude (Hotfix and Release)
-      $prefixesToIgnore = @('hotfix/', 'release/')
-      $shouldIgnore = $false
-
-      # Check each prefix to ignore
-      foreach ($prefix in $prefixesToIgnore) {
-        # Check if branch name begins with a prefix to ignore
-        if ($localEquivalent.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-          $shouldIgnore = $true
-
-          # No point in continuing to search, exit loop
-          break
-        }
-      }
-
-      # If branch matches an ignored prefix, skip to next iteration
-      if ($isIgnored) {
-        continue
-      }
-
-      ######## GUARD CLAUSE : ALREADY TRACKED ########
-      # If the branch already exists locally, skip it
-      if ($localEquivalent -in $allLocalBranches) {
-        continue
-      }
-
-      ######## ADD TO SELECTION ########
-      # If we are here, strictly valid (Not ignored AND Not already local)
-      $branchesFound += $remoteRef
-    }
-  }
-
-  return $branchesFound
-}
-
-##########---------- Interactive proposal to create new local branches ----------##########
-function Invoke-NewBranchTracking {
-  param (
-    [array]$NewBranches
-  )
-
-  ######## GUARD CLAUSE : NO NEW BRANCHES ########
-  # If the list is empty or null, nothing to do
-  if (-not $NewBranches -or $NewBranches.Count -eq 0) {
-    return
-  }
-
-  ######## USER INTERACTION LOOP ########
-  foreach ($newBranchRef in $NewBranches) {
-    # Extract local name (ex: origin/feature/x -> feature/x)
-    $null = $newBranchRef -match '^[^/]+/(.+)$'
-    $localBranchName = $Matches[1]
-
-    # Display Branch Found
-    Write-Host -NoNewline "❤️ New remote branches found ❤️ =>" -ForegroundColor Blue
-    Write-Host "🦄 $localBranchName 🦄" -ForegroundColor DarkCyan
-
-    # Get and show latest commit message
-    $latestCommitMsg = git log -1 --format="%s" $newBranchRef 2>$null
-    if ($latestCommitMsg) {
-      Write-Host -NoNewline "Commit message : " -ForegroundColor Magenta
-      Write-Host "$latestCommitMsg" -ForegroundColor Cyan
-    }
-
-    # Ask user permission
-    Write-Host -NoNewline "Pull " -ForegroundColor Magenta
-    Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
-    Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
-
-    $choice = Read-Host
-    if ($choice -match '^(Y|y|yes|^)$') {
-      Write-Host -NoNewline "⏳ Creating local branch " -ForegroundColor Magenta
-      Write-Host "$localBranchName" -ForegroundColor Red
-
-      # Create local branch tracking remote branch
-      git branch --track --quiet $localBranchName $newBranchRef 2>$null
-
-      # Check if branch creation worked
-      if ($LASTEXITCODE -eq 0) {
-        Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
-        Write-Host " successfully pulled ✅" -ForegroundColor Green
-      }
-      # If branch creation failed
-      else {
-        Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
-        Write-Host "⚠️ New creation branch has failed ! ⚠️" -ForegroundColor Red
-      }
-    }
-  }
-
-  ######## UI : END SEPARATOR ########
-  Show-Separator -Length 80 -ForegroundColor DarkGray
 }
 
 ##########---------- Retrieve local branches that have a remote upstream ----------##########
@@ -805,8 +751,7 @@ function Test-UnpushedCommits {
 function Test-IsUpToDate {
   param (
     [string]$LocalBranch,
-    [string]$RemoteBranch,
-    [bool]$ShowSeparator = $true
+    [string]$RemoteBranch
   )
 
   ######## DATA RETRIEVAL ########
@@ -824,10 +769,6 @@ function Test-IsUpToDate {
     Write-Host -NoNewline "$LocalBranch" -ForegroundColor Red
     Write-Host " is already updated ✅" -ForegroundColor Green
 
-    if ($ShowSeparator) {
-      Show-Separator -Length 80 -ForegroundColor DarkGray
-    }
-
     return $true
   }
 
@@ -841,8 +782,7 @@ function Invoke-BranchUpdateStrategy {
   param (
     [string]$LocalBranch,
     [string]$RemoteBranch,
-    [string]$RepoName,
-    [bool]$ShowSeparator = $true
+    [string]$RepoName
   )
 
   # Default state
@@ -912,8 +852,6 @@ function Invoke-BranchUpdateStrategy {
       Write-Host -NoNewline "$LocalBranch" -ForegroundColor Red
       Write-Host "..." -ForegroundColor Magenta
 
-      Show-Separator -Length 80 -ForegroundColor DarkGray
-
       # Reset pull success
       $pullStatus = 'Skipped'
     }
@@ -925,9 +863,6 @@ function Invoke-BranchUpdateStrategy {
       Write-Host -NoNewline "$LocalBranch" -ForegroundColor Red
       Write-Host " successfully updated ✅" -ForegroundColor Green
 
-      if ($ShowSeparator) {
-        Show-Separator -Length 80 -ForegroundColor DarkGray
-      }
     }
     'Failed' {
       Write-Host "⚠️ "
@@ -940,67 +875,6 @@ function Invoke-BranchUpdateStrategy {
   }
 
   return $pullStatus
-}
-
-##########---------- Show last commit date regardless of branch ----------##########
-function Show-LastCommitDate {
-  ######## DATA RETRIEVAL ########
-  # Retrieve all remote branches sorted by date
-  $allRefs = git for-each-ref --sort=-committerdate refs/remotes --format="%(refname:short) %(committerdate:iso-strict)" 2>$null
-
-  ######## GUARD CLAUSE : NO REFS RETRIEVED ########
-  # Check if we got a result
-  if ([string]::IsNullOrWhiteSpace($allRefs)) {
-    return
-  }
-
-  ######## FILTERING ########
-  # Exclude "HEAD" references (ex: origin/HEAD) and select most recent
-  $lastCommitInfo = $allRefs | Where-Object {
-    ($_ -notmatch '/HEAD\s') -and ($_ -match '/')
-  } | Select-Object -First 1
-
-  ######## GUARD CLAUSE : NO MATCHING BRANCH ########
-  if ([string]::IsNullOrWhiteSpace($lastCommitInfo)) {
-    return
-  }
-
-  # Separate the chain into two
-  $parts = $lastCommitInfo -split ' ', 2
-
-  ######## GUARD CLAUSE : DATA INTEGRITY FAIL ########
-  # Check data integrity (must have Branch + Date)
-  if ($parts.Length -ne 2) {
-    return
-  }
-
-  ######## PROCESSING / DISPLAY ########
-  # Clean up branch name (Remove "origin/")
-  $branchName = $parts[0] -replace '^.*?/', ''
-  $dateString = $parts[1]
-
-  try {
-    # Convert ISO string into [datetime] object
-    [datetime]$commitDate = $dateString
-
-    # Define culture on "en-US"
-    $culture = [System.Globalization.CultureInfo]'en-US'
-
-    # Format date (ex: Monday 13 September 2025)
-    $formattedDate = $commitDate.ToString('dddd dd MMMM yyyy', $culture)
-
-    # Display formatted message
-    Write-Host -NoNewline "📈 Last repository commit : " -ForegroundColor DarkYellow
-    Write-Host -NoNewline "$formattedDate" -ForegroundColor Cyan
-    Write-Host -NoNewline " on " -ForegroundColor DarkYellow
-    Write-Host "$branchName" -ForegroundColor Magenta
-
-    Show-Separator -Length 80 -ForegroundColor DarkGray
-  }
-  catch {
-    # If date parsing fails, exit silently
-    return
-  }
 }
 
 ##########---------- Get and show latest commit message ----------##########
@@ -1081,6 +955,119 @@ function Show-LatestCommitMessage {
   }
 }
 
+##########---------- Calculate new remote branches to track ----------##########
+function Get-NewRemoteBranches {
+  ######## DATA RETRIEVAL ########
+  # Get all remote branches (excluding HEAD) and local branches
+  $allRemoteRefs = git for-each-ref --format="%(refname:short)" refs/remotes | Where-Object { $_ -notmatch '/HEAD$' }
+  $allLocalBranches = git for-each-ref --format="%(refname:short)" refs/heads
+
+  # List to store new branches to track
+  $branchesFound = @()
+
+  ######## PROCESSING LOOP ########
+  # Iterate through remote branches to find those not tracked locally
+  foreach ($remoteRef in $allRemoteRefs) {
+
+    # Extract local name from remote ref (ex: "origin/feature/x" -> "feature/x")
+    if ($remoteRef -match '^[^/]+/(.+)$') {
+      $localEquivalent = $Matches[1]
+
+      ######## GUARD CLAUSE : IGNORED PREFIXES ########
+      # Define prefixes to exclude (Hotfix and Release)
+      $prefixesToIgnore = @('hotfix/', 'release/')
+      $shouldIgnore = $false
+
+      # Check each prefix to ignore
+      foreach ($prefix in $prefixesToIgnore) {
+        # Check if branch name begins with a prefix to ignore
+        if ($localEquivalent.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+          $shouldIgnore = $true
+
+          # No point in continuing to search, exit loop
+          break
+        }
+      }
+
+      # If branch matches an ignored prefix, skip to next iteration
+      if ($isIgnored) {
+        continue
+      }
+
+      ######## GUARD CLAUSE : ALREADY TRACKED ########
+      # If the branch already exists locally, skip it
+      if ($localEquivalent -in $allLocalBranches) {
+        continue
+      }
+
+      ######## ADD TO SELECTION ########
+      # If we are here, strictly valid (Not ignored AND Not already local)
+      $branchesFound += $remoteRef
+    }
+  }
+
+  return $branchesFound
+}
+
+##########---------- Interactive proposal to create new local branches ----------##########
+function Invoke-NewBranchTracking {
+  param (
+    [array]$NewBranches
+  )
+
+  ######## GUARD CLAUSE : NO NEW BRANCHES ########
+  # If the list is empty or null, nothing to do
+  if (-not $NewBranches -or $NewBranches.Count -eq 0) {
+    return
+  }
+
+  ######## UI : START SEPARATOR ########
+  Show-Separator -Length 80 -ForegroundColor DarkGray
+
+  ######## USER INTERACTION LOOP ########
+  foreach ($newBranchRef in $NewBranches) {
+    # Extract local name (ex: origin/feature/x -> feature/x)
+    $null = $newBranchRef -match '^[^/]+/(.+)$'
+    $localBranchName = $Matches[1]
+
+    # Display Branch Found
+    Write-Host -NoNewline "❤️ New remote branches found ❤️ =>" -ForegroundColor Blue
+    Write-Host "🦄 $localBranchName 🦄" -ForegroundColor DarkCyan
+
+    # Get and show latest commit message
+    $latestCommitMsg = git log -1 --format="%s" $newBranchRef 2>$null
+    if ($latestCommitMsg) {
+      Write-Host -NoNewline "Commit message : " -ForegroundColor Magenta
+      Write-Host "$latestCommitMsg" -ForegroundColor Cyan
+    }
+
+    # Ask user permission
+    Write-Host -NoNewline "Pull " -ForegroundColor Magenta
+    Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
+    Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
+
+    $choice = Read-Host
+    if ($choice -match '^(Y|y|yes|^)$') {
+      Write-Host -NoNewline "⏳ Creating local branch " -ForegroundColor Magenta
+      Write-Host "$localBranchName" -ForegroundColor Red
+
+      # Create local branch tracking remote branch
+      git branch --track --quiet $localBranchName $newBranchRef 2>$null
+
+      # Check if branch creation worked
+      if ($LASTEXITCODE -eq 0) {
+        Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
+        Write-Host " successfully pulled ✅" -ForegroundColor Green
+      }
+      # If branch creation failed
+      else {
+        Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
+        Write-Host "⚠️ New creation branch has failed ! ⚠️" -ForegroundColor Red
+      }
+    }
+  }
+}
+
 ##########---------- Interactive cleanup of orphaned (gone) branches ----------##########
 function Invoke-OrphanedCleanup {
   param (
@@ -1112,6 +1099,9 @@ function Invoke-OrphanedCleanup {
   if (-not $branchesToClean -or $branchesToClean.Count -eq 0) {
     return $false
   }
+
+  ######## UI : START SEPARATOR ########
+  Show-Separator -Length 80 -ForegroundColor DarkGray
 
   Write-Host "🧹 Cleaning up orphaned local branches..." -ForegroundColor DarkYellow
 
@@ -1229,6 +1219,9 @@ function Invoke-MergedCleanup {
     return $false
   }
 
+  ######## UI : START SEPARATOR ########
+  Show-Separator -Length 80 -ForegroundColor DarkGray
+
   Write-Host "🧹 Cleaning up branches that have already being merged..." -ForegroundColor DarkYellow
 
   $originalWasDeleted = $false
@@ -1273,27 +1266,40 @@ function Invoke-MergedCleanup {
 
 ##########---------- Check for unmerged commits in main from dev ----------##########
 function Show-MergeAdvice {
-  ######## DATA RETRIEVAL ########
+  param (
+    [switch]$DryRun
+  )
+
+  ######## MAIN BRANCH DATA RETRIEVAL ########
   # Identify main branch (main or master)
   $mainBranch = if (git branch --list "main") { "main" }
                 elseif (git branch --list "master") { "master" }
                 else { $null }
 
   ######## GUARD CLAUSE : MAIN BRANCH NOT FOUND ########
-  if (-not $mainBranch) { return }
+  if (-not $mainBranch) {
+    if ($DryRun) { return $false }
+    return
+  }
 
-  ######## DATA RETRIEVAL ########
+  ######## DEV BRANCH DATA RETRIEVAL ########
   # Identify dev branch (develop or dev)
   $devBranch = if (git branch --list "develop") { "develop" }
               elseif (git branch --list "dev") { "dev" }
               else { $null }
 
   ######## GUARD CLAUSE : DEV BRANCH NOT FOUND ########
-  if (-not $devBranch) { return }
+  if (-not $devBranch) {
+    if ($DryRun) { return $false }
+  }
 
-  ######## DATA RETRIEVAL ########
+  ######## LOGIC CHECK ########
   # Check for commits in Dev that are not in Main
   $unmergedCommits = git log "$mainBranch..$devBranch" --oneline -q 2>$null
+
+  if ($DryRun) {
+    return [bool]$unmergedCommits
+  }
 
   ######## GUARD CLAUSE : ALREADY MERGED ########
   # If result is empty, everything is merged, so we exit
@@ -1311,12 +1317,15 @@ function Restore-UserLocation {
   param (
     [bool]$RepoIsSafe,
     [string]$OriginalBranch,
-    [bool]$OriginalWasDeleted
+    [bool]$OriginalWasDeleted,
+    [switch]$DryRun
   )
 
   ######## GUARD CLAUSE : UNSAFE REPO STATE ########
   # Repository isn't in a safe mode, cannot switch branches safely
   if (-not $RepoIsSafe) {
+    if ($DryRun) { return $false }
+
     Write-Host "⚠️ Repo is in an unstable state. Can't return to the branch where you were ! ⚠️" -ForegroundColor Red
     return
   }
@@ -1324,6 +1333,8 @@ function Restore-UserLocation {
   ######## GUARD CLAUSE : ORIGINAL BRANCH DELETED ########
   # Original branch was removed during cleaning, switch to a fallback branch
   if ($OriginalWasDeleted) {
+    if ($DryRun) { return $true }
+
     Write-Host -NoNewline "⚡ Original branch " -ForegroundColor Magenta
     Write-Host -NoNewline "$OriginalBranch" -ForegroundColor Red
     Write-Host " has been deleted..." -ForegroundColor Magenta
@@ -1349,10 +1360,14 @@ function Restore-UserLocation {
   ######## GUARD CLAUSE : ALREADY ON TARGET ########
   # If we are already on original branch, we do nothing and we say nothing
   if ($currentBranch -eq $OriginalBranch) {
+    if ($DryRun) { return $false }
+
     return
   }
 
   ######## STANDARD RETURN ########
+  if ($DryRun) { return $true }
+
   # Otherwise, we go there and display it
   git checkout $OriginalBranch *> $null
 
@@ -1440,6 +1455,38 @@ function Show-NetworkOrSystemError {
     Write-Host "Details 👉 " -ForegroundColor Magenta
     Write-Host -NoNewline "$Message" -ForegroundColor Red
   }
+}
+
+##########---------- Display a separator line with custom length and colors ----------##########
+function Show-Separator {
+  param (
+    [Parameter(Mandatory=$true)]
+    [int]$Length,
+
+    [Parameter(Mandatory=$true)]
+    [System.ConsoleColor]$ForegroundColor,
+
+    [Parameter(Mandatory=$false)]
+    [System.ConsoleColor]$BackgroundColor,
+
+    [Parameter(Mandatory=$false)]
+    [switch]$NoNewline
+  )
+
+  ######## DATA PREPARATION ########
+  # Create line string based on requested length
+  $line = "─" * $Length
+
+  ######## GUARD CLAUSE : WITH BACKGROUND COLOR ########
+  # If a background color is specified, handle it specific way and exit
+  if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
+    Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor -BackgroundColor $BackgroundColor
+    return
+  }
+
+  ######## STANDARD DISPLAY ########
+  # Otherwise (default behavior), display with foreground color only
+  Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor
 }
 ```
 

@@ -1318,7 +1318,7 @@ function Invoke-NewBranchTracking {
     $isFirstLoop = $false
 
     # Display Branch Found
-    Write-Host -NoNewline "❤️ New remote branches found => " -ForegroundColor Blue
+    Write-Host -NoNewline "❤️ New remote branche found => " -ForegroundColor Blue
     Write-Host "🦄 $localBranchName 🦄" -ForegroundColor Red
 
     # Get and show latest commit message
@@ -1946,11 +1946,16 @@ function Show-UpdateSummary {
   ######## TABLE CENTERING ########
   $tableOuterPadding = " " * 8
 
+  ######## TABLE WIDTHS ########
+  $colRepoWidth = 24
+  $colStatWidth = 24
+  $colTimeWidth = 16
+
   # Headers (manual format for color control)
   Write-Host -NoNewline $tableOuterPadding
   Write-Host -NoNewline "Repository              " -ForegroundColor White -BackgroundColor DarkGray
   Write-Host -NoNewline "         Status         " -ForegroundColor White -BackgroundColor DarkGray
-  Write-Host -NoNewline "    Duration    " -ForegroundColor White -BackgroundColor DarkGray
+  Write-Host -NoNewline "        Duration" -ForegroundColor White -BackgroundColor DarkGray
   Write-Host ""
 
   # Loop on results
@@ -1967,41 +1972,35 @@ function Show-UpdateSummary {
       "Failed"          { $statusText = "❌ Failed";          $statusColor = "Red" }
     }
 
-    ######## STATUS CENTERING (Width 24) ########
+    ######## STATUS CENTERING (Width 22) ########
     $statLen = $statusText.Length
     # Manual adjustment for emojis that count double on screen
     if ($statusText -match "✅|✨|⏩|🙈|❌") {
       $statLen += 1
     }
 
-    $padStatLeft = [math]::Max(0, [int]((24 - $statLen) / 2))
+    $padStatLeft = [math]::Max(0, [int](($colStatWidth - $statLen) / 2))
     $padStatStr = " " * $padStatLeft
-
-
-    ######## DURATION CENTERING (Width 16) ########
-    $timeLen = $item.Time.Length
-    $padTimeLeft = [math]::Max(0, [int]((16 - $timeLen) / 2))
-    $padTimeStr = " " * $padTimeLeft
 
     ######## OVERALL MARGIN ########
     Write-Host -NoNewline $tableOuterPadding
 
-    ######## COLUMN 1 (Width 24) ########
-    Write-Host -NoNewline ("{0,-24}" -f $item.Repo) -ForegroundColor Cyan
+    ######## COLUMN 1 (Left aligned) ########
+    Write-Host -NoNewline ("{0,-$colRepoWidth}" -f $item.Repo) -ForegroundColor Cyan
 
-    ######## COLUMN 2 (Width 24) ########
+    ######## COLUMN 2 (Centered)) ########
     Write-Host -NoNewline $padStatStr
     Write-Host -NoNewline $statusText -ForegroundColor $statusColor
 
     # Calculating the remaining padding to align next column
-    $padStatRightLen = 24 - $padStatLeft - $statLen
+    $padStatRightLen = $colStatWidth - $padStatLeft - $statLen
     if ($padStatRightLen -gt 0) {
       Write-Host -NoNewline (" " * $padStatRightLen)
     }
 
-    ######## COLUMN 3 (Width 16) ########
-    Write-Host -NoNewline $padTimeStr
-    Write-Host $item.Time -ForegroundColor Magenta
+    ######## COLUMN 3 (Right align) ########
+    $timeString = "{0,$colTimeWidth}" -f $item.Time
+    Write-Host $timeString -ForegroundColor Magenta
   }
 }
 
@@ -2075,17 +2074,15 @@ function Get-CenteredPadding {
     [string]$RawMessage
   )
 
+  # Removes invisible characters from "Variation Selector"
+  $cleanMsg = $RawMessage -replace "\uFE0F", ""
+
   # Standard length in memory
-  $visualLength = $RawMessage.Length
+  $visualLength = $cleanMsg.Length
 
-  # Range : U+2300 to U+23FF (Technical) and U+2600 to U+27BF (Symbols)
-  $emojiPattern = "[\u2300-\u23FF\u2600-\u27BF]"
-
-  # Count how many there are in message
-  $hiddenWidth = ([regex]::Matches($RawMessage, $emojiPattern)).Count
-
-  # Add this hidden width to the total length
-  $visualLength += $hiddenWidth
+  # If message contains "simple" BMP emojis (one character long but two characters wide on screen), we add 1
+  $bmpEmojis = ([regex]::Matches($cleanMsg, "[\u2300-\u23FF\u2600-\u27BF]")).Count
+  $visualLength += $bmpEmojis
 
   # (Total Width - Message Length) / 2
   # [math]::Max(0, ...) => prevents crash if message is longer than 80 characters

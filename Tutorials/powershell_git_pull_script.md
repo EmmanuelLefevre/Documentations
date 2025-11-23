@@ -600,7 +600,7 @@ function Test-LocalRepoExists {
   # Check if the path variable is defined AND if the folder exists on disk
   if (-not ($Path -and (Test-Path -Path $Path))) {
     # Helper called to center message nicely
-    $msg = "⚠️ Local repository path for $Name  doesn't exist ⚠️"
+    $msg = "⚠️ Local repository path for $Name doesn't exist ⚠️"
     $paddingStr = Get-CenteredPadding -RawMessage $msg
 
     # Display message
@@ -869,9 +869,9 @@ function Invoke-SafeCheckout {
     Write-Host -NoNewline "$TargetBranch" -ForegroundColor Red
     Write-Host " !!! ⚠️" -ForegroundColor Magenta
 
-    Write-Host -NoNewline "ℹ️ Blocked by local changes on " -ForegroundColor DarYellow
+    Write-Host -NoNewline "ℹ️ Blocked by local changes on " -ForegroundColor DarkYellow
     Write-Host -NoNewline "$OriginalBranch" -ForegroundColor Magenta
-    Write-Host ". Halting updates for this repository !" -ForegroundColor DarYellow
+    Write-Host ". Halting updates for this repository !" -ForegroundColor DarkYellow
 
     return $false
   }
@@ -1105,7 +1105,7 @@ function Show-LatestCommitMessage {
   }
 
   # Get new commits
-  $raw = git log --oneline --no-merges "$LocalBranch..$RemoteBranch" 2>$null
+  $raw = git log --pretty=format:"%s" --no-merges "$LocalBranch..$RemoteBranch" 2>$null
 
   # Normalisation : string → array
   $newCommits = @()
@@ -1130,18 +1130,11 @@ function Show-LatestCommitMessage {
     return
   }
 
-  # Cleanup if HideHashes option is enabled → removes hash in front of message
-  if ($HideHashes) {
-    $newCommits = $newCommits | ForEach-Object {
-      ($_ -replace '^[0-9a-f]+\s+', '')
-    }
-  }
-
   ######## GUARD CLAUSE : SINGLE COMMIT ########
   # One commit
   if ($newCommits.Count -eq 1) {
     Write-Host -NoNewline "Commit message : " -ForegroundColor Magenta
-    Write-Host "`"$($newCommits[0])`"" -ForegroundColor Cyan
+    Write-Host "  - `"$($newCommits[0])`"" -ForegroundColor Cyan
     return
   }
 
@@ -1149,7 +1142,7 @@ function Show-LatestCommitMessage {
   # Several commits
   Write-Host "New commits received :" -ForegroundColor Magenta
   foreach ($commit in $newCommits) {
-    Write-Host "- `"$commit`"" -ForegroundColor Cyan
+    Write-Host "  - `"$commit`"" -ForegroundColor DarkCyan
   }
 }
 
@@ -1720,7 +1713,7 @@ function Show-GitHubHttpError {
       Write-Host -NoNewline "⚠️ "
       Write-Host -NoNewline "Remote repository " -ForegroundColor Red
       Write-Host -NoNewline "$RepoName" -ForegroundColor white -BackgroundColor DarkBlue
-      Write-Host " doesn't exists ⚠️" -ForegroundColor Red
+      Write-Host " doesn't exist ⚠️" -ForegroundColor Red
       return
     }
 

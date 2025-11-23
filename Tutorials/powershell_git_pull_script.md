@@ -832,7 +832,7 @@ function Invoke-BranchUpdateStrategy {
     Write-Host -NoNewline "Pull ? (Y/n): " -ForegroundColor Magenta
 
     $choice = Read-Host
-    if ($choice -match '^(Y|y|yes|^)$') {
+    if ($choice -match '^(Y|y|Yes|yes|YES|^)$') {
       Write-Host -NoNewline "⏳ Updating " -ForegroundColor Magenta
       Write-Host -NoNewline "$LocalBranch" -ForegroundColor Red
       Write-Host "..." -ForegroundColor Magenta
@@ -1009,7 +1009,7 @@ function Get-NewRemoteBranches {
   return $branchesFound
 }
 
-##########---------- Interactive proposal to create new local branches ----------##########
+##########---------- Interactive proposal to create new local branches OR delete remote ----------##########
 function Invoke-NewBranchTracking {
   param (
     [array]$NewBranches
@@ -1021,14 +1021,29 @@ function Invoke-NewBranchTracking {
     return
   }
 
+  ######## CONFIGURATION ########
+  # Branches that should NEVER be deleted remotely even if user doesn't track them
+  $protectedBranches = @("dev", "develop", "main", "master")
+
   ######## UI : START SEPARATOR ########
   Show-Separator -Length 80 -ForegroundColor DarkGray
+
+  # Flag initialization
+  $isFirstPass = $true
 
   ######## USER INTERACTION LOOP ########
   foreach ($newBranchRef in $NewBranches) {
     # Extract local name (ex: origin/feature/x -> feature/x)
     $null = $newBranchRef -match '^[^/]+/(.+)$'
     $localBranchName = $Matches[1]
+
+    ######## SEPARATOR MANAGEMENT ########
+    # Display separator ONLY if not first pass
+    if (-not $isFirstPass) {
+      Show-Separator -Length 80 -ForegroundColor DarkGray
+    }
+    # Mark that first pass is finished
+    $isFirstPass = $false
 
     # Display Branch Found
     Write-Host -NoNewline "❤️ New remote branches found ❤️ =>" -ForegroundColor Blue
@@ -1041,13 +1056,17 @@ function Invoke-NewBranchTracking {
       Write-Host "$latestCommitMsg" -ForegroundColor Cyan
     }
 
+    ######## CHOICE 1 : TRACKING ########
     # Ask user permission
     Write-Host -NoNewline "Pull " -ForegroundColor Magenta
     Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
     Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
 
-    $choice = Read-Host
-    if ($choice -match '^(Y|y|yes|^)$') {
+    # Helper called for a robust response
+    $wantToTrack = Wait-ForUserConfirmation
+
+    ######## YES WE TRACK ########
+    if ($wantToTrack) {
       Write-Host -NoNewline "⏳ Creating local branch " -ForegroundColor Magenta
       Write-Host "$localBranchName" -ForegroundColor Red
 
@@ -1063,6 +1082,67 @@ function Invoke-NewBranchTracking {
       else {
         Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
         Write-Host "⚠️ New creation branch has failed ! ⚠️" -ForegroundColor Red
+      }
+    }
+
+    ######## CHOICE 2 : OTHERWISE WE PROPOSE REMOVAL #######
+    else {
+      # We NEVER suggest deleting a protected branch
+      if ($protectedBranches -contains $localBranchName) {
+        continue
+      }
+
+      Write-Host -NoNewline "☁️ You don't want to pull " -ForegroundColor DarkYellow
+      Write-Host -NoNewline "$localBranchName" -ForegroundColor Magenta
+      Write-Host ", perhaps because it is obsolete ?" -ForegroundColor DarkYellow
+
+      ######## STEP 1 : REMOTE DELETION ########
+      Write-Host -NoNewline "🗑️ Delete remote branch " -ForegroundColor Magenta
+      Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
+      Write-Host -NoNewline " permanently ? (Y/n): " -ForegroundColor Magenta
+
+      # Helper called for a robust response
+      $wantToDelete = Wait-ForUserConfirmation
+
+      if ($wantToDelete) {
+        ######## STEP 2 : DOUBLE CONFIRMATION ########
+        Write-Host -NoNewline "💀 ARE YOU SURE ? THIS ACTION IS IRREVERSIBLE ! 💀" -ForegroundColor Red
+        Write-Host "Perhaps you are near to delete remote branch of one of your team's member !" -ForegroundColor Red
+        Write-Host "Confirm delete " -ForegroundColor Magenta
+        Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
+        Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
+
+        # Helper called for a robust response
+        $isSure = Wait-ForUserConfirmation
+
+        if ($isSure) {
+          Write-Host -NoNewline "🔥 Removal of " -ForegroundColor Magenta
+          Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
+          Write-Host "..." -ForegroundColor Magenta
+
+          git push origin --delete $localBranchName 2>&1 | Out-Null
+
+          # Check if branch deletion worked
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host -NoNewline "☁️ $localBranchName" -ForegroundColor Magenta
+            Write-Host " successfully deleted from server" -ForegroundColor Green
+          }
+          # If branch deletion failed
+          else {
+            Write-Host -NoNewline "⚠️ Failed to delete " -ForegroundColor Red
+            Write-Host "origin/$localBranchName ⚠️" -ForegroundColor Magenta
+          }
+        }
+        else {
+          Write-Host -NoNewline "👍 Remote branch  " -ForegroundColor Green
+          Write-Host -NoNewline "$localBranchName" -ForegroundColor Magenta
+          Write-Host " kept 👍" -ForegroundColor Green
+        }
+      }
+      else {
+        Write-Host -NoNewline "👍 Remote branch  " -ForegroundColor Green
+        Write-Host -NoNewline "$localBranchName" -ForegroundColor Magenta
+        Write-Host " kept 👍" -ForegroundColor Green
       }
     }
   }
@@ -1110,13 +1190,13 @@ function Invoke-OrphanedCleanup {
   ######## INTERACTIVE CLEANUP LOOP ########
   foreach ($orphaned in $branchesToClean) {
     # Ask user
-    Write-Host -NoNewline "Do you want to delete the orphaned local branch " -ForegroundColor Magenta
+    Write-Host -NoNewline "🗑️ Delete the orphaned local branch " -ForegroundColor Magenta
     Write-Host -NoNewline "$orphaned" -ForegroundColor Red
     Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
 
     $choice = Read-Host
-    if ($choice -match '^(Y|y|yes|^)$') {
-      Write-Host -NoNewline "👉 Removal of " -ForegroundColor Magenta
+    if ($choice -match '^(Y|y|Yes|yes|YES|^)$') {
+      Write-Host -NoNewline "🔥 Removal of " -ForegroundColor Magenta
       Write-Host -NoNewline "$orphaned" -ForegroundColor Red
       Write-Host " branch..." -ForegroundColor Magenta
 
@@ -1142,7 +1222,7 @@ function Invoke-OrphanedCleanup {
         Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
 
         $forceChoice = Read-Host
-        if ($forceChoice -match '^(Y|y|yes|^)$') {
+        if ($forceChoice -match '^(Y|y|Yes|yes|YES|^)$') {
           # Forced removal
           git branch -D $orphaned *> $null
 
@@ -1231,11 +1311,11 @@ function Invoke-MergedCleanup {
     # Ask user
     Write-Host -NoNewline "Branch " -ForegroundColor Magenta
     Write-Host -NoNewline "$merged" -ForegroundColor Red
-    Write-Host -NoNewline " is already merged. Delete ? (Y/n): " -ForegroundColor Magenta
+    Write-Host -NoNewline " is already merged. 🗑️ Delete ? (Y/n): " -ForegroundColor Magenta
 
     $choice = Read-Host
-    if ($choice -match '^(Y|y|yes|^)$') {
-      Write-Host -NoNewline "👉 Removal of " -ForegroundColor Magenta
+    if ($choice -match '^(Y|y|Yes|yes|YES|^)$') {
+      Write-Host -NoNewline "🔥 Removal of " -ForegroundColor Magenta
       Write-Host -NoNewline "$merged" -ForegroundColor Red
       Write-Host " branch..." -ForegroundColor Magenta
 
@@ -1457,36 +1537,25 @@ function Show-NetworkOrSystemError {
   }
 }
 
-##########---------- Display a separator line with custom length and colors ----------##########
-function Show-Separator {
-  param (
-    [Parameter(Mandatory=$true)]
-    [int]$Length,
+##########---------- Wait for valid Yes/No user input ----------##########
+function Wait-ForUserConfirmation {
+  while ($true) {
+    $input = Read-Host
 
-    [Parameter(Mandatory=$true)]
-    [System.ConsoleColor]$ForegroundColor,
+    # Matches: Y, y, Yes, yes, YES, or Empty (Enter key)
+    if ($input -match '^(Y|y|yes|Yes|YES|^)$') {
+      return $true
+    }
 
-    [Parameter(Mandatory=$false)]
-    [System.ConsoleColor]$BackgroundColor,
+    # Matches: n, N, no, No, NO
+    elseif ($input -match '^(n|N|no|No|NO)$') {
+      return $false
+    }
 
-    [Parameter(Mandatory=$false)]
-    [switch]$NoNewline
-  )
-
-  ######## DATA PREPARATION ########
-  # Create line string based on requested length
-  $line = "─" * $Length
-
-  ######## GUARD CLAUSE : WITH BACKGROUND COLOR ########
-  # If a background color is specified, handle it specific way and exit
-  if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
-    Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor -BackgroundColor $BackgroundColor
-    return
+    # If invalid input, loop again
+    Write-Host "⚠️ Invalid entry ! Please type 'y' or 'n'" -ForegroundColor DarkYellow
+    Write-Host -NoNewline "Try again (Y/n): " -ForegroundColor Magenta
   }
-
-  ######## STANDARD DISPLAY ########
-  # Otherwise (default behavior), display with foreground color only
-  Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor
 }
 ```
 

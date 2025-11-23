@@ -1190,18 +1190,8 @@ function Invoke-OrphanedCleanup {
 
   ######## INTERACTIVE CLEANUP LOOP ########
   foreach ($orphaned in $branchesToClean) {
-    # Check if this branch has stash files
-    $stashCheck = git stash list | Select-String -Pattern "On $orphaned:"
-
-    if ($stashCheck) {
-      Write-Host -NoNewline "⚠️ WARNING : There are stashes on branch $orphaned ⚠️" -ForegroundColor Red
-
-      $stashCheck | ForEach-Object {
-        Write-Host "   - $_" -ForegroundColor DarkYellow
-      }
-
-      Write-Host "   La suppression de la branche ne supprime pas le stash, mais vous perdrez le contexte." -ForegroundColor Gray
-    }
+    # Helper called for warn about stash on branch
+    Show-StashWarning -BranchName $orphaned
 
     # Ask user
     Write-Host -NoNewline "🗑️ Delete the orphaned local branch " -ForegroundColor Magenta
@@ -1325,6 +1315,9 @@ function Invoke-MergedCleanup {
 
   ######## INTERACTIVE CLEANUP LOOP ########
   foreach ($merged in $branchesToClean) {
+    # Helper called for warn about stash on branch
+    Show-StashWarning -BranchName $merged
+
     # Ask user
     Write-Host -NoNewline "Branch " -ForegroundColor Magenta
     Write-Host -NoNewline "$merged" -ForegroundColor Red
@@ -1472,6 +1465,28 @@ function Restore-UserLocation {
 
   Write-Host -NoNewline "👌 Place it back on the branch where you were => " -ForegroundColor Magenta
   Write-Host "$OriginalBranch" -ForegroundColor Red
+}
+
+##########---------- Check and warn about stashes on a branch ----------##########
+function Show-StashWarning {
+  param (
+    [string]$BranchName
+  )
+
+  # Check if this branch has stash files
+  $stashCheck = git stash list | Select-String -Pattern "On ${BranchName}:"
+
+  if ($stashCheck) {
+    Write-Host -NoNewline "⚠️ WARNING : There are stashes on branch " -ForegroundColor Red
+    Write-Host -NoNewline "$BranchName" -ForegroundColor Magenta
+    Write-Host -NoNewline " ⚠️" -ForegroundColor Red
+
+    $stashCheck | ForEach-Object {
+      Write-Host "    - $($_.Line.Trim())" -ForegroundColor DarkCyan
+    }
+
+    Write-Host "ℹ️ Deleting branch doesn't delete stash but you will lose context of it" -ForegroundColor Magenta
+  }
 }
 
 ##########---------- Display HTTP errors ----------##########

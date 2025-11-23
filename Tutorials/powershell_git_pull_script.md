@@ -75,6 +75,13 @@ function gpull {
     [switch]$RefreshCache
   )
 
+  ######## GUARD CLAUSE : GIT AVAILABILITY ########
+  if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
+    Write-Host "⛔ Git for Windows is not installed (or not found in path)... Install it before using this command ! ⛔" -ForegroundColor Red
+
+    return
+  }
+
   ######## CACHE MANAGEMENT ########
   # If cache doesn't exist or if a refresh is forced
   if (-not $Global:GPullCache -or $RefreshCache) {

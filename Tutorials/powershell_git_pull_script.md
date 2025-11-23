@@ -79,18 +79,30 @@ function gpull {
 
   ######## GUARD CLAUSE : GIT AVAILABILITY ########
   if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
-    Write-Host "⛔ Git for Windows is not installed (or not found in path)... Install it before using this command ! ⛔" -ForegroundColor Red
+    # Helper called to center message nicely
+    $msg = "⛔ Git for Windows is not installed (or not found in path)... Install it before using this command ! ⛔"
+    $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+    # Display message
+    Write-Host -NoNewline $paddingStr
+    Write-Host $msg -ForegroundColor Red
 
     return
   }
 
-  ######## START TIMER ########
-  $stopWatch = Start-OperationTimer
+  ######## START GLOBAL TIMER ########
+  $globalTimer = Start-OperationTimer
 
   ######## CACHE MANAGEMENT ########
   # If cache doesn't exist or if a refresh is forced
   if (-not $Global:GPullCache -or $RefreshCache) {
-    Write-Host "🔄 Updating repositories informations... 🔄" -ForegroundColor Cyan
+    # Helper called to center message nicely
+    $msg = "🔄 Updating repositories informations... 🔄"
+    $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+    # Display message
+    Write-Host -NoNewline $paddingStr
+    Write-Host $msg -ForegroundColor Cyan
 
     ######## DATA RETRIEVAL ########
     # Function is called only once
@@ -98,9 +110,14 @@ function gpull {
 
     ######## GUARD CLAUSE : INVALID CONFIGURATION ########
     # Validate result before caching it
-    $functionNameMessage = "in Get-RepositoriesInfo function"
     if ($tempReposInfo -eq $null) {
-      Write-Host "⛔ Script stopped due to an invalid configuration $functionNameMessage ! ⛔" -ForegroundColor Red
+      # Helper called to center message nicely
+      $msg = "⛔ Script stopped due to an invalid configuration ! ⛔"
+      $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+      # Display message
+      Write-Host -NoNewline $paddingStr
+      Write-Host $msg -ForegroundColor Red
 
       # Exit function
       return
@@ -134,16 +151,16 @@ function gpull {
   ######## REPOSITORY ITERATION ########
   # Iterate over each repository in the defined order
   foreach ($repoName in $reposToProcess) {
+    ######## START REPOSITORY TIMER ########
+    $repoTimer = Start-OperationTimer
+
+    ######## DATA RETRIEVAL ########
     $repoPath = $repos[$repoName]
 
     ######## UI : SEPARATOR MANAGEMENT ########
-    # Display separator (except first)
+    # Display main separator (except first)
     if (-not $isFirstRepo) {
-      Write-Host ""
-      Write-Host -NoNewline "     " -ForegroundColor DarkGray
-      Show-Separator -NoNewline -Length 70 -ForegroundColor DarkGray -BackgroundColor Gray
-      Write-Host "     " -ForegroundColor DarkGray
-      Write-Host ""
+      Show-MainSeparator
     }
     # Mark first loop is finished
     $isFirstRepo = $false
@@ -169,8 +186,9 @@ function gpull {
 
     ######## MAIN PROCESS ########
     # Show repository name being updated
+    Write-Host -NoNewline "🚀 "
     Write-Host -NoNewline "$repoName" -ForegroundColor white -BackgroundColor DarkBlue
-    Write-Host " is on update process 🚀" -ForegroundColor Green
+    Write-Host " is on update process..." -ForegroundColor Green
 
     try {
       ######## API CHECK & FETCH ########
@@ -353,12 +371,17 @@ function gpull {
       }
     }
 
-    # Return to home directory
+    ######## STOP REPOSITORY TIMER & DISPLAY ########
+    Stop-OperationTimer -Watch $repoTimer -RepoName $repoName
+
+    ######## RETURN HOME DIRECTORY ########
     Set-Location -Path $HOME
   }
 
-  ######## STOP TIMER & DISPLAY ########
-  Stop-OperationTimer -Watch $stopWatch
+  ######## STOP GLOBAL TIMER & DISPLAY ########
+  if ($reposToProcess.Count -gt 1) {
+    Stop-OperationTimer -Watch $globalTimer -IsGlobal
+  }
 }
 
 
@@ -417,44 +440,101 @@ function Get-RepositoriesInfo {
   }
 
   # Error message templates
-  $envVarMessageTemplate = "Check/add {0} and its value in your Windows Environment Variables..."
-  $functionNameMessage = "in Get-RepositoriesInfo function !"
+  $envVarMessageTemplate = "Check {0} in Windows Environment Variables..."
+  $functionNameMessage = "in Get-RepositoriesInfo !"
 
   ######## GUARD CLAUSE : MISSING USERNAME ########
   if ([string]::IsNullOrWhiteSpace($gitHubUsername)) {
-    Write-Host "❌ GitHub username is missing or invalid ! ❌" -ForegroundColor Red
+    # Helper called to center error message nicely
+    $errMsg = "❌ GitHub username is missing or invalid ! ❌"
+    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
 
-    $msg = $envVarMessageTemplate -f "'GITHUB_USERNAME'"
-    Write-Host "ℹ️ $msg" -ForegroundColor DarkYellow
+    # Display error message
+    Write-Host -NoNewline $paddingErrStr
+    Write-Host $errMsg -ForegroundColor Red
+
+    # Helper called to center info message nicely
+    $infoMsg = "ℹ️ " + ($envVarMessageTemplate -f "'GITHUB_USERNAME'")
+    $paddingInfoStr = Get-CenteredPadding -RawMessage $infoMsg
+
+    # Display info message
+    Write-Host -NoNewline $paddingInfoStr
+    Write-Host $infoMsg -ForegroundColor DarkYellow
+
     return $null
   }
 
   ######## GUARD CLAUSE : MISSING TOKEN ########
   if ([string]::IsNullOrWhiteSpace($gitHubToken)) {
-    Write-Host "❌ GitHub token is missing or invalid ! ❌" -ForegroundColor Red
+    # Helper called to center error message nicely
+    $errMsg = "❌ GitHub token is missing or invalid ! ❌"
+    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
 
-    $msg = $envVarMessageTemplate -f "'GITHUB_TOKEN'"
-    Write-Host "ℹ️ $msg" -ForegroundColor DarkYellow
+    # Display error message
+    Write-Host -NoNewline $paddingErrStr
+    Write-Host $errMsg -ForegroundColor Red
+
+    # Helper called to center info message nicely
+    $infoMsg = "ℹ️ " + ($envVarMessageTemplate -f "'GITHUB_TOKEN'")
+    $paddingInfoStr = Get-CenteredPadding -RawMessage $infoMsg
+
+    # Display info message
+    Write-Host -NoNewline $paddingInfoStr
+    Write-Host $infoMsg -ForegroundColor DarkYellow
+
     return $null
   }
 
   ######## GUARD CLAUSE : EMPTY ORDER LIST ########
   if (-not $reposOrder -or $reposOrder.Count -eq 0) {
-    Write-Host "❌ Local array repo order is empty ! ❌" -ForegroundColor Red
-    Write-Host "ℹ️ Define at least one repository in the repository order array $functionNameMessage" -ForegroundColor DarkYellow
+    # Helper called to center error message nicely
+    $errMsg = "❌ Local array repo order is empty ! ❌"
+    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
+
+    # Display error message
+    Write-Host -NoNewline $paddingErrStr
+    Write-Host $errMsg -ForegroundColor Red
+
+    # Helper called to center info message nicely
+    $infoMsg = "ℹ️ Define at least one repository $functionNameMessage (order array)"
+    $paddingInfoStr = Get-CenteredPadding -RawMessage $infoMsg
+
+    # Display info message
+    Write-Host -NoNewline $paddingInfoStr
+    Write-Host $infoMsg -ForegroundColor DarkYellow
+
     return $null
   }
 
   ######## GUARD CLAUSE : EMPTY PATH DICTIONARY ########
   if (-not $repos -or $repos.Keys.Count -eq 0) {
-    Write-Host "❌ Local repository dictionary is empty ! ❌" -ForegroundColor Red
-    Write-Host "ℹ️ Ensure repository dictionary contains at least one reference with a valid path $functionNameMessage" -ForegroundColor DarkYellow
+    # Helper called to center error message nicely
+    $errMsg = "❌ Local repository dictionary is empty ! ❌"
+    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
+
+    # Display error message
+    Write-Host -NoNewline $paddingErrStr
+    Write-Host $errMsg -ForegroundColor Red
+
+    # Helper called to center info message nicely
+    $infoMsg = "ℹ️ Ensure repository dictionary has valid paths $functionNameMessage"
+    $paddingInfoStr = Get-CenteredPadding -RawMessage $infoMsg
+
+    # Display info message
+    Write-Host -NoNewline $paddingInfoStr
+    Write-Host $infoMsg -ForegroundColor DarkYellow
+
     return $null
   }
 
   ######## RETURN SUCCESS ########
-  # All is fine
-  Write-Host "✔️ GitHub configuration and projects are ok ✔️" -ForegroundColor Green
+  # Helper called to center message nicely
+  $msg = "✔️ GitHub and projects configuration are nicely set ✔️"
+  $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+  # Display message
+  Write-Host -NoNewline $paddingStr
+  Write-Host $msg -ForegroundColor Green
   Show-Separator -Length 80 -ForegroundColor DarkBlue
   Write-Host ""
 
@@ -480,19 +560,30 @@ function Get-RepoListToProcess {
 
   # Name specified, check if it exists (case-insensitive)
   if ($FullList -contains $TargetName) {
-    Write-Host "💩 Update targeted on single repository 💩" -ForegroundColor Cyan
+    # Helper called to center message nicely
+    $msg = "🔎 Pull targeted on single repository 🔎"
+    $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+    # Display message
+    Write-Host -NoNewline $paddingStr
+    Write-Host "🔎 Pull targeted on single repository 🔎" -ForegroundColor Cyan
 
     Show-Separator -Length 80 -ForegroundColor DarkGray
+
     return @($TargetName)
   }
 
   # Name not found
   else {
-    Write-Host -NoNewline "⚠️ Repository" -ForegroundColor Red
+    # Helper called to center message nicely
+    $msg = "⚠️ Repository `"$($TargetName)`" not found in your configuration list ! ⚠️"
+    $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+    # Display message
+    Write-Host -NoNewline $paddingStr
+    Write-Host -NoNewline "⚠️ Repository " -ForegroundColor Red
     Write-Host -NoNewline "`"$($TargetName)`"" -ForegroundColor Magenta
     Write-Host " not found in your configuration list ! ⚠️" -ForegroundColor Red
-
-    Show-Separator -Length 80 -ForegroundColor DarkGray
 
     return $null
   }
@@ -508,11 +599,19 @@ function Test-LocalRepoExists {
   ######## GUARD CLAUSE : PATH NOT FOUND ########
   # Check if the path variable is defined AND if the folder exists on disk
   if (-not ($Path -and (Test-Path -Path $Path))) {
+    # Helper called to center message nicely
+    $msg = "⚠️ Local repository path for $Name  doesn't exist ⚠️"
+    $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+    # Display message
+    Write-Host -NoNewline $paddingStr
     Write-Host -NoNewline "⚠️ Local repository path for " -ForegroundColor Red
     Write-Host -NoNewline "$Name" -ForegroundColor White -BackgroundColor Magenta
     Write-Host " doesn't exist ⚠️" -ForegroundColor Red
+    Write-Host ""
+
     Write-Host "Path searched 👉 " -ForegroundColor DarkYellow
-    Write-Host "$Path" -ForegroundColor Red
+    Write-Host "$Path" -ForegroundColor DarkCyan
 
     return $false
   }
@@ -531,11 +630,19 @@ function Test-IsGitRepository {
   ######## GUARD CLAUSE : MISSING .GIT FOLDER ########
   # Check if the .git hidden folder exists inside the target path
   if (-not (Test-Path -Path "$Path\.git")) {
+    # Helper called to center message nicely
+    $msg = "⛔ Local folder $Name found but it's NOT a git repository ⛔"
+    $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+    # Display message
+    Write-Host -NoNewline $paddingStr
     Write-Host -NoNewline "⛔ Local folder " -ForegroundColor Red
-    Write-Host -NoNewline "$Name" -ForegroundColor White -BackgroundColor Magenta
+    Write-Host -NoNewline "$Name" -ForegroundColor White -BackgroundColor DarkBlue
     Write-Host " found but it's NOT a git repository ⛔" -ForegroundColor Red
+    Write-Host ""
+
     Write-Host "Missing .git folder inside 👉 " -ForegroundColor DarkYellow
-    Write-Host "$Path" -ForegroundColor Red
+    Write-Host "$Path" -ForegroundColor DarkCyan
 
     return $false
   }
@@ -553,18 +660,56 @@ function Test-LocalRemoteMatch {
 
   ######## DATA RETRIEVAL ########
   # Retrieve the fetch URL for 'origin'
-  $localRemoteUrl = (git remote get-url origin 2>$null)
+  $rawUrl = (git remote get-url origin 2>$null)
+
+  ######## GUARD CLAUSE : NO REMOTE CONFIGURED ########
+  if ([string]::IsNullOrWhiteSpace($rawUrl)) {
+    # Helper called to center error message nicely
+    $errMsg = "⚠️ No remote 'origin' found for this repository ⚠️"
+    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
+
+    # Display error message
+    Write-Host -NoNewline $paddingErrStr
+    Write-Host $errMsg -ForegroundColor Red
+
+    # Helper called to center info message nicely
+    $infoMsg = "ℹ️ Repository ignored !"
+    $paddingInfoStr = Get-CenteredPadding -RawMessage $infoMsg
+
+    # Helper called to center info message nicely
+    Write-Host -NoNewline $paddingInfoStr
+    Write-Host $infoMsg -ForegroundColor DarkYellow
+
+    return $false
+  }
 
   ######## GUARD CLAUSE : URL MISMATCH ########
+  # Clean up URL because we know it's not empty
+  $localRemoteUrl = $rawUrl.Trim()
+
   # Check if the local remote URL corresponds to the expected GitHub project
   if (-not ($localRemoteUrl -match "$UserName/$RepoName")) {
+    # Helper called to center error message nicely
+    $errMsg = "⚠️ Original local remote $localRemoteUrl doesn't match ($UserName/$RepoName) ⚠️"
+    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
+
+    # Display error message
+    Write-Host -NoNewline $paddingErrStr
     Write-Host -NoNewline "⚠️ Original local remote " -ForegroundColor Red
     Write-Host -NoNewline "$localRemoteUrl" -ForegroundColor Magenta
     Write-Host -NoNewline " doesn't match (" -ForegroundColor Red
     Write-Host -NoNewline "$UserName" -ForegroundColor Magenta
     Write-Host -NoNewline "/" -ForegroundColor Red
     Write-Host -NoNewline "$RepoName" -ForegroundColor Magenta
-    Write-Host "). Repository ignored ! ⚠️" -ForegroundColor Red
+    Write-Host ") ⚠️" -ForegroundColor Red
+
+    # Helper called to center info message nicely
+    $InfoMsg = "ℹ️ Repository ignored !"
+    $paddingInfoStr = Get-CenteredPadding -RawMessage $InfoMsg
+
+    # Display info message
+    Write-Host -NoNewline $paddingInfoStr
+    Write-Host $InfoMsg -ForegroundColor DarkYellow
 
     return $false
   }
@@ -759,17 +904,15 @@ function Test-WorkingTreeClean {
     if ($unstagedChanges) {
       Write-Host "Unstaged affected files =>" -ForegroundColor DarkCyan
       git diff --name-only | ForEach-Object {
-        Write-Host " $_" -ForegroundColor DarkCyan
+        Write-Host "   $_" -ForegroundColor DarkCyan
       }
     }
     if ($stagedChanges) {
       Write-Host "Staged affected files =>" -ForegroundColor DarkCyan
       git diff --cached --name-only | ForEach-Object {
-        Write-Host " $_" -ForegroundColor DarkCyan
+        Write-Host "   $_" -ForegroundColor DarkCyan
       }
     }
-
-    Show-Separator -Length 80 -ForegroundColor DarkGray
 
     return $false
   }
@@ -792,8 +935,6 @@ function Test-UnpushedCommits {
     Write-Host -NoNewline "⚠️ Branch ahead => " -ForegroundColor Red
     Write-Host -NoNewline "$BranchName" -ForegroundColor Magenta
     Write-Host " has unpushed commits. Pull avoided to prevent a merge ! ⚠️" -ForegroundColor Red
-
-    Show-Separator -Length 80 -ForegroundColor DarkGray
 
     return $true
   }
@@ -1102,8 +1243,8 @@ function Invoke-NewBranchTracking {
     $isFirstLoop = $false
 
     # Display Branch Found
-    Write-Host -NoNewline "❤️ New remote branches found ❤️ =>" -ForegroundColor Blue
-    Write-Host "🦄 $localBranchName 🦄" -ForegroundColor DarkCyan
+    Write-Host -NoNewline "❤️ New remote branches found => " -ForegroundColor Blue
+    Write-Host "🦄 $localBranchName 🦄" -ForegroundColor Red
 
     # Get and show latest commit message
     $latestCommitMsg = git log -1 --format="%s" $newBranchRef 2>$null
@@ -1149,19 +1290,26 @@ function Invoke-NewBranchTracking {
       }
 
       Write-Host -NoNewline "ℹ️ You decided not to track " -ForegroundColor DarkYellow
-      Write-Host -NoNewline "$localBranchName" -ForegroundColor Magenta
+      Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
       Write-Host ". This branch is forsaken ?" -ForegroundColor DarkYellow
 
       ######## STEP 1 : REMOTE DELETION ########
-      Write-Host -NoNewline "🗑️ Delete remote branch " -ForegroundColor Magenta
-      Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
-      Write-Host -NoNewline " permanently ? (Y/n): " -ForegroundColor Magenta
+      Write-Host -NoNewline "🗑️ Delete remote branch permanently ? (Y/n): " -ForegroundColor Magenta
 
       # Helper called for a robust response
       $wantToDelete = Wait-ForUserConfirmation
 
       if ($wantToDelete) {
         ######## STEP 2 : DOUBLE CONFIRMATION ########
+        Write-Host -NoNewline (" " * 20)
+        Show-Separator -Length 40 -ForegroundColor Red
+
+        # Helper called to center message nicely
+        $msg = "💀 ARE YOU SURE ? THIS ACTION IS IRREVERSIBLE ! 💀"
+        $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+        # Display message
+        Write-Host -NoNewline $paddingStr
         Write-Host "💀 ARE YOU SURE ? THIS ACTION IS IRREVERSIBLE ! 💀" -ForegroundColor Red
         Write-Host "Maybe you are near to delete remote branch of one of your team's member..." -ForegroundColor Red
         Write-Host -NoNewline "Confirm deletion of " -ForegroundColor Magenta
@@ -1536,7 +1684,7 @@ function Show-StashWarning {
     Write-Host -NoNewline " ⚠️" -ForegroundColor Red
 
     $stashCheck | ForEach-Object {
-      Write-Host "    - $($_.Line.Trim())" -ForegroundColor DarkCyan
+      Write-Host "  - $($_.Line.Trim())" -ForegroundColor DarkCyan
     }
 
     Write-Host "ℹ️ Deleting branch doesn't delete stash but you will lose context of it" -ForegroundColor Magenta
@@ -1678,6 +1826,24 @@ function Show-Separator {
   Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor
 }
 
+##########---------- Display main separator ----------##########
+function Show-MainSeparator {
+  # Length configuration
+  $totalWidth = 80
+  $lineLength = 54
+
+  # Calculation of margins
+  $paddingCount = [math]::Max(0, [int](($totalWidth - $lineLength) / 2))
+  $paddingStr   = " " * $paddingCount
+
+  # Separator display
+  Write-Host ""
+  Write-Host -NoNewline $paddingStr -ForegroundColor DarkGray
+  Show-Separator -NoNewline -Length $lineLength -ForegroundColor DarkGray -BackgroundColor Gray
+  Write-Host $paddingStr -ForegroundColor DarkGray
+  Write-Host ""
+}
+
 ##########---------- Start a stopwatch timer ----------##########
 function Start-OperationTimer {
   return [System.Diagnostics.Stopwatch]::StartNew()
@@ -1686,28 +1852,84 @@ function Start-OperationTimer {
 ##########---------- Stop timer and display elapsed time ----------##########
 function Stop-OperationTimer {
   param (
-    [System.Diagnostics.Stopwatch]$Watch
+    [System.Diagnostics.Stopwatch]$Watch,
+    [switch]$IsGlobal,
+    [string]$RepoName = ""
   )
 
   $Watch.Stop()
   $time = $Watch.Elapsed
 
-  Write-Host ""
-  Write-Host -NoNewline "     " -ForegroundColor DarkGray
-  Show-Separator -NoNewline -Length 70 -ForegroundColor DarkGray -BackgroundColor Gray
-  Write-Host "     " -ForegroundColor DarkGray
-  Write-Host ""
-
-  Write-Host -NoNewline (" " * 28 + "✨ Completed in ") -ForegroundColor Green
-
-  # Formatting (minutes/seconds or just seconds)
+  ######## TEXT TIME CALCULATION ########
+  $timeString = ""
   if ($time.TotalMinutes -ge 1) {
-    Write-Host -NoNewline "$($time.ToString("mm'm 'ss's'"))" -ForegroundColor Magenta
+    $timeString = "$($time.ToString("mm'm 'ss's'"))"
   }
   else {
-    Write-Host -NoNewline "$($time.ToString("ss's'"))" -ForegroundColor Magenta
+    # If was very quick (<1s), we display in ms
+    if (-not $IsGlobal -and $time.TotalSeconds -lt 1) {
+      $timeString = "$($time.TotalMilliseconds.ToString("0"))ms"
+    }
+    else {
+      $timeString = "$($time.ToString("ss's'"))"
+    }
   }
-  Write-Host " ✨" -ForegroundColor Green
+
+  ######## GLOBAL TIME ########
+  if ($IsGlobal) {
+    Show-MainSeparator
+
+    # Helper called to center message nicely
+    $msg = "✨ All completed in $timeString ✨"
+    $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+    # Display global timer
+    Write-Host -NoNewline $paddingStr
+    Write-Host -NoNewline "✨ All completed in " -ForegroundColor Green
+    Write-Host -NoNewline "$timeString" -ForegroundColor Magenta
+    Write-Host " ✨" -ForegroundColor Green
+  }
+  ######## REPOSITORY TIME ########
+  else {
+    Show-Separator -Length 80 -ForegroundColor DarkGray
+
+    # Helper called to center message nicely
+    $msg = "⏱️ $RepoName updated in $timeString ⏱️"
+    $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+    # Display repository timer
+    Write-Host -NoNewline $paddingStr
+    Write-Host -NoNewline "⏱️ "
+    Write-Host -NoNewline "$repoName" -ForegroundColor white -BackgroundColor DarkBlue
+    Write-Host -NoNewline " updated in " -ForegroundColor Green
+    Write-Host "$timeString ⏱️" -ForegroundColor Magenta
+  }
+}
+
+##########---------- Calculate centered padding spaces ----------##########
+function Get-CenteredPadding {
+  param (
+    [int]$TotalWidth = 80,
+    [string]$RawMessage
+  )
+
+  # Standard length in memory
+  $visualLength = $RawMessage.Length
+
+  # Range : U+2300 to U+23FF (Technical) and U+2600 to U+27BF (Symbols)
+  $emojiPattern = "[\u2300-\u23FF\u2600-\u27BF]"
+
+  # Count how many there are in message
+  $hiddenWidth = ([regex]::Matches($RawMessage, $emojiPattern)).Count
+
+  # Add this hidden width to the total length
+  $visualLength += $hiddenWidth
+
+  # (Total Width - Message Length) / 2
+  # [math]::Max(0, ...) => prevents crash if message is longer than 80 characters
+  $paddingCount = [math]::Max(0, [int](($TotalWidth - $visualLength) / 2))
+
+  return " " * $paddingCount
 }
 ```
 

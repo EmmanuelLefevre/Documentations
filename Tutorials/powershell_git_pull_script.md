@@ -67,7 +67,10 @@ Read-Host -Prompt "Press Enter to close... "
 
 11. Copy/Paste "git_pull" function and his utility function inside.
 ```powershell
-##########---------- Update your local repositories ----------##########
+#--------------------------------------------------------------------------#
+#                   UPDATE YOUR LOCAL REPOSITORIES                         #
+#--------------------------------------------------------------------------#
+
 function gpull {
   [CmdletBinding()]
   param (
@@ -148,50 +151,65 @@ function gpull {
   # Flag initialization
   $isFirstRepo = $true
 
+  # Init summary table list
+  $summaryTableList = @()
+
   ######## REPOSITORY ITERATION ########
   # Iterate over each repository in the defined order
   foreach ($repoName in $reposToProcess) {
     ######## START REPOSITORY TIMER ########
     $repoTimer = Start-OperationTimer
 
-    ######## DATA RETRIEVAL ########
-    $repoPath = $repos[$repoName]
-
-    ######## UI : SEPARATOR MANAGEMENT ########
-    # Display main separator (except first)
-    if (-not $isFirstRepo) {
-      Show-MainSeparator
-    }
-    # Mark first loop is finished
-    $isFirstRepo = $false
-
-    ######## GUARD CLAUSE : PATH EXISTS ########
-    if (-not (Test-LocalRepoExists -Path $repoPath -Name $repoName)) {
-      continue
-    }
-
-    ######## GUARD CLAUSE : NOT A GIT REPO ########
-    if (-not (Test-IsGitRepository -Path $repoPath -Name $repoName)) {
-      continue
-    }
-
-    # Change current directory to repository path
-    Set-Location -Path $repoPath
-
-    ######## GUARD CLAUSE : REMOTE MISMATCH ########
-    # Check local remote matches GitHub info
-    if (-not (Test-LocalRemoteMatch -UserName $username -RepoName $repoName)) {
-      continue
-    }
-
-    ######## MAIN PROCESS ########
-    # Show repository name being updated
-    Write-Host -NoNewline "🚀 "
-    Write-Host -NoNewline "$repoName" -ForegroundColor white -BackgroundColor DarkBlue
-    Write-Host " is on update process..." -ForegroundColor Green
+    ######## UPDATING SUMMARY TABLE STATUS ########
+    $summaryTableCurrentStatus = "Skipped"
 
     try {
-      ######## API CHECK & FETCH ########
+      ######## DATA SETUP ########
+      $repoPath = $repos[$repoName]
+
+      ######## UI : SEPARATOR MANAGEMENT ########
+      # Display main separator (except first)
+      if (-not $isFirstRepo) {
+        Show-MainSeparator
+      }
+      # Mark first loop is finished
+      $isFirstRepo = $false
+
+      ######## GUARD CLAUSE : PATH EXISTS ########
+      if (-not (Test-LocalRepoExists -Path $repoPath -Name $repoName)) {
+        $summaryTableCurrentStatus = "Failed"
+
+        # Go finally block (and after next repository)
+        continue
+      }
+
+      ######## GUARD CLAUSE : NOT A GIT REPO ########
+      if (-not (Test-IsGitRepository -Path $repoPath -Name $repoName)) {
+        $summaryTableCurrentStatus = "Ignored"
+
+        # Go finally block (and after next repository)
+        continue
+      }
+
+      # Change current directory to repository path
+      Set-Location -Path $repoPath
+
+      ######## GUARD CLAUSE : REMOTE MISMATCH ########
+      # Check local remote matches GitHub info
+      if (-not (Test-LocalRemoteMatch -UserName $username -RepoName $repoName)) {
+        $summaryTableCurrentStatus = "Ignored"
+
+        # Go finally block (and after next repository)
+        continue
+      }
+
+      ######## MAIN PROCESS ########
+      # Show repository name being updated
+      Write-Host -NoNewline "🚀 "
+      Write-Host -NoNewline "$repoName" -ForegroundColor white -BackgroundColor DarkBlue
+      Write-Host " is on update process..." -ForegroundColor Green
+
+      ######## API CALL ########
       # Check for remote repository existence using GitHub API with authentication token
       $repoUrl = "https://api.github.com/repos/$username/$repoName"
       $response = Invoke-RestMethod -Uri $repoUrl -Method Get -Headers @{ Authorization = "Bearer $token" } -ErrorAction Stop
@@ -208,9 +226,10 @@ function gpull {
       ######## GUARD CLAUSE : FETCH FAILED ########
       if (-not (Test-GitFetchSuccess -ExitCode $LASTEXITCODE)) {
         $repoIsInSafeState = $false
+        $summaryTableCurrentStatus = "Failed"
 
+        # Go finally block (and after next repository)
         continue
-        # Move next repository
       }
 
       ######## DATA RETRIEVAL : TRACKED BRANCHES ########
@@ -221,10 +240,14 @@ function gpull {
       # If no branch has an upstream defined, nothing to update or clean up
       if (-not $branchesToUpdate) {
         Write-Host "ℹ️ No upstream defined ! Nothing to update or clean up for this repository ! ℹ️" -ForegroundColor DarkYellow
+
+        $summaryTableCurrentStatus = "Ignored"
+
+        # Go finally block (and after next repository)
         continue
       }
 
-      ######## DATA PROCESSING : SORTING ########
+      ######## BRANCH PROCESSING : SORTING ########
       # Organize branches : Main -> Dev -> Others by alphabetical
       $sortedBranchesToUpdate = Get-SortedBranches -Branches $branchesToUpdate
 
@@ -238,6 +261,9 @@ function gpull {
       $branchCount = $sortedBranchesToUpdate.Count
       $i = 0
 
+      # Assume up-to-date until proven otherwise
+      $summaryTableCurrentStatus = "Already-Updated"
+
       ######## UPDATE LOOP ########
       # Iterate over each branch found to pull updates from remote
       foreach ($branch in $sortedBranchesToUpdate) {
@@ -245,22 +271,36 @@ function gpull {
         $i++
 
         ######## GUARD CLAUSE : CHECKOUT ########
-        if (-not (Invoke-SafeCheckout -TargetBranch $branch.Local -OriginalBranch $originalBranch)) {
+        if (-not (Invoke-SafeCheckout -TargetBranch $branch.Local`
+                                      -OriginalBranch $originalBranch)) {
           $repoIsInSafeState = $false
+          $summaryTableCurrentStatus = "Failed"
+
+          # Stop processing branches for this repo (fatal error)
           break
         }
 
         ######## GUARD CLAUSE : LOCAL CONFLICTS ########
         if (-not (Test-WorkingTreeClean -BranchName $branch.Local)) {
+          if ($summaryTableCurrentStatus -ne "Failed") {
+            $summaryTableCurrentStatus = "Skipped"
+          }
+
+          # Jump to next branch in list
           continue
         }
 
         ######## GUARD CLAUSE : UNPUSHED COMMITS ########
         if (Test-UnpushedCommits -BranchName $branch.Local) {
+          if ($summaryTableCurrentStatus -ne "Failed") {
+            $summaryTableCurrentStatus = "Skipped"
+          }
+
+          # Jump to next branch in list
           continue
         }
 
-        ######## GUARD CLAUSE : ALREADY UP-TO-DATE ########
+        ######## GUARD CLAUSE : ALREADY UPDATED ########
         if (Test-IsUpToDate -LocalBranch $branch.Local `
                             -RemoteBranch $branch.Remote) {
 
@@ -269,6 +309,7 @@ function gpull {
             Show-Separator -Length 80 -ForegroundColor DarkGray
           }
 
+          # Jump to next branch in list
           continue
         }
 
@@ -282,9 +323,18 @@ function gpull {
                                                     -RepoName $repoName
 
         ######## GUARD CLAUSE : UPDATE FAILED ########
-        # If update failed critically, mark repo as unsafe and stop
-        if ($updateStatus -eq 'Failed') {
+        # Update was successfull
+        if ($updateStatus -eq 'Success') {
+          if ($summaryTableCurrentStatus -ne "Failed" -and $summaryTableCurrentStatus -ne "Skipped") {
+            $summaryTableCurrentStatus = "Updated"
+          }
+        }
+        # Update failed
+        elseif ($updateStatus -eq 'Failed') {
+          $summaryTableCurrentStatus = "Failed"
           $repoIsInSafeState = $false
+
+          # Stop processing branches for this repo
           break
         }
 
@@ -294,58 +344,65 @@ function gpull {
         }
       }
 
-      ######## STATUS REPORT ########
-      # If no branch needed pull and there was more than one branch to check
-      if (($anyBranchNeededPull -eq $false) -and ($sortedBranchesToUpdate.Count -gt 1)) {
-        Show-Separator -Length 80 -ForegroundColor DarkGray
+      ######## POST-UPDATE ACTIONS (only if safe) ########
+      # We check this flag because if a checkout failed (break), we must NOT try to cleanup
+      if ($repoIsInSafeState) {
+        ######## STATUS REPORT ########
+        # If no branch needed pull and there was more than one branch to check
+        if (($anyBranchNeededPull -eq $false) -and ($sortedBranchesToUpdate.Count -gt 1)) {
+          Show-Separator -Length 80 -ForegroundColor DarkGray
 
-        Write-Host "All branches are being updated 🤙" -ForegroundColor Green
+          Write-Host "All branches are being updated 🤙" -ForegroundColor Green
+        }
+
+        ######## DETECT NEW BRANCHES ########
+        # Calculate which remote branches are missing locally
+        $newBranchesToTrack = Get-NewRemoteBranches
+
+        ######## USER PERMISSION TO PULL NEW BRANCHES ########
+        Invoke-NewBranchTracking -NewBranches $newBranchesToTrack
+
+        # Track whether user's branch has been deleted
+        [bool]$originalBranchWasDeleted = $false
+
+        ######## CLEANUP : ORPHANED BRANCHES ########
+        # Ask to clean branches that no longer exist on remote
+        if (Invoke-OrphanedCleanup -OriginalBranch $originalBranch) {
+          $originalBranchWasDeleted = $true
+        }
+
+        ######## CLEANUP : MERGED BRANCHES ########
+        # Ask to clean branches that are already merged into main/dev
+        if (Invoke-MergedCleanup -OriginalBranch $originalBranch) {
+          $originalBranchWasDeleted = $true
+        }
+
+        ######## UI : PRE-CALCULATION ########
+        $mergeWillDisplayMessage   = Show-MergeAdvice -DryRun
+        $restoreWillDisplayMessage = Restore-UserLocation -RepoIsSafe $repoIsInSafeState `
+                                                -OriginalBranch $originalBranch `
+                                                -OriginalWasDeleted $originalBranchWasDeleted `
+                                                -DryRun
+
+        ######## SEPARATOR MANAGEMENT ########
+        # If one OR other
+        if ($mergeWillDisplayMessage -or $restoreWillDisplayMessage) {
+          Show-Separator -Length 80 -ForegroundColor DarkGray
+        }
+
+        ######## WORKFLOW INFO ########
+        Show-MergeAdvice
+
+        ######## RETURN STRATEGY ########
+        Restore-UserLocation -OriginalBranch $originalBranch `
+                            -RepoIsSafe $repoIsInSafeState `
+                            -OriginalWasDeleted $originalBranchWasDeleted
       }
-
-      ######## DETECT NEW BRANCHES ########
-      # Calculate which remote branches are missing locally
-      $newBranchesToTrack = Get-NewRemoteBranches
-
-      ######## USER PERMISSION TO PULL NEW BRANCHES ########
-      Invoke-NewBranchTracking -NewBranches $newBranchesToTrack
-
-      # Track whether user's branch has been deleted
-      [bool]$originalBranchWasDeleted = $false
-
-      ######## CLEANUP : ORPHANED BRANCHES ########
-      # Ask to clean branches that no longer exist on remote
-      if (Invoke-OrphanedCleanup -OriginalBranch $originalBranch) {
-        $originalBranchWasDeleted = $true
-      }
-
-      ######## CLEANUP : MERGED BRANCHES ########
-      # Ask to clean branches that are already merged into main/dev
-      if (Invoke-MergedCleanup -OriginalBranch $originalBranch) {
-        $originalBranchWasDeleted = $true
-      }
-
-      ######## UI : PRE-CALCULATION ########
-      $mergeWillDisplayMessage   = Show-MergeAdvice -DryRun
-      $restoreWillDisplayMessage = Restore-UserLocation -RepoIsSafe $repoIsInSafeState `
-                                              -OriginalBranch $originalBranch `
-                                              -OriginalWasDeleted $originalBranchWasDeleted `
-                                              -DryRun
-
-      ######## SEPARATOR MANAGEMENT ########
-      # If one OR other
-      if ($mergeWillDisplayMessage -or $restoreWillDisplayMessage) {
-        Show-Separator -Length 80 -ForegroundColor DarkGray
-      }
-
-      ######## WORKFLOW INFO ########
-      Show-MergeAdvice
-
-      ######## RETURN STRATEGY ########
-      Restore-UserLocation -OriginalBranch $originalBranch `
-                          -RepoIsSafe $repoIsInSafeState `
-                          -OriginalWasDeleted $originalBranchWasDeleted
     }
     catch {
+      ######## UPDATING SUMMARY TABLE STATUS ########
+      $summaryTableCurrentStatus = "Failed"
+
       ######## ERROR CONTEXT ANALYSIS ########
       # Get HTTP response if exists (regardless of the error type)
       $responseError = $null
@@ -370,24 +427,49 @@ function gpull {
                                   -Message $_.Exception.Message
       }
     }
+    finally {
+      ######## STOP TIMER ########
+      $repoTimer.Stop()
+      $elapsed = $repoTimer.Elapsed
 
-    ######## STOP REPOSITORY TIMER & DISPLAY ########
-    Stop-OperationTimer -Watch $repoTimer -RepoName $repoName
+      ######## FORMAT TIME ########
+      $timeForTable = ""
+      # Less than a second (Milliseconds)
+      if ($elapsed.TotalSeconds -lt 1) {
+        $timeForTable = "$($elapsed.TotalMilliseconds.ToString("0"))ms"
+      }
+      # More than a minute (Minutes + Seconds)
+      elseif ($elapsed.TotalMinutes -ge 1) {
+        $timeForTable = "$($elapsed.ToString("mm'm 'ss's'"))"
+      }
+      # Between 1s and 59s (Seconds)
+      else {
+        $timeForTable = "$($elapsed.ToString("ss's'"))"
+      }
 
-    ######## RETURN HOME DIRECTORY ########
-    Set-Location -Path $HOME
+      ######## ADD TO SUMMARY TABLE ########
+      $summaryTableList += [PSCustomObject]@{ Repo=$repoName; Status=$summaryTableCurrentStatus; Time=$timeForTable }
+
+      ######## STOP REPOSITORY TIMER & DISPLAY ########
+      Stop-OperationTimer -Watch $repoTimer -RepoName $repoName
+
+      ######## RETURN HOME DIRECTORY ########
+      Set-Location -Path $HOME
+    }
   }
 
-  ######## STOP GLOBAL TIMER & DISPLAY ########
+  ######## STOP GLOBAL TIMER & DISPLAY SUMMARY TABLE ########
   if ($reposToProcess.Count -gt 1) {
+    Show-UpdateSummary -ReportData $summaryTableList
     Stop-OperationTimer -Watch $globalTimer -IsGlobal
   }
 }
 
 
-#------------------------------#
-# GIT PULL UTILITIES FUNCTIONS #
-#------------------------------#
+#--------------------------------------------------------------------------#
+#                        GIT PULL UTILITIES FUNCTIONS                      #
+#--------------------------------------------------------------------------#
+
 ##########---------- Get local repositories information ----------##########
 function Get-RepositoriesInfo {
   ######## DATA DEFINITION ########
@@ -1577,7 +1659,11 @@ function Show-MergeAdvice {
 
   ######## GUARD CLAUSE : DEV BRANCH NOT FOUND ########
   if (-not $devBranch) {
-    if ($DryRun) { return $false }
+    if ($DryRun) {
+      return $false
+    }
+
+    return
   }
 
   ######## LOGIC CHECK ########
@@ -1837,6 +1923,88 @@ function Show-MainSeparator {
   Write-Host ""
 }
 
+##########---------- Display update summary table ----------##########
+function Show-UpdateSummary {
+  param (
+    [array]$ReportData
+  )
+
+  # If no data, we don't do anything
+  if (-not $ReportData -or $ReportData.Count -eq 0) { return }
+
+  Show-MainSeparator
+
+  # Helper called to center table title nicely
+  $title = "📊 UPDATE SUMMARY REPORT 📊"
+  $padding = Get-CenteredPadding -RawMessage $title
+
+  # Display table title
+  Write-Host -NoNewline $padding
+  Write-Host $title -ForegroundColor Cyan
+  Write-Host ""
+
+  ######## TABLE CENTERING ########
+  $tableOuterPadding = " " * 8
+
+  # Headers (manual format for color control)
+  Write-Host -NoNewline $tableOuterPadding
+  Write-Host -NoNewline "Repository              " -ForegroundColor White -BackgroundColor DarkGray
+  Write-Host -NoNewline "         Status         " -ForegroundColor White -BackgroundColor DarkGray
+  Write-Host -NoNewline "    Duration    " -ForegroundColor White -BackgroundColor DarkGray
+  Write-Host ""
+
+  # Loop on results
+  foreach ($item in $ReportData) {
+    # Icon Definition + Color
+    $statusText = $item.Status
+    $statusColor = "White"
+
+    switch ($item.Status) {
+      "Updated"         { $statusText = "✅ Updated";         $statusColor = "Green" }
+      "Already-Updated" { $statusText = "✨ Already Updated"; $statusColor = "DarkCyan" }
+      "Skipped"         { $statusText = "⏩ Skipped";         $statusColor = "DarkYellow" }
+      "Ignored"         { $statusText = "🙈 Ignored";         $statusColor = "Magenta" }
+      "Failed"          { $statusText = "❌ Failed";          $statusColor = "Red" }
+    }
+
+    ######## STATUS CENTERING (Width 24) ########
+    $statLen = $statusText.Length
+    # Manual adjustment for emojis that count double on screen
+    if ($statusText -match "✅|✨|⏩|🙈|❌") {
+      $statLen += 1
+    }
+
+    $padStatLeft = [math]::Max(0, [int]((24 - $statLen) / 2))
+    $padStatStr = " " * $padStatLeft
+
+
+    ######## DURATION CENTERING (Width 16) ########
+    $timeLen = $item.Time.Length
+    $padTimeLeft = [math]::Max(0, [int]((16 - $timeLen) / 2))
+    $padTimeStr = " " * $padTimeLeft
+
+    ######## OVERALL MARGIN ########
+    Write-Host -NoNewline $tableOuterPadding
+
+    ######## COLUMN 1 (Width 24) ########
+    Write-Host -NoNewline ("{0,-24}" -f $item.Repo) -ForegroundColor Cyan
+
+    ######## COLUMN 2 (Width 24) ########
+    Write-Host -NoNewline $padStatStr
+    Write-Host -NoNewline $statusText -ForegroundColor $statusColor
+
+    # Calculating the remaining padding to align next column
+    $padStatRightLen = 24 - $padStatLeft - $statLen
+    if ($padStatRightLen -gt 0) {
+      Write-Host -NoNewline (" " * $padStatRightLen)
+    }
+
+    ######## COLUMN 3 (Width 16) ########
+    Write-Host -NoNewline $padTimeStr
+    Write-Host $item.Time -ForegroundColor Magenta
+  }
+}
+
 ##########---------- Start a stopwatch timer ----------##########
 function Start-OperationTimer {
   return [System.Diagnostics.Stopwatch]::StartNew()
@@ -1891,6 +2059,7 @@ function Stop-OperationTimer {
     $paddingStr = Get-CenteredPadding -RawMessage $msg
 
     # Display repository timer
+    Write-Host ""
     Write-Host -NoNewline $paddingStr
     Write-Host -NoNewline "⏱️ "
     Write-Host -NoNewline "$repoName" -ForegroundColor white -BackgroundColor DarkBlue

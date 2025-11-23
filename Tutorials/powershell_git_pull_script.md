@@ -72,7 +72,9 @@ function gpull {
   [CmdletBinding()]
   param (
     # Force repository information reloading
-    [switch]$RefreshCache
+    [switch]$RefreshCache,
+    # Optional parameter to update only one repository
+    [string]$Name
   )
 
   ######## GUARD CLAUSE : GIT AVAILABILITY ########
@@ -81,6 +83,9 @@ function gpull {
 
     return
   }
+
+  ######## START TIMER ########
+  $stopWatch = Start-OperationTimer
 
   ######## CACHE MANAGEMENT ########
   # If cache doesn't exist or if a refresh is forced
@@ -109,19 +114,26 @@ function gpull {
 
   ######## DATA RETRIEVAL ########
   # Retrieve repositories information from cache
-  $reposInfo = $Global:GPullCache.ReposInfo
+  $reposInfo  = $Global:GPullCache.ReposInfo
 
   $reposOrder = $reposInfo.Order
-  $repos = $reposInfo.Paths
-  $username = $reposInfo.Username
-  $token = $reposInfo.Token
+  $repos      = $reposInfo.Paths
+  $username   = $reposInfo.Username
+  $token      = $reposInfo.Token
+
+  ######## LAUNCH SCRIPT FOR A SINGLE REPO ########
+  $reposToProcess = Get-RepoListToProcess -FullList $reposOrder -TargetName $Name
+  # If helper returns `$null` (repo not found), we stop everything
+  if ($null -eq $reposToProcess) {
+    return
+  }
 
   # Flag initialization
   $isFirstRepo = $true
 
   ######## REPOSITORY ITERATION ########
   # Iterate over each repository in the defined order
-  foreach ($repoName in $reposOrder) {
+  foreach ($repoName in $reposToProcess) {
     $repoPath = $repos[$repoName]
 
     ######## UI : SEPARATOR MANAGEMENT ########
@@ -344,6 +356,9 @@ function gpull {
     # Return to home directory
     Set-Location -Path $HOME
   }
+
+  ######## STOP TIMER & DISPLAY ########
+  Stop-OperationTimer -Watch $stopWatch
 }
 
 
@@ -448,6 +463,38 @@ function Get-RepositoriesInfo {
     Token = $gitHubToken
     Order = $reposOrder
     Paths = $repos
+  }
+}
+
+##########---------- Filter repository list (All vs Single) ----------##########
+function Get-RepoListToProcess {
+  param (
+    [array]$FullList,
+    [string]$TargetName
+  )
+
+  # No optional parameters, return full list
+  if ([string]::IsNullOrWhiteSpace($TargetName)) {
+    return $FullList
+  }
+
+  # Name specified, check if it exists (case-insensitive)
+  if ($FullList -contains $TargetName) {
+    Write-Host "💩 Update targeted on single repository 💩" -ForegroundColor Cyan
+
+    Show-Separator -Length 80 -ForegroundColor DarkGray
+    return @($TargetName)
+  }
+
+  # Name not found
+  else {
+    Write-Host -NoNewline "⚠️ Repository" -ForegroundColor Red
+    Write-Host -NoNewline "`"$($TargetName)`"" -ForegroundColor Magenta
+    Write-Host " not found in your configuration list ! ⚠️" -ForegroundColor Red
+
+    Show-Separator -Length 80 -ForegroundColor DarkGray
+
+    return $null
   }
 }
 
@@ -1115,9 +1162,9 @@ function Invoke-NewBranchTracking {
 
       if ($wantToDelete) {
         ######## STEP 2 : DOUBLE CONFIRMATION ########
-        Write-Host -NoNewline "💀 ARE YOU SURE ? THIS ACTION IS IRREVERSIBLE ! 💀" -ForegroundColor Red
-        Write-Host "Perhaps you are near to delete remote branch of one of your team's member !" -ForegroundColor Red
-        Write-Host "Confirm deletion of " -ForegroundColor Magenta
+        Write-Host "💀 ARE YOU SURE ? THIS ACTION IS IRREVERSIBLE ! 💀" -ForegroundColor Red
+        Write-Host "Maybe you are near to delete remote branch of one of your team's member..." -ForegroundColor Red
+        Write-Host -NoNewline "Confirm deletion of " -ForegroundColor Magenta
         Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
         Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
 
@@ -1629,6 +1676,38 @@ function Show-Separator {
   ######## STANDARD DISPLAY ########
   # Otherwise (default behavior), display with foreground color only
   Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor
+}
+
+##########---------- Start a stopwatch timer ----------##########
+function Start-OperationTimer {
+  return [System.Diagnostics.Stopwatch]::StartNew()
+}
+
+##########---------- Stop timer and display elapsed time ----------##########
+function Stop-OperationTimer {
+  param (
+    [System.Diagnostics.Stopwatch]$Watch
+  )
+
+  $Watch.Stop()
+  $time = $Watch.Elapsed
+
+  Write-Host ""
+  Write-Host -NoNewline "     " -ForegroundColor DarkGray
+  Show-Separator -NoNewline -Length 70 -ForegroundColor DarkGray -BackgroundColor Gray
+  Write-Host "     " -ForegroundColor DarkGray
+  Write-Host ""
+
+  Write-Host -NoNewline (" " * 28 + "✨ Completed in ") -ForegroundColor Green
+
+  # Formatting (minutes/seconds or just seconds)
+  if ($time.TotalMinutes -ge 1) {
+    Write-Host -NoNewline "$($time.ToString("mm'm 'ss's'"))" -ForegroundColor Magenta
+  }
+  else {
+    Write-Host -NoNewline "$($time.ToString("ss's'"))" -ForegroundColor Magenta
+  }
+  Write-Host " ✨" -ForegroundColor Green
 }
 ```
 

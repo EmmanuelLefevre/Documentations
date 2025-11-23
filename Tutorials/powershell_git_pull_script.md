@@ -1094,9 +1094,9 @@ function Invoke-NewBranchTracking {
         continue
       }
 
-      Write-Host -NoNewline "☁️ You don't want to pull " -ForegroundColor DarkYellow
+      Write-Host -NoNewline "ℹ️ You decided not to track " -ForegroundColor DarkYellow
       Write-Host -NoNewline "$localBranchName" -ForegroundColor Magenta
-      Write-Host ", perhaps because this branch is obsolete ?" -ForegroundColor DarkYellow
+      Write-Host ". This branch is forsaken ?" -ForegroundColor DarkYellow
 
       ######## STEP 1 : REMOTE DELETION ########
       Write-Host -NoNewline "🗑️ Delete remote branch " -ForegroundColor Magenta
@@ -1110,7 +1110,7 @@ function Invoke-NewBranchTracking {
         ######## STEP 2 : DOUBLE CONFIRMATION ########
         Write-Host -NoNewline "💀 ARE YOU SURE ? THIS ACTION IS IRREVERSIBLE ! 💀" -ForegroundColor Red
         Write-Host "Perhaps you are near to delete remote branch of one of your team's member !" -ForegroundColor Red
-        Write-Host "Confirm delete " -ForegroundColor Magenta
+        Write-Host "Confirm deletion of " -ForegroundColor Magenta
         Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
         Write-Host -NoNewline " ? (Y/n): " -ForegroundColor Magenta
 
@@ -1587,7 +1587,7 @@ function Wait-ForUserConfirmation {
     }
 
     # If invalid input, loop again
-    Write-Host "⚠️ Invalid entry ! Please type 'y' or 'n'" -ForegroundColor DarkYellow
+    Write-Host "⚠️ Invalid entry... Please type 'y' or 'n' !" -ForegroundColor DarkYellow
     Write-Host -NoNewline "Try again (Y/n): " -ForegroundColor Magenta
   }
 }

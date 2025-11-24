@@ -1762,7 +1762,7 @@ function Show-StashWarning {
   if ($stashCheck) {
     Write-Host -NoNewline "⚠️ WARNING : There are stashes on branch " -ForegroundColor Red
     Write-Host -NoNewline "$BranchName" -ForegroundColor Magenta
-    Write-Host -NoNewline " ⚠️" -ForegroundColor Red
+    Write-Host " ⚠️" -ForegroundColor Red
 
     $stashCheck | ForEach-Object {
       Write-Host "  - $($_.Line.Trim())" -ForegroundColor DarkCyan

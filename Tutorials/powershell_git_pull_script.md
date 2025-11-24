@@ -497,7 +497,8 @@ function Get-RepositoriesInfo {
     "ReplicaMySQL",
     "Schemas",
     "ScrapMate",
-    "Soutenances"
+    "Soutenances",
+    "Test"
   )
 
   # Dictionary containing local repositories path
@@ -519,6 +520,7 @@ function Get-RepositoriesInfo {
     "Schemas"                = "$env:USERPROFILE\Desktop\Schemas"
     "ScrapMate"              = "$env:USERPROFILE\Desktop\Projets\ScrapMate"
     "Soutenances"            = "$env:USERPROFILE\Desktop\Soutenances"
+    "Test"                   = "$env:USERPROFILE\Desktop\Projets\Test"
   }
 
   # Error message templates
@@ -664,7 +666,7 @@ function Get-RepoListToProcess {
     # Display message
     Write-Host -NoNewline $paddingStr
     Write-Host -NoNewline "⚠️ Repository " -ForegroundColor Red
-    Write-Host -NoNewline "`"$($TargetName)`"" -ForegroundColor Magenta
+    Write-Host -NoNewline "`"$TargetName`"" -ForegroundColor Magenta
     Write-Host " not found in your configuration list ! ⚠️" -ForegroundColor Red
 
     return $null
@@ -1140,6 +1142,7 @@ function Invoke-BranchUpdateStrategy {
   ######## RESULT FEEDBACK ########
   switch ($pullStatus) {
     'Success' {
+      Write-Host -NoNewline "  => "
       Write-Host -NoNewline "$LocalBranch" -ForegroundColor Red
       Write-Host " successfully updated ✅" -ForegroundColor Green
 
@@ -1216,7 +1219,7 @@ function Show-LatestCommitMessage {
   # One commit
   if ($newCommits.Count -eq 1) {
     Write-Host -NoNewline "Commit message : " -ForegroundColor Magenta
-    Write-Host "  - `"$($newCommits[0])`"" -ForegroundColor Cyan
+    Write-Host "  - `"$newCommits[0]`"" -ForegroundColor Cyan
     return
   }
 
@@ -1347,6 +1350,7 @@ function Invoke-NewBranchTracking {
 
       # Check if branch creation worked
       if ($LASTEXITCODE -eq 0) {
+        Write-Host -NoNewline "  => "
         Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
         Write-Host " successfully pulled ✅" -ForegroundColor Green
       }
@@ -1395,16 +1399,15 @@ function Invoke-NewBranchTracking {
         $isSure = Wait-ForUserConfirmation
 
         if ($isSure) {
-          Write-Host -NoNewline "🔥 Removal of " -ForegroundColor Magenta
-          Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
-          Write-Host "..." -ForegroundColor Magenta
+          Write-Host "  🔥 Removal of $localBranchName..." -ForegroundColor Magenta
 
           git push origin --delete $localBranchName 2>&1 | Out-Null
 
           # Check if branch deletion worked
           if ($LASTEXITCODE -eq 0) {
-            Write-Host -NoNewline "☁️ $localBranchName" -ForegroundColor Magenta
-            Write-Host " successfully deleted from server" -ForegroundColor Green
+            Write-Host -NoNewline "  => "
+            Write-Host -NoNewline "$localBranchName" -ForegroundColor Magenta
+            Write-Host " successfully deleted from server ✅" -ForegroundColor Green
           }
           # If branch deletion failed
           else {
@@ -1479,15 +1482,14 @@ function Invoke-OrphanedCleanup {
     $wantToDelete = Wait-ForUserConfirmation
 
     if ($wantToDelete) {
-      Write-Host -NoNewline "🔥 Removal of " -ForegroundColor Magenta
-      Write-Host -NoNewline "$orphaned" -ForegroundColor Red
-      Write-Host " branch..." -ForegroundColor Magenta
+      Write-Host "  🔥 Removal of $orphaned..." -ForegroundColor Magenta
 
       # Attempt secure removal
       git branch -d $orphaned *> $null
 
       # Check if deletion worked
       if ($LASTEXITCODE -eq 0) {
+        Write-Host -NoNewline "  => "
         Write-Host -NoNewline "$orphaned" -ForegroundColor Red
         Write-Host " successfully deleted ✅" -ForegroundColor Green
         if ($orphaned -eq $OriginalBranch) {
@@ -1513,6 +1515,7 @@ function Invoke-OrphanedCleanup {
 
           # Check if forced deletion worked
           if ($LASTEXITCODE -eq 0) {
+            Write-Host -NoNewline "  => "
             Write-Host -NoNewline "$orphaned" -ForegroundColor Red
             Write-Host " successfully deleted ✅" -ForegroundColor Green
 
@@ -1604,15 +1607,14 @@ function Invoke-MergedCleanup {
     $wantToDelete = Wait-ForUserConfirmation
 
     if ($wantToDelete) {
-      Write-Host -NoNewline "🔥 Removal of " -ForegroundColor Magenta
-      Write-Host -NoNewline "$merged" -ForegroundColor Red
-      Write-Host " branch..." -ForegroundColor Magenta
+      Write-Host "  🔥 Removal of $merged..." -ForegroundColor Magenta
 
       # Secure removal (guaranteed to work because we checked --merged)
       git branch -d $merged *> $null
 
       # Check if deletion worked
       if ($LASTEXITCODE -eq 0) {
+        Write-Host -NoNewline "  => "
         Write-Host -NoNewline "$merged" -ForegroundColor Red
         Write-Host " successfully deleted ✅" -ForegroundColor Green
 

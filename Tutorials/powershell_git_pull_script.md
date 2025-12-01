@@ -284,6 +284,27 @@ function gpull {
           break
         }
 
+        ######## STRATEGY : BOT BRANCHES (OUTPUT) ########
+        $botSyncStatus = Invoke-BotBranchSync -BranchName $branch.Local
+
+        if ($botSyncStatus -ne 'NotBot') {
+          if ($botSyncStatus -eq 'Updated') {
+            $summaryTableCurrentStatus = "Updated"
+          }
+          else {
+            $summaryTableCurrentStatus = "Failed"
+            $allBranchesWerePulled = $false
+          }
+
+          # If not last branch, display separator
+          if ($i -lt $branchCount) {
+            Show-Separator -Length 80 -ForegroundColor DarkGray
+          }
+
+          # Jump to next branch in list
+          continue
+        }
+
         ######## GUARD CLAUSE : LOCAL CONFLICTS ########
         if (-not (Test-WorkingTreeClean -BranchName $branch.Local)) {
           if ($summaryTableCurrentStatus -ne "Failed") {
@@ -995,6 +1016,34 @@ function Invoke-SafeCheckout {
   Write-Host "$TargetBranch" -ForegroundColor Magenta
 
   return $true
+}
+
+##########---------- Force sync for bot-managed branches (e.g. output) ----------##########
+function Invoke-BotBranchSync {
+  param (
+    [string]$BranchName
+  )
+
+  # Branches list managed by robots
+  $botBranches = @("output")
+
+  # If branch isn't in list, nothing is done
+  if ($botBranches -notcontains $BranchName) {
+    return 'NotBot'
+  }
+
+  # If it's a bot branch, we force synchronization.
+  Write-Host -NoNewline "🤖 Bot branch detected. Forcing sync... " -ForegroundColor Magenta
+
+  # We force a reset on the server version (upstream)
+  git reset --hard "@{u}" *> $null
+
+  if ($LASTEXITCODE -eq 0) {
+    return 'Updated'
+  }
+  else {
+    return 'Failed'
+  }
 }
 
 ##########---------- Check for local modifications (Staged/Unstaged) ----------##########

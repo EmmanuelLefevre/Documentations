@@ -360,29 +360,39 @@ function gpull {
         $newBranchesToTrack = Get-NewRemoteBranches
 
         ######## USER PERMISSION TO PULL NEW BRANCHES ########
-        Invoke-NewBranchTracking -NewBranches $newBranchesToTrack
+        if (Invoke-NewBranchTracking -NewBranches $newBranchesToTrack) {
+          $summaryTableCurrentStatus = "Failed"
+        }
 
         # Track whether user's branch has been deleted
         [bool]$originalBranchWasDeleted = $false
 
         ######## CLEANUP : ORPHANED BRANCHES ########
         # Ask to clean branches that no longer exist on remote
-        if (Invoke-OrphanedCleanup -OriginalBranch $originalBranch) {
+        $orphanResult = Invoke-OrphanedCleanup -OriginalBranch $originalBranch
+        if ($orphanResult.OriginalDeleted) {
           $originalBranchWasDeleted = $true
+        }
+        if ($orphanResult.HasError) {
+          $summaryTableCurrentStatus = "Failed"
         }
 
         ######## CLEANUP : MERGED BRANCHES ########
         # Ask to clean branches that are already merged into main/dev
-        if (Invoke-MergedCleanup -OriginalBranch $originalBranch) {
+        $mergedResult = Invoke-MergedCleanup -OriginalBranch $originalBranch
+        if ($mergedResult.OriginalDeleted) {
           $originalBranchWasDeleted = $true
+        }
+        if ($mergedResult.HasError) {
+          $summaryTableCurrentStatus = "Failed"
         }
 
         ######## UI : PRE-CALCULATION ########
         $mergeWillDisplayMessage   = Show-MergeAdvice -DryRun
         $restoreWillDisplayMessage = Restore-UserLocation -RepoIsSafe $repoIsInSafeState `
-                                                -OriginalBranch $originalBranch `
-                                                -OriginalWasDeleted $originalBranchWasDeleted `
-                                                -DryRun
+                                                          -OriginalBranch $originalBranch `
+                                                          -OriginalWasDeleted $originalBranchWasDeleted `
+                                                          -DryRun
 
         ######## SEPARATOR MANAGEMENT ########
         # If one OR other
@@ -1294,7 +1304,7 @@ function Invoke-NewBranchTracking {
   ######## GUARD CLAUSE : NO NEW BRANCHES ########
   # If the list is empty or null, nothing to do
   if (-not $NewBranches -or $NewBranches.Count -eq 0) {
-    return
+    return $false
   }
 
   ######## CONFIGURATION ########
@@ -1304,6 +1314,7 @@ function Invoke-NewBranchTracking {
   Show-Separator -Length 80 -ForegroundColor DarkGray
 
   # Flag initialization
+  $hasError = $false
   $isFirstLoop = $true
 
   ######## USER INTERACTION LOOP ########
@@ -1358,6 +1369,8 @@ function Invoke-NewBranchTracking {
       else {
         Write-Host -NoNewline "$localBranchName" -ForegroundColor Red
         Write-Host "⚠️ New creation branch has failed ! ⚠️" -ForegroundColor Red
+
+        $hasError = $true
       }
     }
 
@@ -1413,6 +1426,8 @@ function Invoke-NewBranchTracking {
           else {
             Write-Host -NoNewline "⚠️ Failed to delete " -ForegroundColor Red
             Write-Host "origin/$localBranchName ⚠️" -ForegroundColor Magenta
+
+            $hasError = $true
           }
         }
         else {
@@ -1428,6 +1443,7 @@ function Invoke-NewBranchTracking {
       }
     }
   }
+  return $hasError
 }
 
 ##########---------- Interactive cleanup of orphaned (gone) branches ----------##########
@@ -1466,9 +1482,10 @@ function Invoke-OrphanedCleanup {
 
   Write-Host "🧹 Cleaning up orphaned local branches..." -ForegroundColor DarkYellow
 
-  $originalWasDeleted = $false
 
-    # Flag initialization
+  # Flags initialization
+  $originalWasDeleted = $false
+  $hasError = $false
   $isFirstBranch = $true
 
   ######## INTERACTIVE CLEANUP LOOP ########
@@ -1537,6 +1554,8 @@ function Invoke-OrphanedCleanup {
           else {
             Write-Host -NoNewline "⚠️ Unexpected error. Failure to remove " -ForegroundColor Red
             Write-Host "$orphaned ⚠️" -ForegroundColor Magenta
+
+            $hasError = $true
           }
         }
         # User refuses forced deletion
@@ -1549,7 +1568,10 @@ function Invoke-OrphanedCleanup {
     }
   }
 
-  return $originalWasDeleted
+  return [PSCustomObject]@{
+    OriginalDeleted = $originalWasDeleted
+    HasError        = $hasError
+  }
 }
 
 ##########---------- Interactive cleanup of fully merged branches ----------##########
@@ -1600,9 +1622,10 @@ function Invoke-MergedCleanup {
 
   Write-Host "🧹 Cleaning up local branches that have already being merged..." -ForegroundColor DarkYellow
 
-  $originalWasDeleted = $false
 
-  # Flag initialization
+  # Flags initialization
+  $originalWasDeleted = $false
+  $hasError = $false
   $isFirstBranch = $true
 
   ######## INTERACTIVE CLEANUP LOOP ########
@@ -1646,11 +1669,16 @@ function Invoke-MergedCleanup {
       else {
         Write-Host -NoNewline "⚠️ Unexpected error. Failure to remove " -ForegroundColor Red
         Write-Host "$merged ⚠️" -ForegroundColor Magenta
+
+        $hasError = $true
       }
     }
   }
 
-  return $originalWasDeleted
+  return [PSCustomObject]@{
+    OriginalDeleted = $originalWasDeleted
+    HasError        = $hasError
+  }
 }
 
 ##########---------- Check for unmerged commits in main from dev ----------##########

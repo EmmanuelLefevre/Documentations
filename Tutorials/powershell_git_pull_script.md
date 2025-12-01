@@ -1468,8 +1468,17 @@ function Invoke-OrphanedCleanup {
 
   $originalWasDeleted = $false
 
+    # Flag initialization
+  $isFirstBranch = $true
+
   ######## INTERACTIVE CLEANUP LOOP ########
   foreach ($orphaned in $branchesToClean) {
+    if (-not $isFirstBranch) {
+      Show-Separator -Length 80 -ForegroundColor DarkGray
+    }
+
+    $isFirstBranch = $false
+
     # Helper called for warn about stash on branch
     Show-StashWarning -BranchName $orphaned
 
@@ -1589,17 +1598,26 @@ function Invoke-MergedCleanup {
 
   Show-Separator -Length 80 -ForegroundColor DarkGray
 
-  Write-Host "🧹 Cleaning up branches that have already being merged..." -ForegroundColor DarkYellow
+  Write-Host "🧹 Cleaning up local branches that have already being merged..." -ForegroundColor DarkYellow
 
   $originalWasDeleted = $false
 
+  # Flag initialization
+  $isFirstBranch = $true
+
   ######## INTERACTIVE CLEANUP LOOP ########
   foreach ($merged in $branchesToClean) {
+    if (-not $isFirstBranch) {
+      Show-Separator -Length 80 -ForegroundColor DarkGray
+    }
+
+    $isFirstBranch = $false
+
     # Helper called for warn about stash on branch
     Show-StashWarning -BranchName $merged
 
     # Ask user
-    Write-Host -NoNewline "Branch " -ForegroundColor Magenta
+    Write-Host -NoNewline "Local branch " -ForegroundColor Magenta
     Write-Host -NoNewline "$merged" -ForegroundColor Red
     Write-Host -NoNewline " is already merged. 🗑️ Delete ? (Y/n): " -ForegroundColor Magenta
 
@@ -1610,7 +1628,7 @@ function Invoke-MergedCleanup {
       Write-Host "  🔥 Removal of $merged..." -ForegroundColor Magenta
 
       # Secure removal (guaranteed to work because we checked --merged)
-      git branch -d $merged *> $null
+      git branch -D $merged *> $null
 
       # Check if deletion worked
       if ($LASTEXITCODE -eq 0) {
@@ -1756,16 +1774,45 @@ function Show-StashWarning {
     [string]$BranchName
   )
 
-  # Check if this branch has stash files
-  $stashCheck = git stash list | Select-String -Pattern "On ${BranchName}:"
+  # Retrieves raw list as text
+  $stashList = git stash list --no-color
 
-  if ($stashCheck) {
+  # Filter to keep only lines relevant to our branch
+  $branchStashes = $stashList | Where-Object { $_ -match "On ${BranchName}:" }
+
+  if ($branchStashes) {
     Write-Host -NoNewline "⚠️ WARNING : There are stashes on branch " -ForegroundColor Red
     Write-Host -NoNewline "$BranchName" -ForegroundColor Magenta
     Write-Host " ⚠️" -ForegroundColor Red
 
-    $stashCheck | ForEach-Object {
-      Write-Host "  - $($_.Line.Trim())" -ForegroundColor DarkCyan
+    foreach ($line in $branchStashes) {
+      # Display stash line
+      Write-Host "  - $line" -ForegroundColor DarkCyan
+
+      # Extract stash Id with regex (ex: stash@{0})
+      if ($line -match "stash@\{\d+\}") {
+        $stashId = $matches[0].Trim()
+
+        # Get files list in this stash
+        $files = @(git stash show --name-only --include-untracked $stashId 2>&1)
+
+        # If command fails (old Git), we try again without untracked option
+        if ($LASTEXITCODE -ne 0) {
+          $files = @(git stash show --name-only $stashId 2>&1)
+        }
+
+        if ($files.Count -gt 0) {
+          foreach ($file in $files) {
+            # Converts to string to be safe (in case it's an error object)
+            $fileString = "$file".Trim()
+
+            if (-not [string]::IsNullOrWhiteSpace($fileString)) {
+              # Display files
+              Write-Host "    $fileString" -ForegroundColor Gray
+            }
+          }
+        }
+      }
     }
 
     Write-Host "ℹ️ Deleting branch doesn't delete stash but you will lose context of it" -ForegroundColor Magenta

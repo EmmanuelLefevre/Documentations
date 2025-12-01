@@ -257,6 +257,9 @@ function gpull {
       # Track if any branch needed a pull
       $anyBranchNeededPull = $false
 
+      # Track if ALL branches were processed successfully (no skip, no fail)
+      $allBranchesWerePulled = $true
+
       # Separator control
       $branchCount = $sortedBranchesToUpdate.Count
       $i = 0
@@ -275,6 +278,7 @@ function gpull {
                                       -OriginalBranch $originalBranch)) {
           $repoIsInSafeState = $false
           $summaryTableCurrentStatus = "Failed"
+          $allBranchesWerePulled = $false
 
           # Stop processing branches for this repo (fatal error)
           break
@@ -286,6 +290,8 @@ function gpull {
             $summaryTableCurrentStatus = "Skipped"
           }
 
+          $allBranchesWerePulled = $false
+
           # Jump to next branch in list
           continue
         }
@@ -295,6 +301,8 @@ function gpull {
           if ($summaryTableCurrentStatus -ne "Failed") {
             $summaryTableCurrentStatus = "Skipped"
           }
+
+          $allBranchesWerePulled = $false
 
           # Jump to next branch in list
           continue
@@ -333,9 +341,19 @@ function gpull {
         elseif ($updateStatus -eq 'Failed') {
           $summaryTableCurrentStatus = "Failed"
           $repoIsInSafeState = $false
+          $allBranchesWerePulled = $false
 
           # Stop processing branches for this repo
           break
+        }
+        # Update Skipped (User said No)
+        elseif ($updateStatus -eq 'Skipped') {
+          $allBranchesWerePulled = $false
+
+          # Update status of summary table
+          if ($summaryTableCurrentStatus -ne "Failed") {
+            $summaryTableCurrentStatus = "Skipped"
+          }
         }
 
         # If execution was successful (Success or Skipped) and not last one, display separator
@@ -349,7 +367,9 @@ function gpull {
       if ($repoIsInSafeState) {
         ######## STATUS REPORT ########
         # If no branch needed pull and there was more than one branch to check
-        if (($anyBranchNeededPull -eq $false) -and ($sortedBranchesToUpdate.Count -gt 1)) {
+        if (($anyBranchNeededPull -eq $false) -and
+            ($sortedBranchesToUpdate.Count -gt 1) -and
+            ($allBranchesWerePulled -eq $true)) {
           Show-Separator -Length 80 -ForegroundColor DarkGray
 
           Write-Host "All branches are being updated 🤙" -ForegroundColor Green
@@ -629,7 +649,7 @@ function Get-RepositoriesInfo {
   # Display message
   Write-Host -NoNewline $paddingStr
   Write-Host $msg -ForegroundColor Green
-  Show-Separator -Length 80 -ForegroundColor DarkBlue
+  Show-Separator -Length 80 -ForegroundColor Cyan
   Write-Host ""
 
   return @{
@@ -2128,7 +2148,7 @@ function Stop-OperationTimer {
   }
   ######## REPOSITORY TIME ########
   else {
-    Show-Separator -Length 80 -ForegroundColor DarkGray
+    Show-Separator -Length 80 -ForegroundColor DarkBlue
 
     # Helper called to center message nicely
     $msg = "⏱️ $RepoName updated in $timeString ⏱️"

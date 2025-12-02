@@ -68,13 +68,13 @@ Write-Host ""
 Read-Host -Prompt "Press Enter to close... "
 ```
 
-⚠️ I you don't use a personal token to request the Github API this script will not work. To set up an identification token on the Github API and environements variables, go to the next "Bonus"" section...
+9. ⚠️ I you don't use a personal token to request the Github API this script will not work. To set up an identification token on the Github API and environements variables, go to the next "Bonus"" section...
 
 ![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script.png)
 
 Request the github api with a personnal token to increase the rate limit and be able to update a private repository...
 
-9. On github.com:
+- On github.com:
 
 Settings > Developer settings > Personal access tokens > Tokens (classic) > Generate new token > Generate new token (classic)
 
@@ -85,7 +85,7 @@ Settings > Developer settings > Personal access tokens > Tokens (classic) > Gene
 
 ⚠️ Be careful to copy your token because it will no longer be visible afterwards!
 
-10. On windows:
+- On windows:
 
 Setup your username and token in the environment variables.
 ![First Step](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_config_environement_variable_step_1.png)  
@@ -94,9 +94,9 @@ Setup your username and token in the environment variables.
 
 Repeat operation for the username...  
 
-11. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
+10. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
 
-12. Copy/Paste "gpull" function and his utilities functions inside.
+11. Copy/Paste "gpull" function and his utilities functions inside.
 
 ```powershell
 #--------------------------------------------------------------------------#

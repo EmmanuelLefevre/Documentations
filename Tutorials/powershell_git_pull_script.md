@@ -1147,6 +1147,14 @@ function Invoke-BranchUpdateStrategy {
     [string]$RepoName
   )
 
+  ######## GUARD CLAUSE : INVALID REFERENCES ########
+  if (-not (git rev-parse --verify $LocalBranch 2>$null) -or
+    -not (git rev-parse --verify $RemoteBranch 2>$null)) {
+    Write-Host "⚠️ Unable to read local/remote references for $LocalBranch ! ⚠️" -ForegroundColor Red
+
+    return 'Failed'
+  }
+
   # Default state
   $pullStatus = 'Skipped'
 
@@ -1255,20 +1263,27 @@ function Show-LatestCommitsMessages {
   $localHash  = git rev-parse $LocalBranch 2>$null
   $remoteHash = git rev-parse $RemoteBranch 2>$null
 
-  ######## GUARD CLAUSE : INVALID REFERENCES ########
-  if (-not $localHash -or -not $remoteHash) {
-    Write-Host "⚠️ Unable to read local/remote references ! ⚠️" -ForegroundColor Red
-
-    return
-  }
-
   ######## DATA ANALYSIS : ANCESTRY ########
   $isLocalBehind  = git merge-base --is-ancestor $localHash $remoteHash 2>$null
   $isRemoteBehind = git merge-base --is-ancestor $remoteHash $localHash 2>$null
 
-  # Divergence detection (detect rebase/push --force)
+  # Divergence detection
   if (-not $isLocalBehind -and -not $isRemoteBehind) {
-    Write-Host "⚠️ History rewritten or divergence detected... A pull can trigger a rebase or a reset ! ⚠️" -ForegroundColor Red
+    # Calculate exact difference
+    $counts = git rev-list --left-right --count "$LocalBranch...$RemoteBranch" 2>$null
+    $ahead = 0
+    $behind = 0
+
+    if ($counts -match '(\d+)\s+(\d+)') {
+      $ahead  = $Matches[1]
+      $behind = $Matches[2]
+    }
+
+    Write-Host "🔀 Diverged History detected !" -ForegroundColor DarkYellow
+    Write-Host -NoNewline "   └─ Your branch is ahead by " -ForegroundColor Magenta
+    Write-Host -NoNewline "$ahead" -ForegroundColor DarkCyan
+    Write-Host -NoNewline " and behind by " -ForegroundColor Magenta
+    Write-Host "$behind" -ForegroundColor DarkCyan
   }
 
   # Get new commits

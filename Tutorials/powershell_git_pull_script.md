@@ -68,7 +68,7 @@ Read-Host -Prompt "Press Enter to close... "
 ```
 10. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
 
-11. Copy/Paste "git_pull" function and his utilities functions inside.
+11. Copy/Paste "gpull" function and his utilities functions inside.
 ```powershell
 #--------------------------------------------------------------------------#
 #                   UPDATE YOUR LOCAL REPOSITORIES                         #

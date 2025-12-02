@@ -44,7 +44,7 @@ wt.exe -p "PowerShell" pwsh.exe -ExecutionPolicy Bypass -File "C:\Users\<UserNam
 
 7. ❤️ Additionally give the shortcut a nice icon ❤️
 
-💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this.
+💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this (or the Git one).
 
 Right click on shortcut > Properties > Change icon
 Icons paths:

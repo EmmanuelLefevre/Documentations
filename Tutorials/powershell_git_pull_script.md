@@ -1,60 +1,81 @@
 # POWERSHELL GIT PULL SCRIPT
 
 ## SOMMAIRE
+
 - [INTRODUCTION](#introduction)
 - [PROCEDURE](#procedure)
-- [BONUS](#bonus)
+- [BONUS](#😍 Bonus 😍)
 
 ## INTRODUCTION
+
 This tutorial shows the step-by-step procedure to create a powershell script (executable using a shortcut button on the user's desktop) allowing you to update your local repositories with a single click. Indeed, when you have several computers, it can be laborious to synchronize your local repositories each one after the other if you have made a modification in one of them.  
 
 ⚠️ This procedure is intended to automate pulls for repositories with only one branch, such as a repository for documentation or configurations.  
 
 👌 Many controls have been added 👌
+
 ## PROCEDURE
+
 1. Get the fully path where PowerShell was installed:
+
 ```shell
 (Get-Command pwsh).Source
 ```
-2. Right click on desktop > "New" > "Shortcut"
 
-3. In the window that opens, enter this line =>
+1. Right click on desktop > "New" > "Shortcut"
+
+1. In the window that opens, enter this line =>
 
 💡 Consider replacing the installation path of your file "run_powershell_git_pull_script.ps1" with yours, it may be different!  
 
 - Windows 10
+
 ```shell
 Start-Process -FilePath "C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1`"" -NoNewWindow -Wait
 ```
+
 ⚠️ Also pay attention to the version of powershell installed if you use Windows 10 ...
 
 - Windows 11
+
 ```shell
 wt.exe -p "PowerShell" pwsh.exe -ExecutionPolicy Bypass -File "C:\Users\<UserName>\Documents\PowerShell\run_powershell_git_pull_script.ps1"
 ```
-4. "Next" button
 
-5. Give the shortcut the name you like.
+1. "Next" button
 
-6. "Finish" button
+1. Give the shortcut the name you like.
 
-7. ❤️ Additionally give the shortcut a nice icon ❤️
+1. "Finish" button
+
+1. ❤️ Additionally give the shortcut a nice icon ❤️
 
 💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this.
 
 Right click on shortcut > Properties > Change icon
 Icons paths:
+
 ```shell
 C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.exe
-```  
+```
+
 ```shell
 C:\Program Files\Git\git-bash.exe
 ```
-8. Create the file "run_powershell_git_pull_script.ps1" in this path:
+
+1. 🧠 You can easily launch script automatically at Windows starts. 🧠
+**Win + R** -> type `shell:startup`  
+Copy (Ctrl+C) the shortcut and paste it in the "Getting Started" folder...  
+Now the script will be launched every time you start your PC 💪
+
+1. Create the file "run_powershell_git_pull_script.ps1" in this path:
+
 ```powershell
 New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_script.ps1" -ItemType File
 ```
-9. Copy/Paste this inside the new file
+
+1. Copy/Paste this inside the new file
+
 ```powershell
 # Load PowerShell Profile
 . "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
@@ -66,10 +87,13 @@ gpull
 Write-Host ""
 Read-Host -Prompt "Press Enter to close... "
 ```
-10. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
 
-11. Copy/Paste "gpull" function and his utilities functions inside.
+1. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
+
+1. Copy/Paste "gpull" function and his utilities functions inside.
+
 ```powershell
+
 #--------------------------------------------------------------------------#
 #                   UPDATE YOUR LOCAL REPOSITORIES                         #
 #--------------------------------------------------------------------------#
@@ -2306,7 +2330,8 @@ Settings > Developer settings > Personal access tokens > Tokens (classic) > Gene
 
 ⚠️ Be careful to copy your token because it will no longer be visible afterwards!
 
-2. On windows:  
+1. On windows:
+
 Setup your username and token in the environment variables.
 ![First Step](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_config_environement_variable_step_1.png)  
 

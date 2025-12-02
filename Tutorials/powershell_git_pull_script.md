@@ -1150,7 +1150,7 @@ function Invoke-BranchUpdateStrategy {
   ######## STRATEGY : AUTO-UPDATE (Main/Master) ########
   if ($LocalBranch -eq "main" -or $LocalBranch -eq "master") {
     Write-Host "⏳ Updating main branch..." -ForegroundColor Magenta
-    Show-LatestCommitMessage -LocalBranch $LocalBranch -RemoteBranch $RemoteBranch -HideHashes
+    Show-LatestCommitsMessages -LocalBranch $LocalBranch -RemoteBranch $RemoteBranch -HideHashes
 
     git pull
 
@@ -1166,7 +1166,7 @@ function Invoke-BranchUpdateStrategy {
   ######## STRATEGY : AUTO-UPDATE (Dev/Develop) ########
   elseif ($LocalBranch -eq "dev" -or $LocalBranch -eq "develop") {
     Write-Host "⏳ Updating develop branch..." -ForegroundColor Magenta
-    Show-LatestCommitMessage -LocalBranch $LocalBranch -RemoteBranch $RemoteBranch -HideHashes
+    Show-LatestCommitsMessages -LocalBranch $LocalBranch -RemoteBranch $RemoteBranch -HideHashes
 
     git pull
 
@@ -1186,7 +1186,7 @@ function Invoke-BranchUpdateStrategy {
     Write-Host -NoNewline "$LocalBranch" -ForegroundColor Red
     Write-Host " has updates." -ForegroundColor Magenta
 
-    Show-LatestCommitMessage -LocalBranch $LocalBranch -RemoteBranch $RemoteBranch -HideHashes
+    Show-LatestCommitsMessages -LocalBranch $LocalBranch -RemoteBranch $RemoteBranch -HideHashes
 
     Write-Host -NoNewline "Pull ? (Y/n): " -ForegroundColor Magenta
 
@@ -1240,7 +1240,7 @@ function Invoke-BranchUpdateStrategy {
 }
 
 ##########---------- Get and show latest commit message ----------##########
-function Show-LatestCommitMessage {
+function Show-LatestCommitsMessages {
   param (
     [string]$LocalBranch,
     [string]$RemoteBranch,
@@ -1302,11 +1302,43 @@ function Show-LatestCommitMessage {
     return
   }
 
-  ######## DISPLAY MULTIPLE COMMITS ########
+  ######## DISPLAY MULTIPLE COMMITS (PAGINATION LOGIC) ########
   # Several commits
   Write-Host "New commits received :" -ForegroundColor Magenta
-  foreach ($commit in $newCommits) {
-    Write-Host "  - `"$commit`"" -ForegroundColor DarkCyan
+
+  # Configuration
+  $displayLimit = 5
+  $totalCommits = $newCommits.Count
+
+  # If total is less or equal to limit, we show everything normally
+  if ($totalCommits -le $displayLimit) {
+    foreach ($commit in $newCommits) {
+      Write-Host "  - `"$commit`"" -ForegroundColor DarkCyan
+    }
+  }
+  # If we have more than limit
+  else {
+    # Display first 5 commits
+    for ($i = 0; $i -lt $displayLimit; $i++) {
+      Write-Host "  - `"$($newCommits[$i])`"" -ForegroundColor DarkCyan
+    }
+
+    # Calculate remaining
+    $remainingCount = $totalCommits - $displayLimit
+
+    # Interactive prompt
+    Write-Host -NoNewline "⚠️ $remainingCount" -ForegroundColor Red
+    Write-Host -NoNewline " more commits ! Show all ? (Y/n): " -ForegroundColor DarkYellow
+
+    # Helper called for a robust response
+    $showAll = Wait-ForUserConfirmation
+
+    if ($showAll) {
+      # Display rest
+      for ($i = $displayLimit; $i -lt $totalCommits; $i++) {
+        Write-Host "  - `"$($newCommits[$i])`"" -ForegroundColor DarkCyan
+      }
+    }
   }
 }
 

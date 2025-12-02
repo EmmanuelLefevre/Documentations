@@ -17,9 +17,11 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 ## PROCEDURE
 
 1. Get the fully path where PowerShell was installed:
+
 ```shell
 (Get-Command pwsh).Source
 ```
+
 2. Right click on desktop > "New" > "Shortcut"
 
 3. In the window that opens, enter this line =>
@@ -27,42 +29,33 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 💡 Consider replacing the installation path of your file "run_powershell_git_pull_script.ps1" with yours, it may be different!  
 
 - Windows 10
+
 ```shell
 Start-Process -FilePath "C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"C:\Users\darka\Documents\PowerShell\run_powershell_git_pull_script.ps1`"" -NoNewWindow -Wait
 ```
+
 ⚠️ Also pay attention to the version of powershell installed if you use Windows 10 ...
 
 - Windows 11
+
 ```shell
 wt.exe -p "PowerShell" pwsh.exe -ExecutionPolicy Bypass -File "C:\Users\<UserName>\Documents\PowerShell\run_powershell_git_pull_script.ps1"
 ```
+
 4. "Next" button
 
 5. Give the shortcut the name you like.
 
 6. "Finish" button
 
-7. ❤️ Additionally give the shortcut a nice icon ❤️
+7. Create the file "run_powershell_git_pull_script.ps1" in this path:
 
-💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this (or the Git one).
-
-Right click on shortcut > Properties > Change icon
-Icons paths:
-```shell
-C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.exe
-```  
-```shell
-C:\Program Files\Git\git-bash.exe
-```
-8. 🧠 You can easily launch script automatically at Windows starts. 🧠  
-**Win + R** -> type `shell:startup`  
-Copy (Ctrl+C) the shortcut and paste it in the "Getting Started" folder...  
-Now the script will be launched every time you start your PC 💪
-9. Create the file "run_powershell_git_pull_script.ps1" in this path:
 ```powershell
 New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_script.ps1" -ItemType File
 ```
-10. Copy/Paste this inside the new file
+
+8. Copy/Paste this inside the new file
+
 ```powershell
 # Load PowerShell Profile
 . "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
@@ -74,9 +67,37 @@ gpull
 Write-Host ""
 Read-Host -Prompt "Press Enter to close... "
 ```
+
+⚠️ I you don't use a personal token to request the Github API this script will not work. To set up an identification token on the Github API and environements variables, go to the next "Bonus"" section...
+
+![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script.png)
+
+Request the github api with a personnal token to increase the rate limit and be able to update a private repository...
+
+9. On github.com:
+
+Settings > Developer settings > Personal access tokens > Tokens (classic) > Generate new token > Generate new token (classic)
+
+- Input "Note": Your token name...
+- Expiration option: "No expiration"
+- Tick checkbox: "repo"
+- Click on "Generate token"
+
+⚠️ Be careful to copy your token because it will no longer be visible afterwards!
+
+10. On windows:
+
+Setup your username and token in the environment variables.
+![First Step](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_config_environement_variable_step_1.png)  
+
+![Second Step](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_config_environement_variable_step_2.png)
+
+Repeat operation for the username...  
+
 11. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
 
 12. Copy/Paste "gpull" function and his utilities functions inside.
+
 ```powershell
 #--------------------------------------------------------------------------#
 #                   UPDATE YOUR LOCAL REPOSITORIES                         #
@@ -2296,33 +2317,28 @@ function Get-CenteredPadding {
 }
 ```
 
-⚠️ I you don't use a personal token to request the Github API this script will not work. To set up an identification token on the Github API and environements variables, go to the next "Bonus"" section...
-
-![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script.png)
-
 ## Bonus
 
-Request the github api with a personnal token to increase the rate limit and be able to update a private repository...
+1. ❤️ Additionally give the shortcut a nice icon ❤️
 
-1. On github.com:  
-Settings > Developer settings > Personal access tokens > Tokens (classic) > Generate new token > Generate new token (classic)
+💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this (or the Git one).
 
-- Input "Note": Your token name...
-- Expiration option: "No expiration"
-- Tick checkbox: "repo"
-- Click on "Generate token"
+Right click on shortcut > Properties > Change icon
+Icons paths:
 
-⚠️ Be careful to copy your token because it will no longer be visible afterwards!
+```shell
+C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.exe
+```
 
-2. On windows:  
-Setup your username and token in the environment variables.
-![First Step](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_config_environement_variable_step_1.png)  
+```shell
+C:\Program Files\Git\git-bash.exe
+```
 
-![Second Step](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_config_environement_variable_step_2.png)
+2. 🧠 You can easily launch script automatically at Windows starts. 🧠
 
-Repeat operation for the username...  
-
-⚠️ You might need to restart your computer in order that the environment variables will be correctly applied.
+**Win + R** -> type `shell:startup`  
+Copy (Ctrl+C) the shortcut and paste it in the "Getting Started" folder...  
+Now the script will be launched every time you start your PC 💪
 
 ***
 

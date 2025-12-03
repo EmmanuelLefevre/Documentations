@@ -2344,8 +2344,7 @@ Now the script will be launched every time you start your PC 💪
 ## Console Application Screens
 
 ![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_2.png)
-
-
+<br><br><br>
 ![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_3.png)
 
 ***

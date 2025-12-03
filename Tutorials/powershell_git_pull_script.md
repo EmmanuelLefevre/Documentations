@@ -2335,7 +2335,7 @@ C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pws
 C:\Program Files\Git\git-bash.exe
 ```
 
-2. 🧠 You can easily launch script automatically at Windows starts. 🧠
+2. 🧠 You can easily launch script automatically at Windows starts 🧠
 
 **Win + R** -> type `shell:startup`  
 Copy (Ctrl+C) the shortcut and paste it in the "Getting Started" folder...  

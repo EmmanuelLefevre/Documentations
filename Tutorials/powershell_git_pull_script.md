@@ -5,18 +5,19 @@
 - [INTRODUCTION](#introduction)
 - [PROCEDURE](#procedure)
 - [BONUS](#bonus)
+- [CONSOLE APPLICATION SCREENS](#console-application-screens)
 
 ## INTRODUCTION
 
-This tutorial shows the step-by-step procedure to create a powershell script (executable using a shortcut button on the user's desktop) allowing you to update your local repositories with a single click. Indeed, when you have several computers, it can be laborious to synchronize your local repositories each one after the other if you have made a modification in one of them.  
+This tutorial shows the step-by-step procedure to create a powershell script (executable using a shortcut button on the user's desktop and launch it automatically at Windows start) allowing you to update your local repositories with a single click. Indeed, when you have several computers, it can be laborious to synchronize your local repositories each one after the other if you have made a modification in one of them.  
 
-⚠️ This procedure is intended to automate pulls for repositories with only one branch, such as a repository for documentation or configurations.  
+⚠️ This procedure is intended to automate pulls for repositories with several branches, such as a repository for documentation or configurations.  
 
 👌 Many controls have been added 👌
 
 ## PROCEDURE
 
-1. Get the fully path where PowerShell was installed:
+1. For Windows 10 get the fully path where PowerShell was installed :
 
 ```shell
 (Get-Command pwsh).Source
@@ -68,11 +69,11 @@ Write-Host ""
 Read-Host -Prompt "Press Enter to close... "
 ```
 
-9. ⚠️ I you don't use a personal token to request the Github API this script will not work. To set up an identification token on the Github API and environements variables, go to the next "Bonus"" section...
+9. ⚠️ I you don't use a personal token to request the Github API this script will not work. To set up an identification token on the Github API and environements variables, go lower...
 
 ![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script.png)
 
-Request the github api with a personnal token to increase the rate limit and be able to update a private repository...
+Request the github api with a personnal token increase the rate limit and allow you to update a private repository...
 
 - On github.com:
 
@@ -2339,6 +2340,12 @@ C:\Program Files\Git\git-bash.exe
 **Win + R** -> type `shell:startup`  
 Copy (Ctrl+C) the shortcut and paste it in the "Getting Started" folder...  
 Now the script will be launched every time you start your PC 💪
+
+## Console Application Screens
+
+![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_2.png)
+
+![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_3.png)
 
 ***
 

@@ -1344,7 +1344,7 @@ function Show-LatestCommitsMessages {
   ######## GUARD CLAUSE : SINGLE COMMIT ########
   # One commit
   if ($newCommits.Count -eq 1) {
-    Write-Host -NoNewline "Commit message : " -ForegroundColor Magenta
+    Write-Host "Commit message : " -ForegroundColor Magenta
     Write-Host "  - `"$newCommits[0]`"" -ForegroundColor Cyan
     return
   }

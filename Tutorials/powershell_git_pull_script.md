@@ -97,7 +97,7 @@ Flow Controller based on iterative & sequential, stateless and awareness.
 - Network Resilience, timeout and DNS management without crashing the orchestrator
 - Isolation in case of repository failure (Try/Catch pattern)
 
-👌 Others many controls have been added 👌
+👌 Others many controls and features have been added 👌
 
 ## PROCEDURE
 

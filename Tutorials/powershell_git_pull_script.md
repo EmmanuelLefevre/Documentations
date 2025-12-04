@@ -3,6 +3,7 @@
 ## SOMMAIRE
 
 - [INTRODUCTION](#introduction)
+- [PRESENTATION](#presentation)
 - [PROCEDURE](#procedure)
 - [BONUS](#bonus)
 - [CONSOLE APPLICATION SCREENS](#console-application-screens)
@@ -13,7 +14,14 @@ This tutorial shows the step-by-step procedure to create a powershell script (ex
 
 ⚠️ This procedure is intended to automate pulls for repositories with several branches, such as a repository for documentation or configurations.  
 
-👌 Many controls have been added 👌
+## PRESENTATION
+
+🚀 No more Git syncing hassles between my desktop and laptop! 🚀  
+Working daily on multiple machines, I was wasting too much time (and mental energy) manually checking if my local repositories were up to date before I started coding. The risk of conflicts or working on an outdated version was constant.  
+I decided to automate all of this with a client-side automation approach.  
+So i developed gpull: a PowerShell script acting as a local orchestrator, capable of maintaining the integrity of all my repositories.  
+
+
 
 ## PROCEDURE
 

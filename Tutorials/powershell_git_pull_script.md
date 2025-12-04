@@ -10,12 +10,11 @@
 
 ## INTRO
 
-This tutorial shows the step-by-step procedure to create a powershell script (executable using a shortcut button on the user's desktop and launch it automatically at Windows start) allowing you to update your local repositories with a single click. Indeed, when you have several computers, it can be laborious to synchronize your local repositories each one after the other if you have made a modification in one of them.  
-
-⚠️ This procedure is intended to automate pulls for repositories with several branches, such as a repository for documentation or configurations.  
+This tutorial shows the step-by-step procedure to create a powershell script allowing you to update your local repositories with a single shortcut button click or automatically at Windows start.  
 
 ## PRESENTATION
 
+😫 The Problem =>
 🚀 No more Git syncing hassles between my desktop and laptop! 🚀  
 
 Working daily on multiple machines, I was wasting too much time (and mental energy) manually checking if my local repositories were up to date before I started coding. The risk of conflicts or working on an outdated version was constant.  
@@ -97,6 +96,8 @@ Iterative & sequential, stateless and awareness-based Flow Controller.
 - HTTP context, API error differentiation
 - Network Resilience, timeout and DNS management without crashing the orchestrator
 - Isolation in case of repository failure (Try/Catch pattern)
+
+👌 Others many controls have been added 👌
 
 ## PROCEDURE
 

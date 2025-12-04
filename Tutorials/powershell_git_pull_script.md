@@ -82,6 +82,22 @@ Iterative & sequential, stateless and awareness-based Flow Controller.
 - Summary Table: Status and precise duration for each repository
 - UI Polish: Dynamic separators and text centering
 
+8. 🔐 **GitHub API Integration and Security**
+
+- Repository access via GitHub API + pre-verification of repository existence and access rights
+- Secure Configuration, Environment Variables (Token/Username)
+
+9. ⏱️ **Performance and Caching**
+
+- Metrics, global and individual timers
+- Session Cache, load configuration once per session
+
+10. 🌐 **Granular and Resilient Error Handling**
+
+- HTTP context, API error differentiation
+- Network Resilience, timeout and DNS management without crashing the orchestrator
+- Isolation in case of repository failure (Try/Catch pattern)
+
 ## PROCEDURE
 
 1. For Windows 10 get the fully path where PowerShell was installed :

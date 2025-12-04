@@ -39,7 +39,7 @@ Iterative & sequential, stateless and awareness-based Flow Controller.
 
 🛠️ **FEATURES**
 
-1. 📦 Multi-Branch Update
+1. 📦 **Multi-Branch Update**
 
 - Prioritization, main and develop branches
 - Targeting, optional parameter for updating 1 repository
@@ -47,23 +47,40 @@ Iterative & sequential, stateless and awareness-based Flow Controller.
 - Interactive Mode on incoming commits from other branches
 - Bot Detection (sync force)
 
-2. 🧹 Garbage Collector
+2. 🧹 **Garbage Collector**
 
 - Orphaned Cleanup, detects/removes orphaned branches (interactive)
 - Merged Cleanup, identifies/removes already merged branches (interactive)
 - Protection, prevents the deletion of an integration branch
 
-3. 🛡️ Safety and Integrity (Safety Checks)
+3. 🛡️ **Safety and Integrity (Safety Checks)**
 
 - Dirty Tree Protection: pull canceled if files are not committed
 - Unpushed Protection: pull canceled if local commits are not pushed
 - Stash Warning
 
-4. 🎛️ Context Awareness & Restoration
+4. 🎛️ **Context Awareness & Restoration**
 
 - State Preservation: remembers the active branch
 - Smart Restore: replaces the user on the original branch
 - Fallback Logic: if the original branch is deleted, replace the user on the development branch.
+
+5. 🔍 **Divergence Analysis**
+
+- History Analysis: Calculates the number of commits Ahead/Behind
+- Log Preview: Displays the latest incoming commit messages
+- Divergence Alert: Detects divergent histories
+
+6. 🛰️ **Discovery and Monitoring**
+
+- New Branch Detection: Scans the remote branch to track new remote branches
+- Tracking Proposal: Creates a local branch (or interactively deletes an obsolete branch)
+
+7. 📈 **Visual and Concise Reporting**
+
+- Real-Time Feedback
+- Summary Table: Status and precise duration for each repository
+- UI Polish: Dynamic separators and text centering
 
 ## PROCEDURE
 

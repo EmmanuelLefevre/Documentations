@@ -2,13 +2,13 @@
 
 ## SOMMAIRE
 
-- [INTRODUCTION](#introduction)
+- [INTRO](#intro)
 - [PRESENTATION](#presentation)
 - [PROCEDURE](#procedure)
 - [BONUS](#bonus)
 - [CONSOLE APPLICATION SCREENS](#console-application-screens)
 
-## INTRODUCTION
+## INTRO
 
 This tutorial shows the step-by-step procedure to create a powershell script (executable using a shortcut button on the user's desktop and launch it automatically at Windows start) allowing you to update your local repositories with a single click. Indeed, when you have several computers, it can be laborious to synchronize your local repositories each one after the other if you have made a modification in one of them.  
 

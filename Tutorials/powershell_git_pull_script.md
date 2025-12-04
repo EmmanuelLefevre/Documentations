@@ -21,7 +21,47 @@ Working daily on multiple machines, I was wasting too much time (and mental ener
 I decided to automate all of this with a client-side automation approach.  
 So i developed gpull: a PowerShell script acting as a local orchestrator, capable of maintaining the integrity of all my repositories.  
 
+🏗 ARCHITECTURE  
+Iterative & sequential, stateless and awareness-based Flow Controller.
 
+🧠 PHILOSOPHY
+
+- Safety First (Guard Clause)
+- UX
+
+⚡ TRIGGER
+
+- Event-Driven (startup file)
+- GUI (desktop shortcut)
+- CLI (aka Powershell:gpull)
+
+🛠️ FEATURES
+
+1. 📦 Multi-Branch Update
+
+- Prioritization, main and develop branches
+- Targeting, optional parameter for updating 1 repository
+- Silent Auto-Update on integration branches
+- Interactive Mode on incoming commits from other branches
+- Bot Detection (sync force)
+
+2. 🧹 Garbage Collector
+
+- Orphaned Cleanup, detects/removes orphaned branches (interactive)
+- Merged Cleanup, identifies/removes already merged branches (interactive)
+- Protection, prevents the deletion of an integration branch
+
+3. 🛡️ Safety and Integrity (Safety Checks)
+
+- Dirty Tree Protection: pull canceled if files are not committed
+- Unpushed Protection: pull canceled if local commits are not pushed
+- Stash Warning
+
+4. 🎛️ Context Awareness & Restoration
+
+- State Preservation: remembers the active branch
+- Smart Restore: replaces the user on the original branch
+- Fallback Logic: if the original branch is deleted, replace the user on the development branch.
 
 ## PROCEDURE
 

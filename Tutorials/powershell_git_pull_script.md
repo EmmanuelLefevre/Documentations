@@ -23,19 +23,22 @@ I decided to automate all of this with a client-side automation approach.
 
 So i developed gpull: a PowerShell script acting as a local orchestrator, capable of maintaining the integrity of all my repositories.  
 
-🏗 ARCHITECTURE  
+🏗 **ARCHITECTURE**  
 Iterative & sequential, stateless and awareness-based Flow Controller.
 
-🧠 PHILOSOPHY
+🧠 **PHILOSOPHY**
+
 - Safety First (Guard Clause)
 - UX
 
-⚡ TRIGGER
+⚡ **TRIGGER**
+
 - Event-Driven (startup file)
 - GUI (desktop shortcut)
 - CLI (aka Powershell:gpull)
 
-🛠️ FEATURES
+🛠️ **FEATURES**
+
 1. 📦 Multi-Branch Update
 
 - Prioritization, main and develop branches

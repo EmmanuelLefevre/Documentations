@@ -1393,7 +1393,7 @@ function Show-LatestCommitsMessages {
       $behind = $Matches[2]
     }
 
-    Write-Host "🔀 Diverged History detected !" -ForegroundColor DarkYellow
+    Write-Host "🔀 Diverged history detected !" -ForegroundColor DarkYellow
     Write-Host -NoNewline "   └─ Your branch is ahead by " -ForegroundColor Magenta
     Write-Host -NoNewline "$ahead" -ForegroundColor DarkCyan
     Write-Host -NoNewline " and behind by " -ForegroundColor Magenta

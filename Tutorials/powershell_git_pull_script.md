@@ -197,6 +197,8 @@ function gpull {
     [string]$Name
   )
 
+  Show-HeaderFrame -Title "UPDATE YOUR LOCAL REPOSITORIES"
+
   ######## GUARD CLAUSE : GIT AVAILABILITY ########
   if (-not (Test-GitAvailability)) {
     return
@@ -2505,6 +2507,35 @@ function Get-CenteredPadding {
   $paddingCount = [math]::Max(0, [int](($TotalWidth - $visualLength) / 2))
 
   return " " * $paddingCount
+}
+
+##########---------- Display a frame header ----------##########
+function Show-HeaderFrame {
+  param (
+    [Parameter(Mandatory=$true)]
+    [string]$Title,
+
+    [ConsoleColor]$Color = "Cyan",
+
+    [int]$Padding = 14
+  )
+
+  # Definition of fixed left margin (8 spaces)
+  $leftMargin = " " * 8
+
+  # Preparing internal content with padding
+  $spaceString = " " * $Padding
+  $middleContent = "$spaceString$Title$spaceString"
+
+  # Calculating length for bar
+  $horizontalBar = "═" * $middleContent.Length
+
+  # Display frame
+  Write-Host ""
+  Write-Host "$leftMargin╔$horizontalBar╗" -ForegroundColor $Color
+  Write-Host "$leftMargin║$middleContent║" -ForegroundColor $Color
+  Write-Host "$leftMargin╚$horizontalBar╝" -ForegroundColor $Color
+  Write-Host ""
 }
 ```
 

@@ -650,45 +650,63 @@ function Get-RepositoriesInfo {
   # Array to define the order of repositories
   $reposOrder = @(
     "ArtiWave",
+    "AstroFall",
     "Cours",
     "DailyPush",
     "DataScrub",
     "Documentations",
     "Dotfiles",
+    "EasyGarden",
+    "Elexxion",
+    "ElexxionData",
     "EmmanuelLefevre",
+    "GestForm",
     "GitHubProfileIcons",
     "GoogleSheets",
+    "LeCabinetDeCuriosites",
     "IAmEmmanuelLefevre",
     "MarkdownImg",
+    "Mflix",
+    "OmbreArcane",
     "OpenScraper",
     "ParquetFlow",
     "ReplicaMySQL",
     "Schemas",
     "ScrapMate",
+    "Sortify",
     "Soutenances",
-    "Test"
+    "Yam4"
   )
 
   # Dictionary containing local repositories path
   $repos = @{
     "ArtiWave"               = "$env:USERPROFILE\Desktop\Projets\ArtiWave"
+    "AstroFall"              = "$env:USERPROFILE\Desktop\Projets\AstroFall"
     "Cours"                  = "$env:USERPROFILE\Desktop\Cours"
     "DailyPush"              = "$env:USERPROFILE\Desktop\DailyPush"
     "DataScrub"              = "$env:USERPROFILE\Desktop\Projets\DataScrub"
     "Documentations"         = "$env:USERPROFILE\Documents\Documentations"
     "Dotfiles"               = "$env:USERPROFILE\Desktop\Dotfiles"
+    "EasyGarden"             = "$env:USERPROFILE\Desktop\Projets\EasyGarden"
+    "Elexxion"               = "$env:USERPROFILE\Desktop\Projets\Elexxion"
+    "ElexxionData"           = "$env:USERPROFILE\Desktop\Projets\ElexxionData"
     "EmmanuelLefevre"        = "$env:USERPROFILE\Desktop\Projets\EmmanuelLefevre"
+    "GestForm"               = "$env:USERPROFILE\Desktop\Projets\GestForm"
     "GitHubProfileIcons"     = "$env:USERPROFILE\Pictures\GitHubProfileIcons"
     "GoogleSheets"           = "$env:USERPROFILE\Desktop\GoogleSheets"
+    "LeCabinetDeCuriosites"  = "$env:USERPROFILE\Desktop\Projets\LeCabinetDeCuriosites"
     "IAmEmmanuelLefevre"     = "$env:USERPROFILE\Desktop\Projets\IAmEmmanuelLefevre"
     "MarkdownImg"            = "$env:USERPROFILE\Desktop\MarkdownImg"
+    "Mflix"                  = "$env:USERPROFILE\Desktop\Projets\Mflix"
+    "OmbreArcane"            = "$env:USERPROFILE\Desktop\Projets\OmbreArcane"
     "OpenScraper"            = "$env:USERPROFILE\Desktop\Projets\OpenScraper"
     "ParquetFlow"            = "$env:USERPROFILE\Desktop\Projets\ParquetFlow"
     "ReplicaMySQL"           = "$env:USERPROFILE\Desktop\Projets\ReplicaMySQL"
     "Schemas"                = "$env:USERPROFILE\Desktop\Schemas"
     "ScrapMate"              = "$env:USERPROFILE\Desktop\Projets\ScrapMate"
+    "Sortify"                = "$env:USERPROFILE\Desktop\Projets\Sortify"
     "Soutenances"            = "$env:USERPROFILE\Desktop\Soutenances"
-    "Test"                   = "$env:USERPROFILE\Desktop\Projets\Test"
+    "Yam4"                   = "$env:USERPROFILE\Desktop\Projets\Yam4"
   }
 
   # Error message templates

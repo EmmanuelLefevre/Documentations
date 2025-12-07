@@ -198,15 +198,7 @@ function gpull {
   )
 
   ######## GUARD CLAUSE : GIT AVAILABILITY ########
-  if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
-    # Helper called to center message nicely
-    $msg = "⛔ Git for Windows is not installed (or not found in path)... Install it before using this command ! ⛔"
-    $paddingStr = Get-CenteredPadding -RawMessage $msg
-
-    # Display message
-    Write-Host -NoNewline $paddingStr
-    Write-Host $msg -ForegroundColor Red
-
+  if (-not (Test-GitAvailability)) {
     return
   }
 
@@ -2480,6 +2472,37 @@ function Get-LocationPathConfig {
     [PSCustomObject]@{ Name = "nvim";                     Path = "$env:USERPROFILE\AppData\Local\nvim";                       IsRepo = $false },
     [PSCustomObject]@{ Name = "profile";                  Path = "$env:USERPROFILE\Documents\PowerShell";                     IsRepo = $false }
   )
+}
+
+#-----------------------------------------------------------------------#
+#                        SHARED FUNCTIONS                               #
+#-----------------------------------------------------------------------#
+
+##########---------- Check if Git is installed and available ----------##########
+function Test-GitAvailability {
+  param (
+    # Default message
+    [string]$Message = "⛔ Git for Windows is not installed (or not found in path)... Install it before using this command ! ⛔",
+
+    # By default text is centered
+    [bool]$Center = $true
+  )
+
+  # Check command existence
+  if (Get-Command git -ErrorAction SilentlyContinue) {
+    return $true
+  }
+
+  # Display Logic
+  if ($Center) {
+    # Using existing helper to calculate padding
+    $paddingStr = Get-CenteredPadding -RawMessage $Message
+    Write-Host -NoNewline $paddingStr
+  }
+
+  Write-Host $Message -ForegroundColor Red
+
+  return $false
 }
 ```
 

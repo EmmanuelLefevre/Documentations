@@ -197,7 +197,7 @@ function gpull {
     [string]$Name
   )
 
-  Show-HeaderFrame -Title "UPDATE YOUR LOCAL REPOSITORIES"
+  Show-HeaderFrame -Title "UPDATING LOCAL REPOSITORIES"
 
   ######## GUARD CLAUSE : GIT AVAILABILITY ########
   if (-not (Test-GitAvailability)) {

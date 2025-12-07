@@ -2038,7 +2038,7 @@ function Show-StashWarning {
 
             if (-not [string]::IsNullOrWhiteSpace($fileString)) {
               # Display files
-              Write-Host "    $fileString" -ForegroundColor Gray
+              Write-Host "   $fileString" -ForegroundColor Gray
             }
           }
         }
@@ -2373,6 +2373,7 @@ function Get-CenteredPadding {
 #---------------------------------------------------------------------------#
 #                        LOCATION PATH CONFIG                               #
 #---------------------------------------------------------------------------#
+
 function Get-LocationPathConfig {
   # IsRepo = $true => Included in gpull() process AND accessible via go()
   # IsRepo = $false=> Accessible ONLY via go()

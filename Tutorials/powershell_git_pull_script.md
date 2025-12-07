@@ -650,8 +650,8 @@ function Get-RepositoriesInfo {
   $envVarMessageTemplate = "Check {0} in Windows Environment Variables..."
   $functionNameMessage = "in Get-RepositoriesInfo !"
 
-  ######## LOAD PATH CONFIG ########
-  $allLocations = Get-LocationConfig
+  ######## LOAD PATH LOCATION CONFIG ########
+  $allLocations = Get-LocationPathConfig
   $gitLocations = $allLocations | Where-Object { $_.IsRepo -eq $true }
 
   ######## GUARD CLAUSE : MISSING USERNAME ########

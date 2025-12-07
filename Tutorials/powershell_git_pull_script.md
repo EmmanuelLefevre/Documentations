@@ -2404,29 +2404,6 @@ function Stop-OperationTimer {
   }
 }
 
-##########---------- Calculate centered padding spaces ----------##########
-function Get-CenteredPadding {
-  param (
-    [int]$TotalWidth = 80,
-    [string]$RawMessage
-  )
-
-  # Removes invisible characters from "Variation Selector"
-  $cleanMsg = $RawMessage -replace "\uFE0F", ""
-
-  # Standard length in memory
-  $visualLength = $cleanMsg.Length
-
-  # If message contains "simple" BMP emojis (one character long but two characters wide on screen), we add 1
-  $bmpEmojis = ([regex]::Matches($cleanMsg, "[\u2300-\u23FF\u2600-\u27BF]")).Count
-  $visualLength += $bmpEmojis
-
-  # (Total Width - Message Length) / 2
-  # [math]::Max(0, ...) => prevents crash if message is longer than 80 characters
-  $paddingCount = [math]::Max(0, [int](($TotalWidth - $visualLength) / 2))
-
-  return " " * $paddingCount
-}
 
 #---------------------------------------------------------------------------#
 #                        LOCATION PATH CONFIG                               #
@@ -2474,6 +2451,7 @@ function Get-LocationPathConfig {
   )
 }
 
+
 #-----------------------------------------------------------------------#
 #                        SHARED FUNCTIONS                               #
 #-----------------------------------------------------------------------#
@@ -2503,6 +2481,30 @@ function Test-GitAvailability {
   Write-Host $Message -ForegroundColor Red
 
   return $false
+}
+
+##########---------- Calculate centered padding spaces ----------##########
+function Get-CenteredPadding {
+  param (
+    [int]$TotalWidth = 80,
+    [string]$RawMessage
+  )
+
+  # Removes invisible characters from "Variation Selector"
+  $cleanMsg = $RawMessage -replace "\uFE0F", ""
+
+  # Standard length in memory
+  $visualLength = $cleanMsg.Length
+
+  # If message contains "simple" BMP emojis (one character long but two characters wide on screen), we add 1
+  $bmpEmojis = ([regex]::Matches($cleanMsg, "[\u2300-\u23FF\u2600-\u27BF]")).Count
+  $visualLength += $bmpEmojis
+
+  # (Total Width - Message Length) / 2
+  # [math]::Max(0, ...) => prevents crash if message is longer than 80 characters
+  $paddingCount = [math]::Max(0, [int](($TotalWidth - $visualLength) / 2))
+
+  return " " * $paddingCount
 }
 ```
 

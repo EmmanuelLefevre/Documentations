@@ -184,6 +184,151 @@ Repeat operation for the username...
 11. Copy/Paste "gpull" function and his utilities functions inside.
 
 ```powershell
+#-----------------------------------------------------------------------#
+#                        SHARED FUNCTIONS                               #
+#-----------------------------------------------------------------------#
+
+##########---------- Check if Git is installed and available ----------##########
+function Test-GitAvailability {
+  param (
+    # Default message
+    [string]$Message = "⛔ Git for Windows is not installed (or not found in path)... Install it before using this command ! ⛔",
+
+    # By default text is centered
+    [bool]$Center = $true
+  )
+
+  # Check command existence
+  if (Get-Command git -ErrorAction SilentlyContinue) {
+    return $true
+  }
+
+  # Display Logic
+  if ($Center) {
+    Show-GracefulError -Message $Message
+  }
+  else {
+    Show-GracefulError -Message $Message -NoCenter
+  }
+
+  return $false
+}
+
+##########---------- Calculate centered padding spaces ----------##########
+function Get-CenteredPadding {
+  param (
+    [int]$TotalWidth = 80,
+    [string]$RawMessage
+  )
+
+  # Removes invisible characters from "Variation Selector"
+  $cleanMsg = $RawMessage -replace "\uFE0F", ""
+
+  # Standard length in memory
+  $visualLength = $cleanMsg.Length
+
+  # If message contains "simple" BMP emojis (one character long but two characters wide on screen), we add 1
+  $bmpEmojis = ([regex]::Matches($cleanMsg, "[\u2300-\u23FF\u2600-\u27BF]")).Count
+  $visualLength += $bmpEmojis
+
+  # (Total Width - Message Length) / 2
+  # [math]::Max(0, ...) => prevents crash if message is longer than 80 characters
+  $paddingCount = [math]::Max(0, [int](($TotalWidth - $visualLength) / 2))
+
+  return " " * $paddingCount
+}
+
+##########---------- Display a frame header ----------##########
+function Show-HeaderFrame {
+  param (
+    [Parameter(Mandatory=$true)]
+    [string]$Title,
+
+    [ConsoleColor]$Color = "Cyan"
+  )
+
+  # Fixed constraints
+  $TerminalWidth = 80
+  $FrameWidth = 64
+  $FramePaddingLeft = ($TerminalWidth - $FrameWidth) / 2
+
+  # Frame margins
+  $leftMargin = " " * $FramePaddingLeft
+
+  ######## INTERN CONTENT ########
+  # Space around title inside frame
+  $middleContentRaw = " $Title "
+
+  # Length of horizontal bar between borders ╔ and ╗
+  $horizontalBarLength = $FrameWidth - 2
+
+  # Title length
+  $TitleLength = $middleContentRaw.Length
+
+  # Total space available to center title
+  $TotalInternalSpace = $horizontalBarLength - $TitleLength
+
+  # Internal margin to center title (in 62 characters)
+  $InternalLeftSpaces = [System.Math]::Floor($TotalInternalSpace / 2)
+
+  if ($InternalLeftSpaces -lt 0) {
+    $InternalLeftSpaces = 0
+  }
+
+  $InternalLeftMargin = " " * $InternalLeftSpaces
+
+  # Title with internal left padding
+  $PaddedTitle = $InternalLeftMargin + $middleContentRaw
+
+  # Fill in remaining space
+  $PaddedTitle += " " * ($horizontalBarLength - $PaddedTitle.Length)
+
+  # Create 62-character border bar
+  $horizontalBar = "═" * $horizontalBarLength
+
+  # Display frame header
+  Write-Host ""
+  Write-Host "$leftMargin╔$horizontalBar╗" -ForegroundColor $Color
+  Write-Host "$leftMargin║$PaddedTitle║" -ForegroundColor $Color
+  Write-Host "$leftMargin╚$horizontalBar╝" -ForegroundColor $Color
+  Write-Host ""
+}
+
+##########---------- Display error message nicely ----------##########
+function Show-GracefulError {
+  param (
+    [Parameter(Mandatory=$true)]
+    [string]$Message,
+
+    [Parameter(Mandatory=$false)]
+    [System.Management.Automation.ErrorRecord]$ErrorDetails,
+
+    [switch]$NoCenter,
+
+    [switch]$NoTrailingNewline
+  )
+
+  if ($NoCenter) {
+    Write-Host $Message -ForegroundColor Red
+  }
+  else {
+    $paddingStr = Get-CenteredPadding -RawMessage $Message
+    Write-Host -NoNewline $paddingStr
+    Write-Host $Message -ForegroundColor Red
+  }
+
+  # Display technical details if provided
+  if ($ErrorDetails) {
+    Write-Host "$ErrorDetails" -ForegroundColor DarkBlue
+  }
+
+  # Adding final line break if requested
+  if (-not $NoTrailingNewline) {
+    Write-Host ""
+  }
+}
+
+
 #--------------------------------------------------------------------------#
 #                   UPDATE YOUR LOCAL REPOSITORIES                         #
 #--------------------------------------------------------------------------#
@@ -197,7 +342,12 @@ function gpull {
     [string]$Name
   )
 
-  Show-HeaderFrame -Title "UPDATING LOCAL REPOSITORIES"
+  if ($Name) {
+    Show-HeaderFrame -Title "UPDATING LOCAL REPOSITORY"
+  }
+  else {
+    Show-HeaderFrame -Title "UPDATING LOCAL REPOSITORIES"
+  }
 
   ######## GUARD CLAUSE : GIT AVAILABILITY ########
   if (-not (Test-GitAvailability)) {
@@ -646,13 +796,7 @@ function Get-RepositoriesInfo {
 
   ######## GUARD CLAUSE : MISSING USERNAME ########
   if ([string]::IsNullOrWhiteSpace($gitHubUsername)) {
-    # Helper called to center error message nicely
-    $errMsg = "❌ GitHub username is missing or invalid ! ❌"
-    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
-
-    # Display error message
-    Write-Host -NoNewline $paddingErrStr
-    Write-Host $errMsg -ForegroundColor Red
+    Show-GracefulError -Message "❌ GitHub username is missing or invalid ! ❌" -NoTrailingNewline
 
     # Helper called to center info message nicely
     $infoMsg = "ℹ️ " + ($envVarMessageTemplate -f "'GITHUB_USERNAME'")
@@ -667,13 +811,7 @@ function Get-RepositoriesInfo {
 
   ######## GUARD CLAUSE : MISSING TOKEN ########
   if ([string]::IsNullOrWhiteSpace($gitHubToken)) {
-    # Helper called to center error message nicely
-    $errMsg = "❌ GitHub token is missing or invalid ! ❌"
-    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
-
-    # Display error message
-    Write-Host -NoNewline $paddingErrStr
-    Write-Host $errMsg -ForegroundColor Red
+    Show-GracefulError -Message "❌ GitHub token is missing or invalid ! ❌" -NoTrailingNewline
 
     # Helper called to center info message nicely
     $infoMsg = "ℹ️ " + ($envVarMessageTemplate -f "'GITHUB_TOKEN'")
@@ -691,10 +829,7 @@ function Get-RepositoriesInfo {
 
   ######## GUARD CLAUSE : CONFIG RETURN NOTHING ########
   if (-not $allConfig) {
-    $errMsg = "❌ Critical Error : Get-LocationPathConfig returned no data ! ❌"
-    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
-    Write-Host -NoNewline $paddingErrStr
-    Write-Host $errMsg -ForegroundColor Red
+    Show-GracefulError -Message "❌ Critical Error : Get-LocationPathConfig returned no data ! ❌"
     return $null
   }
 
@@ -704,13 +839,7 @@ function Get-RepositoriesInfo {
 
   ######## GUARD CLAUSE : EMPTY ORDER LIST ########
   if (-not $reposOrder -or $reposOrder.Count -eq 0) {
-    # Helper called to center error message nicely
-    $errMsg = "❌ Local array repo order is empty ! ❌"
-    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
-
-    # Display error message
-    Write-Host -NoNewline $paddingErrStr
-    Write-Host $errMsg -ForegroundColor Red
+    Show-GracefulError -Message "❌ Local array repo order is empty ! ❌" -NoTrailingNewline
 
     # Helper called to center info message nicely
     $infoMsg = "ℹ️ Define at least one repository $functionNameMessage (order array)"
@@ -730,11 +859,7 @@ function Get-RepositoriesInfo {
 
   ######## GUARD CLAUSE : INVALID/NOT FOUND PATHS ########
   if ($invalidItems) {
-    $errMsg = "❌ Local repositories dictionary contains invalid paths ! ❌"
-    $paddingErrStr = Get-CenteredPadding -RawMessage $errMsg
-
-    Write-Host -NoNewline $paddingErrStr
-    Write-Host $errMsg -ForegroundColor Red
+    Show-GracefulError -Message "❌ Local repositories dictionary contains invalid paths ! ❌" -NoTrailingNewline
 
     foreach ($bad in $invalidItems) {
       if ([string]::IsNullOrWhiteSpace($bad.Path)) {
@@ -1021,9 +1146,7 @@ function Test-GitFetchSuccess {
   ######## GUARD CLAUSE : FETCH FAILED ########
   # Check if the exit code indicates an error (non-zero)
   if ($ExitCode -ne 0) {
-    Write-Host -NoNewline "⚠️ "
-    Write-Host -NoNewline "'Git fetch' failed ! Check your Git access credentials (SSH keys/Credential Manager)... ⚠️" -ForegroundColor Red
-
+    Show-GracefulError -Message "⚠️ 'Git fetch' failed ! Check your Git access credentials... ⚠️" -NoCenter
     return $false
   }
 
@@ -2454,88 +2577,39 @@ function Get-LocationPathConfig {
 }
 
 
-#-----------------------------------------------------------------------#
-#                        SHARED FUNCTIONS                               #
-#-----------------------------------------------------------------------#
+#-------------------------------------------------------------------------#
+#                   LOAD GLOBAL GIT IGNORE CONFIG                         #
+#-------------------------------------------------------------------------#
 
-##########---------- Check if Git is installed and available ----------##########
-function Test-GitAvailability {
-  param (
-    # Default message
-    [string]$Message = "⛔ Git for Windows is not installed (or not found in path)... Install it before using this command ! ⛔",
+function Set-LoadGlobalGitIgnore {
+  $GitGlobalIgnorePath = Join-Path -Path $HOME -ChildPath ".gitignore_global"
 
-    # By default text is centered
-    [bool]$Center = $true
-  )
+  # Flag created or updated
+  $WasUpdatedOrCreated = $false
 
-  # Check command existence
-  if (Get-Command git -ErrorAction SilentlyContinue) {
-    return $true
+  ######## GUARD CLAUSE : GIT AVAILABILITY ########
+  if (-not (Test-GitAvailability -Message "⛔ Git for Windows is not installed (or not found in path). Global git ignore config skipped ! ⛔")) {
+    return
   }
 
-  # Display Logic
-  if ($Center) {
-    # Using existing helper to calculate padding
-    $paddingStr = Get-CenteredPadding -RawMessage $Message
-    Write-Host -NoNewline $paddingStr
+  # Load default template content
+  $DefaultLines = Get-DefaultGlobalGitIgnoreTemplate
+
+  ######## FILE CREATION/UPDATE ORCHESTRATION ########
+  if (-not (Test-Path $GitGlobalIgnorePath)) {
+    ######## CASE 1 : FILE DOESN'T EXIST (CREATION) ########
+    Initialize-GlobalGitIgnoreFile -Path $GitGlobalIgnorePath -ContentLines $DefaultLines
+
+    $WasUpdatedOrCreated = $true
+  }
+  ######## CASE 2 : FILE EXIST (UPDATE) ########
+  else {
+    $WasUpdatedOrCreated = Update-GlobalGitIgnoreFile -Path $GitGlobalIgnorePath -DefaultLines $DefaultLines
   }
 
-  Write-Host $Message -ForegroundColor Red
-
-  return $false
-}
-
-##########---------- Calculate centered padding spaces ----------##########
-function Get-CenteredPadding {
-  param (
-    [int]$TotalWidth = 80,
-    [string]$RawMessage
-  )
-
-  # Removes invisible characters from "Variation Selector"
-  $cleanMsg = $RawMessage -replace "\uFE0F", ""
-
-  # Standard length in memory
-  $visualLength = $cleanMsg.Length
-
-  # If message contains "simple" BMP emojis (one character long but two characters wide on screen), we add 1
-  $bmpEmojis = ([regex]::Matches($cleanMsg, "[\u2300-\u23FF\u2600-\u27BF]")).Count
-  $visualLength += $bmpEmojis
-
-  # (Total Width - Message Length) / 2
-  # [math]::Max(0, ...) => prevents crash if message is longer than 80 characters
-  $paddingCount = [math]::Max(0, [int](($TotalWidth - $visualLength) / 2))
-
-  return " " * $paddingCount
-}
-
-##########---------- Display a frame header ----------##########
-function Show-HeaderFrame {
-  param (
-    [Parameter(Mandatory=$true)]
-    [string]$Title,
-
-    [ConsoleColor]$Color = "Cyan",
-
-    [int]$Padding = 14
-  )
-
-  # Definition of fixed left margin (8 spaces)
-  $leftMargin = " " * 8
-
-  # Preparing internal content with padding
-  $spaceString = " " * $Padding
-  $middleContent = "$spaceString$Title$spaceString"
-
-  # Calculating length for bar
-  $horizontalBar = "═" * $middleContent.Length
-
-  # Display frame
-  Write-Host ""
-  Write-Host "$leftMargin╔$horizontalBar╗" -ForegroundColor $Color
-  Write-Host "$leftMargin║$middleContent║" -ForegroundColor $Color
-  Write-Host "$leftMargin╚$horizontalBar╝" -ForegroundColor $Color
-  Write-Host ""
+  ######## GIT CONFIGURATION ########
+  # Only display if file was touched or config is wrong
+  Set-GlobalGitIgnoreReference -Path $GitGlobalIgnorePath -ShowMessage $WasUpdatedOrCreated
 }
 ```
 

@@ -4,7 +4,7 @@
 
 - [INTRO](#intro)
 - [PRESENTATION](#presentation)
-- [PROCEDURE](#procedure)
+- [WORKFLOW](#workflow)
 - [INSTALLATION PROCEDURE](#installation-procedure)
 - [BONUS](#bonus)
 - [CONSOLE APPLICATION SCREENS](#console-application-screens)
@@ -100,11 +100,11 @@ Flow Controller based on iterative & sequential, stateless and awareness.
 
 👌 Others many controls and features have been added 👌
 
-## PROCEDURE
+## WORKFLOW
 
-1. **Initialization :** The Get-DefaultGlobalGitIgnoreTemplate function holds the source of truth (OS files, IDEs, Languages...)
+1. **Initialization :** The Get-DefaultGlobalGitIgnoreTemplate function holds the source of truth (OS files, IDEs, Languages...).
 
-2. **Validation Loop :** Iterates through the defined repository list
+2. **Validation Loop :** Iterates through the defined repository list.
 
 - Integrity Check : verifies the folder exists and is a valid Git repository
 - Security Check : ensures the local origin remote matches the expected GitHub URL
@@ -120,7 +120,7 @@ Flow Controller based on iterative & sequential, stateless and awareness.
 - Safety : blocks updates if the working tree is dirty or has unpushed commits
 - Cleanup : proposes deletion for orphaned (gone) or fully merged branches
 
-5. **Reporting :** Generates a summary table with status (✅ Updated, ⏩ Skipped, ❌ Failed) and execution time
+5. **Reporting :** Generates a summary table with status (✅ Updated, ⏩ Skipped, ❌ Failed) and execution time.
 
 ## INSTALLATION PROCEDURE
 

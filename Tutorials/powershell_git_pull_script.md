@@ -5,6 +5,7 @@
 - [INTRO](#intro)
 - [PRESENTATION](#presentation)
 - [PROCEDURE](#procedure)
+- [INSTALLATION PROCEDURE](#installation-procedure)
 - [BONUS](#bonus)
 - [CONSOLE APPLICATION SCREENS](#console-application-screens)
 
@@ -15,7 +16,7 @@ This tutorial shows the step-by-step procedure to create a powershell script all
 ## PRESENTATION
 
 😫 The Problem =>
-🚀 No more Git syncing hassles between my desktop and laptop! 🚀  
+🚀 No more Git syncing hassles between my desktop and laptop ! 🚀  
 
 Working daily on multiple machines, I was wasting too much time (and mental energy) manually checking if my local repositories were up to date before I started coding. The risk of conflicts or working on an outdated version was constant.  
 I decided to automate all of this with a client-side automation approach.  
@@ -32,9 +33,9 @@ Flow Controller based on iterative & sequential, stateless and awareness.
 
 ⚡ **TRIGGER**
 
-- Event-Driven (startup file)
+- Event-Driven (startup computer)
 - GUI (desktop shortcut)
-- CLI (aka Powershell:gpull)
+- CLI (aka Powershell: gpull)
 
 🛠️ **FEATURES**
 
@@ -54,32 +55,32 @@ Flow Controller based on iterative & sequential, stateless and awareness.
 
 3. 🛡️ **Safety and Integrity (Safety Checks)**
 
-- Dirty Tree Protection: pull canceled if files are not committed
-- Unpushed Protection: pull canceled if local commits are not pushed
+- Dirty Tree Protection, pull canceled if files are not committed
+- Unpushed Protection, pull canceled if local commits are not pushed
 - Stash Warning
 
 4. 🎛️ **Context Awareness & Restoration**
 
-- State Preservation: remembers the active branch
-- Smart Restore: replaces the user on the original branch
-- Fallback Logic: if the original branch is deleted, replace the user on the development branch.
+- State Preservation, remembers the active branch
+- Smart Restore, replaces the user on the original branch
+- Fallback Logic, if the original branch is deleted, replace the user on the development branch.
 
 5. 🔍 **Divergence Analysis**
 
-- History Analysis: Calculates the number of commits Ahead/Behind
-- Log Preview: Displays the latest incoming commit messages
-- Divergence Alert: Detects divergent histories
+- History Analysis, calculates the number of commits Ahead/Behind
+- Log Preview, displays the latest incoming commit messages
+- Divergence Alert, detects divergent histories
 
 6. 🛰️ **Discovery and Monitoring**
 
-- New Branch Detection: Scans the remote branch to track new remote branches
-- Tracking Proposal: Creates a local branch (or interactively deletes an obsolete branch)
+- New Branch Detection, scans the remote branch to track new remote branches
+- Tracking Proposal, creates a local branch (or interactively deletes an obsolete branch)
 
 7. 📈 **Visual and Concise Reporting**
 
 - Real-Time Feedback
-- Summary Table: Status and precise duration for each repository
-- UI Polish: Dynamic separators and text centering
+- Summary Table, status and precise duration for each repository
+- UI Polish, dynamic separators and text centering
 
 8. 🔐 **GitHub API Integration and Security**
 
@@ -100,6 +101,28 @@ Flow Controller based on iterative & sequential, stateless and awareness.
 👌 Others many controls and features have been added 👌
 
 ## PROCEDURE
+
+1. **Initialization :** The Get-DefaultGlobalGitIgnoreTemplate function holds the source of truth (OS files, IDEs, Languages...)
+
+2. **Validation Loop :** Iterates through the defined repository list
+
+- Integrity Check : verifies the folder exists and is a valid Git repository
+- Security Check : ensures the local origin remote matches the expected GitHub URL
+
+3. **Update Strategy :**
+
+- Fetch : performs a git fetch --prune to refresh remote references
+- Prioritize : sorts branches (Main/Master -> Dev/Develop -> others)
+- Action : auto-updates integration branches + triggers Interactive Mode for feature branches
+
+4. **Maintenance: :**
+
+- Safety : blocks updates if the working tree is dirty or has unpushed commits
+- Cleanup : proposes deletion for orphaned (gone) or fully merged branches
+
+5. **Reporting :** Generates a summary table with status (✅ Updated, ⏩ Skipped, ❌ Failed) and execution time
+
+## INSTALLATION PROCEDURE
 
 1. For Windows 10 get the fully path where PowerShell was installed :
 

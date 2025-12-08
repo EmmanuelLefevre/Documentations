@@ -1141,7 +1141,7 @@ function Copy-GlobalGitIgnoreToRepo {
 On the other hand "ALIAS SECTION" could be at top...  
 ℹ️ Unlike some other scripting languages ​​(such as JavaScript), PowerShell does not perform "hoisting" mechanism. You can't call a function before its declaration.
 
-5. Now you can place yourself in a local repository, open a terminal in this path and type =>  
+5. Now you can place yourself in a local repository, open a terminal in its path and type =>  
 
 ```powershell
 gir

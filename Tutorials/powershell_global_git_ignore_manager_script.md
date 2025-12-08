@@ -1025,9 +1025,124 @@ Set-LoadGlobalGitIgnore
 
 ## Bonus
 
-❤️ Additionally you could execute this command to copy your template in your project ❤️  
-So other developpers have it to !
+❤️ Additionally you could execute an alias comand to copy your .gitignore_global in your local repository project ❤️  
+Share the standard (Team Sync) !!!  
+And don't forget that a clean repository starts with a shared set of rules 😉.  
 
+1. Once again open your "Microsoft.PowerShell_profile.ps1" file.
+
+2. Copy/Paste the aliases section in top of the file...
+
+```powershell
+#--------------------------------------------------------------------------#
+#                              ALIASES                                     #
+#--------------------------------------------------------------------------#
+
+Set-Alias gir Copy-GlobalGitIgnoreToRepo
+```
+
+3. Copy/Paste "Copy-GlobalGitIgnoreToRepo" function under the "Set-LoadGlobalGitIgnore" function.
+
+```powershell
+#-------------------------------------------------------------------------------------#
+#              COPY GLOBAL GIT IGNORE CONFIG TO CURRENT REPOSITORY                    #
+#-------------------------------------------------------------------------------------#
+
+##########---------- Copy .gitignore_global to current repository ----------##########
+function Copy-GlobalGitIgnoreToRepo {
+  # Define Path
+  $GlobalIgnorePath = Join-Path -Path $HOME -ChildPath ".gitignore_global"
+  $LocalIgnorePath  = Join-Path -Path (Get-Location) -ChildPath ".gitignore"
+
+  ######## DYNAMIC HEADER FRAME TITLE ########
+  # File exists
+  if (Test-Path $LocalIgnorePath) {
+    $Title = "UPDATE GLOBAL GIT IGNORE IN YOUR REPOSITORY ?"
+  }
+  # File is missing
+  else {
+    $Title = "COPY GLOBAL GIT IGNORE IN YOUR REPOSITORY"
+  }
+
+  # Display header frame
+  Show-HeaderFrame -Title $Title
+
+  ######## GUARD CLAUSE : GLOBAL FILE MISSING ########
+  if (-not (Test-Path $GlobalIgnorePath)) {
+    Show-GracefulError -Message "⛔ .gitignore_global not found in your user folder !"
+    return
+  }
+
+  # Check if repo file exists
+  if (Test-Path $LocalIgnorePath) {
+    $msgPrefix = "⚠️ A "
+    $fileNameStr = " .gitignore"
+    $msgSuffix = " file already exists in this repository !"
+
+    $fullMsg = $msgPrefix + $fileNameStr + $msgSuffix
+
+    Write-Host -NoNewline (Get-CenteredPadding -RawMessage $fullMsg)
+    Write-Host -NoNewline $msgPrefix -ForegroundColor DarkYellow
+    Write-Host -NoNewline $fileNameStr -ForegroundColor Cyan
+    Write-Host $msgSuffix -ForegroundColor DarkYellow
+
+    Write-Host -NoNewline "Overwrite it with global configuration ? (Y/n): " -ForegroundColor Magenta
+
+    # Ask user permission
+    $confirm = Wait-ForUserConfirmation
+
+    if (-not $confirm) {
+      Write-Host ""
+      Write-Host -NoNewline "❌ Operation cancelled. Local " -ForegroundColor Red
+      Write-Host -NoNewline " .gitignore" -ForegroundColor Cyan
+      Write-Host " file kept." -ForegroundColor Red
+      Write-Host ""
+      return
+    }
+  }
+  # File doesn't exist
+  else {
+    $msgPrefix = "✨ Creating new "
+    $fileNameStr = " .gitignore"
+    $msgSuffix = " file from global template..."
+
+    $fullMsg = $msgPrefix + $fileNameStr + $msgSuffix
+
+    Write-Host -NoNewline (Get-CenteredPadding -RawMessage $fullMsg)
+
+    Write-Host -NoNewline $msgPrefix -ForegroundColor Green
+    Write-Host -NoNewline $fileNameStr -ForegroundColor Cyan
+    Write-Host $msgSuffix -ForegroundColor Green
+    Write-Host ""
+  }
+
+  # Perform Copy
+  try {
+    Copy-Item -Path $GlobalIgnorePath -Destination $LocalIgnorePath -Force
+
+    $msgPrefix = "✅ Global "
+    $fileNameStr = " .gitignore"
+    $msgSuffix = " file successfully synchronized in your repository !"
+
+    $fullMsg = $msgPrefix + $fileNameStr + $msgSuffix
+
+    Write-Host -NoNewline $msgPrefix -ForegroundColor Green
+    Write-Host -NoNewline $fileNameStr -ForegroundColor Cyan
+    Write-Host $msgSuffix -ForegroundColor Green
+    Write-Host ""
+  }
+  catch {
+    Show-GracefulError -Message "❌ Error copying file : " -NoCenter -ErrorDetails $_
+  }
+}
+```
+
+4. ⚠️ Be carefull to **ALWAYS** keep the "SHARED FUNCTIONS" section **BEFORE** the two functions stated above !!!  
+On the other hand "ALIAS SECTION" could be at top...  
+ℹ️ Unlike some other scripting languages ​​(such as JavaScript), PowerShell does not perform "hoisting" mechanism. You can't call a function before its declaration.
+
+5. Now you can place yourself in a local repository, open a terminal in this path and type "gir".  
+The magic happens, you've just copied your configuration with a single command 🔥🔥🔥
 
 ## Console Application Screens
 

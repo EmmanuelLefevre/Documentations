@@ -4,8 +4,8 @@
 
 - [INTRO](#intro)
 - [PRESENTATION](#presentation)
-- [PROCEDURE](#procedure)
-- [INSTALLATIONPROCEDURE](#installation-procedure)
+- [WORKFLOW](#workflow)
+- [INSTALLATION PROCEDURE](#installation-procedure)
 - [BONUS](#bonus)
 - [CONSOLE APPLICATION SCREENS](#console-application-screens)
 
@@ -81,22 +81,22 @@ Hybrid Parser & Builder based on a "Sandwich" logic :
 
 👌 Others many controls and features have been added 👌
 
-## PROCEDURE
+## WORKFLOW
 
-1. **Define the template :** The Get-DefaultGlobalGitIgnoreTemplate function holds the source of truth (OS files, IDEs, Languages...).
+1. **Define the template :** The Get-DefaultGlobalGitIgnoreTemplate function holds the source of truth (OS files, IDEs, Languages...)
 
-2. **Startup Check :** On terminal launch, Set-LoadGlobalGitIgnore is called.
+2. **Startup Check :** On terminal launch, Set-LoadGlobalGitIgnore is called
 
 3. **Analysis :**
 
-- It reads the existing .gitignore_global.
-- It strips out the dynamically generated section.
-- It compares the rest with the template.
+- It reads the existing .gitignore_global
+- It strips out the dynamically generated section
+- It compares the rest with the template
 
 4. **Actions :**
 
-- If differences are found -> Backup -> Rebuild File -> Save -> Delete Backup.
-- If identical -> Do Nothing.
+- If differences are found -> Backup -> Rebuild File -> Save -> Delete Backup
+- If identical -> Do Nothing
 
 ## INSTALLATION PROCEDURE
 

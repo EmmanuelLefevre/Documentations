@@ -2598,42 +2598,6 @@ function Get-LocationPathConfig {
     [PSCustomObject]@{ Name = "profile";                  Path = "$env:USERPROFILE\Documents\PowerShell";                     IsRepo = $false }
   )
 }
-
-
-#-------------------------------------------------------------------------#
-#                   LOAD GLOBAL GIT IGNORE CONFIG                         #
-#-------------------------------------------------------------------------#
-
-function Set-LoadGlobalGitIgnore {
-  $GitGlobalIgnorePath = Join-Path -Path $HOME -ChildPath ".gitignore_global"
-
-  # Flag created or updated
-  $WasUpdatedOrCreated = $false
-
-  ######## GUARD CLAUSE : GIT AVAILABILITY ########
-  if (-not (Test-GitAvailability -Message "⛔ Git for Windows is not installed (or not found in path). Global git ignore config skipped ! ⛔")) {
-    return
-  }
-
-  # Load default template content
-  $DefaultLines = Get-DefaultGlobalGitIgnoreTemplate
-
-  ######## FILE CREATION/UPDATE ORCHESTRATION ########
-  if (-not (Test-Path $GitGlobalIgnorePath)) {
-    ######## CASE 1 : FILE DOESN'T EXIST (CREATION) ########
-    Initialize-GlobalGitIgnoreFile -Path $GitGlobalIgnorePath -ContentLines $DefaultLines
-
-    $WasUpdatedOrCreated = $true
-  }
-  ######## CASE 2 : FILE EXIST (UPDATE) ########
-  else {
-    $WasUpdatedOrCreated = Update-GlobalGitIgnoreFile -Path $GitGlobalIgnorePath -DefaultLines $DefaultLines
-  }
-
-  ######## GIT CONFIGURATION ########
-  # Only display if file was touched or config is wrong
-  Set-GlobalGitIgnoreReference -Path $GitGlobalIgnorePath -ShowMessage $WasUpdatedOrCreated
-}
 ```
 
 ## Bonus

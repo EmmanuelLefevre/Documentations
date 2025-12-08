@@ -1147,7 +1147,7 @@ On the other hand "ALIAS SECTION" could be at top...
 gir
 ```
 
-The magic happens, you've just copied your configuration with a single command 🔥🔥🔥
+The magic happens, you've just copied your .gitignore configuration with a single command 🔥🔥🔥
 
 ## Console Application Screens
 

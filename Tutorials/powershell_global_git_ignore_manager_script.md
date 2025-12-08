@@ -1027,7 +1027,7 @@ Set-LoadGlobalGitIgnore
 
 ❤️ Additionally you could execute an alias comand to copy your .gitignore_global in your local repository project ❤️  
 Share the standard (Team Sync) !!!  
-And don't forget that a clean repository starts with a shared set of rules 😉.  
+And don't forget that a clean repository (and project) starts with a shared set of rules 😉.  
 
 1. Once again open your "Microsoft.PowerShell_profile.ps1" file.
 
@@ -1141,7 +1141,12 @@ function Copy-GlobalGitIgnoreToRepo {
 On the other hand "ALIAS SECTION" could be at top...  
 ℹ️ Unlike some other scripting languages ​​(such as JavaScript), PowerShell does not perform "hoisting" mechanism. You can't call a function before its declaration.
 
-5. Now you can place yourself in a local repository, open a terminal in this path and type "gir".  
+5. Now you can place yourself in a local repository, open a terminal in this path and type =>  
+
+```powershell
+gir
+```
+
 The magic happens, you've just copied your configuration with a single command 🔥🔥🔥
 
 ## Console Application Screens

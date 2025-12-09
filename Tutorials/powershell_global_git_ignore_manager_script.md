@@ -1025,16 +1025,15 @@ function Copy-GlobalGitIgnoreToRepo {
 
   # Check if repo file exists
   if (Test-Path $LocalIgnorePath) {
-    $msgPrefix = "⚠️ A "
-    $fileNameStr = " .gitignore"
-    $msgSuffix = " file already exists in this repository !"
+    $msgPrefix = " .gitignore"
+    $msgSuffix = " file already exists in this repository ⚠️"
 
-    $fullMsg = $msgPrefix + $fileNameStr + $msgSuffix
+    $fullMsg = $msgPrefix + $msgSuffix
 
     Write-Host -NoNewline (Get-CenteredPadding -RawMessage $fullMsg)
-    Write-Host -NoNewline $msgPrefix -ForegroundColor DarkYellow
-    Write-Host -NoNewline $fileNameStr -ForegroundColor Cyan
+    Write-Host -NoNewline $msgPrefix -ForegroundColor Cyan
     Write-Host $msgSuffix -ForegroundColor DarkYellow
+    Write-Host ""
 
     Write-Host -NoNewline "Overwrite it with global configuration ? (Y/n): " -ForegroundColor Magenta
 
@@ -1042,10 +1041,17 @@ function Copy-GlobalGitIgnoreToRepo {
     $confirm = Wait-ForUserConfirmation
 
     if (-not $confirm) {
+      $msgPrefix = "❌ Operation cancelled. Local "
+      $fileNameStr = " .gitignore"
+      $msgSuffix = " file kept."
+
+      $fullMsg = $msgPrefix + $fileNameStr + $msgSuffix
+
       Write-Host ""
-      Write-Host -NoNewline "❌ Operation cancelled. Local " -ForegroundColor Red
-      Write-Host -NoNewline " .gitignore" -ForegroundColor Cyan
-      Write-Host " file kept." -ForegroundColor Red
+      Write-Host -NoNewline (Get-CenteredPadding -RawMessage $fullMsg)
+      Write-Host -NoNewline $msgPrefix -ForegroundColor Red
+      Write-Host -NoNewline $fileNameStr -ForegroundColor Cyan
+      Write-Host $msgSuffix -ForegroundColor Red
       Write-Host ""
       return
     }
@@ -1059,7 +1065,6 @@ function Copy-GlobalGitIgnoreToRepo {
     $fullMsg = $msgPrefix + $fileNameStr + $msgSuffix
 
     Write-Host -NoNewline (Get-CenteredPadding -RawMessage $fullMsg)
-
     Write-Host -NoNewline $msgPrefix -ForegroundColor Green
     Write-Host -NoNewline $fileNameStr -ForegroundColor Cyan
     Write-Host $msgSuffix -ForegroundColor Green
@@ -1068,16 +1073,46 @@ function Copy-GlobalGitIgnoreToRepo {
 
   # Perform Copy
   try {
-    Copy-Item -Path $GlobalIgnorePath -Destination $LocalIgnorePath -Force
+    # Read global content
+    $RawContent = Get-Content -Path $GlobalIgnorePath
+    $FilteredContent = New-Object System.Collections.Generic.List[string]
 
-    $msgPrefix = "✅ Global "
-    $fileNameStr = " .gitignore"
-    $msgSuffix = " file successfully synchronized in your repository !"
+    foreach ($line in $RawContent) {
+      ######## CASE 1 : STOP IF HIT "USER CUSTOMIZATIONS" SECTION ########
+      if ($line -match "# USER CUSTOMIZATIONS") {
+        # Check if line just before was a separator bar (# ========)
+        $lastIndex = $FilteredContent.Count - 1
+        if ($lastIndex -ge 0 -and $FilteredContent[$lastIndex] -match "^# ={5,}$") {
+          $FilteredContent.RemoveAt($lastIndex)
+        }
 
-    $fullMsg = $msgPrefix + $fileNameStr + $msgSuffix
+        break
+      }
 
-    Write-Host -NoNewline $msgPrefix -ForegroundColor Green
-    Write-Host -NoNewline $fileNameStr -ForegroundColor Cyan
+      ######## CASE 2 : SKIP LINES THAT ARE JUST NUMBERS ########
+      if ($line -match "^\d+$") {
+        continue
+      }
+
+      # Add line to new content list
+      [void]$FilteredContent.Add($line)
+    }
+
+    # Set-Content handles encoding and overwrites cleanly
+    $FilteredContent | Set-Content -Path $LocalIgnorePath -Encoding UTF8 -Force
+
+    $msgPrefix = " .gitignore_global"
+    $msgAction = " synchronized in "
+    $msgTarget = " .gitignore"
+    $msgSuffix = " repository ✅"
+
+    $fullMsg = $msgPrefix + $msgAction + $msgTarget + $msgSuffix
+
+    Write-Host ""
+    Write-Host -NoNewline (Get-CenteredPadding -RawMessage $fullMsg)
+    Write-Host -NoNewline $msgPrefix -ForegroundColor Cyan
+    Write-Host -NoNewline $msgAction -ForegroundColor Green
+    Write-Host -NoNewline $msgTarget -ForegroundColor Cyan
     Write-Host $msgSuffix -ForegroundColor Green
     Write-Host ""
   }

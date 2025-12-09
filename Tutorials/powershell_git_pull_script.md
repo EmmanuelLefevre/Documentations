@@ -207,6 +207,53 @@ Repeat operation for the username...
 11. Copy/Paste "gpull" function and his utilities functions inside.
 
 ```powershell
+#---------------------------------------------------------------------------#
+#                        LOCATION PATH CONFIG                               #
+#---------------------------------------------------------------------------#
+
+function Get-LocationPathConfig {
+  # IsRepo = $true => Included in gpull() process AND accessible via go()
+  # IsRepo = $false=> Accessible ONLY via go()
+
+  return @(
+    ##########---------- REPOSITORIES (Important order for gpull() function) ----------##########
+    [PSCustomObject]@{ Name = "ArtiWave";                 Path = "$env:USERPROFILE\Desktop\Projets\ArtiWave";                 IsRepo = $true },
+    [PSCustomObject]@{ Name = "Cours";                    Path = "$env:USERPROFILE\Desktop\Cours";                            IsRepo = $true },
+    [PSCustomObject]@{ Name = "DailyPush";                Path = "$env:USERPROFILE\Desktop\DailyPush";                        IsRepo = $true },
+    [PSCustomObject]@{ Name = "DataScrub";                Path = "$env:USERPROFILE\Desktop\Projets\DataScrub";                IsRepo = $true },
+    [PSCustomObject]@{ Name = "Documentations";           Path = "$env:USERPROFILE\Documents\Documentations";                 IsRepo = $true },
+    [PSCustomObject]@{ Name = "Dotfiles";                 Path = "$env:USERPROFILE\Desktop\Dotfiles";                         IsRepo = $true },
+    [PSCustomObject]@{ Name = "EasyGarden";               Path = "$env:USERPROFILE\Desktop\Projets\EasyGarden";               IsRepo = $true },
+    [PSCustomObject]@{ Name = "ElexxionData";             Path = "$env:USERPROFILE\Desktop\Projets\ElexxionData";             IsRepo = $true },
+    [PSCustomObject]@{ Name = "ElexxionMinio";            Path = "$env:USERPROFILE\Desktop\Projets\ElexxionMinio";            IsRepo = $true },
+    [PSCustomObject]@{ Name = "EmmanuelLefevre";          Path = "$env:USERPROFILE\Desktop\Projets\EmmanuelLefevre";          IsRepo = $true },
+    [PSCustomObject]@{ Name = "GestForm";                 Path = "$env:USERPROFILE\Desktop\Projets\GestForm";                 IsRepo = $true },
+    [PSCustomObject]@{ Name = "GitHubProfileIcons";       Path = "$env:USERPROFILE\Pictures\GitHubProfileIcons";              IsRepo = $true },
+    [PSCustomObject]@{ Name = "GoogleSheets";             Path = "$env:USERPROFILE\Desktop\GoogleSheets";                     IsRepo = $true },
+    [PSCustomObject]@{ Name = "LeCabinetDeCuriosites";    Path = "$env:USERPROFILE\Desktop\Projets\LeCabinetDeCuriosites";    IsRepo = $true },
+    [PSCustomObject]@{ Name = "IAmEmmanuelLefevre";       Path = "$env:USERPROFILE\Desktop\Projets\IAmEmmanuelLefevre";       IsRepo = $true },
+    [PSCustomObject]@{ Name = "MarkdownImg";              Path = "$env:USERPROFILE\Desktop\MarkdownImg";                      IsRepo = $true },
+    [PSCustomObject]@{ Name = "Mflix";                    Path = "$env:USERPROFILE\Desktop\Projets\Mflix";                    IsRepo = $true },
+    [PSCustomObject]@{ Name = "OmbreArcane";              Path = "$env:USERPROFILE\Desktop\Projets\OmbreArcane";              IsRepo = $true },
+    [PSCustomObject]@{ Name = "OpenScraper";              Path = "$env:USERPROFILE\Desktop\Projets\OpenScraper";              IsRepo = $true },
+    [PSCustomObject]@{ Name = "ParquetFlow";              Path = "$env:USERPROFILE\Desktop\Projets\ParquetFlow";              IsRepo = $true },
+    [PSCustomObject]@{ Name = "ReplicaMySQL";             Path = "$env:USERPROFILE\Desktop\Projets\ReplicaMySQL";             IsRepo = $true },
+    [PSCustomObject]@{ Name = "Schemas";                  Path = "$env:USERPROFILE\Desktop\Schemas";                          IsRepo = $true },
+    [PSCustomObject]@{ Name = "ScrapMate";                Path = "$env:USERPROFILE\Desktop\Projets\ScrapMate";                IsRepo = $true },
+    [PSCustomObject]@{ Name = "Sortify";                  Path = "$env:USERPROFILE\Desktop\Projets\Sortify";                  IsRepo = $true },
+    [PSCustomObject]@{ Name = "Soutenances";              Path = "$env:USERPROFILE\Desktop\Soutenances";                      IsRepo = $true },
+    [PSCustomObject]@{ Name = "Yam4";                     Path = "$env:USERPROFILE\Desktop\Projets\Yam4";                     IsRepo = $true },
+
+    ##########---------- NAVIGATION ONLY ----------##########
+    [PSCustomObject]@{ Name = "home";                     Path = "$env:USERPROFILE";                                          IsRepo = $false },
+    [PSCustomObject]@{ Name = "dwld";                     Path = "$env:USERPROFILE\Downloads";                                IsRepo = $false },
+    [PSCustomObject]@{ Name = "projets";                  Path = "$env:USERPROFILE\Desktop\Projets";                          IsRepo = $false },
+    [PSCustomObject]@{ Name = "nvim";                     Path = "$env:USERPROFILE\AppData\Local\nvim";                       IsRepo = $false },
+    [PSCustomObject]@{ Name = "profile";                  Path = "$env:USERPROFILE\Documents\PowerShell";                     IsRepo = $false }
+  )
+}
+
+
 #-----------------------------------------------------------------------#
 #                        SHARED FUNCTIONS                               #
 #-----------------------------------------------------------------------#
@@ -2550,53 +2597,6 @@ function Stop-OperationTimer {
     Write-Host -NoNewline " updated in " -ForegroundColor Green
     Write-Host "$timeString ⏱️" -ForegroundColor Magenta
   }
-}
-
-
-#---------------------------------------------------------------------------#
-#                        LOCATION PATH CONFIG                               #
-#---------------------------------------------------------------------------#
-
-function Get-LocationPathConfig {
-  # IsRepo = $true => Included in gpull() process AND accessible via go()
-  # IsRepo = $false=> Accessible ONLY via go()
-
-  return @(
-    ##########---------- REPOSITORIES (Important order for gpull() function) ----------##########
-    [PSCustomObject]@{ Name = "ArtiWave";                 Path = "$env:USERPROFILE\Desktop\Projets\ArtiWave";                 IsRepo = $true },
-    [PSCustomObject]@{ Name = "Cours";                    Path = "$env:USERPROFILE\Desktop\Cours";                            IsRepo = $true },
-    [PSCustomObject]@{ Name = "DailyPush";                Path = "$env:USERPROFILE\Desktop\DailyPush";                        IsRepo = $true },
-    [PSCustomObject]@{ Name = "DataScrub";                Path = "$env:USERPROFILE\Desktop\Projets\DataScrub";                IsRepo = $true },
-    [PSCustomObject]@{ Name = "Documentations";           Path = "$env:USERPROFILE\Documents\Documentations";                 IsRepo = $true },
-    [PSCustomObject]@{ Name = "Dotfiles";                 Path = "$env:USERPROFILE\Desktop\Dotfiles";                         IsRepo = $true },
-    [PSCustomObject]@{ Name = "EasyGarden";               Path = "$env:USERPROFILE\Desktop\Projets\EasyGarden";               IsRepo = $true },
-    [PSCustomObject]@{ Name = "ElexxionData";             Path = "$env:USERPROFILE\Desktop\Projets\ElexxionData";             IsRepo = $true },
-    [PSCustomObject]@{ Name = "ElexxionMinio";            Path = "$env:USERPROFILE\Desktop\Projets\ElexxionMinio";            IsRepo = $true },
-    [PSCustomObject]@{ Name = "EmmanuelLefevre";          Path = "$env:USERPROFILE\Desktop\Projets\EmmanuelLefevre";          IsRepo = $true },
-    [PSCustomObject]@{ Name = "GestForm";                 Path = "$env:USERPROFILE\Desktop\Projets\GestForm";                 IsRepo = $true },
-    [PSCustomObject]@{ Name = "GitHubProfileIcons";       Path = "$env:USERPROFILE\Pictures\GitHubProfileIcons";              IsRepo = $true },
-    [PSCustomObject]@{ Name = "GoogleSheets";             Path = "$env:USERPROFILE\Desktop\GoogleSheets";                     IsRepo = $true },
-    [PSCustomObject]@{ Name = "LeCabinetDeCuriosites";    Path = "$env:USERPROFILE\Desktop\Projets\LeCabinetDeCuriosites";    IsRepo = $true },
-    [PSCustomObject]@{ Name = "IAmEmmanuelLefevre";       Path = "$env:USERPROFILE\Desktop\Projets\IAmEmmanuelLefevre";       IsRepo = $true },
-    [PSCustomObject]@{ Name = "MarkdownImg";              Path = "$env:USERPROFILE\Desktop\MarkdownImg";                      IsRepo = $true },
-    [PSCustomObject]@{ Name = "Mflix";                    Path = "$env:USERPROFILE\Desktop\Projets\Mflix";                    IsRepo = $true },
-    [PSCustomObject]@{ Name = "OmbreArcane";              Path = "$env:USERPROFILE\Desktop\Projets\OmbreArcane";              IsRepo = $true },
-    [PSCustomObject]@{ Name = "OpenScraper";              Path = "$env:USERPROFILE\Desktop\Projets\OpenScraper";              IsRepo = $true },
-    [PSCustomObject]@{ Name = "ParquetFlow";              Path = "$env:USERPROFILE\Desktop\Projets\ParquetFlow";              IsRepo = $true },
-    [PSCustomObject]@{ Name = "ReplicaMySQL";             Path = "$env:USERPROFILE\Desktop\Projets\ReplicaMySQL";             IsRepo = $true },
-    [PSCustomObject]@{ Name = "Schemas";                  Path = "$env:USERPROFILE\Desktop\Schemas";                          IsRepo = $true },
-    [PSCustomObject]@{ Name = "ScrapMate";                Path = "$env:USERPROFILE\Desktop\Projets\ScrapMate";                IsRepo = $true },
-    [PSCustomObject]@{ Name = "Sortify";                  Path = "$env:USERPROFILE\Desktop\Projets\Sortify";                  IsRepo = $true },
-    [PSCustomObject]@{ Name = "Soutenances";              Path = "$env:USERPROFILE\Desktop\Soutenances";                      IsRepo = $true },
-    [PSCustomObject]@{ Name = "Yam4";                     Path = "$env:USERPROFILE\Desktop\Projets\Yam4";                     IsRepo = $true },
-
-    ##########---------- NAVIGATION ONLY ----------##########
-    [PSCustomObject]@{ Name = "home";                     Path = "$env:USERPROFILE";                                          IsRepo = $false },
-    [PSCustomObject]@{ Name = "dwld";                     Path = "$env:USERPROFILE\Downloads";                                IsRepo = $false },
-    [PSCustomObject]@{ Name = "projets";                  Path = "$env:USERPROFILE\Desktop\Projets";                          IsRepo = $false },
-    [PSCustomObject]@{ Name = "nvim";                     Path = "$env:USERPROFILE\AppData\Local\nvim";                       IsRepo = $false },
-    [PSCustomObject]@{ Name = "profile";                  Path = "$env:USERPROFILE\Documents\PowerShell";                     IsRepo = $false }
-  )
 }
 ```
 

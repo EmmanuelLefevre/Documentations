@@ -237,56 +237,6 @@ function Wait-ForUserConfirmation {
   }
 }
 
-##########---------- Display a separator line with custom length and colors ----------##########
-function Show-Separator {
-  param (
-    [Parameter(Mandatory=$true)]
-    [int]$Length,
-
-    [Parameter(Mandatory=$true)]
-    [System.ConsoleColor]$ForegroundColor,
-
-    [Parameter(Mandatory=$false)]
-    [System.ConsoleColor]$BackgroundColor,
-
-    [Parameter(Mandatory=$false)]
-    [switch]$NoNewline
-  )
-
-  ######## DATA PREPARATION ########
-  # Create line string based on requested length
-  $line = "─" * $Length
-
-  ######## GUARD CLAUSE : WITH BACKGROUND COLOR ########
-  # If a background color is specified, handle it specific way and exit
-  if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
-    Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor -BackgroundColor $BackgroundColor
-    return
-  }
-
-  ######## STANDARD DISPLAY ########
-  # Otherwise (default behavior), display with foreground color only
-  Write-Host -NoNewline:$NoNewline $line -ForegroundColor $ForegroundColor
-}
-
-##########---------- Display main separator ----------##########
-function Show-MainSeparator {
-  # Length configuration
-  $totalWidth = 80
-  $lineLength = 54
-
-  # Calculation of margins
-  $paddingCount = [math]::Max(0, [int](($totalWidth - $lineLength) / 2))
-  $paddingStr   = " " * $paddingCount
-
-  # Separator display
-  Write-Host ""
-  Write-Host -NoNewline $paddingStr -ForegroundColor DarkGray
-  Show-Separator -NoNewline -Length $lineLength -ForegroundColor DarkGray -BackgroundColor Gray
-  Write-Host $paddingStr -ForegroundColor DarkGray
-  Write-Host ""
-}
-
 ##########---------- Display error message nicely ----------##########
 function Show-GracefulError {
   param (

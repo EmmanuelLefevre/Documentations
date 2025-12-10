@@ -110,6 +110,37 @@ Hybrid Parser & Builder based on a "Sandwich" logic :
 #                        SHARED FUNCTIONS                               #
 #-----------------------------------------------------------------------#
 
+##########---------- Get system environment context ----------##########
+function Get-SystemContext {
+  # PowerShell editing detection (the engine)
+  # Desktop = PowerShell 5.1 (old Windows)
+  # Core    = PowerShell 7+ (modern : Windows, Linux, Mac)
+  $IsCore = $PSVersionTable.PSEdition -ne 'Desktop'
+
+  # OS detection
+  # In older PowerShell 5.1 versions, variables $IsLinux/$IsMacOS not exist => assume Windows
+  # Also, use different names ($detect...) to avoid conflicts with system reserved variables
+  $detectLinux   = $false
+  $detectMacOS   = $false
+  $detectWindows = $true
+
+  if ($IsCore) {
+    # In PowerShell we simply read native variables
+    # If $IsLinux exists and is true, we update our internal variable
+    if ($IsLinux) { $detectLinux = $true; $detectWindows = $false }
+    if ($IsMacOS) { $detectMacOS = $true; $detectWindows = $false }
+  }
+
+  # Clean/easy-to-use item
+  return [PSCustomObject]@{
+    IsCore    = $IsCore
+    IsDesktop = -not $IsCore
+    IsLinux   = $detectLinux
+    IsMacOS   = $detectMacOS
+    IsWindows = $detectWindows
+  }
+}
+
 ##########---------- Write file content safely (Cross-Platform encoding) ----------##########
 function Set-FileContentCrossPlatform {
   param (
@@ -121,18 +152,20 @@ function Set-FileContentCrossPlatform {
     [object]$Content
   )
 
-  # Desktop = Windows PowerShell 5.1 (Legacy) -> only support "UTF8" (with BOM)
-  # Core    = PowerShell 7+, Linux, macOS     -> support "utf8NoBOM" (Linux standard)
+  # Retrieves system context
+  $Context = Get-SystemContext
+
+  # By default, remain cautious (UTF8 with BOM for maximum compatibility)
   $EncodingConfig = "UTF8"
 
-  if ($PSVersionTable.PSEdition -ne 'Desktop') {
+  # MODERN version of PowerShell (whether Linux, Mac or Windows 7+), uses standard without BOM
+  if ($Context.IsCore) {
     $EncodingConfig = "utf8NoBOM"
   }
 
   # File write (uses -Value $Content rather than pipeline to ensure compatibility)
   Set-Content -Path $Path -Value $Content -Encoding $EncodingConfig -Force
 }
-
 
 ##########---------- Check if Git is installed and available ----------##########
 function Test-GitAvailability {

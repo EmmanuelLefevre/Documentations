@@ -61,7 +61,7 @@ Flow Controller based on iterative & sequential, stateless and awareness.
 
 - **Event-Driven** (startup computer)
 - **GUI** (desktop shortcut)
-- **CLI** (aka Powershell: gpull)
+- **CLI** (alias Powershell: gpull)
 
 🛠️ **FEATURES**
 
@@ -209,15 +209,30 @@ New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_sc
 8. Copy/Paste this inside the new file
 
 ```powershell
-# Load PowerShell Profile
-. "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+# Load PowerShell Profile dynamically (works on all OS paths)
+. $PROFILE
 
 # Call function
-gpull
+Update-GitRepositories
 
 # Close terminal
 Write-Host ""
 Read-Host -Prompt "Press Enter to close... "
+```
+
+9. ❤️ Additionally give the shortcut a nice icon ❤️
+
+💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this (or the Git one).
+
+Right click on shortcut > Properties > Change icon
+Icons paths:
+
+```shell
+C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.exe
+```
+
+```shell
+C:\Program Files\Git\git-bash.exe
 ```
 
 ### Setup for all OS start here
@@ -281,6 +296,14 @@ chmod 600 $PROFILE
 3. Copy/Paste "Update-GitRepositories" function and his utilities functions inside.
 
 ```powershell
+
+#--------------------------------------------------------------------------#
+#                              ALIASES                                     #
+#--------------------------------------------------------------------------#
+
+Set-Alias -Name gpull -Value Update-GitRepositories
+
+
 #---------------------------------------------------------------------------#
 #                        LOCATION PATH CONFIG                               #
 #---------------------------------------------------------------------------#
@@ -623,7 +646,7 @@ function Update-GitRepositories {
 
   ######## CACHE MANAGEMENT ########
   # If cache doesn't exist or if a refresh is forced
-  if (-not $Global:GPullCache -or $RefreshCache) {
+  if (-not $Global:GitReposCache -or $RefreshCache) {
     # Helper called to center message nicely
     $msg = "🔄 Updating repositories informations... 🔄"
     $paddingStr = Get-CenteredPadding -RawMessage $msg
@@ -652,14 +675,14 @@ function Update-GitRepositories {
     }
 
     # If everything is valid cache is created
-    $Global:GPullCache = @{
+    $Global:GitReposCache = @{
       ReposInfo = $tempReposInfo
     }
   }
 
   ######## DATA RETRIEVAL ########
   # Retrieve repositories information from cache
-  $reposInfo  = $Global:GPullCache.ReposInfo
+  $reposInfo  = $Global:GitReposCache.ReposInfo
 
   $reposOrder = $reposInfo.Order
   $repos      = $reposInfo.Paths
@@ -2723,28 +2746,95 @@ function Stop-OperationTimer {
 }
 ```
 
+4. Now you can use the function in your terminal by typing the alias and press ENTER :
+
+```powershell
+gpull
+```
+
+Or launch it with the desktop shortcut 🔥🔥🔥
+
 ## Bonus
 
-1. ❤️ Additionally give the shortcut a nice icon ❤️
+🧠 You can easily launch script automatically at your computer starts 🧠
 
-💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this (or the Git one).
-
-Right click on shortcut > Properties > Change icon
-Icons paths:
-
-```shell
-C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.exe
-```
-
-```shell
-C:\Program Files\Git\git-bash.exe
-```
-
-2. 🧠 You can easily launch script automatically at Windows starts 🧠
+### Windows
 
 **Win + R** -> type `shell:startup`  
-Copy (Ctrl+C) the shortcut and paste it in the "Getting Started" folder...  
+Copy (Ctrl+C) your desktop shortcut and paste it in the "Getting Started" folder...  
+
 Now the script will be launched every time you start your PC 💪
+
+### Linux
+
+Unlike Windows, Linux uses .desktop files for startup items.  
+
+1. Create the autostart directory (if it doesn't exist).
+
+```bash
+mkdir -p ~/.config/autostart
+```
+
+2. Create the shortcut file.
+
+```bash
+nano ~/.config/autostart/git-auto-update.desktop
+```
+
+3. Paste this content inside : this configuration opens a terminal, loads your profile and runs the function.
+
+```Ini, TOML
+[Desktop Entry]
+Type=Application
+Name=Global Git Update
+Comment=Update all git repositories on login
+# Command: Launch PowerShell, Load Profile, Run Function, Wait for user
+Exec=pwsh -Command "& { . $PROFILE; Update-GitRepositories; Read-Host 'Press Enter to close...' }"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Terminal=true
+```
+
+4. Save and Exit.
+
+5. Restart your session.
+
+Now the script will be launched every time you start your PC 💪
+
+### macOS
+
+macOS treats files with the .command extension as clickable shell scripts that automatically open the Terminal.  
+
+1. Create the launcher file : open your terminal and create a file in your Documents folder (or anywhere you like).
+
+```bash
+nano ~/Documents/StartGitUpdate.command
+```
+
+2. Paste this content inside : this script invokes PowerShell, loads your profile (to get tokens and functions), runs the update, and waits for user input.
+
+```bash
+#!/bin/bash
+echo "🚀 Starting Global Git Update..."
+pwsh -Command "& { . $PROFILE; Update-GitRepositories; Read-Host 'Press Enter to close...' }"
+```
+
+3. Save and Exit.
+
+4. Make it executable : this step is mandatory to allow macOS to run the file.
+
+```bash
+chmod +x ~/Documents/StartGitUpdate.command
+```
+
+5. Add to Login Items :  
+
+- Open System Settings > General > Login Items
+- Click the (+) button.
+- Select your file ~/Documents/StartGitUpdate.command.
+
+Now, every time you log in, a Terminal window will pop up, update your repos, and wait for you to check the green ticks ✅ before closing.
 
 ## Console Application Screens
 

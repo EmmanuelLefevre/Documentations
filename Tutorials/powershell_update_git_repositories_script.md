@@ -69,6 +69,7 @@ Flow Controller based on iterative & sequential, stateless and awareness.
 
 - **Prioritization,** main and develop branches
 - **Targeting,** optional parameter for updating 1 repository
+- **Read-Only Mode,** able to restrict updates to main/master only (IsOnlyMain). Ideal for documentation or course repositories where you don't need feature branches.
 - **Silent Auto-Update** on integration branches
 - **Interactive Mode** on incoming commits from other branches
 - **Bot Detection** (sync force)
@@ -309,8 +310,11 @@ Set-Alias -Name gpull -Value Update-GitRepositories
 #---------------------------------------------------------------------------#
 
 function Get-LocationPathConfig {
-  # IsRepo = $true => Included in Update-GitRepositories() process AND accessible via go()
-  # IsRepo = $false=> Accessible ONLY via go()
+  # IsRepo = $true   => Included in Update-GitRepositories() process AND accessible via go()
+  # IsRepo = $false  => Accessible ONLY via go() function
+
+  # IsOnlyMain = $true   => only pull main branch
+  # IsOnlyMain = $false  => pull all branches
 
   # Get system context
   $Sys = Get-SystemContext
@@ -320,7 +324,7 @@ function Get-LocationPathConfig {
   $DesktopPath   = Join-Path $HOME "Desktop"
   $ProjetsPath   = Join-Path $DesktopPath "Projets"
   $DocumentsPath = Join-Path $HOME "Documents"
-  $PicturesPath  = Join-Path $HOME "Pictures"
+  $PicturesPath = Join-Path $HOME "Pictures"
 
   # For nvim, path changes depending on OS
   if ($Sys.IsMacOS -or $Sys.IsLinux) {
@@ -332,32 +336,39 @@ function Get-LocationPathConfig {
 
   return @(
     ##########---------- REPOSITORIES (Important order for Update-GitRepositories() function) ----------##########
-    [PSCustomObject]@{ Name = "ArtiWave";                 Path = Join-Path $ProjetsPath "ArtiWave";                         IsRepo = $true },
-    [PSCustomObject]@{ Name = "Cours";                    Path = Join-Path $DesktopPath "Cours";                            IsRepo = $true },
-    [PSCustomObject]@{ Name = "DailyPush";                Path = Join-Path $DesktopPath "DailyPush";                        IsRepo = $true },
-    [PSCustomObject]@{ Name = "DataScrub";                Path = Join-Path $ProjetsPath "DataScrub";                        IsRepo = $true },
-    [PSCustomObject]@{ Name = "Documentations";           Path = Join-Path $DocumentsPath "Documentations";                 IsRepo = $true },
-    [PSCustomObject]@{ Name = "Dotfiles";                 Path = Join-Path $DesktopPath "Dotfiles";                         IsRepo = $true },
-    [PSCustomObject]@{ Name = "EasyGarden";               Path = Join-Path $ProjetsPath "EasyGarden";                       IsRepo = $true },
-    [PSCustomObject]@{ Name = "ElexxionData";             Path = Join-Path $ProjetsPath "ElexxionData";                     IsRepo = $true },
-    [PSCustomObject]@{ Name = "ElexxionMinio";            Path = Join-Path $ProjetsPath "ElexxionMinio";                    IsRepo = $true },
-    [PSCustomObject]@{ Name = "EmmanuelLefevre";          Path = Join-Path $ProjetsPath "EmmanuelLefevre";                  IsRepo = $true },
-    [PSCustomObject]@{ Name = "GestForm";                 Path = Join-Path $ProjetsPath "GestForm";                         IsRepo = $true },
-    [PSCustomObject]@{ Name = "GitHubProfileIcons";       Path = Join-Path $PicturesPath "GitHubProfileIcons";              IsRepo = $true },
-    [PSCustomObject]@{ Name = "GoogleSheets";             Path = Join-Path $DesktopPath "GoogleSheets";                     IsRepo = $true },
-    [PSCustomObject]@{ Name = "LeCabinetDeCuriosites";    Path = Join-Path $ProjetsPath "LeCabinetDeCuriosites";            IsRepo = $true },
-    [PSCustomObject]@{ Name = "IAmEmmanuelLefevre";       Path = Join-Path $ProjetsPath "IAmEmmanuelLefevre";               IsRepo = $true },
-    [PSCustomObject]@{ Name = "MarkdownImg";              Path = Join-Path $DesktopPath "MarkdownImg";                      IsRepo = $true },
-    [PSCustomObject]@{ Name = "Mflix";                    Path = Join-Path $ProjetsPath "Mflix";                            IsRepo = $true },
-    [PSCustomObject]@{ Name = "OmbreArcane";              Path = Join-Path $ProjetsPath "OmbreArcane";                      IsRepo = $true },
-    [PSCustomObject]@{ Name = "OpenScraper";              Path = Join-Path $ProjetsPath "OpenScraper";                      IsRepo = $true },
-    [PSCustomObject]@{ Name = "ParquetFlow";              Path = Join-Path $ProjetsPath "ParquetFlow";                      IsRepo = $true },
-    [PSCustomObject]@{ Name = "ReplicaMySQL";             Path = Join-Path $ProjetsPath "ReplicaMySQL";                     IsRepo = $true },
-    [PSCustomObject]@{ Name = "Schemas";                  Path = Join-Path $DesktopPath "Schemas";                          IsRepo = $true },
-    [PSCustomObject]@{ Name = "ScrapMate";                Path = Join-Path $ProjetsPath "ScrapMate";                        IsRepo = $true },
-    [PSCustomObject]@{ Name = "Sortify";                  Path = Join-Path $ProjetsPath "Sortify";                          IsRepo = $true },
-    [PSCustomObject]@{ Name = "Soutenances";              Path = Join-Path $DesktopPath "Soutenances";                      IsRepo = $true },
-    [PSCustomObject]@{ Name = "Yam4";                     Path = Join-Path $ProjetsPath "Yam4";                             IsRepo = $true },
+    [PSCustomObject]@{ Name = "ArtiWave";                 Path = Join-Path $ProjetsPath "ArtiWave";                         IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "Cours";                    Path = Join-Path $DesktopPath "Cours";                            IsRepo = $true;     IsOnlyMain = $true },
+    [PSCustomObject]@{ Name = "DailyPush";                Path = Join-Path $DesktopPath "DailyPush";                        IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "DataScrub";                Path = Join-Path $ProjetsPath "DataScrub";                        IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "Documentations";           Path = Join-Path $DocumentsPath "Documentations";                 IsRepo = $true;     IsOnlyMain = $true },
+    [PSCustomObject]@{ Name = "Dotfiles";                 Path = Join-Path $DesktopPath "Dotfiles";                         IsRepo = $true;     IsOnlyMain = $true },
+    [PSCustomObject]@{ Name = "EasyGarden";               Path = Join-Path $ProjetsPath "EasyGarden";                       IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "ElexxionData";             Path = Join-Path $ProjetsPath "ElexxionData";                     IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "ElexxionMinio";            Path = Join-Path $ProjetsPath "ElexxionMinio";                    IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "EmmanuelLefevre";          Path = Join-Path $ProjetsPath "EmmanuelLefevre";                  IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "GestForm";                 Path = Join-Path $ProjetsPath "GestForm";                         IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "GitHubProfileIcons";       Path = Join-Path $PicturesPath "GitHubProfileIcons";              IsRepo = $true;     IsOnlyMain = $true },
+    [PSCustomObject]@{ Name = "GoogleSheets";             Path = Join-Path $DesktopPath "GoogleSheets";                     IsRepo = $true;     IsOnlyMain = $true },
+    [PSCustomObject]@{ Name = "LeCabinetDeCuriosites";    Path = Join-Path $ProjetsPath "LeCabinetDeCuriosites";            IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "IAmEmmanuelLefevre";       Path = Join-Path $ProjetsPath "IAmEmmanuelLefevre";               IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "MarkdownImg";              Path = Join-Path $DesktopPath "MarkdownImg";                      IsRepo = $true;     IsOnlyMain = $true },
+    [PSCustomObject]@{ Name = "Mflix";                    Path = Join-Path $ProjetsPath "Mflix";                            IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "OmbreArcane";              Path = Join-Path $ProjetsPath "OmbreArcane";                      IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "OpenScraper";              Path = Join-Path $ProjetsPath "OpenScraper";                      IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "ParquetFlow";              Path = Join-Path $ProjetsPath "ParquetFlow";                      IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "ReplicaMySQL";             Path = Join-Path $ProjetsPath "ReplicaMySQL";                     IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "Schemas";                  Path = Join-Path $DesktopPath "Schemas";                          IsRepo = $true;     IsOnlyMain = $true },
+    [PSCustomObject]@{ Name = "ScrapMate";                Path = Join-Path $ProjetsPath "ScrapMate";                        IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "Sortify";                  Path = Join-Path $ProjetsPath "Sortify";                          IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "Soutenances";              Path = Join-Path $DesktopPath "Soutenances";                      IsRepo = $true;     IsOnlyMain = $true },
+    [PSCustomObject]@{ Name = "Yam4";                     Path = Join-Path $ProjetsPath "Yam4";                             IsRepo = $true;     IsOnlyMain = $false },
+
+    ##########---------- NAVIGATION ONLY ----------##########
+    [PSCustomObject]@{ Name = "home";                     Path = $HOME;                                                     IsRepo = $false },
+    [PSCustomObject]@{ Name = "dwld";                     Path = Join-Path $HOME "Downloads";                               IsRepo = $false },
+    [PSCustomObject]@{ Name = "nvim";                     Path = $NvimPath;                                                 IsRepo = $false },
+    [PSCustomObject]@{ Name = "profile";                  Path = Split-Path $PROFILE;                                       IsRepo = $false },
+    [PSCustomObject]@{ Name = "projets";                  Path = $ProjetsPath;                                              IsRepo = $false }
   )
 }
 
@@ -622,6 +633,9 @@ function Update-GitRepositories {
     [string]$Name
   )
 
+  # Get settings
+  $reposSettings = $reposInfo.Settings
+
   if ($Name) {
     Show-HeaderFrame -Title "UPDATING LOCAL REPOSITORY"
   }
@@ -776,6 +790,17 @@ function Update-GitRepositories {
       ######## DATA RETRIEVAL : TRACKED BRANCHES ########
       # Find all local branches that have a remote upstream
       $branchesToUpdate = Get-LocalBranchesWithUpstream
+
+      ######## LOGIC : ONLY MAIN FILTER ########
+      # Check if specific repo is configured to pull only main/master
+      if ($reposSettings[$repoName] -eq $true) {
+        # Keep only branches strictly named "main" or "master"
+        $branchesToUpdate = $branchesToUpdate | Where-Object { $_.Local -match '^(main|master)$' }
+
+        if ($branchesToUpdate) {
+          Write-Host "ℹ️ Configured to pull MAIN branch only ℹ️" -ForegroundColor DarkYellow
+        }
+      }
 
       ######## GUARD CLAUSE : NO UPSTREAM ########
       # If no branch has an upstream defined, nothing to update or clean up
@@ -1163,8 +1188,19 @@ function Get-RepositoriesInfo {
 
   ######## DICTIONARY CONSTRUCTION ########
   $repos = @{}
+  $reposSettings = @{}
+
   foreach ($item in $gitConfig) {
     $repos[$item.Name] = $item.Path
+
+    ######## SECURITY ########
+    # Optional handling : if property does not exist, force $false
+    if ($item.PSObject.Properties.Match('IsOnlyMain').Count) {
+      $reposSettings[$item.Name] = $item.IsOnlyMain
+    }
+    else {
+      $reposSettings[$item.Name] = $false
+    }
   }
 
   ######## RETURN SUCCESS ########
@@ -1183,6 +1219,7 @@ function Get-RepositoriesInfo {
     Token = $gitHubToken
     Order = $reposOrder
     Paths = $repos
+    Settings = $reposSettings
   }
 }
 

@@ -39,7 +39,7 @@ Hybrid Parser & Builder based on a "Sandwich" logic :
 ⚡ **TRIGGER**
 
 - Event-Driven (startup terminal)
-- CLI (aka Powershell: Set-LoadGlobalGitIgnore)
+- CLI (alias Powershell : gir)
 
 🛠️ **FEATURES**
 
@@ -702,43 +702,204 @@ function Get-DefaultGlobalGitIgnoreTemplate {
 # ======================================================================
 # SECURITY & IDENTIFICATION CREDENTIALS (CRITICAL)
 # ======================================================================
-# Certificates & Keys
+# Commons
 *.cert
 *.key
 *.pem
 *.pfx
 id_rsa
 id_rsa.pub
+secrets.json
 
-# Environment Variables & Secrets
+# Environment Variables
+!.env.example
+*.env
 *.private.php
 .env
 .env.*
-!.env.example
-secrets.json
+
+# Local Configuration (Overrides)
+*.local
 
 # ======================================================================
-# SPECIFIC OS
+# SPECIFIC OS & SYSTEM FILES
 # ======================================================================
-# Linux
+# Commons
+*.bak
+*.old
+*.orig
+*.swp
+*.temp
+*.tmp
 *~
+
+# Linux
 .directory
 .fuse_hidden*
 .Trash-*
 
 # macOS
-._*
 .AppleDouble
 .DS_Store
 .LSOverride
 .Spotlight-V100
 .Trashes
+._*
 
 # Windows
 $RECYCLE.BIN/
 Desktop.ini
 ehthumbs.db
 Thumbs.db
+
+# ======================================================================
+# FRAMEWORKS (Cache & Configs)
+# ======================================================================
+# .NET Core
+.store/
+
+# Angular
+.angular
+/.angular/cache
+
+# Expo / React Native
+/.expo/
+
+# Next.js
+/.next/
+
+# Sass (CSS)
+.sass-cache/
+
+# Symfony
+/connect.lock
+/public/bundles/
+/public/media/
+/var/
+
+# ======================================================================
+# LANGUAGES (Compilers & Binaries)
+# ======================================================================
+# JavaScript / TypeScript
+*.tsbuildinfo
+/bazel-out
+/out-tsc
+next-env.d.ts
+
+# Python (Bytecode)
+*$py.class
+*.egg-info/
+*.py[cod]
+.venv/
+__pycache__/
+env/
+venv/
+
+# ======================================================================
+# IDEs & EDITORS
+# ======================================================================
+# Commons
+.idea/
+
+# Eclipse
+*.launch
+.classpath
+.project
+.settings/
+
+# JetBrains
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-*
+*.sublime-workspace
+
+# Vim / Neovim
+*.swl
+*.swm
+*.swn
+*.swo
+*.swp
+*.un~
+*.vim.old
+.backup/
+.netrwhist
+.nvimlog
+.swap/
+.undo/
+.vim/
+.vim-bookmarks
+.vim-fuf-data/
+.viminfo
+.vimrc.local
+.vimsession
+Session.vim
+Sessionx.vim
+
+# Visual Studio (Classic)
+*.sln.docstates
+*.suo
+*.user
+*.VisualState.xml
+.vs/
+
+# Visual Studio Code
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+.history/
+.vscode/*
+
+# ======================================================================
+# PACKAGE MANAGERS
+# ======================================================================
+# Commons
+!**/packages/build/
+**/packages/
+/node_modules
+/typings
+/vendor/
+node_modules/
+typings/
+
+# Node.js (Yarn Berry)
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+.pnp
+.pnp.*
+.yarn/*
+
+# NuGet
+*.nupkg
+*.snupkg
+
+# ======================================================================
+# TESTING (Tests & Coverage)
+# ======================================================================
+# Commons
+/coverage
+*.lcov
+*.xml
+
+# Jest (JS)
+.jest-cache
+test-report.xml
+
+# NUnit / MSTest (.NET)
+*.trdx
+*.trx
+NUnitResults.xml
+TestResult.xml
+TestResults/
+
+# PHPUnit (PHP)
+.phpunit.result.cache
+/phpunit.xml
 
 # ======================================================================
 # CLOUD & INFRASTRUCTURE
@@ -765,123 +926,6 @@ docker-compose.override.yml
 .vercel
 
 # ======================================================================
-# LANGUAGES (Compilers & Binaries)
-# ======================================================================
-# C# / .NET (Build Output)
-[Bb]in/
-[Oo]bj/
-/out/
-Artifacts/
-
-# JavaScript / TypeScript (Build Output)
-/bazel-out
-/build
-/dist
-/out
-/out-tsc
-/tmp
-*.tsbuildinfo
-next-env.d.ts
-
-# Python (Bytecode)
-*.py[cod]
-*$py.class
-__pycache__/
-
-# ======================================================================
-# PACKAGE MANAGERS
-# ======================================================================
-# Composer
-/vendor/
-
-# Node.js
-/node_modules
-node_modules/
-
-# Node.js (Yarn Berry)
-.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# Npm
-npm-debug.log*
-
-# NuGet
-*.nupkg
-*.snupkg
-**/packages/
-!**/packages/build/
-
-# PNPM
-.pnpm-debug.log*
-
-# Python (Pip / Venv)
-*.egg-info/
-.venv/
-env/
-venv/
-
-# Typings
-/typings
-
-# Yarn
-yarn-debug.log*
-yarn-error.log*
-
-# ======================================================================
-# FRAMEWORKS (Cache & Configs)
-# ======================================================================
-# .NET Core
-.store/
-
-# Angular
-.angular
-/.angular/cache
-
-# Expo / React Native
-/.expo/
-
-# Next.js
-/.next/
-
-# Sass (CSS)
-.sass-cache/
-
-# Symfony
-/public/bundles/
-/public/media/
-/var/
-/connect.lock
-
-# ======================================================================
-# TESTING (Tests & Coverage)
-# ======================================================================
-# General Coverage
-/coverage
-
-# Jest (JS)
-.jest-cache
-test-report.xml
-
-# NUnit / MSTest (.NET)
-*.trdx
-*.trx
-NUnitResults.xml
-TestResult.xml
-TestResults/
-
-# PHPUnit (PHP)
-.phpunit.result.cache
-/phpunit.xml
-
-# Testem
-testem.log
-
-# ======================================================================
 # QUALITY & AUDIT
 # ======================================================================
 # Checkmarx
@@ -905,6 +949,14 @@ api-docs/
 swagger-ui/
 
 # ======================================================================
+# DATABASES
+# ======================================================================
+# Commons
+*.db
+*.sql
+*.sqlite
+
+# ======================================================================
 # DATA SCIENCE & ML
 # ======================================================================
 # Data files
@@ -920,43 +972,35 @@ mc-config/
 notebooks/mlruns
 
 # ======================================================================
-# IDEs & EDITORS
+# LOGS
 # ======================================================================
-# Eclipse
-.classpath
-.project
-.settings/
-*.launch
-
-# JetBrains
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# Sublime Text
-*.sublime-workspace
-
-# Visual Studio (Classic)
-*.sln.docstates
-*.suo
-*.user
-*.VisualState.xml
-.vs/
-
-# Visual Studio Code
-.history/
-.vscode/*
-!.vscode/extensions.json
-!.vscode/launch.json
-!.vscode/settings.json
-!.vscode/tasks.json
-
-# ======================================================================
-# DIVERS & LOGS
-# ======================================================================
+# Commons
 *.log
+
+# Specific Logs
 /libpeerconnection.log
+.pnpm-debug.log*
+npm-debug.log*
+testem.log
+yarn-debug.log*
+yarn-error.log*
+
+# ======================================================================
+# BUILDS & ARTIFACTS (Global)
+# ======================================================================
+# Commons
+[Bb]in/
+[Oo]bj/
+Artifacts/
+build/
+dist/
+out/
+temp/
+tmp/
+
+# ======================================================================
+# MISCELLANEOUS
+# ======================================================================
 public/COM3
 
 # ======================================================================

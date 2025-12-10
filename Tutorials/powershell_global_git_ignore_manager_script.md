@@ -16,53 +16,52 @@ It acts as a "Single Source of Truth" across all your development environments (
 
 ## WHY THIS SCRIPT
 
-😫 The Problems =>  
+😫 **The Problems =>**  
 
-1. 🔄 **Sync & Consistency Across Machines**
+1. 🔄 **Sync & Consistency Across Machines**  
 If you work on a desktop and multiple laptops, maintaining a consistent .gitignore_global is a nightmare. A rule added on one machine is often forgotten on the next.
 
-- **The Solution**, this script synchronizes your configuration. Run it once, and your environment is up to date.
-- **Drift Prevention**, it ensures that your personal "Standard of Truth" is applied everywhere.
+- **Solution,** this script synchronizes your configuration. Run it once, and your environment is up to date.
+- **Drift Prevention,** it ensures that your personal "Standard of Truth" is applied everywhere.
 
-2. 🛡️ **Team Hygiene & "Dirty" Commits**
+2. 🛡️ **Team Hygiene & "Dirty" Commits**  
 We all have colleagues who lack rigor or use different OS/IDEs, accidentally polluting repositories with .DS_Store, Thumbs.db, or IDE configuration files.
 
-- **The Solution**, by managing global exclusions at the system level, you prevent these files from ever appearing in git status. You don't need to rely on your team remembering to ignore them => your machine ignores them by default.
+- **Solution,** by managing global exclusions at the system level, you prevent these files from ever appearing in git status. You don't need to rely on your team remembering to ignore them => your machine ignores them by default.
 
-3. ⚡ **Zero Friction & Offline Mode ("Set and Forget")**
+3. ⚡ **Zero Friction & Offline Mode ("Set and Forget")**  
 Websites like gitignore.io are great, but they require manual steps: visit site -> select tags -> generate -> copy -> open file -> paste -> save.  
-
-**The Solution :**
 
 - **3 Letters + Enter,** just type gir (Git Ignore Reload) in your terminal. Done.
 - **No Internet Required,** works entirely offline using the embedded template.
 - **Git Config Integration,** unlike text generators, this script actively configures git config --global core.excludesfile for you.
 
-4. 🐧 **Cross-Platform Engineering**
+4. 🐧 **Cross-Platform Engineering**  
 Built with strict adherence to .NET and PowerShell Core conventions:
 
 - **OS Agnostic,** works seamlessly on Windows, Linux and macOS.
 - **Smart Handling,** manages file encoding (UTF8/NoBOM) and path separators ("/" vs "\") automatically.
 
 🏗 **ARCHITECTURE**  
+
 **THE "SANDWICH" LOGIC** The script uses a hybrid Parser & Builder approach to ensure safety :
 
-- **Standard Template**  
+- **Standard Template :**  
 Enforces the "Source of Truth" (Languages, IDEs, OS garbage files).
-- **Dynamic Updates**  
+- **Dynamic Updates :**  
 Detects the # USER CUSTOMIZATIONS section and strictly preserves everything you added manually.
-- **User Customizations**  
+- **User Customizations :**  
 Injects missing rules into a dedicated section without overwriting your work.
 
 🧠 **PHILOSOPHY**
 
-- **Idempotency**  
+- **Idempotency :**  
 You can run the script 100 times. If nothing changed, it impacts 0ms. It only acts when necessary.
-- **Non-Destructive**  
+- **Non-Destructive :**  
 Your private/custom rules are sacred. The script appends, it never destroys.
-- **Self-Healing**  
+- **Self-Healing :**  
 If you reinstall Git, crash your OS, or delete the config, the script automatically detects the anomaly and repairs the link to the global ignore file.
-- **Safety First**  
+- **Safety First :**  
 An automatic backup (.bak) is created before any changes are made. If everything went well, it is deleted.
 - UX
 - Cross-Platform
@@ -1798,11 +1797,11 @@ On the other hand "ALIAS SECTION" could be at top...
 The main script manages your machine's hygiene. But what about your repositories?  
 When you start a new project (git init), you usually need a .gitignore file immediately. Instead of copy-pasting from the web or downloading a generic file, this bonus function allows you to clone your Global Configuration into your Local Repository.  
 
-**✨ Key Feature: Smart Privacy Filtering**  
+**✨ Key Feature : Smart Privacy Filtering**  
 It doesn't just copy the file blindly. It effectively sanitizes the content by stripping out the # USER CUSTOMIZATIONS section.
 
-- **Result,** you get a robust, standard .gitignore for your project.
-- **Safety,** your private paths (personal backup folders, specific work directories) remain on your machine and are never committed to the project.
+- **Result =>** you get a robust, standard .gitignore for your project.
+- **Safety =>** your private paths (personal backup folders, specific work directories) remain on your machine and are never committed to the project.
 
 1. Reopen your profile (see procedure above).
 
@@ -1938,6 +1937,7 @@ function Copy-GlobalGitIgnoreToRepo {
 ```
 
 4. **Activate the Shortcut**  
+
 To make it fast add this Alias definition in top of file.
 
 ```powershell

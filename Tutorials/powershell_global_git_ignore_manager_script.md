@@ -11,6 +11,8 @@
 
 ## INTRO
 
+🚀 Stop polluting my Git repositories ! 🚀  
+
 This documentation details the architecture of the Global GitIgnore Manager, a PowerShell automation module designed to standardize, maintain, and safeguard your global git exclusion rules.  
 It acts as a "Single Source of Truth" across all your development environments (Desktop, Laptops, Windows, Linux, macOS), ensuring that your git configuration remains consistent, clean, and synchronized automatically at startup.
 

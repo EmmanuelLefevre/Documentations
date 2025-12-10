@@ -1,9 +1,9 @@
-# POWERSHELL GIT PULL SCRIPT
+# POWERSHELL UPDATE GIT REPOSITORIES SCRIPT
 
 ## SOMMAIRE
 
 - [INTRO](#intro)
-- [PRESENTATION](#presentation)
+- [WHYTHISSCRIPT](#why-this-script)
 - [WORKFLOW](#workflow)
 - [INSTALLATION PROCEDURE](#installation-procedure)
 - [BONUS](#bonus)
@@ -11,118 +11,162 @@
 
 ## INTRO
 
-This tutorial shows the step-by-step procedure to create a powershell script allowing you to update your local repositories with a single shortcut button click or automatically at Windows start.  
+🚀 No more struggling to sync Git between my desktop PC and my laptop ! 🚀  
 
-## PRESENTATION
+This documentation details the architecture of Update-GitRepositories, a PowerShell automation module acting as a local orchestrator. It is designed to maintain the integrity of your development environment by updating, cleaning, and synchronizing all your local repositories with a single command or automatically at startup.
 
-😫 The Problem =>
-🚀 No more Git syncing hassles between my desktop and laptop ! 🚀  
+## WHY THIS SCRIPT
 
-Working daily on multiple machines, I was wasting too much time (and mental energy) manually checking if my local repositories were up to date before I started coding. The risk of conflicts or working on an outdated version was constant.  
-I decided to automate all of this with a client-side automation approach.  
+😫 **The Problems =>**  
 
-So i developed gpull : a PowerShell script acting as a local orchestrator, capable of maintaining the integrity of all my repositories.  
+1. 🔄 **Sync Anxiety & Multi-Machine Chaos**  
+Working on a desktop and a laptop often leads to "Drift". You start coding on your laptop, realizing too late that you forgot to pull the latest changes you made yesterday on your desktop.
+
+- **Solution,** this script runs automatically at startup. You sit down, and your machine is already up-to-date.
+- **Peace of Mind,** eliminates the risk of working on an outdated version or facing avoidable merge conflicts.
+
+2. 🧠 **Mental Load & Repetitive Tasks**  
+Manually checking 10, 20, or 30 repositories every morning is a waste of mental energy. A simple batch script often fails because it blindly tries to pull without context.
+
+- **Solution,** an intelligent Orchestrator. It iterates through your specific list of active projects, skipping the irrelevant ones.
+- **Efficiency**, one shortcut, 2 seconds of execution, 100% visibility.
+
+3. 🛡️ **Safety & "Dirty" State Protection**  
+Standard scripts break things. If you have uncommitted work (dirty tree) or unpushed commits, a blind git pull can create a mess.  
+
+- **Solution,** the script features strict Guard Clauses. It checks if your workspace is clean before touching anything.
+- **Bot Detection :** it automatically detects and resets specific bot branches (like output) to ensure they match the remote exactly.
+
+4. 📍 **Context Awareness (The "Smart Restore")**  
+Most update scripts force a checkout to main, pulling changes, and leave you there. You lose your spot.
+
+- **State Preservation,** the script remembers you were on feature/login-page. It switches to main, updates it, cleans up old branches, and puts you back exactly where you were.
+
+5. 🧹 **Hygiene & Garbage Collection**  
+Over time, local repositories get cluttered with dead branches (feature/done-3-months-ago) that have already been merged or deleted remotely.
+
+- **Garbage Collector,** it proactively purposes to delete orphaned branches (: gone) and fully merged branches, keeping your local list clean.
 
 🏗 **ARCHITECTURE**  
+
 Flow Controller based on iterative & sequential, stateless and awareness.
 
 🧠 **PHILOSOPHY**
 
-- Safety First (Guard Clause)
-- UX
+- **Safety First (Guard Clause)**
+- **UX**
+- **Cross-Platform**
 
 ⚡ **TRIGGER**
 
-- Event-Driven (startup computer)
-- GUI (desktop shortcut)
-- CLI (aka Powershell: gpull)
+- **Event-Driven** (startup computer)
+- **GUI** (desktop shortcut)
+- **CLI** (aka Powershell: gpull)
 
 🛠️ **FEATURES**
 
 1. 📦 **Multi-Branch Update**
 
-- Prioritization, main and develop branches
-- Targeting, optional parameter for updating 1 repository
-- Silent Auto-Update on integration branches
-- Interactive Mode on incoming commits from other branches
-- Bot Detection (sync force)
+- **Prioritization,** main and develop branches
+- **Targeting,** optional parameter for updating 1 repository
+- **Silent Auto-Update** on integration branches
+- **Interactive Mode** on incoming commits from other branches
+- **Bot Detection** (sync force)
 
 2. 🧹 **Garbage Collector**
 
-- Orphaned Cleanup, detects/removes orphaned branches (interactive)
-- Merged Cleanup, identifies/removes already merged branches (interactive)
-- Protection, prevents the deletion of an integration branch
+- **Orphaned Cleanup,** detects/removes orphaned branches (interactive)
+- **Merged Cleanup,** identifies/removes already merged branches (interactive)
+- **Protection,** prevents the deletion of an integration branch
 
 3. 🛡️ **Safety and Integrity (Safety Checks)**
 
-- Dirty Tree Protection, pull canceled if files are not committed
-- Unpushed Protection, pull canceled if local commits are not pushed
-- Stash Warning
+- **Dirty Tree Protection,** pull canceled if files are not committed
+- **Unpushed Protection,** pull canceled if local commits are not pushed
+- **Stash Warning**
 
 4. 🎛️ **Context Awareness & Restoration**
 
-- State Preservation, remembers the active branch
-- Smart Restore, replaces the user on the original branch
-- Fallback Logic, if the original branch is deleted, replace the user on the development branch.
+- **State Preservation,** remembers the active branch
+- **Smart Restore,** replaces the user on the original branch
+- **Fallback Logic,** if the original branch is deleted, replace the user on the development branch.
 
 5. 🔍 **Divergence Analysis**
 
-- History Analysis, calculates the number of commits Ahead/Behind
-- Log Preview, displays the latest incoming commit messages
-- Divergence Alert, detects divergent histories
+- **History Analysis,** calculates the number of commits Ahead/Behind
+- **Log Preview,** displays the latest incoming commit messages
+- **Divergence Alert,** detects divergent histories
 
 6. 🛰️ **Discovery and Monitoring**
 
-- New Branch Detection, scans the remote branch to track new remote branches
-- Tracking Proposal, creates a local branch (or interactively deletes an obsolete branch)
+- **New Branch Detection,** scans the remote branch to track new remote branches
+- **Tracking Proposal,** creates a local branch (or interactively deletes an obsolete branch)
 
 7. 📈 **Visual and Concise Reporting**
 
-- Real-Time Feedback
-- Summary Table, status and precise duration for each repository
-- UI Polish, dynamic separators and text centering
+- **Real-Time Feedback**
+- **Summary Table,** status and precise duration for each repository
+- **UI Polish,** dynamic separators and text centering
 
 8. 🔐 **GitHub API Integration and Security**
 
-- Repository access via GitHub API + pre-verification of repository existence and access rights
-- Secure Configuration, Environment Variables (Token/Username)
+- **Repository access via GitHub API** + pre-verification of repository existence and access rights
+- **Secure Configuration,** Environment Variables (Token/Username)
 
 9. ⏱️ **Performance and Caching**
 
-- Metrics, global and individual timers
-- Session Cache, load configuration once per session
+- **Metrics,** global and individual timers
+- **Session Cache,** load configuration once per session
 
 10. 🌐 **Granular and Resilient Error Handling**
 
-- HTTP context, API error differentiation
-- Network Resilience, timeout and DNS management without crashing the orchestrator
-- Isolation in case of repository failure (Try/Catch pattern)
+- **HTTP context,** API error differentiation
+- **Network Resilience,** timeout and DNS management without crashing the orchestrator
+- **Isolation** in case of repository failure (Try/Catch pattern)
 
 👌 Others many controls and features have been added 👌
 
 ## WORKFLOW
 
-1. **Initialization :** The Get-DefaultGlobalGitIgnoreTemplate function holds the source of truth (OS files, IDEs, Languages...).
+1. **Initialization :**  
+The Get-DefaultGlobalGitIgnoreTemplate function holds the source of truth (OS files, IDEs, Languages...).
 
-2. **Validation Loop :** Iterates through the defined repository list.
+2. **Validation Loop :**  
+Iterates through the defined repository list (triggered by Update-GitRepositories or its alias gpull).
 
-- Integrity Check : verifies the folder exists and is a valid Git repository
-- Security Check : ensures the local origin remote matches the expected GitHub URL
+- **Integrity Check :**  
+Verifies the folder exists and is a valid Git repository
+- **Security Check :**  
+Ensures the local origin remote matches the expected GitHub URL
 
 3. **Update Strategy :**
 
-- Fetch : performs a git fetch --prune to refresh remote references
-- Prioritize : sorts branches (Main/Master -> Dev/Develop -> others)
-- Action : auto-updates integration branches + triggers Interactive Mode for feature branches
+- **Fetch :**  
+Performs a git fetch --prune to refresh remote references
+- **Prioritize :**  
+Sorts branches (Main/Master -> Dev/Develop -> others)
+- **Action :**  
+Auto-updates integration branches + triggers Interactive Mode for feature branches
 
 4. **Maintenance: :**
 
-- Safety : blocks updates if the working tree is dirty or has unpushed commits
-- Cleanup : proposes deletion for orphaned (gone) or fully merged branches
+- **Safety :**  
+Blocks updates if the working tree is dirty or has unpushed commits
+- **Cleanup :**  
+Proposes deletion for orphaned (gone) or fully merged branches
 
-5. **Reporting :** Generates a summary table with status (✅ Updated, ⏩ Skipped, ❌ Failed) and execution time.
+5. **Reporting :**  
+Generates a summary table with execution time and status :  
+
+- ✅ Updated
+- ✨ Already Updated
+- ⏩ Skipped
+- 🙈 Ignored
+- ❌ Failed
 
 ## INSTALLATION PROCEDURE
+
+### Setup the desktop shortkey (Windows only)
 
 1. For Windows 10 get the fully path where PowerShell was installed :
 
@@ -176,7 +220,9 @@ Write-Host ""
 Read-Host -Prompt "Press Enter to close... "
 ```
 
-9. ⚠️ I you don't use a personal token to request the Github API this script will not work. To set up an identification token on the Github API and environements variables, go lower...
+### Setup for all OS start here
+
+1. ⚠️ I you don't use a personal token to request the Github API this script will not work. To set up an identification token on the Github API and environements variables, go lower...
 
 ![Script Screen](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script.png)
 
@@ -193,7 +239,7 @@ Settings > Developer settings > Personal access tokens > Tokens (classic) > Gene
 
 ⚠️ Be careful to copy your token because it will no longer be visible afterwards!
 
-- On windows:
+### On windows
 
 Setup your username and token in the environment variables.
 ![First Step](https://github.com/EmmanuelLefevre/MarkdownImg/blob/main/git_pull_script_config_environement_variable_step_1.png)  
@@ -202,9 +248,37 @@ Setup your username and token in the environment variables.
 
 Repeat operation for the username...  
 
-10. Now you must open your "Microsoft.PowerShell_profile.ps1" file with your favorite text editor.
+### On Linux / macOS
 
-11. Copy/Paste "gpull" function and his utilities functions inside.
+Open your PowerShell profile with your favorite editor.  
+
+```powershell
+nano $PROFILE
+```
+
+Add these two lines at the top of the file (replace with your real credentials) :  
+
+```powershell
+$env:GITHUB_TOKEN = "ghp_YourGeneratedTokenHere..."
+$env:GITHUB_USERNAME = "YourGitHubUsername"
+```
+
+Save and exit, reload your profile now :  
+
+```powershell
+. $PROFILE
+```
+
+🔒 **Security Tip :**  
+Since this file contains a secret token, it is recommended to restrict read permissions to your user only.  
+
+```powershell
+chmod 600 $PROFILE
+```
+
+2. Now you must open your "Microsoft.PowerShell_profile.ps1" file in your favorite text editor.
+
+3. Copy/Paste "Update-GitRepositories" function and his utilities functions inside.
 
 ```powershell
 #---------------------------------------------------------------------------#
@@ -212,7 +286,7 @@ Repeat operation for the username...
 #---------------------------------------------------------------------------#
 
 function Get-LocationPathConfig {
-  # IsRepo = $true => Included in gpull() process AND accessible via go()
+  # IsRepo = $true => Included in Update-GitRepositories() process AND accessible via go()
   # IsRepo = $false=> Accessible ONLY via go()
 
   # Get system context
@@ -234,7 +308,7 @@ function Get-LocationPathConfig {
   }
 
   return @(
-    ##########---------- REPOSITORIES (Important order for gpull() function) ----------##########
+    ##########---------- REPOSITORIES (Important order for Update-GitRepositories() function) ----------##########
     [PSCustomObject]@{ Name = "ArtiWave";                 Path = Join-Path $ProjetsPath "ArtiWave";                         IsRepo = $true },
     [PSCustomObject]@{ Name = "Cours";                    Path = Join-Path $DesktopPath "Cours";                            IsRepo = $true },
     [PSCustomObject]@{ Name = "DailyPush";                Path = Join-Path $DesktopPath "DailyPush";                        IsRepo = $true },
@@ -523,7 +597,7 @@ function Show-GracefulError {
 #                   UPDATE YOUR LOCAL REPOSITORIES                         #
 #--------------------------------------------------------------------------#
 
-function gpull {
+function Update-GitRepositories {
   [CmdletBinding()]
   param (
     # Force repository information reloading

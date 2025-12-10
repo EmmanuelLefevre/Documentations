@@ -110,6 +110,30 @@ Hybrid Parser & Builder based on a "Sandwich" logic :
 #                        SHARED FUNCTIONS                               #
 #-----------------------------------------------------------------------#
 
+##########---------- Write file content safely (Cross-Platform encoding) ----------##########
+function Set-FileContentCrossPlatform {
+  param (
+    [Parameter(Mandatory=$true)]
+    [string]$Path,
+
+    [Parameter(Mandatory=$true)]
+    [AllowEmptyCollection()]
+    [object]$Content
+  )
+
+  # Desktop = Windows PowerShell 5.1 (Legacy) -> only support "UTF8" (with BOM)
+  # Core    = PowerShell 7+, Linux, macOS     -> support "utf8NoBOM" (Linux standard)
+  $EncodingConfig = "UTF8"
+
+  if ($PSVersionTable.PSEdition -ne 'Desktop') {
+    $EncodingConfig = "utf8NoBOM"
+  }
+
+  # File write (uses -Value $Content rather than pipeline to ensure compatibility)
+  Set-Content -Path $Path -Value $Content -Encoding $EncodingConfig -Force
+}
+
+
 ##########---------- Check if Git is installed and available ----------##########
 function Test-GitAvailability {
   param (
@@ -339,7 +363,8 @@ function Initialize-GlobalGitIgnoreFile {
   Write-Host $msg -ForegroundColor Red
 
   try {
-    $ContentLines | Set-Content -Path $Path -Encoding UTF8 -Force
+    # Initialize content
+    Set-FileContentCrossPlatform -Path $Path -Content $ContentLines
 
     $msg = "✅ File created successfully ✅"
 
@@ -435,7 +460,8 @@ function Update-GlobalGitIgnoreFile {
 
   # Write changes
   try {
-    $NewContent | Set-Content -Path $Path -Encoding UTF8 -Force
+    # Update content
+    Set-FileContentCrossPlatform -Path $Path -Content $NewContent
 
     ######## CLEANUP: DELETE BACKUP ON SUCCESS ########
     Sync-GlobalGitIgnoreBackup -Path $Path -Action "Delete"
@@ -476,12 +502,17 @@ function Set-GlobalGitIgnoreReference {
   # Get actual config
   $CurrentConfig = git config --global core.excludesfile
 
-  # Normalize paths for comparison
-  $NormCurrent = if ($CurrentConfig) { $CurrentConfig.Replace('/', '\').Trim() } else { "" }
-  $NormPath = $Path.Replace('/', '\').Trim()
+  # Cross-Platform normalization
+  $NormCurrent = if (-not [string]::IsNullOrWhiteSpace($CurrentConfig)) {
+    [System.IO.Path]::GetFullPath($CurrentConfig)
+  }
+  # Avoid .NET error
+  else { "" }
 
-  ######## GUARD CLAUSE : CURRENT CONFIG IS NULL OR DIFFERENT ########
-  if ([string]::IsNullOrEmpty($CurrentConfig) -or ($NormCurrent -ne $NormPath)) {
+  $NormPath = [System.IO.Path]::GetFullPath($Path)
+
+  ######## GUARD CLAUSE : COMPARE STANDARDIZED VERSIONS ########
+  if ($NormCurrent -ne $NormPath) {
 
     git config --global core.excludesfile $Path
 
@@ -1680,29 +1711,8 @@ public/COM3
 
 # Executed immediately on terminal startup
 Set-LoadGlobalGitIgnore
-```
 
-## Bonus
 
-❤️ Additionally you could execute an alias comand to copy your .gitignore_global in your local repository project ❤️  
-Share the standard (Team Sync) !!!  
-And don't forget that a clean repository (and project) starts with a shared set of rules 😉.  
-
-1. Once again open your "Microsoft.PowerShell_profile.ps1" file.
-
-2. Copy/Paste the aliases section in top of the file...
-
-```powershell
-#--------------------------------------------------------------------------#
-#                              ALIASES                                     #
-#--------------------------------------------------------------------------#
-
-Set-Alias gir Copy-GlobalGitIgnoreToRepo
-```
-
-3. Copy/Paste "Copy-GlobalGitIgnoreToRepo" function under the "Set-LoadGlobalGitIgnore" function.
-
-```powershell
 #-------------------------------------------------------------------------------------#
 #              COPY GLOBAL GIT IGNORE CONFIG TO CURRENT REPOSITORY                    #
 #-------------------------------------------------------------------------------------#
@@ -1807,8 +1817,8 @@ function Copy-GlobalGitIgnoreToRepo {
       [void]$FilteredContent.Add($line)
     }
 
-    # Set-Content handles encoding and overwrites cleanly
-    $FilteredContent | Set-Content -Path $LocalIgnorePath -Encoding UTF8 -Force
+    # Set content
+    Set-FileContentCrossPlatform -Path $LocalIgnorePath -Content $FilteredContent
 
     $msgPrefix = " .gitignore_global"
     $msgAction = " synchronized in "

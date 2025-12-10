@@ -13,20 +13,20 @@
 
 🚀 No more struggling to sync Git between my desktop PC and my laptop ! 🚀  
 
-This documentation details the architecture of Update-GitRepositories, a PowerShell automation module acting as a local orchestrator. It is designed to maintain the integrity of your development environment by updating, cleaning, and synchronizing all your local repositories with a single command or automatically at startup.
+This documentation details the architecture of Update-GitRepositories, a PowerShell automation module acting as a local orchestrator. It is designed to maintain the integrity of your development environment by updating, cleaning, and synchronizing all your local repositories with a single command or automatically at startup.  
 
 ## WHY THIS SCRIPT
 
 😫 **The Problems =>**  
 
 1. 🔄 **Sync Anxiety & Multi-Machine Chaos**  
-Working on a desktop and a laptop often leads to "Drift". You start coding on your laptop, realizing too late that you forgot to pull the latest changes you made yesterday on your desktop.
+Working on a desktop and a laptop often leads to "Drift". You start coding on your laptop, realizing too late that you forgot to pull the latest changes you made yesterday on your desktop.  
 
 - **Solution,** this script runs automatically at startup. You sit down, and your machine is already up-to-date.
 - **Peace of Mind,** eliminates the risk of working on an outdated version or facing avoidable merge conflicts.
 
 2. 🧠 **Mental Load & Repetitive Tasks**  
-Manually checking 10, 20, or 30 repositories every morning is a waste of mental energy. A simple batch script often fails because it blindly tries to pull without context.
+Manually checking 10, 20, or 30 repositories every morning is a waste of mental energy. A simple batch script often fails because it blindly tries to pull without context.  
 
 - **Solution,** an intelligent Orchestrator. It iterates through your specific list of active projects, skipping the irrelevant ones.
 - **Efficiency**, one shortcut, 2 seconds of execution, 100% visibility.
@@ -37,19 +37,24 @@ Standard scripts break things. If you have uncommitted work (dirty tree) or unpu
 - **Solution,** the script features strict Guard Clauses. It checks if your workspace is clean before touching anything.
 - **Bot Detection :** it automatically detects and resets specific bot branches (like output) to ensure they match the remote exactly.
 
-4. 📍 **Context Awareness (The "Smart Restore")**  
-Most update scripts force a checkout to main, pulling changes, and leave you there. You lose your spot.
+4. 🆕 **New Machine Setup**  
+When switching to a new laptop, I used to spend hours manually cloning my 30+ repositories one by one.  
+
+- **Solution,** just copy this script and the config. Run gpull. It detects missing folders and offers to clone everything for you. Instant setup.
+
+5. 📍 **Context Awareness (The "Smart Restore")**  
+Most update scripts force a checkout to main, pulling changes, and leave you there. You lose your spot.  
 
 - **State Preservation,** the script remembers you were on feature/login-page. It switches to main, updates it, cleans up old branches, and puts you back exactly where you were.
 
-5. 🧹 **Hygiene & Garbage Collection**  
-Over time, local repositories get cluttered with dead branches (feature/done-3-months-ago) that have already been merged or deleted remotely.
+6. 🧹 **Hygiene & Garbage Collection**  
+Over time, local repositories get cluttered with dead branches (feature/done-3-months-ago) that have already been merged or deleted remotely.  
 
 - **Garbage Collector,** it proactively purposes to delete orphaned branches (: gone) and fully merged branches, keeping your local list clean.
 
 🏗 **ARCHITECTURE**  
 
-Flow Controller based on iterative & sequential, stateless and awareness.
+Flow Controller based on iterative & sequential, stateless and awareness.  
 
 🧠 **PHILOSOPHY**
 
@@ -103,23 +108,31 @@ Flow Controller based on iterative & sequential, stateless and awareness.
 - **New Branch Detection,** scans the remote branch to track new remote branches
 - **Tracking Proposal,** creates a local branch (or interactively deletes an obsolete branch)
 
-7. 📈 **Visual and Concise Reporting**
+7. 🏗️ **Auto-Provisioning & Onboarding**
+New computer? No problem.  
+
+- **Missing Repo Detection,** if a repository defined in your config doesn't exist locally, the script doesn't fail
+- **Remote Validation,** it queries the GitHub API to ensure the repository actually exists (avoiding errors on typos)
+- **Interactive Cloning,** it proposes to clone the missing repository via SSH immediately
+- **Auto-Structure,** it automatically creates missing parent directories (if the Projets folder is missing, it creates it)
+
+5. 📈 **Visual and Concise Reporting**
 
 - **Real-Time Feedback**
 - **Summary Table,** status and precise duration for each repository
 - **UI Polish,** dynamic separators and text centering
 
-8. 🔐 **GitHub API Integration and Security**
+9. 🔐 **GitHub API Integration and Security**
 
 - **Repository access via GitHub API** + pre-verification of repository existence and access rights
 - **Secure Configuration,** Environment Variables (Token/Username)
 
-9. ⏱️ **Performance and Caching**
+10. ⏱️ **Performance and Caching**
 
 - **Metrics,** global and individual timers
 - **Session Cache,** load configuration once per session
 
-10. 🌐 **Granular and Resilient Error Handling**
+11. 🌐 **Granular and Resilient Error Handling**
 
 - **HTTP context,** API error differentiation
 - **Network Resilience,** timeout and DNS management without crashing the orchestrator
@@ -135,6 +148,9 @@ The Get-DefaultGlobalGitIgnoreTemplate function holds the source of truth (OS fi
 2. **Validation Loop :**  
 Iterates through the defined repository list (triggered by Update-GitRepositories or its alias gpull).
 
+- **Existence Check :**  
+If missing : Checks GitHub API -> Proposes Clone -> Clones -> Marks as "✨ Cloned"  
+If present : proceeds to standard checks
 - **Integrity Check :**  
 Verifies the folder exists and is a valid Git repository
 - **Security Check :**  
@@ -159,11 +175,12 @@ Proposes deletion for orphaned (gone) or fully merged branches
 5. **Reporting :**  
 Generates a summary table with execution time and status :  
 
-- ✅ Updated
 - ✨ Already Updated
-- ⏩ Skipped
-- 🙈 Ignored
+- 🐙 Cloned
 - ❌ Failed
+- 🙈 Ignored
+- ⏩ Skipped
+- ✅ Updated
 
 ## INSTALLATION PROCEDURE
 
@@ -2806,7 +2823,7 @@ function Show-UpdateSummary {
 
     switch ($item.Status) {
       "Already-Updated"   { $statusText = "✨ Already Updated";    $statusColor = "DarkCyan"   }
-      "Cloned"            { $statusText = "✨ Cloned";             $statusColor = "Cyan"       }
+      "Cloned"            { $statusText = "🐙 Cloned";             $statusColor = "Cyan"       }
       "Failed"            { $statusText = "❌ Failed";             $statusColor = "Red"        }
       "Ignored"           { $statusText = "🙈 Ignored";            $statusColor = "Magenta"    }
       "Skipped"           { $statusText = "⏩ Skipped";            $statusColor = "DarkYellow" }

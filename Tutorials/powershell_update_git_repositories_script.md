@@ -730,12 +730,30 @@ function Update-GitRepositories {
       # Mark first loop is finished
       $isFirstRepo = $false
 
-      ######## GUARD CLAUSE : PATH EXISTS ########
-      if (-not (Test-LocalRepoExists -Path $repoPath -Name $repoName)) {
-        $summaryTableCurrentStatus = "Failed"
+      ######## GUARD CLAUSE : PATH EXISTS / CLONE PROPOSAL ########
+      # Use -Silent to avoid error message, treating absence as an opportunity
+      if (-not (Test-LocalRepoExists -Path $repoPath -Name $repoName -Silent)) {
 
-        # Go finally block (and after next repository)
-        continue
+        # Call clone manager
+        $cloneStatus = Invoke-InteractiveClone -RepoName $repoName -RepoPath $repoPath -UserName $username
+
+        # Dispatch result
+        if ($cloneStatus -eq 'Success') {
+          $summaryTableCurrentStatus = "✨ Cloned"
+
+          # Skip rest of loop (pull/cleanup) => fresh clone is already perfect
+          continue
+        }
+        elseif ($cloneStatus -eq 'Skipped') {
+          $summaryTableCurrentStatus = "Ignored"
+
+          continue
+        }
+        else {
+          $summaryTableCurrentStatus = "Failed"
+
+          continue
+        }
       }
 
       ######## GUARD CLAUSE : NOT A GIT REPO ########
@@ -1266,35 +1284,107 @@ function Get-RepoListToProcess {
   }
 }
 
+##########---------- Propose to clone missing repository via SSH ----------##########
+function Invoke-InteractiveClone {
+  param (
+    [string]$RepoName,
+    [string]$RepoPath,
+    [string]$UserName
+  )
+
+  # Helper called to center message nicely
+  $msgPrefix = "⚠️ Repository "
+  $msgSuffix = " not found on disk ⚠️"
+
+  $fullMsg = $msgPrefix + $RepoName + $msgSuffix
+
+  Write-Host -NoNewline (Get-CenteredPadding -RawMessage $fullMsg)
+  Write-Host -NoNewline $msgPrefix -ForegroundColor DarkYellow
+  Write-Host -NoNewline $RepoName -ForegroundColor White -BackgroundColor DarkBlue
+  Write-Host $msgSuffix -ForegroundColor DarkYellow
+  Write-Host ""
+
+  Write-Host -NoNewline "Target path : " -ForegroundColor DarkBlue
+  Write-Host "   └─  $RepoPath" -ForegroundColor DarkCyan
+
+  # Ask user permission
+  Write-Host -NoNewline "🐑 Clone it via SSH? (Y/n): " -ForegroundColor Magenta
+
+  $confirm = Wait-ForUserConfirmation
+
+  if ($confirm) {
+    Write-Host -NoNewline "⏳ Cloning " -ForegroundColor DarkBlue
+    Write-Host -NoNewline $RepoName -ForegroundColor White -BackgroundColor DarkBlue
+    Write-Host "..." -ForegroundColor DarkBlue
+
+    # Ensure parent directory exists
+    $parentDir = Split-Path -Path $RepoPath -Parent
+    if (-not (Test-Path $parentDir)) {
+      New-Item -ItemType Directory -Force -Path $parentDir | Out-Null
+    }
+
+    # Construct SSH URL
+    $sshUrl = "git@github.com:$UserName/$RepoName.git"
+
+    # Execute Clone
+    git clone $sshUrl $RepoPath
+
+    if ($LASTEXITCODE -eq 0) {
+      Write-Host -NoNewline "  => " -ForegroundColor Green
+      Write-Host -NoNewline "$RepoName" -ForegroundColor Magenta
+      Write-Host " successfully cloned ✅" -ForegroundColor Green
+
+      return 'Success'
+    }
+    else {
+      Write-Host "❌ Clone failed. Check your SSH keys or internet connection. ❌" -ForegroundColor Red
+
+      return 'Failed'
+    }
+  }
+  else {
+    Write-Host "⏩ Clone skipped by user..." -ForegroundColor DarkYellow
+
+    return 'Skipped'
+  }
+}
+
 ##########---------- Check if local repository path exists ----------##########
 function Test-LocalRepoExists {
   param (
     [string]$Name,
-    [string]$Path
+    [string]$Path,
+    [switch]$Silent
   )
 
-  ######## GUARD CLAUSE : PATH NOT FOUND ########
-  # Check if the path variable is defined AND if the folder exists on disk
-  if (-not ($Path -and (Test-Path -Path $Path))) {
-    # Helper called to center message nicely
-    $msg = "⚠️ Local repository path for $Name doesn't exist ⚠️"
-    $paddingStr = Get-CenteredPadding -RawMessage $msg
+  ######## CHECK ########
+  # Check if path variable is defined AND if folder exists on disk
+  if ($Path -and (Test-Path -Path $Path)) {
+    return $true
+  }
 
-    # Display message
-    Write-Host -NoNewline $paddingStr
-    Write-Host -NoNewline "⚠️ Local repository path for " -ForegroundColor Red
-    Write-Host -NoNewline "$Name" -ForegroundColor White -BackgroundColor Magenta
-    Write-Host " doesn't exist ⚠️" -ForegroundColor Red
-    Write-Host ""
-
-    Write-Host "Path searched 👉 " -ForegroundColor DarkYellow
-    Write-Host "$Path" -ForegroundColor DarkCyan
-
+  ######## ERROR HANDLING ########
+  # If silent mode is ON, just return false without drama
+  if ($Silent) {
     return $false
   }
 
-  ######## RETURN SUCCESS ########
-  return $true
+  # Otherwise (Standard Mode), display the big red error
+  # Helper called to center message nicely
+  $msg = "⚠️ Local repository path for $Name doesn't exist ⚠️"
+  $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+  # Display message
+  Write-Host -NoNewline $paddingStr
+  Write-Host -NoNewline "⚠️ Local repository path for " -ForegroundColor Red
+  Write-Host -NoNewline "$Name" -ForegroundColor White -BackgroundColor Magenta
+  Write-Host " doesn't exist ⚠️" -ForegroundColor Red
+  Write-Host ""
+
+  Write-Host "Path searched 👉 " -ForegroundColor DarkYellow
+  Write-Host "$Path" -ForegroundColor DarkCyan
+
+  return $false
 }
 
 ##########---------- Check if folder is a valid git repository ----------##########
@@ -1769,18 +1859,18 @@ function Invoke-BranchUpdateStrategy {
   ######## RESULT FEEDBACK ########
   switch ($pullStatus) {
     'Success' {
-      Write-Host -NoNewline "  => "
-      Write-Host -NoNewline "$LocalBranch" -ForegroundColor Red
+      Write-Host -NoNewline "  => " -ForegroundColor Green
+      Write-Host -NoNewline "$LocalBranch" -ForegroundColor Magenta
       Write-Host " successfully updated ✅" -ForegroundColor Green
 
     }
     'Failed' {
-      Write-Host "⚠️ "
+      Write-Host "❌ "
       Write-Host -NoNewline "Error updating " -ForegroundColor Red
       Write-Host -NoNewline "$LocalBranch" -ForegroundColor Magenta
       Write-Host -NoNewline " in " -ForegroundColor Red
       Write-Host -NoNewline "$RepoName" -ForegroundColor white -BackgroundColor DarkBlue
-      Write-Host " ⚠️" -ForegroundColor Red
+      Write-Host " ❌" -ForegroundColor Red
     }
   }
 
@@ -2673,11 +2763,12 @@ function Show-UpdateSummary {
     $statusColor = "White"
 
     switch ($item.Status) {
-      "Updated"         { $statusText = "✅ Updated";         $statusColor = "Green" }
-      "Already-Updated" { $statusText = "✨ Already Updated"; $statusColor = "DarkCyan" }
-      "Skipped"         { $statusText = "⏩ Skipped";         $statusColor = "DarkYellow" }
-      "Ignored"         { $statusText = "🙈 Ignored";         $statusColor = "Magenta" }
-      "Failed"          { $statusText = "❌ Failed";          $statusColor = "Red" }
+      "Already-Updated"   { $statusText = "✨ Already Updated";    $statusColor = "DarkCyan"   }
+      "Cloned"            { $statusText = "✨ Cloned";             $statusColor = "Cyan"       }
+      "Failed"            { $statusText = "❌ Failed";             $statusColor = "Red"        }
+      "Ignored"           { $statusText = "🙈 Ignored";            $statusColor = "Magenta"    }
+      "Skipped"           { $statusText = "⏩ Skipped";            $statusColor = "DarkYellow" }
+      "Updated"           { $statusText = "✅ Updated";            $statusColor = "Green"      }
     }
 
     ######## STATUS CENTERING (Width 22) ########

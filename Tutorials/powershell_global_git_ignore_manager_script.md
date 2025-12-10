@@ -703,28 +703,72 @@ function Get-DefaultGlobalGitIgnoreTemplate {
 # SECURITY & IDENTIFICATION CREDENTIALS (CRITICAL)
 # ======================================================================
 # Commons
+*.asc
 *.cert
+*.crt
+*.csr
+*.gpg
 *.key
+*.p12
 *.pem
 *.pfx
 id_rsa
 id_rsa.pub
 secrets.json
 
+# Android Studio
+local.properties
+
+# Django
+local_settings.py
+
 # Environment Variables
-!.env.example
 *.env
 *.private.php
 .env
 .env.*
 
-# Local Configuration (Overrides)
+# Git
+/.git-credentials
+.git-credentials.local
+
+# GitHub Actions
+.env.ci
+.env.github-actions
+act-secrets.env
+act.env
+
+# Jenkins
+*.credentials
+credentials.xml
+hudson.util.Secret
+identity.key.enc
+master.key
+secrets/
+
+# Kubernetes
+*.config.yaml
+*.secret.yaml
+kubeconfig
+
+# Laravel
+/storage/*.key
+
+# Local Configuration
 *.local
+
+# Terraform
+*.auto.tfvars
+*.tfvars.json
+terraform.tfvars
+terraform.tfvars.json
 
 # ======================================================================
 # SPECIFIC OS & SYSTEM FILES
 # ======================================================================
 # Commons
+*.back.*
+*.backup.*
 *.bak
 *.old
 *.orig
@@ -734,23 +778,72 @@ secrets.json
 *~
 
 # Linux
+.*.kate-swp
+.ICEauthority
+.Trash-*
+.Xauthority
+.bash_history
+.cache/
+.config/
+.dbus/
 .directory
 .fuse_hidden*
-.Trash-*
+.gvfs/
+.local/
+.lock
+.nfs*
+.recently-used
+.saves-*
+.swap
+.thumbnails/
+core
+core.*
+lost+found/
 
 # macOS
+.AppleDB
+.AppleDB/
+.AppleDesktop
+.AppleDesktop/
 .AppleDouble
 .DS_Store
+.DS_Store?
+.DocumentRevisions-V100
 .LSOverride
 .Spotlight-V100
+.TemporaryItems
 .Trashes
+.VolumeIcon.icns
+.apdisk
+.com.apple.timemachine.donotpresent
+.fseventsd
 ._*
+Icon
+Network Trash Folder
+Temporary Items
 
 # Windows
 $RECYCLE.BIN/
+$Recycle.Bin/
+*.cab
+*.lnk
+*.msi
+*.msix
+*.msm
+*.msp
+*.stackdump
 Desktop.ini
-ehthumbs.db
+System Volume Information/
 Thumbs.db
+Thumbs.db:encryptable
+[Dd]esktop.ini
+[Tt]emp/
+ehthumbs.db
+ehthumbs_vista.db
+hiberfil.sys
+ntuser.dat*
+pagefile.sys
+~$*
 
 # ======================================================================
 # FRAMEWORKS (Cache & Configs)
@@ -758,18 +851,77 @@ Thumbs.db
 # .NET Core
 .store/
 
+# Android Studio
+.cxx
+.externalNativeBuild
+.navigation/
+/captures
+proguard/
+
 # Angular
 .angular
 /.angular/cache
 
-# Expo / React Native
+# Celery
+celerybeat-schedule
+
+# Django
+media/
+static/
+
+# Docusaurus
+.docusaurus
+
+# Expo & React Native
 /.expo/
 
+# Flask
+.webassets-cache
+instance/
+
+# Flutter
+**/android/gradlew
+**/android/gradlew.bat
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+.packages
+
+# FuseBox
+.fusebox/
+
+# Laravel
+/public/hot
+/public/storage
+storage/framework/
+storage/logs/
+
 # Next.js
-/.next/
+.next/
+
+# Nuxt.js
+.nuxt
+.output
+
+# Parcel
+.parcel-cache
+
+# PyBuilder
+.pybuilder/
 
 # Sass (CSS)
 .sass-cache/
+
+# Scrapy
+.scrapy
+
+# Serverless
+.serverless/
+
+# SvelteKit
+.svelte-kit
 
 # Symfony
 /connect.lock
@@ -777,40 +929,116 @@ Thumbs.db
 /public/media/
 /var/
 
+# VuePress
+.temp
+.vuepress/dist
+
 # ======================================================================
-# LANGUAGES (Compilers & Binaries)
+# LANGUAGES (Compilers & Specifics)
 # ======================================================================
+# Dart (Generated code)
+*.freezed.dart
+*.g.dart
+*.mocks.dart
+
 # JavaScript / TypeScript
 *.tsbuildinfo
+.babel.json
+.cache/
+.eslintcache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+.stylelintcache
+.tern-port
+.v8flags.*
+.webpack/
 /bazel-out
 /out-tsc
 next-env.d.ts
 
+# PHP
+.php_cs.cache
+
 # Python (Bytecode)
 *$py.class
 *.egg-info/
+*.mo
+*.pot
 *.py[cod]
+*.sage.py
+.Python
 .venv/
 __pycache__/
+cython_debug/
 env/
 venv/
+
+# Python Linters & Types (Mypy, Pyre, Ruff, etc.)
+.dmypy.json
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+dmypy.json
+pyrightconfig.json
 
 # ======================================================================
 # IDEs & EDITORS
 # ======================================================================
 # Commons
+.buildlog/
 .idea/
+
+# Android Studio
+*.iml
+.idea/.name
+.idea/assetWizardSettings.xml
+.idea/caches/
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/libraries
+.idea/misc.xml
+.idea/modules.xml
+.idea/navEditor.xml
+.idea/scopes/scope_settings.xml
+.idea/tasks.xml
+.idea/vcs.xml
+.idea/workspace.xml
+
+# BlueJ
+*.ctxt
 
 # Eclipse
 *.launch
+.apt_generated/
 .classpath
+.factorypath
+.mtj.tmp/
 .project
 .settings/
+.springBeans
 
-# JetBrains
+# JetBrains (IntelliJ, WebStorm, PyCharm, etc.)
 *.iml
+*.iml.bak
 *.ipr
+*.ipr.bak
 *.iws
+*.iws.bak
+com_crashlytics_export_strings.xml
+crashlytics-build.properties
+crashlytics.properties
+fabric.properties
+
+# Python IDEs (Spyder, Rope, IPython)
+.ropeproject
+.spyderproject
+.spyproject
+ipython_config.py
+profile_default/
 
 # Sublime Text
 *.sublime-*
@@ -838,20 +1066,77 @@ venv/
 Session.vim
 Sessionx.vim
 
-# Visual Studio (Classic)
+# Visual Studio
+*.actions
+*.browsers
+*.cache
+*.dbmdl
+*.dbproj.schemaview
+*.developer.json
+*.docstates
+*.dotSettings.user
+*.dsk
+*.force.json
+*.jfm
+*.mbar
+*.openbrowsers
+*.org
+*.plg
+*.scope
 *.sln.docstates
 *.suo
 *.user
+*.userosscache
+*.userprefs
+*.usersettings
+*.vcxproj.user
 *.VisualState.xml
+*.vsp
+*.vspf
+*.vspx
+*.vtg
+*.work
+*.workspace
 .vs/
+_i/
+_p/
+_ReSharper*/
+_TeamCity*
 
 # Visual Studio Code
+!.vscode/*.code-snippets
 !.vscode/extensions.json
 !.vscode/launch.json
 !.vscode/settings.json
 !.vscode/tasks.json
+*.code-workspace
+*.vsix
+.devcontainer/
 .history/
+.ionide
 .vscode/*
+.vscode-server/
+.vscode/chrome
+.vscode/sftp.json
+.vscode/tags
+.vscodeignore
+
+# ======================================================================
+# VERSION CONTROL
+# ======================================================================
+# Git (Local & Temps)
+*.git
+.git-blame*
+.git-old/
+.git-rewrite/
+.gitattributes.local
+.gitconfig
+.gitflow
+.gitflow.default
+.gitk
+.gitlint
+.gitstats
+git.properties
 
 # ======================================================================
 # PACKAGE MANAGERS
@@ -859,32 +1144,175 @@ Sessionx.vim
 # Commons
 !**/packages/build/
 **/packages/
-/node_modules
-/typings
-/vendor/
+.npm
+bower_components/
+jspm_packages/
 node_modules/
 typings/
+vendor/
+web_modules/
 
-# Node.js (Yarn Berry)
+# Chocolatey
+.choco-cache/
+.chocolatey/
+*.nupkg
+chocolatey.config
+
+# Composer
+.composer-cache/
+.composer-update-check
+.composer/
+composer-setup.php
+composer-temp*/
+composer-test-cleanup
+composer.json.bak
+composer.phar
+composer/
+
+# Gradle
+!src/**/build/
+.gradle-cache/
+.gradle/
+.gradletasknamecache
+gradle-app.setting
+gradle-build/
+
+# Homebrew
+.brew/
+.homebrew-cache/
+Brewfile.local
+brew.env
+
+# Maven
+.m2/
+.maven-cache/
+.maven-classpath
+.maven/
+.maven_repos/
+.mvn/timing.properties
+buildNumber.properties
+dependency-reduced-pom.xml
+generated-sources/
+generated-test-sources/
+maven-archiver/
+maven-compiler-plugin/
+maven-eclipse.xml
+maven-metadata-local.xml
+maven-metadata.xml
+maven-repository/
+maven-status/
+maven/
+pom.xml.next
+pom.xml.releaseBackup
+pom.xml.tag
+pom.xml.versionsBackup
+release.properties
+repository/
+
+# NPM
+.node-gyp/
+.node_modules.ember-try/
+.npm-cache/
+.npm-debug/
+.npm-global/
+.npm-init.js
+.npm-tarball/
+.npm-tmp/
+.npm-update-notifier
+.npm-version
+.npm/
+.npmrc
+.package-lock.json
+node_modules_*
+package.json.bak
+
+# NuGet
+*.nuget.cache
+*.nuget.dgspec.json
+*.nuget.props
+*.nuget.targets
+*.nupkg
+*.snupkg
+.nuget-packages/
+.nuget-plugins/
+.nuget/
+.packages/
+project.lock.json
+
+# PNPM
+.pnpm-cache/
+.pnpm-store/
+.pnpm/
+pnpm-lock.yaml.bak
+
+# Pub (Dart/Flutter)
+.pub/
+.pub-cache/
+
+# Python (Pip, Pipenv, Poetry, PDM)
+.eggs/
+.installed.cfg
+.pdm.toml
+.pip-build/
+.pip-cache/
+.pip-tmp/
+.pip/
+.pip_cache/
+.pipenv-cache/
+.pipenv-shims/
+.pipenv/
+Pipfile.bak
+__pypackages__/
+develop-eggs/
+eggs/
+pip-selfcheck.json
+pip-wheel-metadata/
+pipenv.lock.bak
+poetry.toml
+pypackages/
+requirements.txt.bak
+requirements.txt.lock
+
+# Yarn (v1 & Berry)
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
+!.yarn/sdks
 !.yarn/versions
 .pnp
 .pnp.*
+.yarn-cache/
+.yarn-integrity
+.yarn-metadata
+.yarn-metadata.json
+.yarn-update-notifier
 .yarn/*
-
-# NuGet
-*.nupkg
-*.snupkg
+.yarn/build
+.yarn/build-state.yml
+.yarn/cache
+.yarn/install-state.gz
+.yarn/install-state.gz.tmp
+.yarn/unplugged
+yarn-conditions.yml
+yarn.build.json
 
 # ======================================================================
 # TESTING (Tests & Coverage)
 # ======================================================================
 # Commons
-/coverage
 *.lcov
 *.xml
+.nyc_output
+coverage/
+lib-cov
+
+# CMake
+CTestTestfile.cmake
+Testing/
+
+# Cypress
+/cypress/screenshots/
+/cypress/videos/
 
 # Jest (JS)
 .jest-cache
@@ -901,29 +1329,127 @@ TestResults/
 .phpunit.result.cache
 /phpunit.xml
 
+# Python Testing (Coverage, Tox, Pytest, etc.)
+*.cover
+*.py,cover
+.coverage
+.coverage.*
+.hypothesis/
+.nox/
+.pytest_cache/
+.tox/
+coverage.xml
+cover/
+htmlcov/
+nosetests.xml
+
+# VS Code (Extension Testing)
+.vscode-test
+
+# ======================================================================
+# CI/CD & AUTOMATION
+# ======================================================================
+# CircleCI
+.circle-cache/
+.circleci-cache/
+.circleci-local/
+process.yml
+
+# GitHub Actions
+.actrc
+.actions-cache/
+.github-cache/
+.github/runners/
+.runner
+.tool-versions
+
+# GitLab CI
+.gitlab-artifacts/
+.gitlab-cache/
+.gitlab-ci.yml.bak
+.gitlab-pages/
+.gitlab-runner/
+.runner_system
+gitlab-ci/
+
+# Jenkins
+*.groovy
+*.jenkinsfile
+.jenkins-workspace/
+.jenkins/
+builds/
+init.groovy.d/
+jenkins-config/
+jenkins.json
+jenkins.properties
+jenkins.yaml
+jenkins.yml
+jenkins/
+jenkins_backup/
+jenkins_home/
+plugin-configs/
+plugins/
+workspace/
+
+# Travis CI
+.travis-build/
+.travis-cache/
+.travis-data/
+
+# Vercel
+.vercel
+
 # ======================================================================
 # CLOUD & INFRASTRUCTURE
 # ======================================================================
 # Docker
 *.docker.tar
+*.env.docker
+.docker-sync/
 .docker/
+.dockerignore
+Dockerfile.*
 docker-compose.*.override.yml
+docker-compose.*.yaml
+docker-compose.*.yml
+docker-compose.dev.yml
+docker-compose.local.yml
+docker-compose.override.yaml
 docker-compose.override.yml
+docker-compose.prod.yml
+docker-volumes/
 
 # Kubernetes / Helm
+*.decoded.*
 .helm/
+.helmignore
 .kube/
+kubeseal/
+sealed-secrets/
+values.*.yaml
+values.*.yml
 
 # Terraform
+*.tfplan
 *.tfstate
+*.tfstate.*
 *.tfstate.backup
+*_override.tf
+*_override.tf.json
+.terraform-docs.yml
+.terraform-version
+.terraform.d/
+.terraform.lock.hcl
 .terraform/
+.terragrunt-cache/
+override.tf
+override.tf.json
+terraform.rc
+terragrunt.iml
 
-# ======================================================================
-# DEPLOYMENT
-# ======================================================================
-# Vercel
-.vercel
+# Vagrant / Homestead
+Homestead.json
+Homestead.yaml
 
 # ======================================================================
 # QUALITY & AUDIT
@@ -941,8 +1467,17 @@ sonar-report.json
 # ======================================================================
 # DOCUMENTATION
 # ======================================================================
+# Commons
+site/
+
 # Compodoc (Angular)
 /documentation/
+
+# Sphinx (Python)
+docs/_build/
+
+# Storybook
+storybook-static/
 
 # Swagger / OpenAPI
 api-docs/
@@ -954,7 +1489,16 @@ swagger-ui/
 # Commons
 *.db
 *.sql
+*.sql.bak
+*.sql~
 *.sqlite
+
+# Django
+db.sqlite3
+db.sqlite3-journal
+
+# DynamoDB (Local)
+.dynamodb/
 
 # ======================================================================
 # DATA SCIENCE & ML
@@ -975,28 +1519,149 @@ notebooks/mlruns
 # LOGS
 # ======================================================================
 # Commons
+*.hprof
 *.log
+logs
 
 # Specific Logs
 /libpeerconnection.log
+*.pid
+*.pid.lock
+*.seed
+.node_history
+.node_repl_history
 .pnpm-debug.log*
+action-logs/
+celerybeat.pid
+crash.*.log
+crash.log
+hs_err_pid*
+jenkins_logs/
+lerna-debug.log*
 npm-debug.log*
+pids
+pip-delete-this-directory.txt
+pip-log.txt
+replay_pid*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+runner-logs/
 testem.log
 yarn-debug.log*
 yarn-error.log*
+
+# Visual Studio Logs
+*.svclog
 
 # ======================================================================
 # BUILDS & ARTIFACTS (Global)
 # ======================================================================
 # Commons
+*.a
+*.ap_
+*.apk
+*.class
+*.dex
+*.ear
+*.egg
+*.jar
+*.manifest
+*.nar
+*.o
+*.out
+*.rar
+*.so
+*.spec
+*.tar.gz
+*.tgz
+*.war
+*.zip
+.lock-wscript
 [Bb]in/
 [Oo]bj/
+_CPack_Packages/
+_build/
+_deps/
 Artifacts/
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+CMakeTmp/
+MANIFEST
+Makefile
 build/
+cmake-build-*/
+cmake_install.cmake
+compile_commands.json
 dist/
+dist-ssr/
+downloads/
+gen/
+install_manifest.txt
+lib/
+lib64/
 out/
+parts/
+sdist/
+share/python-wheels/
+target/
 temp/
 tmp/
+var/
+wheels/
+
+# ======================================================================
+# BUILD TOOLS & TASK RUNNERS
+# ======================================================================
+# CMake (Configuration)
+*.cmake
+CMakeCache.txt.prev
+CMakeDoxyfile.in
+CMakeDoxygen.in
+CMakeDoxygenDefaults.cmake
+CMakeLists.txt.user
+CMakeLists.txt.user.*
+CMakeSettings.json
+CMakeUserPresets.json
+DartConfiguration.tcl
+
+# Grunt
+.grunt-cache/
+.grunt-tasks/
+.grunt/
+Gruntfile.*.js
+Gruntfile.js.bak
+grunt-config/
+grunt.config.js
+
+# Gulp
+.gulp.*.cache
+.gulp-cache/
+.gulp/
+gulp-cache/
+gulp.1
+gulp.config.js
+gulpfile.*.js
+gulpfile.js.bak
+
+# Webpack
+.webpack.*.cache
+.webpack/
+webpack.*.js
+webpack.config.*.js
+webpack.config.js.bak
+webpack.generated.*
+webpack.generated.js
+webpack.records.json
+webpack-assets.json
+webpack-stats.json
+
+# ======================================================================
+# DESIGN & MEDIA
+# ======================================================================
+# Commons
+*.psd
+*.sketch
+thumb
 
 # ======================================================================
 # MISCELLANEOUS

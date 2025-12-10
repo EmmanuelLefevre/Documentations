@@ -1947,7 +1947,7 @@ To make it fast add this Alias definition in top of file.
 #                              ALIASES                                     #
 #--------------------------------------------------------------------------#
 
-Set-Alias gir Copy-GlobalGitIgnoreToRepo
+Set-Alias -Name gir -Value Copy-GlobalGitIgnoreToRepo
 ```
 
 5. Now you can place yourself in a local repository, open a terminal in its path and type =>  

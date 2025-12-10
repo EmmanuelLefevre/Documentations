@@ -138,7 +138,7 @@ function Set-FileContentCrossPlatform {
 function Test-GitAvailability {
   param (
     # Default message
-    [string]$Message = "⛔ Git for Windows is not installed (or not found in path)... Install it before using this command ! ⛔",
+    [string]$Message = "⛔ Git is not installed (or not found in path)... Install it before using this command ! ⛔",
 
     # By default text is centered
     [bool]$Center = $true

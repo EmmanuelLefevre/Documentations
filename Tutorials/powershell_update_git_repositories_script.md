@@ -1284,6 +1284,42 @@ function Get-RepoListToProcess {
   }
 }
 
+##########---------- Check if remote repository exists on GitHub ----------##########
+function Test-RemoteRepositoryExistence {
+  param (
+    [string]$RepoName,
+    [string]$UserName,
+    [string]$Token
+  )
+
+  Write-Host ""
+  $msg = "🔎 Checking remote availability 🔎"
+  $paddingStr = Get-CenteredPadding -RawMessage $msg
+
+  Write-Host -NoNewline $paddingStr
+  Write-Host -NoNewline $msg
+
+  $apiUrl = "https://api.github.com/repos/$UserName/$RepoName"
+
+  try {
+    # Try to retrieve information from the repository. If 404, go to catch
+    $null = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers @{ Authorization = "Bearer $Token" } -ErrorAction Stop
+
+    return $true
+  }
+  catch {
+    Write-Host ""
+    Write-Host -NoNewline "⛔ Remote repository " -ForegroundColor Red
+    Write-Host -NoNewline "$UserName" -ForegroundColor Magenta
+    Write-Host -NoNewline "/" -ForegroundColor Red
+    Write-Host -NoNewline "$RepoName" -ForegroundColor Magenta
+    Write-Host " does not exist on GitHub !" -ForegroundColor Red
+    Write-Host "  => Please check spelling in Get-LocationPathConfig..." -ForegroundColor DarkYellow
+
+    return $false
+  }
+}
+
 ##########---------- Propose to clone missing repository via SSH ----------##########
 function Invoke-InteractiveClone {
   param (
@@ -1306,6 +1342,12 @@ function Invoke-InteractiveClone {
 
   Write-Host -NoNewline "Target path : " -ForegroundColor DarkBlue
   Write-Host "   └─  $RepoPath" -ForegroundColor DarkCyan
+
+  ######## GUARD CLAUSE : CHECK REMOTE EXISTENCE ########
+  # If remote doesn't exist, immediately exit
+  if (-not (Test-RemoteRepositoryExistence -RepoName $RepoName -UserName $UserName -Token $Token)) {
+    return 'Failed'
+  }
 
   # Ask user permission
   Write-Host -NoNewline "🐑 Clone it via SSH? (Y/n): " -ForegroundColor Magenta

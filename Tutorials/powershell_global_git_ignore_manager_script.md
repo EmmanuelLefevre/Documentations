@@ -153,6 +153,7 @@ if (!(Test-Path ".\Microsoft.PowerShell_profile.ps1")) { New-Item ".\Microsoft.P
 #-----------------------------------------------------------------------#
 #                        GLOBAL VARIABLES                               #
 #-----------------------------------------------------------------------#
+
 $Global:TerminalWidth = 100
 
 

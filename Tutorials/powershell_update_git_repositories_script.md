@@ -324,6 +324,7 @@ Set-Alias -Name gpull -Value Update-GitRepositories
 #-----------------------------------------------------------------------#
 #                        GLOBAL VARIABLES                               #
 #-----------------------------------------------------------------------#
+
 $Global:TerminalWidth = 100
 
 
@@ -344,9 +345,9 @@ function Get-LocationPathConfig {
   # Definition of universal root folders
   # Join-Path automatically handles "/"" or "\"" depending on specific OS
   $DesktopPath   = Join-Path $HOME "Desktop"
-  $ProjectsPath   = Join-Path $DesktopPath "Projets"
+  $ProjectsPath  = Join-Path $DesktopPath "Projets"
   $DocumentsPath = Join-Path $HOME "Documents"
-  $PicturesPath = Join-Path $HOME "Pictures"
+  $PicturesPath  = Join-Path $HOME "Pictures"
 
   # For nvim, path changes depending on OS
   if ($Sys.IsMacOS -or $Sys.IsLinux) {
@@ -386,8 +387,9 @@ function Get-LocationPathConfig {
     [PSCustomObject]@{ Name = "Yam4";                     Path = Join-Path $ProjectsPath   "Yam4";                             IsRepo = $true;     IsOnlyMain = $false },
 
     ##########---------- NAVIGATION ONLY ----------##########
-    [PSCustomObject]@{ Name = "home";                     Path = $HOME;                                                       IsRepo = $false },
+    [PSCustomObject]@{ Name = "desktop";                  Path = $DesktopPath;                                                IsRepo = $false },
     [PSCustomObject]@{ Name = "dwld";                     Path = Join-Path $HOME "Downloads";                                 IsRepo = $false },
+    [PSCustomObject]@{ Name = "home";                     Path = $HOME;                                                       IsRepo = $false },
     [PSCustomObject]@{ Name = "nvim";                     Path = $NvimPath;                                                   IsRepo = $false },
     [PSCustomObject]@{ Name = "profile";                  Path = Split-Path $PROFILE;                                         IsRepo = $false },
     [PSCustomObject]@{ Name = "projets";                  Path = $ProjectsPath;                                               IsRepo = $false }

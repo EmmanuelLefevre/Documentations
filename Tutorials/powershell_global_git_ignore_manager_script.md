@@ -151,6 +151,12 @@ if (!(Test-Path ".\Microsoft.PowerShell_profile.ps1")) { New-Item ".\Microsoft.P
 
 ```powershell
 #-----------------------------------------------------------------------#
+#                        GLOBAL VARIABLES                               #
+#-----------------------------------------------------------------------#
+$Global:TerminalWidth = 100
+
+
+#-----------------------------------------------------------------------#
 #                        SHARED FUNCTIONS                               #
 #-----------------------------------------------------------------------#
 
@@ -240,7 +246,7 @@ function Test-GitAvailability {
 ##########---------- Calculate centered padding spaces ----------##########
 function Get-CenteredPadding {
   param (
-    [int]$TotalWidth = 80,
+    [int]$TotalWidth = $Global:TerminalWidth,
     [string]$RawMessage
   )
 
@@ -255,7 +261,7 @@ function Get-CenteredPadding {
   $visualLength += $bmpEmojis
 
   # (Total Width - Message Length) / 2
-  # [math]::Max(0, ...) => prevents crash if message is longer than 80 characters
+  # [math]::Max(0, ...) => prevents crash if message is longer than $Global:TerminalWidth characters
   $paddingCount = [math]::Max(0, [int](($TotalWidth - $visualLength) / 2))
 
   return " " * $paddingCount
@@ -271,7 +277,7 @@ function Show-HeaderFrame {
   )
 
   # Fixed constraints
-  $TerminalWidth = 80
+  $TerminalWidth = $Global:TerminalWidth
   $FrameWidth = 64
   $FramePaddingLeft = ($TerminalWidth - $FrameWidth) / 2
 

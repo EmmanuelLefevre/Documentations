@@ -314,12 +314,17 @@ chmod 600 $PROFILE
 3. Copy/Paste "Update-GitRepositories" function and his utilities functions inside.
 
 ```powershell
-
 #--------------------------------------------------------------------------#
 #                              ALIASES                                     #
 #--------------------------------------------------------------------------#
 
 Set-Alias -Name gpull -Value Update-GitRepositories
+
+
+#-----------------------------------------------------------------------#
+#                        GLOBAL VARIABLES                               #
+#-----------------------------------------------------------------------#
+$Global:TerminalWidth = 100
 
 
 #---------------------------------------------------------------------------#
@@ -454,7 +459,7 @@ function Test-GitAvailability {
 ##########---------- Calculate centered padding spaces ----------##########
 function Get-CenteredPadding {
   param (
-    [int]$TotalWidth = 80,
+    [int]$TotalWidth = $Global:TerminalWidth,
     [string]$RawMessage
   )
 
@@ -469,7 +474,7 @@ function Get-CenteredPadding {
   $visualLength += $bmpEmojis
 
   # (Total Width - Message Length) / 2
-  # [math]::Max(0, ...) => prevents crash if message is longer than 80 characters
+  # [math]::Max(0, ...) => prevents crash if message is longer than $Global:TerminalWidth characters
   $paddingCount = [math]::Max(0, [int](($TotalWidth - $visualLength) / 2))
 
   return " " * $paddingCount
@@ -485,7 +490,7 @@ function Show-HeaderFrame {
   )
 
   # Fixed constraints
-  $TerminalWidth = 80
+  $TerminalWidth = $Global:TerminalWidth
   $FrameWidth = 64
   $FramePaddingLeft = ($TerminalWidth - $FrameWidth) / 2
 
@@ -587,7 +592,7 @@ function Show-Separator {
 ##########---------- Display main separator ----------##########
 function Show-MainSeparator {
   # Length configuration
-  $totalWidth = 80
+  $totalWidth = $Global:TerminalWidth
   $lineLength = 54
 
   # Calculation of margins
@@ -908,7 +913,7 @@ function Update-GitRepositories {
 
           # If not last branch, display separator
           if ($i -lt $branchCount) {
-            Show-Separator -Length 80 -ForegroundColor DarkGray
+            Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
           }
 
           # Jump to next branch in list
@@ -945,7 +950,7 @@ function Update-GitRepositories {
 
           # If not last branch, display separator
           if ($i -lt $branchCount) {
-            Show-Separator -Length 80 -ForegroundColor DarkGray
+            Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
           }
 
           # Jump to next branch in list
@@ -989,7 +994,7 @@ function Update-GitRepositories {
 
         # If execution was successful (Success or Skipped) and not last one, display separator
         if ($updateStatus -ne 'Failed' -and $i -lt $branchCount) {
-          Show-Separator -Length 80 -ForegroundColor DarkGray
+          Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
         }
       }
 
@@ -1001,7 +1006,7 @@ function Update-GitRepositories {
         if (($anyBranchNeededPull -eq $false) -and
             ($sortedBranchesToUpdate.Count -gt 1) -and
             ($allBranchesWerePulled -eq $true)) {
-          Show-Separator -Length 80 -ForegroundColor DarkGray
+          Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
 
           Write-Host "All branches are being updated 🤙" -ForegroundColor Green
         }
@@ -1048,7 +1053,7 @@ function Update-GitRepositories {
         ######## SEPARATOR MANAGEMENT ########
         # If one OR other
         if ($mergeWillDisplayMessage -or $restoreWillDisplayMessage) {
-          Show-Separator -Length 80 -ForegroundColor DarkGray
+          Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
         }
 
         ######## WORKFLOW INFO ########
@@ -1255,7 +1260,7 @@ function Get-RepositoriesInfo {
   # Display message
   Write-Host -NoNewline $paddingStr
   Write-Host $msg -ForegroundColor Green
-  Show-Separator -Length 80 -ForegroundColor Cyan
+  Show-Separator -Length $Global:TerminalWidth -ForegroundColor Cyan
   Write-Host ""
 
   return @{
@@ -1289,7 +1294,7 @@ function Get-RepoListToProcess {
     Write-Host -NoNewline $paddingStr
     Write-Host "🔎 Pull targeted on single repository 🔎" -ForegroundColor Cyan
 
-    Show-Separator -Length 80 -ForegroundColor DarkGray
+    Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
 
     return @($TargetName)
   }
@@ -1606,7 +1611,7 @@ function Show-LastCommitDate {
     Write-Host -NoNewline " on " -ForegroundColor DarkYellow
     Write-Host "$branchName" -ForegroundColor Magenta
 
-    Show-Separator -Length 80 -ForegroundColor DarkGray
+    Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
   }
   catch {
     # If date parsing fails, exit silently
@@ -2128,7 +2133,7 @@ function Invoke-NewBranchTracking {
   # Branches that should NEVER be deleted remotely even if user doesn't track them
   $protectedBranches = @("dev", "develop", "main", "master")
 
-  Show-Separator -Length 80 -ForegroundColor DarkGray
+  Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
 
   # Flag initialization
   $hasError = $false
@@ -2143,7 +2148,7 @@ function Invoke-NewBranchTracking {
     ######## UI : SEPARATOR MANAGEMENT ########
     # Display separator (except first)
     if (-not $isFirstLoop) {
-      Show-Separator -Length 80 -ForegroundColor DarkGray
+      Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
     }
     # Mark first loop is finished
     $isFirstLoop = $false
@@ -2295,7 +2300,7 @@ function Invoke-OrphanedCleanup {
     return [PSCustomObject]@{ OriginalDeleted = $false; HasError = $false }
   }
 
-  Show-Separator -Length 80 -ForegroundColor DarkGray
+  Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
 
   Write-Host "🧹 Cleaning up orphaned local branches..." -ForegroundColor DarkYellow
 
@@ -2308,14 +2313,14 @@ function Invoke-OrphanedCleanup {
   ######## INTERACTIVE CLEANUP LOOP ########
   foreach ($orphaned in $branchesToClean) {
     if (-not $isFirstBranch) {
-      Show-Separator -Length 80 -ForegroundColor DarkGray
+      Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
     }
 
     # Refresh current branch status (in case we moved in previous loop)
     $realTimeCurrentBranch = (git rev-parse --abbrev-ref HEAD).Trim()
 
     if (-not $isFirstBranch) {
-      Show-Separator -Length 80 -ForegroundColor DarkGray
+      Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
     }
     $isFirstBranch = $false
 
@@ -2481,7 +2486,7 @@ function Invoke-MergedCleanup {
     return $false
   }
 
-  Show-Separator -Length 80 -ForegroundColor DarkGray
+  Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
 
   Write-Host "🧹 Cleaning up local branches that have already being merged..." -ForegroundColor DarkYellow
 
@@ -2494,7 +2499,7 @@ function Invoke-MergedCleanup {
   ######## INTERACTIVE CLEANUP LOOP ########
   foreach ($merged in $branchesToClean) {
     if (-not $isFirstBranch) {
-      Show-Separator -Length 80 -ForegroundColor DarkGray
+      Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkGray
     }
 
     $isFirstBranch = $false
@@ -2797,7 +2802,7 @@ function Show-UpdateSummary {
     [array]$ReportData
   )
 
-  # If no data, we don't do anything
+  # If no data, no do anything
   if (-not $ReportData -or $ReportData.Count -eq 0) { return }
 
   Show-MainSeparator
@@ -2811,13 +2816,19 @@ function Show-UpdateSummary {
   Write-Host $title -ForegroundColor Cyan
   Write-Host ""
 
-  ######## TABLE CENTERING ########
-  $tableOuterPadding = " " * 8
 
-  ######## TABLE WIDTHS ########
+  ######## TABLE WIDTHS (fixed at 64 characters) ########
   $colRepoWidth = 24
   $colStatWidth = 24
   $colTimeWidth = 16
+
+  $fixedTableWidth = $colRepoWidth + $colStatWidth + $colTimeWidth
+
+  ######## TABLE CENTERING (Dynamic) ########
+  $tableOuterPadding = " " * 8
+  # Calculation of exterior padding based on overall width
+  $outerPaddingLength = [math]::Max(0, [int](($Global:TerminalWidth - $fixedTableWidth) / 2))
+  $tableOuterPadding = " " * $outerPaddingLength
 
   # Headers (manual format for color control)
   Write-Host -NoNewline $tableOuterPadding
@@ -2841,10 +2852,10 @@ function Show-UpdateSummary {
       "Updated"           { $statusText = "✅ Updated";            $statusColor = "Green"      }
     }
 
-    ######## STATUS CENTERING (Width 22) ########
+    ######## STATUS CENTERING ########
     $statLen = $statusText.Length
     # Manual adjustment for emojis that count double on screen
-    if ($statusText -match "✅|✨|⏩|🙈|❌") {
+    if ($statusText -match "✅|✨|⏩|🙈|❌|🐙") {
       $statLen += 1
     }
 
@@ -2920,7 +2931,7 @@ function Stop-OperationTimer {
   }
   ######## REPOSITORY TIME ########
   else {
-    Show-Separator -Length 80 -ForegroundColor DarkBlue
+    Show-Separator -Length $Global:TerminalWidth -ForegroundColor DarkBlue
 
     # Helper called to center message nicely
     $msg = "⏱️ $RepoName updated in $timeString ⏱️"

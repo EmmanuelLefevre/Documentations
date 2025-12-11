@@ -602,6 +602,17 @@ function Show-MainSeparator {
   Write-Host ""
 }
 
+##########---------- Display technical error message ----------##########
+function Show-TechnicalErrorDetail {
+  param (
+    [Parameter(Mandatory=$true)]
+    [string]$Message
+  )
+
+  Write-Host "Error message => " -ForegroundColor Red
+  Write-Host $Message -ForegroundColor DarkBlue
+}
+
 ##########---------- Display error message nicely ----------##########
 function Show-GracefulError {
   param (
@@ -2775,9 +2786,8 @@ function Show-NetworkOrSystemError {
   else {
     Show-GracefulError -Message "💥 Internal Script/Git processing error 💥" -NoTrailingNewline
 
-    # Display technical message for debugging
-    Write-Host "Error message => " -ForegroundColor Red
-    Write-Host $Message -ForegroundColor DarkBlue
+    # Debug message
+    Show-TechnicalErrorDetail -Message $Message
   }
 }
 

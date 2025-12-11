@@ -2847,7 +2847,7 @@ function Show-UpdateSummary {
   # Headers (manual format for color control)
   Write-Host -NoNewline $tableOuterPadding
   Write-Host -NoNewline "Repository              " -ForegroundColor White -BackgroundColor DarkGray
-  Write-Host -NoNewline "         Status         " -ForegroundColor White -BackgroundColor DarkGray
+  Write-Host -NoNewline "        Status          " -ForegroundColor White -BackgroundColor DarkGray
   Write-Host -NoNewline "        Duration" -ForegroundColor White -BackgroundColor DarkGray
   Write-Host ""
 

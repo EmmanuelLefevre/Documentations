@@ -390,7 +390,7 @@ function Set-LoadGlobalGitIgnore {
   $WasUpdatedOrCreated = $false
 
   ######## GUARD CLAUSE : GIT AVAILABILITY ########
-  if (-not (Test-GitAvailability -Message "⛔ Git for Windows is not installed (or not found in path). Global git ignore config skipped ! ⛔")) {
+  if (-not (Test-GitAvailability -Message "⛔ Git is not installed (or not found in path). Global git ignore config skipped ! ⛔")) {
     return
   }
 

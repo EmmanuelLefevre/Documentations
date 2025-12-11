@@ -847,7 +847,21 @@ function Update-GitRepositories {
         $branchesToUpdate = @($branchesToUpdate | Where-Object { $_.Local -match '^(main|master)$' })
 
         if ($branchesToUpdate) {
-          Write-Host "ℹ️ Configured to pull MAIN branch only ℹ️" -ForegroundColor DarkYellow
+          $msgPrefix = "ℹ️ Configured to pull "
+          $msgMainBranch = "MAIN"
+          $msgMiddle = "/"
+          $msgMasterBranch = "MAIN"
+          $msgSuffix = " branch only ℹ️"
+
+          $fullMsg = $msgPrefix + $msgMainBranch + $msgMiddle + $msgMasterBranch + $msgSuffix
+
+          Write-Host -NoNewline (Get-CenteredPadding -RawMessage $fullMsg)
+          Write-Host -NoNewline $msgPrefix -ForegroundColor DarkYellow
+          Write-Host -NoNewline $msgMainBranch -ForegroundColor Magenta
+          Write-Host -NoNewline $msgMiddle -ForegroundColor DarkYellow
+          Write-Host -NoNewline $msgMasterBranch -ForegroundColor Magenta
+          Write-Host -NoNewline $msgSuffix -ForegroundColor DarkYellow
+          Write-Host ""
         }
       }
 

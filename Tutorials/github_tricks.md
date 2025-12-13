@@ -15,11 +15,16 @@
 
 ## INTRO
 
-Ce document regroupe les procédures pour nettoyer l'historique Git, supprimer des données sensibles et uniformiser les contributeurs.  
+Ce document regroupe les procédures pour :  
+
+- nettoyer l'historique Git  
+- supprimer des données sensibles  
+- supprimer un emailpublique dans les metadonnées de commits  
+- uniformiser les contributeurs.  
 
 ⚠️ AVERTISSEMENT CRITIQUE ⚠️  
 
-La réécriture d'historique (via filter-repo ou filter-branch) est destructrice. Elle change les SHA-1 des commits (metadonnées).  
+La réécriture d'historique (via `filter-repo` ou `filter-branch`) est destructrice. Elle change les SHA-1 des commits (metadonnées).  
 
 **Faire toujours une COPIE DE SAUVEGARDE complète du dossier local avant de lancer ces commandes**  
 
@@ -57,7 +62,7 @@ git filter-repo --version
 
 Ces fichiers sont utilisés par certaines commandes ci-dessous pour mapper les anciennes informations vers les nouvelles.  
 
-**`mailmap`**  
+- **`mailmap`**  
 
 Utilisé pour corriger les noms et emails des auteurs/committers.  
 
@@ -65,7 +70,7 @@ Utilisé pour corriger les noms et emails des auteurs/committers.
 LefevreEmmanuel <47084975+EmmanuelLefevre@users.noreply.github.com> <ancien.email@example.com>
 ```
 
-**`requirements.txt`**  
+- **`requirements.txt`**  
 
 Utilisé pour remplacer du texte dans le corps des fichiers ou les messages de commit.  
 
@@ -106,11 +111,9 @@ git log --all -- example.txt
 
 ## SUPPRIMER UN EMAIL PUBLIQUE
 
-1. Utiliser mailmap et replacements.txt pour nettoyer l'historique. Copier ces deux fichiers à la racine de votre projet.  
+1. Utiliser `mailmap` et `replacements.txt` pour nettoyer l'historique. Copier ces deux fichiers à la racine de votre projet.  
 
-💡 Dans le cas de vouloir réaliser cette opération sur plusieurs branches il suffit de récupérer toutes les branches distantes avec la commande suivante:  
-
-Sinon passer directement à l'étape 2.  
+💡 Dans le cas de vouloir réaliser cette opération sur plusieurs branches il suffit de récupérer toutes les branches distantes avec la commande suivante, sinon passer directement à l'étape 2.  
 
 Se placer dans le path du projet et lancer cette commande  
 
@@ -120,7 +123,7 @@ Se placer dans le path du projet et lancer cette commande
 git fetch --all
 ```
 
-2. Lancer ensuite cette commande de filtrage  
+2. Lancer ensuite la commande de filtrage  
 
 ```powershell
 git filter-repo --mailmap mailmap --replace-text replacements.txt --force
@@ -180,7 +183,7 @@ Si vous ne pouvez pas utiliser Python/git-filter-repo et que vous êtes sous Pow
 
 Cette commande est plus lente et dépréciée, mais fonctionne partout !  
 
-⚠️ git filter-branch est lent. Cette commande force l'identité sur tous les commits.  
+⚠️ `git filter-branch` est lent. Cette commande force l'identité sur tous les commits.  
 
 1. Uniformisation de l'auteur et du committer  
 
@@ -236,7 +239,7 @@ Procédure pour moderniser le nom de la branche par défaut => **Master** vers *
 
 **En local :**
 
-3. Se placer sur master en local  
+3. Se placer sur master  
 
 4. Renommer la branche locale  
 
@@ -291,7 +294,7 @@ git push origin --force --all
 git push origin --force --tags
 ```
 
-4. Nettoyage finla (optionnel mais recommandé)  
+4. Nettoyage final (optionnel mais recommandé)  
 
 Une fois que tout est poussé et vérifié, vous pouvez nettoyer les résidus locaux pour gagner de la place disque.  
 

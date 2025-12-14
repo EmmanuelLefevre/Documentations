@@ -3,7 +3,7 @@
 ## SOMMAIRE
 
 - [INTRO](#intro)
-- [WHYTHISSCRIPT](#why-this-script)
+- [WHY THIS SCRIPT](#why-this-script)
 - [WORKFLOW](#workflow)
 - [INSTALLATION PROCEDURE](#installation-procedure)
 - [BONUS](#bonus)

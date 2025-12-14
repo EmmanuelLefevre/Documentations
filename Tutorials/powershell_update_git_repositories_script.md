@@ -1236,8 +1236,10 @@ function Get-RepositoriesInfo {
         Write-Host "📦 $($bad.Name)" -ForegroundColor DarkCyan
       }
       else {
+        Write-Host ""
         Write-Host -NoNewline "└─ Path NOT FOUND on disk : " -ForegroundColor DarkYellow
         Write-Host " $($bad.Path)" -ForegroundColor DarkCyan
+        Write-Host ""
       }
     }
 

@@ -853,18 +853,14 @@ function Update-GitRepositories {
 
         if ($branchesToUpdate) {
           $msgPrefix = "ℹ️ Configured to pull "
-          $msgMainBranch = "MAIN"
-          $msgMiddle = "/"
-          $msgMasterBranch = "MAIN"
+          $msgBranch = "MAIN"
           $msgSuffix = " branch only ℹ️"
 
-          $fullMsg = $msgPrefix + $msgMainBranch + $msgMiddle + $msgMasterBranch + $msgSuffix
+          $fullMsg = $msgPrefix + $msgBranch + $msgSuffix
 
           Write-Host -NoNewline (Get-CenteredPadding -RawMessage $fullMsg)
-          Write-Host -NoNewline $msgPrefix -ForegroundColor DarkYellow
           Write-Host -NoNewline $msgMainBranch -ForegroundColor Magenta
-          Write-Host -NoNewline $msgMiddle -ForegroundColor DarkYellow
-          Write-Host -NoNewline $msgMasterBranch -ForegroundColor Magenta
+          Write-Host -NoNewline $msgBranch -ForegroundColor DarkYellow
           Write-Host -NoNewline $msgSuffix -ForegroundColor DarkYellow
           Write-Host ""
         }

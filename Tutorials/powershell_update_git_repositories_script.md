@@ -359,7 +359,9 @@ function Get-LocationPathConfig {
 
   return @(
     ##########---------- REPOSITORIES (Important order for Update-GitRepositories() function) ----------##########
+    [PSCustomObject]@{ Name = "AngularTemplate";          Path = Join-Path $ProjectsPath   "AngularTemplate";                  IsRepo = $true;     IsOnlyMain = $true  },
     [PSCustomObject]@{ Name = "ArtiWave";                 Path = Join-Path $ProjectsPath   "ArtiWave";                         IsRepo = $true;     IsOnlyMain = $false },
+    [PSCustomObject]@{ Name = "Astrofalls";               Path = Join-Path $ProjectsPath   "Astrofalls";                       IsRepo = $true;     IsOnlyMain = $true  },
     [PSCustomObject]@{ Name = "Cours";                    Path = Join-Path $DesktopPath    "Cours";                            IsRepo = $true;     IsOnlyMain = $true  },
     [PSCustomObject]@{ Name = "DailyPush";                Path = Join-Path $DesktopPath    "DailyPush";                        IsRepo = $true;     IsOnlyMain = $false },
     [PSCustomObject]@{ Name = "DataScrub";                Path = Join-Path $ProjectsPath   "DataScrub";                        IsRepo = $true;     IsOnlyMain = $false },
@@ -2196,7 +2198,7 @@ function Invoke-NewBranchTracking {
     ######## YES WE TRACK ########
     if ($wantToTrack) {
       Write-Host -NoNewline "⏳ Creating local branch " -ForegroundColor Magenta
-      Write-Host "$localBranchName" -ForegroundColor Red
+      Write-Host "$localBranchName" -ForegroundColor Green
 
       # Create local branch tracking remote branch
       git branch --track --quiet $localBranchName $newBranchRef 2>$null

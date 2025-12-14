@@ -444,7 +444,7 @@ function Initialize-GlobalGitIgnoreFile {
   $msg = "🔄 Creating it with default template 🔄"
 
   Write-Host -NoNewline (Get-CenteredPadding -RawMessage $msg)
-  Write-Host $msg -ForegroundColor Red
+  Write-Host $msg -ForegroundColor Green
 
   try {
     # Initialize content

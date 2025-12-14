@@ -1221,29 +1221,23 @@ function Get-RepositoriesInfo {
     return $null
   }
 
-  ######## PATH VALIDATION (INTEGRITY CHECK) ########
-  $invalidItems = $gitConfig | Where-Object {
-    ([string]::IsNullOrWhiteSpace($_.Path)) -or (-not (Test-Path -Path $_.Path -ErrorAction SilentlyContinue))
+  ######## PATH VALIDATION 1 : SYNTAX INTEGRITY CHECK (BLOCKING) ########
+  # ONLY check if path string is empty
+  $invalidSyntaxItems = $gitConfig | Where-Object {
+    [string]::IsNullOrWhiteSpace($_.Path)
   }
 
-  ######## GUARD CLAUSE : INVALID/NOT FOUND PATHS ########
-  if ($invalidItems) {
-    Show-GracefulError -Message "❌ Local repositories dictionary contains invalid paths ! ❌" -NoTrailingNewline
+  if ($invalidSyntaxItems) {
+    Show-GracefulError -Message "❌ Local repositories array contains empty paths ! ❌" -NoTrailingNewline
 
-    foreach ($bad in $invalidItems) {
-      if ([string]::IsNullOrWhiteSpace($bad.Path)) {
-        Write-Host -NoNewline "└─ Path is EMPTY for : " -ForegroundColor DarkYellow
-        Write-Host "📦 $($bad.Name)" -ForegroundColor DarkCyan
-      }
-      else {
-        Write-Host ""
-        Write-Host -NoNewline "└─ Path NOT FOUND on disk : " -ForegroundColor DarkYellow
-        Write-Host " $($bad.Path)" -ForegroundColor DarkCyan
-        Write-Host ""
-      }
+    Write-Host ""
+    foreach ($bad in $invalidSyntaxItems) {
+      Write-Host -NoNewline " └─ Empty path for : " -ForegroundColor DarkYellow
+      Write-Host "📦 $($bad.Name)" -ForegroundColor DarkCyan
     }
+    Write-Host ""
 
-    $infoMsg = "ℹ️ Ensure repositories dictionary has valid paths $functionNameMessage"
+    $infoMsg = "ℹ️ Ensure repositories array has valid paths $functionNameMessage"
     $paddingInfoStr = Get-CenteredPadding -RawMessage $infoMsg
 
     Write-Host -NoNewline $paddingInfoStr
@@ -1252,7 +1246,24 @@ function Get-RepositoriesInfo {
     return $null
   }
 
-  ######## DICTIONARY CONSTRUCTION ########
+  ######## PATH VALIDATION 2 : DISK CHECK (NON-BLOCKING WARNING) ########
+  # Simply informing user that folder doesn't exist,
+  # but no return $null => allow script to purpose clone
+  $missingFolders = $gitConfig | Where-Object {
+    -not (Test-Path -Path $_.Path -ErrorAction SilentlyContinue)
+  }
+
+  if ($missingFolders) {
+
+    Write-Host ""
+    foreach ($miss in $missingFolders) {
+      Write-Host -NoNewline " └─ Path not found on disk : " -ForegroundColor DarkYellow
+      Write-Host " $($miss.Path)" -ForegroundColor DarkCyan
+    }
+    Write-Host ""
+  }
+
+  ######## ARRAY CONSTRUCTION ########
   $repos = @{}
   $reposSettings = @{}
 
@@ -1344,12 +1355,7 @@ function Test-RemoteRepositoryExistence {
     [string]$Token
   )
 
-  Write-Host ""
-  $msg = "🔎 Checking remote availability 🔎"
-  $paddingStr = Get-CenteredPadding -RawMessage $msg
-
-  Write-Host -NoNewline $paddingStr
-  Write-Host -NoNewline $msg
+  Write-Host "🔎 Checking remote availability..." -ForegroundColor DarkBlue
 
   $apiUrl = "https://api.github.com/repos/$UserName/$RepoName"
 
@@ -1381,6 +1387,7 @@ function Invoke-InteractiveClone {
   )
 
   # Helper called to center message nicely
+  Write-Host ""
   $msgPrefix = "⚠️ Repository "
   $msgSuffix = " not found on disk ⚠️"
 
@@ -1392,8 +1399,8 @@ function Invoke-InteractiveClone {
   Write-Host $msgSuffix -ForegroundColor DarkYellow
   Write-Host ""
 
-  Write-Host -NoNewline "Target path : " -ForegroundColor DarkBlue
-  Write-Host "   └─  $RepoPath" -ForegroundColor DarkCyan
+  Write-Host -NoNewline "Target path : " -ForegroundColor Cyan
+  Write-Host " $RepoPath" -ForegroundColor DarkCyan
 
   ######## GUARD CLAUSE : CHECK REMOTE EXISTENCE ########
   # If remote doesn't exist, immediately exit
@@ -1402,7 +1409,7 @@ function Invoke-InteractiveClone {
   }
 
   # Ask user permission
-  Write-Host -NoNewline "🐑 Clone it via SSH? (Y/n): " -ForegroundColor Magenta
+  Write-Host -NoNewline "🐑 Clone it via SSH ? (Y/n): " -ForegroundColor Magenta
 
   $confirm = Wait-ForUserConfirmation
 

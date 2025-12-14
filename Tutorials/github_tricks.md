@@ -3,15 +3,15 @@
 ## SOMMAIRE
 
 - [INTRO](#intro)
-- [FILTERREPO](#filter-repo)
-- [NOREPLYGITHUBEMAIL](#no-reply-github-email)
-- [FICHIERSDECONFIGURATION](#fichiers-de-configuration)
-- [SUPPRIMERHISTORIQUEFICHIERSPECIFIQUE](#supprimer-historique-fichier-specifique)
-- [SUPPRIMERUNEMAILPUBLIQUE](#supprimer-un-email-publique)
-- [METHODESANSFILTER-REPO(NATIVE GIT)](#methode-sans-filter-repo-native-git)
+- [FILTER REPO](#filter-repo)
+- [NO REPLY GITHUB EMAIL](#no-reply-github-email)
+- [FICHIERS DE CONFIGURATION](#fichiers-de-configuration)
+- [SUPPRIMER HISTORIQUE FICHIER SPECIFIQUE](#supprimer-historique-fichier-specifique)
+- [SUPPRIMER UN EMAIL PUBLIQUE](#supprimer-un-email-publique)
+- [METHODE SANS FILTER-REPO (NATIVE GIT)](#methode-sans-filter-repo-native-git)
 - [BONUS](#bonus)
-  - [PROCEDUREBRANCHEDEFAUTMODERNE](#procedure-branche-defaut-moderne)
-  - [DELETEALLCONTRIBUTORS](#delete-all-contributors)
+  - [PROCEDURE BRANCHE DEFAUT MODERNE](#procedure-branche-defaut-moderne)
+  - [DELETE ALL CONTRIBUTORS](#delete-all-contributors)
 
 ## INTRO
 

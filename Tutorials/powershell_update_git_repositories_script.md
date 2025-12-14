@@ -359,9 +359,9 @@ function Get-LocationPathConfig {
 
   return @(
     ##########---------- REPOSITORIES (Important order for Update-GitRepositories() function) ----------##########
-    [PSCustomObject]@{ Name = "AngularTemplate";          Path = Join-Path $ProjectsPath   "AngularTemplate";                  IsRepo = $true;     IsOnlyMain = $true  },
+    [PSCustomObject]@{ Name = "AngularTemplate";          Path = Join-Path $ProjectsPath   "AngularTemplate";                  IsRepo = $true;     IsOnlyMain = $false },
     [PSCustomObject]@{ Name = "ArtiWave";                 Path = Join-Path $ProjectsPath   "ArtiWave";                         IsRepo = $true;     IsOnlyMain = $false },
-    [PSCustomObject]@{ Name = "Astrofalls";               Path = Join-Path $ProjectsPath   "Astrofalls";                       IsRepo = $true;     IsOnlyMain = $true  },
+    [PSCustomObject]@{ Name = "Astrofalls";               Path = Join-Path $ProjectsPath   "Astrofalls";                       IsRepo = $true;     IsOnlyMain = $false },
     [PSCustomObject]@{ Name = "Cours";                    Path = Join-Path $DesktopPath    "Cours";                            IsRepo = $true;     IsOnlyMain = $true  },
     [PSCustomObject]@{ Name = "DailyPush";                Path = Join-Path $DesktopPath    "DailyPush";                        IsRepo = $true;     IsOnlyMain = $false },
     [PSCustomObject]@{ Name = "DataScrub";                Path = Join-Path $ProjectsPath   "DataScrub";                        IsRepo = $true;     IsOnlyMain = $false },
@@ -388,7 +388,7 @@ function Get-LocationPathConfig {
     [PSCustomObject]@{ Name = "Soutenances";              Path = Join-Path $DesktopPath    "Soutenances";                      IsRepo = $true;     IsOnlyMain = $true  },
     [PSCustomObject]@{ Name = "Yam4";                     Path = Join-Path $ProjectsPath   "Yam4";                             IsRepo = $true;     IsOnlyMain = $false },
 
-    ##########---------- NAVIGATION ONLY ----------##########
+    ##########---------- NAVIGATION ONLY (go() function) ----------##########
     [PSCustomObject]@{ Name = "desktop";                  Path = $DesktopPath;                                                IsRepo = $false },
     [PSCustomObject]@{ Name = "dwld";                     Path = Join-Path $HOME "Downloads";                                 IsRepo = $false },
     [PSCustomObject]@{ Name = "home";                     Path = $HOME;                                                       IsRepo = $false },

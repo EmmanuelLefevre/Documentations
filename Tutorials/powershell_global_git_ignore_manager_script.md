@@ -5,6 +5,7 @@
 - [INTRO](#intro)
 - [WHY THIS SCRIPT](#why-this-script)
 - [WORKFLOW](#workflow)
+- [REQUIREMENTS](#requirements)
 - [INSTALLATION PROCEDURE](#installation-procedure)
 - [BONUS](#bonus)
 - [CONSOLE APPLICATION SCREENS](#console-application-screens)
@@ -114,6 +115,13 @@ An automatic backup (.bak) is created before any changes are made. If everything
 
 👌 Others many controls and features have been added 👌
 
+## REQUIREMENTS
+
+PowerShell Core is the cross-platform version of PowerShell, built on .NET Core. It works on Windows, Linux, and macOS. It is distinct from Windows PowerShell (v5.1 and earlier), which is still shipped with Windows but is no longer actively developed with new features.  
+For cross-platform scripting and modern features, PowerShell 7 (or higher) is the recommended version.  
+
+⚠️ You NEED to install it ! ⚠️  
+
 ## WORKFLOW
 
 1. **Define the template :** The Get-DefaultGlobalGitIgnoreTemplate function holds the source of truth (OS files, IDEs, Languages...)
@@ -133,7 +141,9 @@ An automatic backup (.bak) is created before any changes are made. If everything
 
 ## INSTALLATION PROCEDURE
 
-1. Place yourself in the directory :  
+Open your terminal :  
+
+1. Create the folder (if it doesn't already exist) :  
 
 ```powershell
 $dir = Split-Path $PROFILE -Parent; if (!(Test-Path $dir)) { New-Item -Path $dir -ItemType Directory }; Set-Location $dir

@@ -5,6 +5,7 @@
 - [INTRO](#intro)
 - [WHY THIS SCRIPT](#why-this-script)
 - [WORKFLOW](#workflow)
+- [REQUIREMENTS](#requirements)
 - [INSTALLATION PROCEDURE](#installation-procedure)
 - [BONUS](#bonus)
 - [CONSOLE APPLICATION SCREENS](#console-application-screens)
@@ -140,6 +141,13 @@ New computer? No problem.
 
 👌 Others many controls and features have been added 👌
 
+## REQUIREMENTS
+
+PowerShell Core is the cross-platform version of PowerShell, built on .NET Core. It works on Windows, Linux, and macOS. It is distinct from Windows PowerShell (v5.1 and earlier), which is still shipped with Windows but is no longer actively developed with new features.  
+For cross-platform scripting and modern features, PowerShell 7 (or higher) is the recommended version.  
+
+⚠️ You NEED to install it ! ⚠️  
+
 ## WORKFLOW
 
 1. **Initialization :**  
@@ -218,13 +226,19 @@ wt.exe -p "PowerShell" pwsh.exe -ExecutionPolicy Bypass -File "C:\Users\<UserNam
 
 6. "Finish" button
 
-7. Create the file "run_powershell_git_pull_script.ps1" in this path:
+7. Create the folder (if it doesn't already exist) :  
 
 ```powershell
-New-Item -Path "$env:USERPROFILE\Documents\PowerShell\run_powershell_git_pull_script.ps1" -ItemType File
+$dir = Split-Path $PROFILE -Parent; if (!(Test-Path $dir)) { New-Item -Path $dir -ItemType Directory }; Set-Location $dir
 ```
 
-8. Copy/Paste this inside the new file
+8. Create the file (if it doesn't already exist) :  
+
+```powershell
+if (!(Test-Path ".\Microsoft.PowerShell_profile.ps1")) { New-Item ".\Microsoft.PowerShell_profile.ps1" -ItemType File }
+```
+
+9. Copy/Paste this inside the new file
 
 ```powershell
 # Load PowerShell Profile dynamically (works on all OS paths)
@@ -238,7 +252,7 @@ Write-Host ""
 Read-Host -Prompt "Press Enter to close... "
 ```
 
-9. ❤️ Additionally give the shortcut a nice icon ❤️
+10. ❤️ Additionally give the shortcut a nice icon ❤️
 
 💡 On Windows 10, by default the created shortcut will not have the black PowerShell 7 icon but an other ugly one, you can assign the correct one like this (or the Git one).
 

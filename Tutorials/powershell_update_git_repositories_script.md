@@ -404,7 +404,7 @@ function Get-LocationPathConfig {
     [PSCustomObject]@{ Name = "Yam4";                     Path = Join-Path $ProjectsPath   "Yam4";                             IsRepo = $true;     IsOnlyMain = $false },
 
     ##########---------- NAVIGATION ONLY (go() function) ----------##########
-    [PSCustomObject]@{ Name = "desktop";                  Path = $DesktopPath;                                                IsRepo = $false },
+    [PSCustomObject]@{ Name = "desk";                     Path = $DesktopPath;                                                IsRepo = $false },
     [PSCustomObject]@{ Name = "dwld";                     Path = Join-Path $HOME "Downloads";                                 IsRepo = $false },
     [PSCustomObject]@{ Name = "home";                     Path = $HOME;                                                       IsRepo = $false },
     [PSCustomObject]@{ Name = "nvim";                     Path = $NvimPath;                                                   IsRepo = $false },

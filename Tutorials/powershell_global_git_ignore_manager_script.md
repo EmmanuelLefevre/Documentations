@@ -499,6 +499,9 @@ function Update-GlobalGitIgnoreFile {
     }
   }
 
+  # Calculate truly new rules
+  $TrulyNewItems = $ItemsToAdd | Where-Object { $ExistingLines -notcontains $_.Rule }
+
   # Build new content (clean file + new block at end)
   $NewContent = Build-GlobalGitIgnoreUpdatedContent -BaseLines $CleanFileLines -ItemsToAdd $ItemsToAdd
 
@@ -514,7 +517,7 @@ function Update-GlobalGitIgnoreFile {
   Show-HeaderFrame -Title "UPDATE GLOBAL GIT IGNORE CONFIGURATION"
 
   # Display messages
-  if ($ItemsToAdd.Count -gt 0) {
+  if ($TrulyNewItems.Count -gt 0) {
     $msgPrefix = "📢 New exclusions added to "
     $fileNameStr = " .gitignore_global"
     $msgSuffix = " 📢"
@@ -529,7 +532,7 @@ function Update-GlobalGitIgnoreFile {
 
     Write-Host "New rules added =>" -ForegroundColor DarkBlue
 
-    foreach ($item in $ItemsToAdd) {
+    foreach ($item in $TrulyNewItems) {
       Write-Host "  $($item.Rule)" -ForegroundColor DarkCyan
     }
 
@@ -633,7 +636,7 @@ function Build-GlobalGitIgnoreUpdatedContent {
   )
 
   # Start with clean base
-  $NewContent = [System.Collections.ArrayList]@($BaseLines)
+  $NewContent = [System.Collections.Generic.List[string]]::new([string[]]$BaseLines)
 
   # If no new items to add, just return cleaned file (removes old "NEW IGNORE RULES" block)
   if ($ItemsToAdd.Count -eq 0) {
@@ -641,15 +644,17 @@ function Build-GlobalGitIgnoreUpdatedContent {
   }
 
   # Add new rules block at end
-  if ($NewContent.Count -gt 0 -and $NewContent[-1] -ne "") { $NewContent.Add("") }
+  if ($NewContent.Count -gt 0 -and $NewContent[$NewContent.Count - 1] -ne "") {
+    $NewContent.Add("")
+  }
 
-  $NewContent.Add("# ======================================================================") | Out-Null
-  $NewContent.Add("# NEW IGNORE RULES") | Out-Null
-  $NewContent.Add("# ======================================================================") | Out-Null
+  $NewContent.Add("# ======================================================================")
+  $NewContent.Add("# NEW IGNORE RULES")
+  $NewContent.Add("# ======================================================================")
 
   # Format and sort rules
   $FormattedBlock = Get-FormattedNewRulesBlock -Items $ItemsToAdd
-  $NewContent.AddRange($FormattedBlock)
+  $NewContent.AddRange([string[]]$FormattedBlock)
 
   return $NewContent
 }
@@ -660,34 +665,29 @@ function Get-FormattedNewRulesBlock {
     [array]$Items
   )
 
-  $BlockContent = @()
+  $BlockContent = [System.Collections.Generic.List[string]]::new()
 
   # Group missing items by category
   $GroupedRules = $Items | Group-Object Category
 
   foreach ($group in $GroupedRules) {
-    $CategoryName = $group.Name
-
-    # If no category (null or empty), we force "# Others"
-    if ([string]::IsNullOrWhiteSpace($CategoryName)) {
-      $CategoryName = "# Others"
-    }
-    # Otherwise, make sure it's properly formatted (double security)
-    else {
-      $CategoryName = Format-GitIgnoreComment -RawComment $CategoryName
-    }
+    $CategoryName =
+      # If no category (null or empty), we force "# Others"
+      if ([string]::IsNullOrWhiteSpace($group.Name)) {"# Others" }
+      # Otherwise, make sure it's properly formatted (double security)
+      else { Format-GitIgnoreComment -RawComment $group.Name }
 
     # Add blank line before new category (if not immediately after header)
     if ($BlockContent.Count -gt 0) {
-      $BlockContent += ""
+      $BlockContent.Add("")
     }
 
     # Add category title
-    $BlockContent += $CategoryName
+    $BlockContent.Add($CategoryName)
 
     # Adding rules for this group (sorted alphbetically)
     foreach ($item in ($group.Group | Sort-Object Rule)) {
-      $BlockContent += $item.Rule
+      $BlockContent.Add($item.Rule)
     }
   }
 

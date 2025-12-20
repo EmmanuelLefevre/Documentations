@@ -1587,7 +1587,6 @@ CxReports/
 # SonarQube
 .scannerwork/
 .sonar/
-sonar-project.properties
 sonar-report.json
 
 # ======================================================================

@@ -95,19 +95,19 @@ La norme technique (**WCAG**) est ensuite transformée en obligation légale par
 - étiquettes de formulaire (label) manquantes : **45%** des pages (sans étiquette, une personne utilisant un lecteur d'écran ne sait pas quel champ elle doit remplir).
 
 Il est important de noter que ce test est automatisé et ne détecte qu'environ 30% des problèmes potentiels. En effet il ne concerne que le "TOP 1M home page" et ne scan donc QUE la page d'accueil de ce TOP sites.  
+
 **La situation réelle est donc probablement bien pire !!!**  
 
 2. **Personnes en situation de handicap**
 
 - A l'échelle mondiale : **1,3 milliard** de personnes de personnes, soit environ **16%** de la population mondiale (1 personne sur 6), vivent avec un handicap significatif.  
-**Source :** [OMS : rapport mondial sur la santé et le handicap 2023](https://www.who.int/fr/news-room/fact-sheets/detail/disability-and-health)  
+**Source :** [OMS : rapport mondial sur la santé et le handicap 2023](https://www.who.int/fr/news-room/fact-sheets/detail/disability-and-health)
 
 - A l'échelle européenne : environ **135M** de personnes dans l'Union Européenne, soit près d'un citoyen sur quatre (**27%**), déclarent une forme de handicap ou de limitation durable.  
-**Source :** [Eurostat : statistiques sur le handicap 2023/2024](https://drees.solidarites-sante.gouv.fr/sites/default/files/2025-01/Fiche%208.7%20-%20Le%20handicap%20en%20Europe.pdf)  
+**Source :** [Eurostat : statistiques sur le handicap 2023/2024](https://drees.solidarites-sante.gouv.fr/sites/default/files/2025-01/Fiche%208.7%20-%20Le%20handicap%20en%20Europe.pdf)
 
 - A l'échelle de la France : **12M** de personnes sont touchées par un handicap (1 personne sur 5).  
-**80%** des handicaps sont invisibles (troubles cognitifs, maladies chroniques invalidantes...).  
-
+**80%** des handicaps sont invisibles (troubles cognitifs, maladies chroniques invalidantes...).
 **Source :** [Chiffres consolidés par l'INSEE et la DREES 2022-2024](https://handicap.gouv.fr/publication-drees-le-handicap-en-chiffres-edition-2024#:~:text=Les%20chiffres%20cl%C3%A9s%20du%20handicap,des%20probl%C3%A8mes%20de%20m%C3%A9moire%2C%20etc.)  
 
 3. **Conformité dans le secteur public français**  
@@ -127,8 +127,8 @@ Concrètement, cela signifie permettre :
 - à un utilisateur malvoyant de comprendre la structure et le contenu via un lecteur d'écran. Celui-ci vocalise la page en se basant sur un balisage correct : il annonce les titres (`h1`, `h2`), décrit le rôle des éléments (`bouton`, `lien`) et lit le contenu textuel des images grâce à leur attribut `alt`.
 - à un utilisateur de lecteur d'écran de bénéficier d'une prononciation correcte. En déclarant la langue principale de la page avec `<html lang="fr">`, la synthèse vocale utilise le bon accent pour tout le site.
 Pour les termes anglophones, les encadrer avec un `<span>` afin de permettre au lecteur de basculer sur une prononciation anglaise juste pour ce mot, évitant ainsi une lecture confuse.
-(ex : `<span lang="en">framework`).
-- à une personne ayant un handicap moteur (et ne pouvant utiliser de souris) de contrôler l'interface entièrement au clavier. Cela se fait principalement avec la touche `Tab` pour se déplacer entre les éléments interactifs (`liens`, `boutons`, `champs`), et les touches `Entrée` ou `Espace` pour les activer. Un balisage sémantique est essentiel car les éléments natifs comme la balise `button` ou `a` sont "focusables" par défaut.
+(ex : `<span lang="en">framework</span>`).
+- à une personne ayant un handicap moteur (et ne pouvant utiliser de souris) de contrôler l'interface entièrement au clavier. Cela se fait principalement avec la touche `Tab` pour se déplacer entre les éléments interactifs (`liens`, `boutons`, `champs`), et les touches `Entrée` ou `Espace` pour les activer. Un balisage sémantique est essentiel car les éléments natifs comme la balise `<button>` ou `<a>` sont "focusables" par défaut.
 - ou encore à un utilisateur sourd ou malentendant d'accéder au contenu d'une vidéo grâce à des `captions` (sous-titres enrichis), qui décrivent non seulement les dialogues mais aussi les sons importants (ex: `[musique entraînante]`, `[porte qui claque]`), ainsi qu'une transcription textuelle complète disponible à côté de la vidéo.
 
 Garantir l'accessibilité, c'est s'assurer que personne n'est laissé pour compte dans l'accès à l'information et aux services.  
@@ -136,11 +136,11 @@ Garantir l'accessibilité, c'est s'assurer que personne n'est laissé pour compt
 ### JURIDIQUE
 Le cadre légal s'appuie notamment sur la transposition en droit français des directives européennes qui visent à harmoniser les exigences en la matière.  
 
-Cette directive est entrée en vigueur le 28 juin 2025 ...!!!  
+**Cette directive est entrée en vigueur le 28 juin 2025 ...!!!**  
 
 [Directive Européenne sur l'Accessibilité](https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/la-nouvelle-directive-europeenne-accessibilite-pour-des-produits-et-des-services-accessibles-aux-personnes-en-situation)  
 
-En France, le non-respect des obligations d'accessibilité numérique, définies par le RGAA, expose les organismes concernés à des sanctions financières.  
+En France, le non-respect des obligations d'accessibilité numérique, définies par le **RGAA**, expose les organismes concernés à des sanctions financières.  
 Le défaut de conformité ou l'absence de publication d'une déclaration d'accessibilité peut entraîner une sanction administrative dont le montant peut s'élever jusqu'à **25K€/PAR infraction** constatée.  
 
 [Décret n° 2019-768 du 24 juillet 2019](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000038811937)

@@ -13,7 +13,7 @@
 
 ## INTRODUCTION
 
-**Qu'est-ce que l'Accessibilité Numérique ?**
+**Qu'est-ce que l'Accessibilité Numérique ?**  
 
 L'accessibilité numérique consiste à concevoir et développer des produits digitaux (sites web, applications mobiles, documents) de manière à ce que tous les utilisateurs, quelles que soient leurs capacités physiques ou mentales, puissent y accéder, les comprendre et interagir avec eux.
 
@@ -25,21 +25,21 @@ L'objectif est de supprimer les barrières qui pourraient empêcher quelqu'un d'
 - **Moteurs** (incapacité à utiliser une souris, tremblements, etc).
 - **Auditifs** (surdité, malentendance, etc).
 - **Cognitifs** (troubles de l'attention, dyslexie, difficultés d'apprentissage, etc).
-- **Vieillesse et limitations fonctionnelles :** le vieillissement n'est pas une maladie ou un handicap en soi, mais il s'accompagne souvent de limitations fonctionnelles qui rejoignent directement les problématiques d'accessibilité. La baisse de la vue, de l'ouïe, de la dextérité motrice ou de la vitesse de traitement cognitif sont des obstacles courants. Rendre un site accessible, c'est donc aussi le rendre utilisable par une population senior grandissante.
+- **Vieillesse et limitations fonctionnelles :** le vieillissement n'est pas une maladie ou un handicap en soi, mais il s'accompagne souvent de limitations fonctionnelles qui rejoignent directement les problématiques d'accessibilité. La baisse de l'acuité visuelle et audtive, de la dextérité motrice ou de la vitesse de traitement cognitif sont des obstacles courants. Rendre un site accessible, c'est donc aussi le rendre utilisable par une population senior grandissante.
 
 De plus il est important de noter qu'une bonne accessibilité profite souvent à tous les utilisateurs, pas seulement à ceux en situation de handicap :
 
-- Les sous-titres (conçus pour les sourds) aident aussi quelqu'un à regarder une vidéo dans un environnement bruyant.
+- Les sous-titres (conçus pour les sourds) aident aussi quelqu'un à regarder une vidéo dans un environnement bruyant si celui-ci n'a pas de casque/écouteurs.
 - Un bon contraste de couleurs (conçu pour les malvoyants) aide tout le monde à lire un écran en plein soleil.
 - Une navigation au clavier simple (conçue pour ceux qui ne peuvent utiliser une souris) peut être pratique à bien des égards (oubli de souris ou celle-ci cassée/en panne).
 
-**Le spectre du handicap**
+**Le spectre du handicap**  
 
 Il est crucial de comprendre que le handicap n'est pas toujours un état permanent. L'approche moderne de l'accessibilité (notamment le "Design Inclusif") distingue trois contextes :
 
 - **Permanent :** une personne aveugle ou amputée d'un bras.
-- **Temporaire :** une personne ayant une cataracte en attente d'opération ou un bras dans le plâtre.
-- **Situationnel :** une personne tenant un bébé dans un bras (limitation motrice).
+- **Temporaire :** une personne ayant une cataracte en attente d'opération, un bras dans le plâtre ou en convalescence.
+- **Situationnel :** une personne tenant un bébé dans un bras ou u parent avec une poussette (limitation motrice).
 
 En rendant votre site accessible pour le cas "permanent", vous résolvez automatiquement les problèmes des cas "temporaires" et "situationnels".
 
@@ -128,7 +128,7 @@ Il est important de noter que ce test est automatisé et ne détecte qu'environ 
 
 - A l'échelle mondiale : **1,3 milliard** de personnes de personnes, soit environ **16%** de la population mondiale (1 personne sur 6), vivent avec un handicap significatif.  
 
-  **Source :**  
+**Source :**  
 
 > [🔗 OMS : rapport mondial sur la santé et le handicap 2023](https://www.who.int/fr/news-room/fact-sheets/detail/disability-and-health)
 

@@ -10,8 +10,8 @@
 - [NORME WCAG](#wcag)
 - [QUELQUES CHIFFRES](#quelques-chiffres)
 - [JURIDIQUE](#juridique)
-- [BONNES PRATIQUES](#bonnes-pratiques)
 - [OUTILS & RESSOURCES](#outils-ressources)
+- [BONNES PRATIQUES](#bonnes-pratiques)
 
 ## INTRODUCTION
 
@@ -221,19 +221,6 @@ Pour les entreprises dépassant les seuils ci-dessus, deux cas spécifiques perm
 
 - **Charge disproportionnée :** si l'application des normes impose un coût excessif qui mettrait en péril la viabilité économique de l'opérateur (le calcul est précis et défini par la réglementation).  
 
-<h2 id="bonnes-pratiques">✨ BONNES PRATIQUES</h2>
-
-
-
-**Conseil pour les développeurs**  
-
-💡💡💡 Ne faites pas confiance aveugle aux outils automatiques (**Lighthouse**, **Wave**). Ils ne détectent que **30% des erreurs**.  
-
-Prenez l'habitude de lancer **NVDA** (sur Windows) ou **VoiceOver** (sur Mac) une fois par sprint.
-* Fermez les yeux (ou éteignez l'écran).
-* Essayez de naviguer sur votre site uniquement au clavier.
-* Si vous arrivez à comprendre où vous êtes et à effectuer une action clé (ex: envoyer un message), c'est gagné.
-
 <h2 id="outils-ressources">🛠️ OUTILS & RESSOURCES</h2>
 
 L'accessibilité ne se devine pas, elle se mesure. Voici les outils de référence pour auditer vos projets, au-delà du simple score **Lighthouse**.  
@@ -318,3 +305,17 @@ Déjà installé sur tous les appareils **Apple**. C'est la référence absolue 
 4. **TalkBack** - *Android / Natif*  
 
 L'équivalent de **VoiceOver** pour l'écosystème **Google/Android**.  
+
+<h2 id="bonnes-pratiques">✨ BONNES PRATIQUES</h2>
+
+
+
+**Conseil pour les développeurs**  
+
+💡💡💡 Ne faites pas confiance aveugle aux outils automatiques (**Lighthouse**, **Wave**). Ils ne détectent que **30% des erreurs**.  
+
+Prenez l'habitude de lancer **NVDA** (sur Windows) ou **VoiceOver** (sur Mac) une fois par sprint.  
+
+- Fermez les yeux (ou éteignez l'écran).  
+- Essayez de naviguer sur votre site uniquement au clavier.  
+- Si vous arrivez à comprendre où vous êtes et à effectuer une action clé (ex: envoyer un message), c'est gagné.  

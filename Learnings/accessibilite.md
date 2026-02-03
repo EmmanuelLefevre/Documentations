@@ -10,6 +10,8 @@
 - [NORME WCAG](#wcag)
 - [QUELQUES CHIFFRES](#quelques-chiffres)
 - [JURIDIQUE](#juridique)
+- [BONNES PRATIQUES](#bonnes-pratiques)
+- [OUTILS & RESSOURCES](#outils-ressources)
 
 ## INTRODUCTION
 
@@ -218,3 +220,101 @@ Pour les entreprises dépassant les seuils ci-dessus, deux cas spécifiques perm
 - **Modification fondamentale :** si la mise en conformité modifie la nature même du produit ou service (ex: supprimer l'image d'un outil de radiologie rendrait l'outil inutile).  
 
 - **Charge disproportionnée :** si l'application des normes impose un coût excessif qui mettrait en péril la viabilité économique de l'opérateur (le calcul est précis et défini par la réglementation).  
+
+<h2 id="bonnes-pratiques">✨ BONNES PRATIQUES</h2>
+
+
+
+**Conseil pour les développeurs**  
+
+💡💡💡 Ne faites pas confiance aveugle aux outils automatiques (**Lighthouse**, **Wave**). Ils ne détectent que **30% des erreurs**.  
+
+Prenez l'habitude de lancer **NVDA** (sur Windows) ou **VoiceOver** (sur Mac) une fois par sprint.
+* Fermez les yeux (ou éteignez l'écran).
+* Essayez de naviguer sur votre site uniquement au clavier.
+* Si vous arrivez à comprendre où vous êtes et à effectuer une action clé (ex: envoyer un message), c'est gagné.
+
+<h2 id="outils-ressources">🛠️ OUTILS & RESSOURCES</h2>
+
+L'accessibilité ne se devine pas, elle se mesure. Voici les outils de référence pour auditer vos projets, au-delà du simple score **Lighthouse**.  
+
+### 🔍 Audit & Scan Global
+
+> [🔗 Google Lighthouse](https://developers.google.com/web/tools/lighthouse)
+
+Accessible directement via la touche `F12` (onglet **Lighthouse**), c'est le point de départ incontournable. Il génère un rapport global (**Performance**, **SEO**, **Accessibilité**) et attribue un score sur 100.  
+*Attention : Un score de 100% ne garantit pas une accessibilité parfaite, car il ne détecte que les erreurs automatisables (~30% des problèmes réels).*  
+
+> [🔗 WAVE (Web Accessibility Evaluation Tool)](https://wave.webaim.org/)
+
+C'est la référence visuelle. Il injecte des icônes directement sur votre page pour montrer les erreurs (titres manquants, contrastes faibles, images sans alt).  
+*Disponible en extension Chrome/Firefox.*  
+
+> [🔗 Axe DevTools](https://www.deque.com/axe/devtools/)
+
+Le moteur qui fait tourner **Lighthouse** mais en version dédiée et plus puissante. Il permet de scanner des portions de page et offre des explications très détaillées pour corriger les bugs.  
+*Disponible en extension navigateur.*  
+
+> [🔗 Yellow Lab Tools](https://yellowlab.tools/)
+
+Un outil en ligne excellent qui audite la performance **ET** la qualité du code (**DOM Complexity**, mauvaises pratiques **CSS**/**JS**) avec une section dédiée à l'accessibilité.  
+
+> [🔗 HeadingsMap](https://chrome.google.com/webstore/detail/headingsmap/flbjommegcjonpdmenkdiocclhjacmbi)
+
+Une extension indispensable qui génère le "plan" de votre site basé sur vos balises `<h1>` à `<h6>`. Si le plan est incohérent, votre accessibilité est compromise.  
+
+### 🎨 Couleurs & Contrastes
+
+> [🔗 WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+
+L'outil "juge de paix". Vous entrez vos deux codes hexadécimaux et il vous dit instantanément si vous passez les niveaux **AA** ou **AAA**.  
+
+> [🔗 Adobe Color (Roue d'accessibilité)](https://color.adobe.com/fr/create/color-contrast-analyzer)
+
+Idéal pour les designers. Il permet de tester des palettes entières et suggère des couleurs proches pour corriger les contrastes insuffisants.  
+
+> [🔗 Coolors Contrast Checker](https://coolors.co/contrast-checker)
+
+Très visuel, il permet de voir le rendu du texte sur le fond en temps réel et donne un score de lisibilité (**Poor**, **Good**, **Very Good**).  
+
+> [🔗 Vision Simulator (Chrome Extension)](https://chrome.google.com/webstore/detail/nocoffee/jjeeggmbnhckmgdhmgdckeigabjfbddl)
+
+Permet de simuler différents troubles de la vision (daltonisme, cataracte, vision floue) directement sur votre site pour vérifier que l'interface reste utilisable.  
+
+### 🗣️ Lecteurs d'écrans (screen readers)**
+
+C'est l'outil final qui valide ou invalide tout votre travail. Un lecteur d'écran est un logiciel d'assistance qui transmet l'information affichée à l'écran (texte, images, liens, menus) à un utilisateur aveugle ou malvoyant, soit par **synthèse vocale** (**Text-to-Speech**) soit via une **plage braille**.  
+
+**Comment ça marche ?**  
+
+Contrairement à une idée reçue, un utilisateur de lecteur d'écran n'écoute pas la page du début à la fin de manière linéaire (ce serait interminable). Il **navigue** dans la page en sautant d'élément en élément.  
+
+D'où l'importance cruciale de votre code HTML :  
+
+- Il utilise des raccourcis pour sauter de **Titre** en **Titre** (`H1`, `H2`...).  
+- Il peut lister tous les **Liens** de la page pour trouver "Contact".  
+- Il navigue par **Landmarks** (Régions) pour aller directement au `<footer>` ou au `<main>`.  
+
+Si votre sémantique est mauvaise (pas de balises `<h1>` ou des boutons `<div>`) la page devient un labyrinthe sans issue.  
+
+**Les solutions du marché**  
+
+Il existe quelques acteurs majeurs qu'il est bon de connaître :  
+
+1. **NVDA (NonVisual Desktop Access)** - *Windows / Gratuit & Open Source*  
+
+C'est la référence mondiale et le meilleur outil pour tester vos développements sur **PC**. Il est léger, puissant et respecte strictement les normes.  
+
+> [📥 Télécharger NVDA](https://www.nvaccess.org/download/)
+
+2. **JAWS (Job Access With Speech)** - *Windows / Payant*  
+
+Historiquement le plus utilisé en entreprise. Très cher mais très performant pour les applications bureautiques complexes (**Office**...).
+
+3. **VoiceOver** - *Apple (Mac, iPhone, iPad) / Natif*  
+
+Déjà installé sur tous les appareils **Apple**. C'est la référence absolue sur mobile. Si vous avez un **iPhone** vous pouvez l'essayer dès maintenant (Réglages > Accessibilité).  
+
+4. **TalkBack** - *Android / Natif*  
+
+L'équivalent de **VoiceOver** pour l'écosystème **Google/Android**.  

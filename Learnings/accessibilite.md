@@ -11,7 +11,7 @@
 - [QUELQUES CHIFFRES](#quelques-chiffres)
 - [JURIDIQUE](#juridique)
 - [OUTILS & RESSOURCES](#outils-ressources)
-- [BONNES PRATIQUES](#bonnes-pratiques)
+- [BONNES PRATIQUES / EXEMPLES DE CODE](#bonnes-pratiques-exemples-code)
 
 ## INTRODUCTION
 
@@ -306,9 +306,234 @@ Déjà installé sur tous les appareils **Apple**. C'est la référence absolue 
 
 L'équivalent de **VoiceOver** pour l'écosystème **Google/Android**.  
 
-<h2 id="bonnes-pratiques">✨ BONNES PRATIQUES</h2>
+<h2 id="bonnes-pratiques-exemples-code">✨ BONNES PRATIQUES / EXEMPLES DE CODE</h2>
 
+L'accessibilité ne se limite pas à des contrastes de couleurs. Elle repose sur une structure **HTML** sémantique, une gestion rigoureuse des interactions **JavaScript** et le respect des normes **ARIA**.  
 
+1. **La Sémantique** (Structure de la page)
+
+Les lecteurs d'écran utilisent les balises **HTML** pour naviguer ("Aller au menu", "Aller au contenu principal"). Remplacer des <div> par des balises sémantiques est la fondation.  
+
+❌ **Mauvaise pratique :**
+
+```HTML
+<div class="header">...</div>
+<div class="main-content">
+  <div class="article-title">Mon Titre</div>
+</div>
+```
+
+✅ **Bonne pratique :**
+
+```HTML
+<header>...</header>
+<main> <article>
+  <h1>Mon Titre</h1> </article>
+</main>
+```
+
+2. **Images & Texte Alternatif** (Alt)
+
+Le texte alternatif remplace l'image si elle ne s'affiche pas ou pour un utilisateur aveugle. C'est le contexte qui dicte le contenu.  
+
+❌ **Mauvaise pratique :**
+
+```HTML
+<img src="k8s_v2_final.jpg">
+<img src="logo.png" alt="image">
+```
+
+✅ **Bonne pratique :**
+
+```HTML
+<img src="search.png" alt="Lancer la recherche">
+<img src="stats-2024.png" alt="Graphique des ventes 2024, hausse de 20% au T3">
+```
+
+3. **Contraste des Couleurs**
+
+Le texte doit être lisible pour les malvoyants ou en cas de forte luminosité (soleil sur écran). Le ratio minimum standard (**AA**) est de 4.5:1 pour un texte normal.  
+
+💡 Astuce : utiliser les **DevTools** du navigateur pour vérifier le ratio !  
+
+❌ **Mauvaise pratique :**
+
+```CSS
+.text-muted {
+  color: #b3b3b3; /* Gris clair sur blanc : Ratio 2.1:1 (Illisible) */
+  background-color: #ffffff;
+}
+```
+
+✅ **Bonne pratique :**
+
+```CSS
+.text-muted {
+  color: #595959; /* Gris foncé sur blanc : Ratio 4.6:1 (Conforme AA) */
+  background-color: #ffffff;
+}
+```
+
+4. **Navigation Clavier** (Indicateur visuel)  
+
+Un utilisateur naviguant au clavier (touche `Tab`) doit toujours savoir où il se trouve. Ne supprimez jamais l'outline **CSS** sans fournir une alternative visuelle forte.  
+
+❌ **Mauvaise pratique :**
+
+```CSS
+*:focus {
+  outline: none; /* L'utilisateur clavier devient "invisible" */
+}
+```
+
+✅ **Bonne pratique :**
+
+```CSS
+/* :focus-visible cible uniquement la navigation clavier (pas le clic souris) */
+button:focus-visible {
+  outline: 3px solid #2d3e50;
+  outline-offset: 2px;
+}
+```
+
+5. **Gestion du Focus** (Focus Management)
+
+Lorsqu'une interaction change le contexte (ouverture d'une modale) le focus clavier doit suivre sinon l'utilisateur reste "perdu" derrière.  
+
+❌ **Mauvaise pratique :** j'ouvre une modale mais le focus reste sur le bouton qui l'a ouverte en arrière-plan.  
+
+✅ **Bonne pratique :**
+
+```javascript
+function openModal() {
+  const modal = document.getElementById('myModal');
+  modal.classList.add('open');
+
+  // 1. Déplacer le focus DANS la modale (sur le 1er élément interactif ou le conteneur)
+  const closeBtn = modal.querySelector('.close-button');
+  closeBtn.focus();
+
+  // 2. Piéger le focus (Focus Trap) pour qu'il ne sorte pas de la modale (via JS)
+}
+```
+
+6. **Liens, Boutons et Rôles ARIA**
+
+Il ne faut pas utiliser des `<div>` ou `<span>` pour créer des boutons. Si vous n'avez pas le choix vous devez recréer le comportement natif manquant.  
+
+❌ **Mauvaise pratique :**
+
+```HTML
+<div class="btn" onclick="submit()">Valider</div>
+```
+
+✅ **Bonne pratique :** (Native - Recommandé)
+
+```HTML
+<button type="button" onclick="submit()">Valider</button>
+```
+
+✅ **Bonne pratique :** (Si `<div>` obligatoire - **ARIA**)
+
+```HTML
+<div
+  role="button"
+  tabindex="0"
+  onclick="submit()"
+  onkeydown="if(event.key === 'Enter' || event.key === ' ') submit()">
+  Valider
+</div>
+```
+
+7. **Formulaires & Labels**
+
+Un champ de saisie doit toujours être lié à une étiquette. Le placeholder ne suffit pas...  
+
+❌ **Mauvaise pratique :**
+
+```HTML
+<input type="email" placeholder="Votre email">
+```
+
+✅ **Bonne pratique :**
+
+```HTML
+<label for="user-email">Votre adresse email</label>
+<input type="email" id="user-email" name="email" autocomplete="email">
+```
+
+8. **Alertes & Notifications** (ARIA Live Regions)
+
+Lorsqu'un message apparaît dynamiquement (erreur, succès) sans rechargement de page, le lecteur d'écran ne le voit pas s'il n'est pas averti.  
+
+❌ **Mauvaise pratique :**
+
+```javascript
+// Injecter du texte dans une div standard
+errorDiv.innerHTML = "Identifiants incorrects";
+// Le lecteur d'écran reste silencieux
+```
+
+✅ **Bonne pratique :**
+
+```HTML
+<div role="alert" id="error-message">
+  Identifiants incorrects
+</div>
+
+<div aria-live="polite">Mise à jour effectuée</div>
+```
+
+9. **Vidéo et Audio**
+
+Le contenu multimédia doit avoir une alternative textuelle synchronisée (sous-titres) ou une transcription.  
+
+❌ **Mauvaise pratique :** une vidéo en autoplay sans contrôles ou sans piste de sous-titres.  
+
+✅ **Bonne pratique :**
+
+```HTML
+<video controls width="250">
+  <source src="video.mp4" type="video/mp4">
+
+  <track kind="captions" src="sous-titres-fr.vtt" srclang="fr" label="Français">
+
+  Votre navigateur ne supporte pas la vidéo. Voici <a href="transcription.txt">la transcription textuelle</a>.
+</video>
+```
+
+10. **Langue & Prononciation**
+
+Définit l'accent utilisé par la synthèse vocale.  
+
+✅ **Bonne pratique :**
+
+```HTML
+<html lang="fr">
+<p>
+  J'utilise le framework <span lang="en">React</span> pour mes projets.
+</p>
+```
+
+11. **Composants dynamiques** (ARIA States)
+
+Indiquer l'état d'un composant (Ouvert/Fermé, Sélectionné/Non sélectionné) aux technologies d'assistance.  
+
+✅ **Bonne pratique :**
+
+```HTML
+<button
+  aria-expanded="false" aria-controls="content-1"
+  id="accordion-btn-1"
+  onclick="toggleAccordion(this)"
+>
+  Voir plus d'infos
+</button>
+
+<div id="content-1" role="region" aria-labelledby="accordion-btn-1" hidden>
+  Contenu caché...
+</div>
+```
 
 **Conseil pour les développeurs**  
 
